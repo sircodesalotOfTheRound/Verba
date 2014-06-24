@@ -1,0 +1,7 @@
+fn aFunction() {
+
+}
+
+class MyClass {
+
+}
