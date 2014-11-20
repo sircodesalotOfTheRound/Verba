@@ -1,7 +1,0 @@
-fn aFunction() {
-
-}
-
-class MyClass {
-
-}
