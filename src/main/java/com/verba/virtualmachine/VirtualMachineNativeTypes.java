@@ -1,10 +1,10 @@
 package com.verba.virtualmachine;
 
 import com.verba.language.exceptions.CompilerException;
-import com.verba.language.expressions.VerbaExpression;
-import com.verba.language.expressions.categories.LiteralExpression;
-import com.verba.language.expressions.categories.NativeTypeExpression;
-import com.verba.language.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parsing.expressions.VerbaExpression;
+import com.verba.language.parsing.expressions.categories.LiteralExpression;
+import com.verba.language.parsing.expressions.categories.NativeTypeExpression;
+import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 
 /**
  * Created by sircodesalot on 14-5-28.

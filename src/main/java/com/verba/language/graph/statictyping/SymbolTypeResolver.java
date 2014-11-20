@@ -1,14 +1,14 @@
 package com.verba.language.graph.statictyping;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.expressions.categories.ResolvableTypeExpression;
-import com.verba.language.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.symbols.resolution.fields.VariableTypeResolver;
-import com.verba.language.symbols.resolution.function.FunctionReturnTypeResolver;
-import com.verba.language.symbols.resolution.polymorphic.PolymorphicResolver;
-import com.verba.language.symbols.table.entries.SymbolTableEntry;
-import com.verba.language.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parsing.expressions.categories.ResolvableTypeExpression;
+import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
+import com.verba.language.graph.symbols.resolution.fields.VariableTypeResolver;
+import com.verba.language.graph.symbols.resolution.function.FunctionReturnTypeResolver;
+import com.verba.language.graph.symbols.resolution.polymorphic.PolymorphicResolver;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 
 /**
  * Resolves symbol table information about application symbols.

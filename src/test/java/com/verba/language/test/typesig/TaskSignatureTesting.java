@@ -1,9 +1,9 @@
 package com.verba.language.test.typesig;
 
-import com.verba.language.expressions.StaticSpaceExpression;
-import com.verba.language.expressions.VerbaExpression;
-import com.verba.language.expressions.blockheader.functions.TaskDeclarationExpression;
-import com.verba.language.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.parsing.expressions.VerbaExpression;
+import com.verba.language.parsing.expressions.blockheader.functions.TaskDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.test.loader.TestFileLoader;
 import org.junit.Test;
 

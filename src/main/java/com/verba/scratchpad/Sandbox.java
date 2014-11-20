@@ -1,11 +1,11 @@
 package com.verba.scratchpad;
 
-import com.verba.language.build.codepage.VerbaCodePage;
+import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.imagegen.function.FunctionGraph;
-import com.verba.language.codegen.rendering.FileStreamImageWriter;
-import com.verba.language.codegen.rendering.images.ObjectImage;
-import com.verba.language.expressions.StaticSpaceExpression;
-import com.verba.language.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.emit.rendering.FileStreamImageWriter;
+import com.verba.language.emit.rendering.images.ObjectImage;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 
 /**
  * Created by sircodesalot on 14-2-16.

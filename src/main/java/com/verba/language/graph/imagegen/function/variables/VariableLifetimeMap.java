@@ -1,6 +1,6 @@
 package com.verba.language.graph.imagegen.function.variables;
 
-import com.verba.language.expressions.VerbaExpression;
+import com.verba.language.parsing.expressions.VerbaExpression;
 
 import java.util.HashMap;
 

@@ -1,22 +1,22 @@
 package com.verba.language.graph.visitors;
 
-import com.verba.language.build.codepage.VerbaCodePage;
-import com.verba.language.expressions.StaticSpaceExpression;
-import com.verba.language.expressions.block.BlockDeclarationExpression;
-import com.verba.language.expressions.blockheader.classes.ClassDeclarationExpression;
-import com.verba.language.expressions.blockheader.classes.TraitDeclarationExpression;
-import com.verba.language.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.expressions.blockheader.functions.SignatureDeclarationExpression;
-import com.verba.language.expressions.blockheader.functions.TaskDeclarationExpression;
-import com.verba.language.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.expressions.containers.array.ArrayDeclarationExpression;
-import com.verba.language.expressions.containers.json.JsonExpression;
-import com.verba.language.expressions.containers.tuple.TupleDeclarationExpression;
-import com.verba.language.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.expressions.rvalue.simple.QuoteExpression;
-import com.verba.language.expressions.statements.assignment.AssignmentStatementExpression;
-import com.verba.language.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.expressions.statements.returns.ReturnStatementExpression;
+import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.classes.TraitDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.functions.TaskDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parsing.expressions.containers.array.ArrayDeclarationExpression;
+import com.verba.language.parsing.expressions.containers.json.JsonExpression;
+import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
+import com.verba.language.parsing.expressions.rvalue.simple.NumericExpression;
+import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parsing.expressions.statements.assignment.AssignmentStatementExpression;
+import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
+import com.verba.language.parsing.expressions.statements.returns.ReturnStatementExpression;
 
 /**
  * Created by sircodesalot on 14/9/12.

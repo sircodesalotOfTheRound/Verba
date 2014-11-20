@@ -1,14 +1,14 @@
 package com.verba.language.test.statements;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.expressions.StaticSpaceExpression;
-import com.verba.language.expressions.VerbaExpression;
-import com.verba.language.expressions.rvalue.math.RpnExpression;
-import com.verba.language.expressions.rvalue.math.RpnMap;
-import com.verba.language.expressions.rvalue.simple.MathOpExpression;
-import com.verba.language.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.parsing.expressions.VerbaExpression;
+import com.verba.language.parsing.expressions.rvalue.math.RpnExpression;
+import com.verba.language.parsing.expressions.rvalue.math.RpnMap;
+import com.verba.language.parsing.expressions.rvalue.simple.MathOpExpression;
+import com.verba.language.parsing.expressions.rvalue.simple.NumericExpression;
+import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.test.loader.TestFileLoader;
 import org.junit.Test;
 

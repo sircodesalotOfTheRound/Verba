@@ -1,10 +1,10 @@
 package com.verba.language.test.typeresolve;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.expressions.StaticSpaceExpression;
-import com.verba.language.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.expressions.statements.declaration.ValDeclarationStatement;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.test.loader.TestFileLoader;
 import org.junit.Test;
 

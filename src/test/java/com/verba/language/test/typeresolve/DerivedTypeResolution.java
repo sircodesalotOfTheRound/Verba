@@ -1,10 +1,10 @@
 package com.verba.language.test.typeresolve;
 
-import com.verba.language.expressions.StaticSpaceExpression;
-import com.verba.language.symbols.resolution.fields.VariableTypeResolutionMetadata;
-import com.verba.language.symbols.resolution.function.FunctionReturnTypeResolutionMetadata;
-import com.verba.language.symbols.table.entries.SymbolTableEntry;
-import com.verba.language.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.graph.symbols.resolution.fields.VariableTypeResolutionMetadata;
+import com.verba.language.graph.symbols.resolution.function.FunctionReturnTypeResolutionMetadata;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.test.loader.TestFileLoader;
 import org.junit.Test;
 
