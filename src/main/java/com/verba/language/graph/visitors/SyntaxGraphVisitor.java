@@ -1,6 +1,6 @@
 package com.verba.language.graph.visitors;
 
-import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.build.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;

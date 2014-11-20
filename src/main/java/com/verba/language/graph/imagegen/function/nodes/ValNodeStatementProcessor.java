@@ -2,8 +2,8 @@ package com.verba.language.graph.imagegen.function.nodes;
 
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.graph.imagegen.function.FunctionContext;
-import com.verba.language.emit.opcodes.LdStrOpCode;
-import com.verba.language.emit.registers.VirtualVariable;
+import com.verba.language.build.opcodes.LdStrOpCode;
+import com.verba.language.build.registers.VirtualVariable;
 import com.verba.language.parsing.expressions.categories.LiteralExpression;
 import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;

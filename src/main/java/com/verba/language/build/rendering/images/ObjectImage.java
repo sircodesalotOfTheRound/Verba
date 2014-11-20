@@ -1,4 +1,4 @@
-package com.verba.language.emit.rendering.images;
+package com.verba.language.build.rendering.images;
 
 /**
  * Created by sircodesalot on 14/9/26.

@@ -1,6 +1,6 @@
-package com.verba.language.emit.rendering.functions;
+package com.verba.language.build.rendering.functions;
 
-import com.verba.language.emit.opcodes.VerbajOpCode;
+import com.verba.language.build.opcodes.VerbajOpCode;
 
 /**
  * Created by sircodesalot on 14/9/19.

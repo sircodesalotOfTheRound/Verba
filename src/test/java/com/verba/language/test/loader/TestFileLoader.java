@@ -1,6 +1,6 @@
 package com.verba.language.test.loader;
 
-import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.build.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 
 /**

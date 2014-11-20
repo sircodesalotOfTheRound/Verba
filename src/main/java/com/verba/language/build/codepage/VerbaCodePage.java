@@ -1,4 +1,4 @@
-package com.verba.language.emit.codepage;
+package com.verba.language.build.codepage;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
@@ -41,7 +41,7 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
   }
 
   public static VerbaCodePage read(VerbaExpression parent, Lexer lexer) {
-    throw new NotImplementedException();
+    return new VerbaCodePage(parent, lexer);
   }
 
   public QIterable<VerbaExpression> expressions() {

@@ -2,7 +2,7 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.build.codepage.VerbaCodePage;
 import com.verba.language.graph.validation.violations.ValidationViolation;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -78,7 +78,11 @@ public class ScopedSymbolTable implements Serializable {
 
   public void visit(StaticSpaceExpression block) {
     for (SymbolTableExpression expression : block.rootLevelExpressions().ofType(SymbolTableExpression.class)) {
-      expression.accept(this);
+      if (expression instanceof NamedBlockExpression) {
+        this.addNested(((NamedBlockExpression) expression).name(), expression);
+      } else {
+        expression.accept(this);
+      }
     }
   }
 
@@ -87,6 +91,7 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(VerbaCodePage block) {
+    // This is technically incorrect. See 'visit(StaticSpaceExpression)'
     for (NamedExpression expression : block.expressions().ofType(NamedExpression.class)) {
       this.addNested(expression.name(), (SymbolTableExpression)expression);
     }

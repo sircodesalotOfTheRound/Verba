@@ -1,6 +1,6 @@
-package com.verba.language.emit.rendering.images;
+package com.verba.language.build.rendering.images;
 
-import com.verba.language.emit.rendering.functions.MemoryStreamFunctionRenderer;
+import com.verba.language.build.rendering.functions.MemoryStreamFunctionRenderer;
 
 /**
  * Created by sircodesalot on 14/9/26.

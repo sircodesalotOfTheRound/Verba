@@ -1,10 +1,10 @@
-package com.verba.language.emit.rendering.functions;
+package com.verba.language.build.rendering.functions;
 
 import com.verba.language.graph.imagegen.function.FunctionGraph;
-import com.verba.language.emit.opcodes.VerbajOpCode;
-import com.verba.language.emit.rendering.images.ImageRenderer;
-import com.verba.language.emit.rendering.images.ImageType;
-import com.verba.language.emit.rendering.images.ObjectImage;
+import com.verba.language.build.opcodes.VerbajOpCode;
+import com.verba.language.build.rendering.images.ImageRenderer;
+import com.verba.language.build.rendering.images.ImageType;
+import com.verba.language.build.rendering.images.ObjectImage;
 import com.verba.language.exceptions.CompilerException;
 
 import java.util.ArrayList;

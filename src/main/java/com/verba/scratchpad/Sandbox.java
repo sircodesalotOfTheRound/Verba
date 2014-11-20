@@ -1,32 +1,17 @@
 package com.verba.scratchpad;
 
-import com.verba.language.emit.codepage.VerbaCodePage;
-import com.verba.language.graph.imagegen.function.FunctionGraph;
-import com.verba.language.emit.rendering.FileStreamImageWriter;
-import com.verba.language.emit.rendering.images.ObjectImage;
-import com.verba.language.parsing.expressions.StaticSpaceExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.build.buildtools.Build;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 
 /**
  * Created by sircodesalot on 14-2-16.
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    //FileBasedCodeStream codeStream = new FileBasedCodeStream("SimpleSource.v");
-    //VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("SimpleSource.v", codeStream);
-    //FunctionDeclarationExpression expression = (FunctionDeclarationExpression)VerbaExpression.read(null, lexer);
+    Build build = Build.fromString("fn function() { val item = 3 } fn function2() { val mut item2 = 5 }");
 
-    VerbaCodePage codePage = VerbaCodePage.fromFile(null, "SimpleSource.v");
-    StaticSpaceExpression staticSpaceExpression = new StaticSpaceExpression(codePage);
-    staticSpaceExpression.resolveSymbolNames();
-
-    Iterable<ObjectImage> images = staticSpaceExpression.allSubExpressions()
-      .ofType(FunctionDeclarationExpression.class)
-      .map(function -> new FunctionGraph(function, staticSpaceExpression))
-      .map(FunctionGraph::createImage);
-
-    try (FileStreamImageWriter writer = new FileStreamImageWriter("/Users/sircodesalot/Desktop/program.vbaj")) {
-      writer.save(images);
+    for (SymbolTableEntry entry : build.symbolTable().entries()) {
+      System.out.println(entry.fqn());
     }
   }
 }
