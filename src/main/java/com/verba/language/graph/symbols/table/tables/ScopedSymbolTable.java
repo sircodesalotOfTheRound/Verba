@@ -3,6 +3,12 @@ package com.verba.language.graph.symbols.table.tables;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.codepage.VerbaCodePage;
+import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
+import com.verba.language.graph.symbols.meta.NestedSymbolTableMetadata;
+import com.verba.language.graph.symbols.meta.ParameterSymbolTableItem;
+import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntrySet;
 import com.verba.language.graph.validation.violations.ValidationViolation;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -20,12 +26,6 @@ import com.verba.language.parsing.expressions.categories.NamedExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
-import com.verba.language.graph.symbols.meta.NestedSymbolTableMetadata;
-import com.verba.language.graph.symbols.meta.ParameterSymbolTableItem;
-import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntrySet;
 
 import java.io.Serializable;
 
@@ -93,7 +93,7 @@ public class ScopedSymbolTable implements Serializable {
   public void visit(VerbaCodePage block) {
     for (SymbolTableExpression expression : block.expressions().ofType(SymbolTableExpression.class)) {
       if (expression instanceof NamedBlockExpression) {
-        this.addNested(((NamedBlockExpression) expression).name(), (SymbolTableExpression) expression);
+        this.addNested(((NamedBlockExpression) expression).name(), expression);
       } else {
         expression.accept(this);
       }
@@ -102,7 +102,19 @@ public class ScopedSymbolTable implements Serializable {
 
   public void visit(ClassDeclarationExpression classDeclaration) {
     this.visit(classDeclaration.genericParameters());
-    this.visit(classDeclaration.block());
+
+    if (classDeclaration.hasBlock()) {
+      // Add symbols. In particular add sub-tables for named block expressions.
+      for (SymbolTableExpression subExpression : classDeclaration.block().ofType(SymbolTableExpression.class)) {
+        if (subExpression instanceof NamedBlockExpression) {
+          NamedBlockExpression block = (NamedBlockExpression) subExpression;
+          this.addNested(block.name(), block);
+
+        } else {
+          subExpression.accept(this);
+        }
+      }
+    }
   }
 
   public void visit(TraitDeclarationExpression trait) {
