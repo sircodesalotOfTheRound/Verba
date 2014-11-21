@@ -8,10 +8,7 @@ import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString("fn function() { val item = 3 } fn function2() { val mut item2 = 5 }");
+    Build build = Build.fromString("random");
 
-    for (SymbolTableEntry entry : build.symbolTable().entries()) {
-      System.out.println(entry.fqn());
-    }
   }
 }

@@ -91,9 +91,12 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(VerbaCodePage block) {
-    // This is technically incorrect. See 'visit(StaticSpaceExpression)'
-    for (NamedExpression expression : block.expressions().ofType(NamedExpression.class)) {
-      this.addNested(expression.name(), (SymbolTableExpression)expression);
+    for (SymbolTableExpression expression : block.expressions().ofType(SymbolTableExpression.class)) {
+      if (expression instanceof NamedBlockExpression) {
+        this.addNested(((NamedBlockExpression) expression).name(), (SymbolTableExpression) expression);
+      } else {
+        expression.accept(this);
+      }
     }
   }
 

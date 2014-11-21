@@ -12,7 +12,6 @@ import com.verba.language.graph.symbols.meta.interfaces.SymbolTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
-import com.verba.vblz.build.objectfile.SourceFilePathInfo;
 
 /**
  * Created by sircodesalot on 14-5-14.
@@ -40,9 +39,10 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
     this.update();
   }
 
+  /*
   public StaticSpaceExpression(SourceFilePathInfo path) {
     this(VerbaCodePage.fromFile(null, path.absolutePath()));
-  }
+  }*/
 
   public QIterable<VerbaExpression> rootLevelExpressions() {
     return this.rootExpressions;

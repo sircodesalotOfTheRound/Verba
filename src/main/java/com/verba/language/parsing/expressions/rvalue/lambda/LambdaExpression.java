@@ -1,5 +1,6 @@
 package com.verba.language.parsing.expressions.rvalue.lambda;
 
+import com.verba.language.exceptions.ParseException;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
@@ -19,7 +20,12 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
     super(parent, lexer);
 
     this.lvalue = TypeDeclarationExpression.read(this, lexer);
-    lexer.readCurrentAndAdvance(LambdaToken.class);
+
+    if (lexer.currentIs(LambdaToken.class)) {
+      lexer.readCurrentAndAdvance(LambdaToken.class);
+    } else {
+      throw ParseException.INSTANCE;
+    }
 
     // Attempt to read RValueExpression
     this.rvalue = RValueExpression.read(this, lexer);
