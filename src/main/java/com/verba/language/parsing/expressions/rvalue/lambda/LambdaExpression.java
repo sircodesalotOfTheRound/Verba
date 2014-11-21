@@ -21,11 +21,7 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
 
     this.lvalue = TypeDeclarationExpression.read(this, lexer);
 
-    if (lexer.currentIs(LambdaToken.class)) {
-      lexer.readCurrentAndAdvance(LambdaToken.class);
-    } else {
-      throw ParseException.INSTANCE;
-    }
+    lexer.readCurrentAndAdvance(LambdaToken.class);
 
     // Attempt to read RValueExpression
     this.rvalue = RValueExpression.read(this, lexer);

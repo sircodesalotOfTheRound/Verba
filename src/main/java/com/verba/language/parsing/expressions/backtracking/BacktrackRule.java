@@ -16,6 +16,7 @@ public abstract class BacktrackRule {
 
   public abstract VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) throws MismatchException;
 
+  @Deprecated
   public <T extends VerbaExpression> T tryWithRollback(Lexer lexer, Supplier<T> expression) {
     try {
       lexer.setUndoPoint();
@@ -30,6 +31,7 @@ public abstract class BacktrackRule {
     }
   }
 
+  @Deprecated
   public boolean verifyThenRollback(Lexer lexer, Consumer<Lexer> expression) {
     try {
       lexer.setUndoPoint();
