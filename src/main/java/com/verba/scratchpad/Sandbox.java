@@ -8,7 +8,7 @@ import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString("random");
+    Build build = Build.fromString("?");
 
   }
 }

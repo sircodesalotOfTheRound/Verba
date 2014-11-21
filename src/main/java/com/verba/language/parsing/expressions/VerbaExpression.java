@@ -39,7 +39,8 @@ public abstract class VerbaExpression implements Serializable, SyntaxGraphVisita
     .addRule(new SignatureDeclarationBacktrackRule())
     .addRule(new HashtagDeclarationBacktrackRule())
     .addRule(new AspectDeclarationBacktrackRule())
-    .addRule(new ReturnStatementRule());
+    .addRule(new ReturnStatementRule())
+    .addRule(new CatchAllBacktrackRule());
 
   private VerbaExpression parent;
 

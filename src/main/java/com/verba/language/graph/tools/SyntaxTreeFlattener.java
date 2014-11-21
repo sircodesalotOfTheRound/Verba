@@ -135,7 +135,7 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
 
   @Override
   public void visit(NumericExpression expression) {
-    throw new NotImplementedException();
+
   }
 
   @Override
