@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.backtracking.rules;
 
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
-import com.verba.language.parsing.expressions.backtracking.MismatchException;
 import com.verba.language.parsing.expressions.tags.hashtag.HashTagExpression;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.info.LexList;
@@ -18,7 +17,7 @@ public class HashtagDeclarationBacktrackRule extends BacktrackRule {
   }
 
   @Override
-  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) throws MismatchException {
-    return tryWithRollback(lexer, () -> HashTagExpression.read(parent, lexer));
+  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
+    return HashTagExpression.read(parent, lexer);
   }
 }

@@ -1,8 +1,8 @@
 package com.verba.language.parsing.tokens.operators.tags;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.tokens.operators.OperatorToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-28.
@@ -33,6 +33,6 @@ public abstract class TagToken extends OperatorToken {
     } else if (firstToken == '@' && stream.peek() == '[') {
       stream.read();
       return new AspectTagToken();
-    } else throw new ParseException("Expected Hashtag Token");
+    } else throw new NotImplementedException();
   }
 }

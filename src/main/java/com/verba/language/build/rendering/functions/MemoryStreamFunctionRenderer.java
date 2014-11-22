@@ -5,7 +5,7 @@ import com.verba.language.build.opcodes.VerbajOpCode;
 import com.verba.language.build.rendering.images.ImageRenderer;
 import com.verba.language.build.rendering.images.ImageType;
 import com.verba.language.build.rendering.images.ObjectImage;
-import com.verba.language.exceptions.CompilerException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class MemoryStreamFunctionRenderer implements FunctionOpCodeRenderer, Obj
   @Override
   public void writeInt8(String label, int value) {
     if (isFrozen) {
-      throw new CompilerException("Stream already frozen");
+      throw new NotImplementedException();
     }
 
     data.add((byte)value);

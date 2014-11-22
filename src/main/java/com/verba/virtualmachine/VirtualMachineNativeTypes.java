@@ -1,10 +1,10 @@
 package com.verba.virtualmachine;
 
-import com.verba.language.exceptions.CompilerException;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.LiteralExpression;
 import com.verba.language.parsing.expressions.categories.NativeTypeExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-5-28.
@@ -48,7 +48,7 @@ public final class VirtualMachineNativeTypes {
 
   public static TypeDeclarationExpression getTypeFromInstance(VerbaExpression expression) {
     if (!(expression instanceof NativeTypeExpression)) {
-      throw new CompilerException("%s is not a virtual machine native type", expression);
+      throw new NotImplementedException();
     }
 
     return ((NativeTypeExpression) expression).nativeTypeDeclaration();

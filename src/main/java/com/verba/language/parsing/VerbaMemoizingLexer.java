@@ -1,6 +1,5 @@
 package com.verba.language.parsing;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.info.LexList;
@@ -8,6 +7,7 @@ import com.verba.language.parsing.tokenization.Token;
 import com.verba.language.parsing.tokenization.VerbaLexicalTokenizer;
 import com.verba.language.parsing.tokens.ignorable.LineCommentToken;
 import com.verba.language.parsing.tokens.ignorable.WhitespaceToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Serializable;
 import java.util.*;
@@ -179,25 +179,25 @@ public class VerbaMemoizingLexer implements Lexer, Serializable {
   public <T extends Token> LexInfo readNext(Class<T> type) {
     LexInfo next = this.next();
     if (next.is(type)) return next;
-    else throw new ParseException("Expected %s, found %s", type, next);
+    else throw new NotImplementedException();
   }
 
   public <T extends Token> LexInfo readNext(Class<T> type, String representation) {
     LexInfo next = this.next();
     if (next.is(type, representation)) return next;
-    else throw new ParseException("Expected %s, found %s", type, next);
+    else throw new NotImplementedException();
   }
 
   public <T extends Token> LexInfo current(Class<T> type) {
     LexInfo current = this.current();
     if (current.is(type)) return current;
-    else throw new ParseException("Expected %s, found %s", type, current);
+    else throw new NotImplementedException();
   }
 
   public <T extends Token> LexInfo current(Class<T> type, String representation) {
     LexInfo current = this.current();
     if (current.is(type, representation)) return current;
-    else throw new ParseException("Expected %s, found %s", type, current);
+    else throw new NotImplementedException();
   }
 
 

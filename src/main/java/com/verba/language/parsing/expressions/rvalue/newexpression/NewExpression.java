@@ -1,7 +1,6 @@
 package com.verba.language.parsing.expressions.rvalue.newexpression;
 
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.MathOperandExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
@@ -10,6 +9,7 @@ import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.tokens.EnclosureToken;
 import com.verba.language.parsing.tokens.identifiers.IdentifierToken;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-24.
@@ -33,7 +33,7 @@ public class NewExpression extends VerbaExpression implements RValueExpression, 
 
   private TypeDeclarationExpression parseExpression(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) return TypeDeclarationExpression.read(this, lexer);
-    else throw new ParseException("Expected type name to follow new");
+    else throw new NotImplementedException();
   }
 
   public static NewExpression read(VerbaExpression parent, Lexer lexer) {

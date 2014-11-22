@@ -3,12 +3,12 @@ package com.verba.language.parsing.expressions.block;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.tokens.EnclosureToken;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Iterator;
 
@@ -34,7 +34,7 @@ public class BlockDeclarationExpression extends VerbaExpression
       VerbaExpression result = VerbaExpression.read(this, lexer);
 
       if (result != null) this.expressions.add(result);
-      else throw new ParseException("Expected statement.");
+      else throw new NotImplementedException();
     }
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, EnclosureToken.CLOSE_BRACE);

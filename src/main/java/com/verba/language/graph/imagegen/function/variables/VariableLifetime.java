@@ -1,7 +1,7 @@
 package com.verba.language.graph.imagegen.function.variables;
 
-import com.verba.language.exceptions.CompilerException;
 import com.verba.language.parsing.expressions.VerbaExpression;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14/9/21.
@@ -30,7 +30,7 @@ public class VariableLifetime {
 
   private void validateExpression(VerbaExpression expression) {
     if (!this.expression.text().equals(expression.text())) {
-      throw new CompilerException("Variables do not match");
+      throw new NotImplementedException();
     }
   }
 

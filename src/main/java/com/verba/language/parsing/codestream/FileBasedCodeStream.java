@@ -1,6 +1,6 @@
 package com.verba.language.parsing.codestream;
 
-import com.verba.language.exceptions.ParseException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -45,10 +45,9 @@ public class FileBasedCodeStream implements CodeStream {
 
       file.close();
       return contents.toString();
-    } catch (IOException ex) {
-    }
+    } catch (IOException ex) { }
 
-    throw new ParseException("File not found");
+    throw new NotImplementedException();
   }
 
   @Override

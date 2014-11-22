@@ -3,7 +3,7 @@ package com.verba.language.build.rendering;
 import com.verba.language.build.rendering.functions.MemoryStreamFunctionRenderer;
 import com.verba.language.build.rendering.images.ImageRenderer;
 import com.verba.language.build.rendering.images.ObjectImage;
-import com.verba.language.exceptions.CompilerException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class FileStreamImageWriter implements ImageRenderer, AutoCloseable {
       this.path = path;
       this.stream = new FileOutputStream(path);
     } catch (Exception ex) {
-      throw new CompilerException("Unable to load file");
+      throw new NotImplementedException();
     }
   }
 
@@ -56,7 +56,7 @@ public class FileStreamImageWriter implements ImageRenderer, AutoCloseable {
       stream.write(imageTypeCode);
       stream.write(data);
     } catch (IOException ex) {
-      throw new CompilerException("Unable to write to file");
+      throw new NotImplementedException();
     }
   }
 

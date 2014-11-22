@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.backtracking.rules;
 
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
-import com.verba.language.parsing.expressions.backtracking.MismatchException;
 import com.verba.language.parsing.expressions.statements.flow.iteration.ForStatementExpression;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.info.LexList;
@@ -18,9 +17,8 @@ public class ForStatementBacktrackRule extends BacktrackRule {
   }
 
   @Override
-  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) throws MismatchException {
-    if (restOfLine.startsWith(KeywordToken.class, "for")) return ForStatementExpression.read(parent, lexer);
+  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
+    return ForStatementExpression.read(parent, lexer);
 
-    throw MismatchException.getInstance();
   }
 }

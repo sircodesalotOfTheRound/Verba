@@ -1,9 +1,9 @@
 package com.verba.language.parsing.tokens.operators.assignment;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.tokens.PowerEqualsToken;
 import com.verba.language.parsing.tokens.operators.OperatorToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-27.
@@ -41,7 +41,7 @@ public class AssignmentToken extends OperatorToken {
   public static AssignmentToken read(Character firstToken, CodeStream stream) {
     if (firstToken == '=' && (!stream.hasNext() || stream.peek() != '=')) return new AssignmentOperatorToken();
 
-    if (!stream.hasNext()) throw new ParseException("Expected assignment token");
+    if (!stream.hasNext()) throw new NotImplementedException();
 
     if (firstToken == '+' && stream.peek() == '=') {
       stream.read();
@@ -63,6 +63,6 @@ public class AssignmentToken extends OperatorToken {
       return new PowerEqualsToken();
     }
 
-    throw new ParseException("Expected assignment token");
+    throw new NotImplementedException();
   }
 }

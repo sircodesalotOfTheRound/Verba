@@ -1,7 +1,6 @@
 package com.verba.language.parsing.expressions.tags.aspect;
 
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.MetaTagExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
@@ -11,6 +10,7 @@ import com.verba.language.parsing.tokens.EnclosureToken;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
 import com.verba.language.parsing.tokens.operators.OperatorToken;
 import com.verba.language.parsing.tokens.operators.tags.AspectTagToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-25.
@@ -40,21 +40,22 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
   }
 
   private VerbaExpression readType(Lexer lexer) {
-    // @| ... : new AspectFQN
+    // @[ ... : new AspectFQN ]
     if (lexer.currentIs(KeywordToken.class, "new")) {
       return NewExpression.read(this, lexer);
     }
 
-    // @| ... : inject AspectFQN
+    // @ [ ... : inject AspectFQN ]
     else if (lexer.currentIs(KeywordToken.class, "inject")) {
-      throw new ParseException("Injected Aspects not Implemented yet");
+      throw new NotImplementedException();
     }
 
-    // @| ... : AspectFQN (is the same as new aspectFQN)
-    else if (FullyQualifiedNameExpression.IsFullyQualifiedName(lexer))
-      return FullyQualifiedNameExpression.read(this, lexer);
+    // @ [ ... : AspectFQN ] (is the same as new aspectFQN)
+    else if (FullyQualifiedNameExpression.IsFullyQualifiedName(lexer)) {
+      throw new NotImplementedException();
+    }
 
-    throw new ParseException("Expected Aspect RValue expression");
+    throw new NotImplementedException();
   }
 
   public FullyQualifiedNameExpression identifier() {
@@ -70,7 +71,7 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
   }
 
   public boolean isInjectedAspect() {
-    throw new ParseException("Injected Aspects not Implemented yet");
+    throw new NotImplementedException();
   }
 
   public boolean hasIdentifier() {

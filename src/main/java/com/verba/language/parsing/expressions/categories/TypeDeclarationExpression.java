@@ -1,11 +1,11 @@
 package com.verba.language.parsing.expressions.categories;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.tokenization.Token;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-25.
@@ -20,7 +20,7 @@ public interface TypeDeclarationExpression extends Token {
       return TupleDeclarationExpression.read(parent, lexer);
     }
 
-    throw new ParseException("Expected Type Declaration");
+    throw new NotImplementedException();
   }
 
   public abstract String representation();

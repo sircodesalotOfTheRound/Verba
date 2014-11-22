@@ -32,18 +32,10 @@ public class BacktrackRuleSet<T> implements QIterable<BacktrackRule> {
 
     for (BacktrackRule rule : this.rules) {
       if (rule.attemptIf(parent, lexer, restOfLine)) {
-        T result = safeAttempt(rule, parent, lexer, restOfLine);
+        T result = (T)rule.attempt(parent, lexer, restOfLine);
         if (result != null) return result;
       }
     }
-
-    return null;
-  }
-
-  private T safeAttempt(BacktrackRule rule, VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    try {
-      return (T) rule.attempt(parent, lexer, restOfLine);
-    } catch (MismatchException ex) { /* Do nothing */}
 
     return null;
   }

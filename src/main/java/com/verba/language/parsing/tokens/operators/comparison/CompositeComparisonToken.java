@@ -1,8 +1,8 @@
 package com.verba.language.parsing.tokens.operators.comparison;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.tokens.operators.OperatorToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-27.
@@ -49,6 +49,6 @@ public abstract class CompositeComparisonToken extends OperatorToken {
     } else if (firstToken == '>' && stream.peek() == '=') {
       stream.read();
       return new GreaterThanEqualsToken();
-    } else throw new ParseException("Expected CompositeComparison Token");
+    } else throw new NotImplementedException();
   }
 }

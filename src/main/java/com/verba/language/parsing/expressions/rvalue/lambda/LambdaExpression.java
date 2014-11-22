@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.rvalue.lambda;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;

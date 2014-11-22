@@ -4,7 +4,6 @@ import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
-import com.verba.language.parsing.expressions.backtracking.MismatchException;
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.info.LexList;
 
@@ -32,7 +31,7 @@ public class CatchAllBacktrackRule extends BacktrackRule {
   }
 
   @Override
-  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) throws MismatchException {
+  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
     return new CatchAllExpression(parent, lexer);
   }
 }

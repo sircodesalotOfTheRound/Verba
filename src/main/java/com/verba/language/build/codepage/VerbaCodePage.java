@@ -3,7 +3,6 @@ package com.verba.language.build.codepage;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.exceptions.CompilerException;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.parsing.Lexer;
@@ -72,7 +71,7 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
 
       return new VerbaCodePage(null, lexer);
     } catch (Exception ex) {
-      throw new CompilerException("Unable to load file %s", path);
+      throw new NotImplementedException();
     }
   }
 

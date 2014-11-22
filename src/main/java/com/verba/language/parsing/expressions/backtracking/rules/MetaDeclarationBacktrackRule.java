@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.backtracking.rules;
 
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
-import com.verba.language.parsing.expressions.backtracking.MismatchException;
 import com.verba.language.parsing.expressions.blockheader.classes.MetaDeclarationExpression;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.info.LexList;
@@ -18,9 +17,7 @@ public class MetaDeclarationBacktrackRule extends BacktrackRule {
   }
 
   @Override
-  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) throws MismatchException {
-    if (restOfLine.startsWith(KeywordToken.class, "meta")) return MetaDeclarationExpression.read(parent, lexer);
-
-    throw MismatchException.getInstance();
+  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
+    return MetaDeclarationExpression.read(parent, lexer);
   }
 }

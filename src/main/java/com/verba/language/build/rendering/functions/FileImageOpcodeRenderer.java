@@ -1,7 +1,7 @@
 package com.verba.language.build.rendering.functions;
 
 import com.verba.language.build.opcodes.VerbajOpCode;
-import com.verba.language.exceptions.CompilerException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class FileImageOpcodeRenderer implements FunctionOpCodeRenderer, AutoClos
       this.stream = new FileOutputStream(path);
 
     } catch (IOException ex) {
-      throw new CompilerException("Unable to open output file");
+      throw new NotImplementedException();
     }
   }
 

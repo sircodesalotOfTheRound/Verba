@@ -1,7 +1,7 @@
 package com.verba.language.parsing.info;
 
-import com.verba.language.exceptions.CompilerException;
 import com.verba.language.parsing.tokenization.Token;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Serializable;
 
@@ -52,7 +52,7 @@ public class LexInfo implements Serializable {
       try {
         this.type = Class.forName(this.typeName);
       } catch (ClassNotFoundException e) {
-        throw new CompilerException("Unable to instantiate class");
+        throw new NotImplementedException();
       }
     }
 

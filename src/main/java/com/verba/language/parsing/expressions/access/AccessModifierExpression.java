@@ -1,11 +1,11 @@
 package com.verba.language.parsing.expressions.access;
 
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.exceptions.CompilerException;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +36,7 @@ public class AccessModifierExpression extends VerbaExpression {
 
     // Validate that it was in fact a
     if (!ACCESS_MODIFIERS.contains(lexer.current().representation()))
-      throw new CompilerException("Invalid access modifier");
+      throw new NotImplementedException();
 
     this.accessModifier = lexer.readCurrentAndAdvance(KeywordToken.class);
     this.closeLexingRegion();

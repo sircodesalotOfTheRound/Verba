@@ -1,6 +1,6 @@
 package com.verba.language.build.rendering.images;
 
-import com.verba.language.exceptions.CompilerException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14/9/26.
@@ -16,6 +16,6 @@ public enum ImageType {
         return functionCode;
     }
 
-    throw new CompilerException("Invalid image type");
+    throw new NotImplementedException();
   }
 }

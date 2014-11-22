@@ -1,7 +1,7 @@
 package com.verba.language.parsing.tokens.operators.mathop;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.tokens.operators.OperatorToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-27.
@@ -37,6 +37,6 @@ public abstract class MathOpToken extends OperatorToken {
       return new DivideOpToken();
     } else if (text == '%') {
       return new ModuloOpToken();
-    } else throw new ParseException("Expected math operation");
+    } else throw new NotImplementedException();
   }
 }

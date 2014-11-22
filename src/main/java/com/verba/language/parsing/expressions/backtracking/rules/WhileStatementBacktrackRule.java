@@ -1,10 +1,9 @@
 package com.verba.language.parsing.expressions.backtracking.rules;
 
+import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
-import com.verba.language.parsing.expressions.backtracking.MismatchException;
 import com.verba.language.parsing.expressions.statements.flow.iteration.WhileStatementExpression;
-import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.info.LexList;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
 
@@ -18,8 +17,7 @@ public class WhileStatementBacktrackRule extends BacktrackRule {
   }
 
   @Override
-  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) throws MismatchException {
-    if (restOfLine.startsWith(KeywordToken.class, "while")) return WhileStatementExpression.read(parent, lexer);
-    throw MismatchException.getInstance();
+  public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
+    return WhileStatementExpression.read(parent, lexer);
   }
 }

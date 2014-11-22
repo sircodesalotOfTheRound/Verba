@@ -1,8 +1,8 @@
 package com.verba.language.parsing.tokens;
 
-import com.verba.language.exceptions.ParseException;
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.tokens.operators.OperatorToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-26.
@@ -20,7 +20,7 @@ public class LambdaToken extends OperatorToken {
     if (firstToken == '-' && stream.peek() == '>') {
       stream.read();
       return new LambdaToken();
-    } else throw new ParseException("Expected lambda token");
+    } else throw new NotImplementedException();
   }
 
   @Override
