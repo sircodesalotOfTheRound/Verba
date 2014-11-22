@@ -104,16 +104,17 @@ public class ScopedSymbolTable implements Serializable {
     this.visit(classDeclaration.genericParameters());
 
     if (classDeclaration.hasBlock()) {
-      // Add symbols. In particular add sub-tables for named block expressions.
-      for (SymbolTableExpression subExpression : classDeclaration.block().ofType(SymbolTableExpression.class)) {
-        if (subExpression instanceof NamedBlockExpression) {
-          NamedBlockExpression block = (NamedBlockExpression) subExpression;
-          this.addNested(block.name(), block);
-
-        } else {
-          subExpression.accept(this);
-        }
-      }
+      this.addNamedNestedBlockToSubTable(classDeclaration.block());
+//      // Add symbols. In particular add sub-tables for named block expressions.
+//      for (SymbolTableExpression subExpression : classDeclaration.block().ofType(SymbolTableExpression.class)) {
+//        if (subExpression instanceof NamedBlockExpression) {
+//          NamedBlockExpression block = (NamedBlockExpression) subExpression;
+//          this.addNested(block.name(), block);
+//
+//        } else {
+//          subExpression.accept(this);
+//        }
+//      }
     }
   }
 
@@ -140,15 +141,17 @@ public class ScopedSymbolTable implements Serializable {
     }
 
     // Add symbols. In particular add sub-tables for named block expressions.
-    for (SymbolTableExpression subExpression : function.block().ofType(SymbolTableExpression.class)) {
-      if (subExpression instanceof NamedBlockExpression) {
+    this.addNamedNestedBlockToSubTable(function.block());
+
+    /*for (SymbolTableExpression subExpression : function.block().ofType(SymbolTableExpression.class)) {
+      /*if (subExpression instanceof NamedBlockExpression) {
         NamedBlockExpression block = (NamedBlockExpression) subExpression;
         this.addNested(block.name(), block);
 
       } else {
         subExpression.accept(this);
       }
-    }
+    }*/
   }
 
   public void visit(SignatureDeclarationExpression signature) {
@@ -264,6 +267,17 @@ public class ScopedSymbolTable implements Serializable {
 
   public QIterable<ValidationViolation> violations() {
     return collectViolations(new QList<>(), this);
+  }
+
+  private void addNamedNestedBlockToSubTable(BlockDeclarationExpression subBlock) {
+    for (SymbolTableExpression subExpression : subBlock.expressions().ofType(SymbolTableExpression.class)) {
+      if (subExpression instanceof NamedBlockExpression) {
+        NamedBlockExpression block = (NamedBlockExpression) subExpression;
+        this.addNested(block.name(), block);
+      } else {
+        subExpression.accept(this);
+      }
+    }
   }
 
   private QList<ValidationViolation> collectViolations(QList<ValidationViolation> violations,
