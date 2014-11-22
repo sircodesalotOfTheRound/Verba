@@ -108,7 +108,7 @@ public abstract class VerbaExpression implements Serializable, SyntaxGraphVisita
   }
 
   public <T> boolean parentIs(Class<T> type) {
-    return this.hasParent() && type.isAssignableFrom(this.getClass());
+    return this.hasParent() && type.isAssignableFrom(this.parent.getClass());
   }
 
   public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {

@@ -26,6 +26,7 @@ import com.verba.language.parsing.expressions.categories.NamedExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
+import org.omg.CORBA.NamedValue;
 
 import java.io.Serializable;
 
@@ -44,18 +45,24 @@ public class ScopedSymbolTable implements Serializable {
 
   // Construction
   // Anonymous block
-  public ScopedSymbolTable(SymbolTableExpression block) {
-    this(null, block);
-  }
-
-  public ScopedSymbolTable(ScopedSymbolTable parent, SymbolTableExpression block) {
+  public ScopedSymbolTable(SymbolTableExpression region) {
     this.entrySet = new SymbolTableEntrySet(this);
-    this.name = resolveName(block);
-    this.parent = parent;
-    this.headerExpression = block;
+    this.name = resolveName(region);
+    this.parent = null;
+    this.headerExpression = null;
     this.fqn = resolveFqn(name);
 
-    block.accept(this);
+    region.accept(this);
+  }
+
+  public ScopedSymbolTable(ScopedSymbolTable parentTable, NamedBlockExpression blockHeader) {
+    this.entrySet = new SymbolTableEntrySet(this);
+    this.name = resolveName(blockHeader);
+    this.parent = parentTable;
+    this.headerExpression = blockHeader;
+    this.fqn = resolveFqn(name);
+
+    this.visitAll(blockHeader.block().expressions());
   }
 
   private String resolveName(SymbolTableExpression block) {
@@ -74,47 +81,19 @@ public class ScopedSymbolTable implements Serializable {
     return name;
   }
 
-
-
-  public void visit(StaticSpaceExpression block) {
-    for (SymbolTableExpression expression : block.rootLevelExpressions().ofType(SymbolTableExpression.class)) {
-      if (expression instanceof NamedBlockExpression) {
-        this.addNested(((NamedBlockExpression) expression).name(), expression);
-      } else {
-        expression.accept(this);
-      }
-    }
+  public void visit(StaticSpaceExpression staticSpace) {
+    this.visitAll(staticSpace.rootLevelExpressions());
   }
 
-  public void visit(TaskDeclarationExpression expression) {
-//    this.addNested(expression);
-  }
-
-  public void visit(VerbaCodePage block) {
-    for (SymbolTableExpression expression : block.expressions().ofType(SymbolTableExpression.class)) {
-      if (expression instanceof NamedBlockExpression) {
-        this.addNested(((NamedBlockExpression) expression).name(), expression);
-      } else {
-        expression.accept(this);
-      }
-    }
+  public void visit(VerbaCodePage page) {
+    this.visitAll(page.expressions());
   }
 
   public void visit(ClassDeclarationExpression classDeclaration) {
     this.visit(classDeclaration.genericParameters());
 
     if (classDeclaration.hasBlock()) {
-      this.addNamedNestedBlockToSubTable(classDeclaration.block());
-//      // Add symbols. In particular add sub-tables for named block expressions.
-//      for (SymbolTableExpression subExpression : classDeclaration.block().ofType(SymbolTableExpression.class)) {
-//        if (subExpression instanceof NamedBlockExpression) {
-//          NamedBlockExpression block = (NamedBlockExpression) subExpression;
-//          this.addNested(block.name(), block);
-//
-//        } else {
-//          subExpression.accept(this);
-//        }
-//      }
+      this.visit(classDeclaration.block());
     }
   }
 
@@ -128,30 +107,17 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(FunctionDeclarationExpression function) {
+    this.visit(function.genericParameters());
+
     // First add the parameterSets
     QIterable<NamedValueExpression> parameters = function.parameterSets()
       .flatten(TupleDeclarationExpression::items)
       .cast(NamedValueExpression.class);
 
-    this.visit(function.genericParameters());
-
-    // Then add regular parameterSets
-    for (NamedValueExpression parameter : parameters) {
-      this.add(parameter.identifier().representation(), parameter, new ParameterSymbolTableItem());
-    }
+    this.visit(parameters);
 
     // Add symbols. In particular add sub-tables for named block expressions.
-    this.addNamedNestedBlockToSubTable(function.block());
-
-    /*for (SymbolTableExpression subExpression : function.block().ofType(SymbolTableExpression.class)) {
-      /*if (subExpression instanceof NamedBlockExpression) {
-        NamedBlockExpression block = (NamedBlockExpression) subExpression;
-        this.addNested(block.name(), block);
-
-      } else {
-        subExpression.accept(this);
-      }
-    }*/
+    this.visit(function.block());
   }
 
   public void visit(SignatureDeclarationExpression signature) {
@@ -166,8 +132,20 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(BlockDeclarationExpression block) {
-    for (SymbolTableExpression expression : block.ofType(SymbolTableExpression.class)) {
-      expression.accept(this);
+    NamedBlockExpression parent = (NamedBlockExpression) block.parent();
+    this.addNested(parent.name(), parent);
+  }
+
+  public void visit(ValDeclarationStatement statement) {
+    this.add(statement.name(), statement);
+  }
+
+  public void visit(TaskDeclarationExpression expression) {  }
+
+  public void visit(QIterable<NamedValueExpression> parameters) {
+    // Then add regular parameterSets
+    for (NamedValueExpression parameter : parameters) {
+      this.add(parameter.identifier().representation(), parameter, new ParameterSymbolTableItem());
     }
   }
 
@@ -189,15 +167,11 @@ public class ScopedSymbolTable implements Serializable {
     this.add(entry);
   }
 
-  public void addNested(String name, SymbolTableExpression block) {
+  public void addNested(String name, NamedBlockExpression block) {
     ScopedSymbolTable nestedTable = new ScopedSymbolTable(this, block);
 
     this.add(name, (VerbaExpression) block, new NestedSymbolTableMetadata(nestedTable));
     this.nestedTables.add(nestedTable);
-  }
-
-  public void visit(ValDeclarationStatement statement) {
-    this.add(statement.name(), statement);
   }
 
   // Accessing Items
@@ -267,6 +241,12 @@ public class ScopedSymbolTable implements Serializable {
 
   public QIterable<ValidationViolation> violations() {
     return collectViolations(new QList<>(), this);
+  }
+
+  private void visitAll(QIterable<VerbaExpression> expressions) {
+    for (SymbolTableExpression expression : expressions.ofType(SymbolTableExpression.class)) {
+      expression.accept(this);
+    }
   }
 
   private void addNamedNestedBlockToSubTable(BlockDeclarationExpression subBlock) {
