@@ -7,8 +7,8 @@ import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationE
 /**
  * Created by sircodesalot on 14-5-25.
  */
+
 public interface InvokableExpression extends TypedExpression {
   public QIterable<TupleDeclarationExpression> parameterSets();
-
   public BlockDeclarationExpression block();
 }

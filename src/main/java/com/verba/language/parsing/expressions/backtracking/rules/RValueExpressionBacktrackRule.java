@@ -5,6 +5,7 @@ import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.info.LexList;
+import com.verba.language.parsing.tokens.identifiers.IdentifierToken;
 
 /**
  * Created by sircodesalot on 14-4-26.
@@ -13,9 +14,8 @@ public class RValueExpressionBacktrackRule extends BacktrackRule {
 
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    // Todo: Fix this.
-
-    return false;
+    // Todo: This is not very specific.
+    return (lexer.currentIs(IdentifierToken.class));
   }
 
   @Override

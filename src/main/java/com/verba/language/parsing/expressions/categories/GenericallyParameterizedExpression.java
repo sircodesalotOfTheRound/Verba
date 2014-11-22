@@ -5,7 +5,7 @@ import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeLis
 /**
  * Created by sircodesalot on 14-5-30.
  */
-public interface GenericExpression {
+public interface GenericallyParameterizedExpression {
   boolean hasGenericParameters();
 
   GenericTypeListExpression genericParameters();

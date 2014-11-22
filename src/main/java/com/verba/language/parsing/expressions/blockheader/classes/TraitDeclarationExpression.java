@@ -7,7 +7,7 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.NamedBlockExpression;
 import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeListExpression;
-import com.verba.language.parsing.expressions.categories.GenericExpression;
+import com.verba.language.parsing.expressions.categories.GenericallyParameterizedExpression;
 import com.verba.language.parsing.expressions.categories.PolymorphicExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
@@ -23,7 +23,7 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  * Created by sircodesalot on 14-2-17.
  */
 public class TraitDeclarationExpression extends VerbaExpression
-  implements NamedBlockExpression, PolymorphicExpression, GenericExpression, SymbolTableExpression {
+  implements NamedBlockExpression, PolymorphicExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;

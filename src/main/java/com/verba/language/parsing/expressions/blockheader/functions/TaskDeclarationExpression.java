@@ -19,7 +19,7 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  * Created by sircodesalot on 14-2-17.
  */
 public class TaskDeclarationExpression extends VerbaExpression
-  implements NamedBlockExpression, TypedExpression, InvokableExpression, GenericExpression, SymbolTableExpression {
+  implements NamedBlockExpression, TypedExpression, InvokableExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;

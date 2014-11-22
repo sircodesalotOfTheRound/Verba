@@ -19,7 +19,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by sircodesalot on 14-2-17.
  */
 public class SignatureDeclarationExpression extends VerbaExpression implements NamedExpression,
-  TypedExpression, InvokableExpression, GenericExpression, SymbolTableExpression {
+  TypedExpression, InvokableExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 
   private final FullyQualifiedNameExpression identifier;
   private TypeDeclarationExpression returnType;

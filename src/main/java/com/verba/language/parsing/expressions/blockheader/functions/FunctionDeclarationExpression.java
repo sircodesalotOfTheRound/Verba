@@ -20,8 +20,8 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  * Created by sircodesalot on 14-2-17.
  */
 public class FunctionDeclarationExpression extends VerbaExpression
-  implements NamedBlockExpression, TypedExpression, InvokableExpression,
-  GenericExpression, SymbolTableExpression, ResolvableTypeExpression {
+  implements NamedBlockExpression, TypedExpression, InvokableExpression, ParameterizedExpression,
+  GenericallyParameterizedExpression, SymbolTableExpression, ResolvableTypeExpression {
 
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
@@ -51,6 +51,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
     return this.primaryIdentifier().hasGenericParameters();
   }
 
+  @Override
   public boolean hasParameters() {
     return (this.primaryIdentifier().hasParameters());
   }

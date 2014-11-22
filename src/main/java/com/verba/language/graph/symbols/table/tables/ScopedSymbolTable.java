@@ -22,11 +22,12 @@ import com.verba.language.parsing.expressions.blockheader.functions.TaskDeclarat
 import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeListExpression;
 import com.verba.language.parsing.expressions.blockheader.namespaces.NamespaceDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parsing.expressions.categories.GenericallyParameterizedExpression;
 import com.verba.language.parsing.expressions.categories.NamedExpression;
+import com.verba.language.parsing.expressions.categories.ParameterizedExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
-import org.omg.CORBA.NamedValue;
 
 import java.io.Serializable;
 
@@ -62,6 +63,18 @@ public class ScopedSymbolTable implements Serializable {
     this.headerExpression = blockHeader;
     this.fqn = resolveFqn(name);
 
+    if (blockHeader instanceof GenericallyParameterizedExpression) {
+      this.visit(((GenericallyParameterizedExpression)blockHeader).genericParameters());
+    }
+
+    if (blockHeader instanceof ParameterizedExpression) {
+      QIterable<NamedValueExpression> parameters = ((ParameterizedExpression)blockHeader).parameterSets()
+        .flatten(TupleDeclarationExpression::items)
+        .cast(NamedValueExpression.class);
+
+      this.visit(parameters);
+    }
+
     this.visitAll(blockHeader.block().expressions());
   }
 
@@ -90,11 +103,7 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(ClassDeclarationExpression classDeclaration) {
-    this.visit(classDeclaration.genericParameters());
-
-    if (classDeclaration.hasBlock()) {
-      this.visit(classDeclaration.block());
-    }
+    this.visit(classDeclaration.block());
   }
 
   public void visit(TraitDeclarationExpression trait) {
@@ -107,16 +116,6 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(FunctionDeclarationExpression function) {
-    this.visit(function.genericParameters());
-
-    // First add the parameterSets
-    QIterable<NamedValueExpression> parameters = function.parameterSets()
-      .flatten(TupleDeclarationExpression::items)
-      .cast(NamedValueExpression.class);
-
-    this.visit(parameters);
-
-    // Add symbols. In particular add sub-tables for named block expressions.
     this.visit(function.block());
   }
 
