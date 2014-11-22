@@ -2,15 +2,13 @@ package com.verba.language.parsing.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.NamedBlockExpression;
 import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeListExpression;
-import com.verba.language.parsing.expressions.categories.GenericallyParameterizedExpression;
-import com.verba.language.parsing.expressions.categories.PolymorphicExpression;
-import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
-import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parsing.expressions.categories.*;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parsing.expressions.members.MemberExpression;
@@ -23,7 +21,8 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  * Created by sircodesalot on 14-2-17.
  */
 public class ClassDeclarationExpression extends VerbaExpression
-  implements NamedBlockExpression, PolymorphicExpression, GenericallyParameterizedExpression, SymbolTableExpression {
+  implements NamedBlockExpression, PolymorphicExpression, ParameterizedExpression,
+  GenericallyParameterizedExpression, SymbolTableExpression {
 
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
@@ -66,6 +65,11 @@ public class ClassDeclarationExpression extends VerbaExpression
 
   public static ClassDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new ClassDeclarationExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   public FullyQualifiedNameExpression declaration() {
@@ -126,4 +130,10 @@ public class ClassDeclarationExpression extends VerbaExpression
   public void accept(ScopedSymbolTable symbolTable) {
     symbolTable.visit(this);
   }
+
+  @Override
+  public boolean hasParameters() { return this.primaryIdentifier().hasParameters(); }
+
+  @Override
+  public QIterable<TupleDeclarationExpression> parameterSets() { return this.primaryIdentifier().parameterLists(); }
 }

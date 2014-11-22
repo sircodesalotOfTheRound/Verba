@@ -9,13 +9,8 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 /**
  * Created by sircodesalot on 14-5-3.
  */
-public abstract class ExpressionValidator<T> {
-  private final T target;
+public abstract class ExpressionValidator {
   private final ValidationViolationList violations = new ValidationViolationList();
-
-  public ExpressionValidator(T target) {
-    this.target = target;
-  }
 
   protected void addViolations(Iterable<ValidationViolation> violations) {
     for (ValidationViolation violation : violations) {
@@ -37,9 +32,5 @@ public abstract class ExpressionValidator<T> {
 
   public QIterable<ValidationViolation> violations() {
     return this.violations;
-  }
-
-  protected T target() {
-    return this.target;
   }
 }

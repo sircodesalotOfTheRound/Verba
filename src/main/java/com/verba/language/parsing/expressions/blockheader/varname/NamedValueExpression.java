@@ -1,6 +1,7 @@
 package com.verba.language.parsing.expressions.blockheader.varname;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.*;
@@ -34,6 +35,11 @@ public class NamedValueExpression extends VerbaExpression
 
   public static NamedValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamedValueExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   public String representation() {

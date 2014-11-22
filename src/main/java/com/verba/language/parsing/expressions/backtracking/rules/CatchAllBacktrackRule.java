@@ -1,5 +1,7 @@
 package com.verba.language.parsing.expressions.backtracking.rules;
 
+import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.Lexer;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -17,6 +19,11 @@ public class CatchAllBacktrackRule extends BacktrackRule {
     public CatchAllExpression(VerbaExpression parent, Lexer lexer) {
       super(parent, lexer);
       this.lexInfo = lexer.readCurrentAndAdvance();
+    }
+
+    @Override
+    public QIterable<ExpressionValidator> validators() {
+      return null;
     }
 
     public LexInfo lexInfo() { return this.lexInfo; }

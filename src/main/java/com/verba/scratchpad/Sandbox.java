@@ -8,7 +8,7 @@ import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString("fn function<T>(parameter) { val item = 10 } class MyClass<T> { }");
+    Build build = Build.fromString("fn function<T>(parameter) { val item = 10 } class MyClass<T, U, V>(first, second, third) { }");
 
     for (SymbolTableEntry entry : build.symbolTable().entries()) {
       System.out.println(entry.fqn());

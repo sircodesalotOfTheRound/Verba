@@ -1,5 +1,7 @@
 package com.verba.language.parsing.expressions.blockheader.classes;
 
+import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -31,6 +33,11 @@ public class InjectedDeclarationExpression extends VerbaExpression implements Na
 
   public static InjectedDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new InjectedDeclarationExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   public FullyQualifiedNameExpression identifier() {

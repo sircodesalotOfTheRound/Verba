@@ -1,5 +1,7 @@
 package com.verba.language.parsing.expressions.rvalue.simple;
 
+import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
@@ -22,6 +24,11 @@ public class IdentifierExpression extends VerbaExpression implements RValueExpre
 
   public static IdentifierExpression read(VerbaExpression parent, Lexer lexer) {
     return new IdentifierExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   public LexInfo identifier() {

@@ -1,6 +1,8 @@
 package com.verba.language.parsing.expressions.statements.declaration;
 
+import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.statictyping.SymbolTypeResolver;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -46,6 +48,11 @@ public class ValDeclarationStatement extends VerbaExpression
 
   public static ValDeclarationStatement read(VerbaExpression parent, Lexer lexer) {
     return new ValDeclarationStatement(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   @Override

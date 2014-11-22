@@ -1,5 +1,7 @@
 package com.verba.language.parsing.expressions.rvalue.simple;
 
+import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.*;
@@ -43,6 +45,11 @@ public class NumericExpression extends VerbaExpression
 
   public static NumericExpression read(VerbaExpression parent, Lexer lexer) {
     return new NumericExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   @Override

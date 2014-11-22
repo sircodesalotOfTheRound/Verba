@@ -1,5 +1,7 @@
 package com.verba.language.parsing.expressions.statements.meta;
 
+import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.Lexer;
@@ -23,6 +25,11 @@ public class MetaStatementExpression extends VerbaExpression {
 
   public static MetaStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaStatementExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   public VerbaExpression statement() {

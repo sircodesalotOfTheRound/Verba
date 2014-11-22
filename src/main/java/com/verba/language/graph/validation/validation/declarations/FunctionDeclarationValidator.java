@@ -10,18 +10,10 @@ import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationE
 /**
  * Created by sircodesalot on 14-5-3.
  */
-public class FunctionDeclarationValidator extends ExpressionValidator<FunctionDeclarationExpression> {
-  private final FullyQualifiedNameValidator declarationValidator;
-
-  public FunctionDeclarationValidator(FunctionDeclarationExpression function) {
-    super(function);
-
-    this.declarationValidator = new FullyQualifiedNameValidator(function.declaration());
-  }
-
+public class FunctionDeclarationValidator extends ExpressionValidator {
   public void validate() {
     this.validateName();
-    this.validateParameters();
+//    this.validateParameters();
     this.validateReturnValue();
   }
 
@@ -33,11 +25,11 @@ public class FunctionDeclarationValidator extends ExpressionValidator<FunctionDe
 //        }
   }
 
-  private void validateParameters() {
-    for (TupleDeclarationExpression tuple : this.function().parameterSets()) {
-      validateParameterTuple(tuple);
-    }
-  }
+//  private void validateParameters() {
+//    for (TupleDeclarationExpression tuple : this.function().parameterSets()) {
+//      validateParameterTuple(tuple);
+//    }
+//  }
 
   private void validateParameterTuple(TupleDeclarationExpression tuple) {
     for (VerbaExpression expression : tuple.items()) {
@@ -56,6 +48,7 @@ public class FunctionDeclarationValidator extends ExpressionValidator<FunctionDe
   }
 
   public void validateName() {
+    /*
     if (!declarationValidator.hasSingleMember()) {
       this.addError(this.function().declaration(),
         "Function '%s' is not a valid declaration name.", function().declaration().representation());
@@ -64,10 +57,6 @@ public class FunctionDeclarationValidator extends ExpressionValidator<FunctionDe
     if (!declarationValidator.hasParameters()) {
       this.addError(this.function().declaration(),
         "Function '%s' must have parameterSets.", function().declaration().representation());
-    }
-  }
-
-  public FunctionDeclarationExpression function() {
-    return super.target();
+    }*/
   }
 }

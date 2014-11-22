@@ -1,6 +1,7 @@
 package com.verba.language.parsing.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -40,6 +41,11 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
 
   public static SignatureDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new SignatureDeclarationExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
 

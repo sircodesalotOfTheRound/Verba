@@ -1,6 +1,7 @@
 package com.verba.language.parsing.expressions;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.validation.violations.ValidationError;
 import com.verba.language.graph.validation.violations.ValidationViolation;
 import com.verba.language.graph.validation.violations.ValidationViolationList;
@@ -16,7 +17,7 @@ import java.io.Serializable;
 /**
  * Created by sircodesalot on 14-2-19.
  */
-public abstract class VerbaExpression implements Serializable, SyntaxGraphVisitable {
+public abstract class VerbaExpression implements SyntaxGraphVisitable {
   private static BacktrackRuleSet<VerbaExpression> rules
     = new BacktrackRuleSet<VerbaExpression>()
     .addRule(new MathExpressionBacktrackRule())
@@ -122,6 +123,8 @@ public abstract class VerbaExpression implements Serializable, SyntaxGraphVisita
   public void addWarningViolation(VerbaExpression expression, String format, Object... args) {
     this.violations.addWarning(expression, format, args);
   }
+
+  public abstract QIterable<ExpressionValidator> validators();
 
   public QIterable<ValidationViolation> violations() { return this.violations; }
   public QIterable<ValidationError> errors() { return this.violations.ofType(ValidationError.class); }

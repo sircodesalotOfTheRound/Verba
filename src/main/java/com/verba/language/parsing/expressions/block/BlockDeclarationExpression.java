@@ -2,6 +2,7 @@ package com.verba.language.parsing.expressions.block;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
@@ -52,6 +53,11 @@ public class BlockDeclarationExpression extends VerbaExpression
 
   public static BlockDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new BlockDeclarationExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   @Override

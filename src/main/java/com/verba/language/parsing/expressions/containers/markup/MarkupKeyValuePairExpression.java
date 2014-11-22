@@ -1,5 +1,7 @@
 package com.verba.language.parsing.expressions.containers.markup;
 
+import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.MarkupRvalueExpression;
@@ -24,6 +26,11 @@ public class MarkupKeyValuePairExpression extends VerbaExpression {
 
   public static MarkupKeyValuePairExpression read(VerbaExpression parent, Lexer lexer) {
     return new MarkupKeyValuePairExpression(parent, lexer);
+  }
+
+  @Override
+  public QIterable<ExpressionValidator> validators() {
+    return null;
   }
 
   @Override
