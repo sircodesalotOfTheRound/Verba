@@ -13,4 +13,5 @@ public class FunctionExpressionAnalyzer extends ExpressionAnalysis<FunctionDecla
   public FunctionExpressionAnalyzer(FunctionDeclarationExpression expression) {
     super(expression);
   }
+
 }

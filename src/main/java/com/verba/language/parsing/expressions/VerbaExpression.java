@@ -46,7 +46,6 @@ public abstract class VerbaExpression implements SyntaxGraphVisitable {
   private transient final Lexer lexer;
   private final LexInfo startingLexPoint;
   private LexInfo endingLexPoint;
-  private ValidationViolationList violations;
 
   public VerbaExpression(VerbaExpression parent, Lexer lexer) {
     this.parent = parent;
@@ -114,19 +113,10 @@ public abstract class VerbaExpression implements SyntaxGraphVisitable {
     return rules.resolve(parent, lexer);
   }
 
-  public void addErrorViolation(VerbaExpression expression, String format, Object... args) {
-    this.violations.addError(expression, format, args);
-  }
 
-  public void addWarningViolation(VerbaExpression expression, String format, Object... args) {
-    this.violations.addWarning(expression, format, args);
-  }
 
   public abstract ExpressionAnalysisBase expressionAnalysis();
 
-  public QIterable<ValidationViolation> violations() { return this.violations; }
-  public QIterable<ValidationError> errors() { return this.violations.ofType(ValidationError.class); }
-  public QIterable<ValidationWarning> warnings() { return this.violations.ofType(ValidationWarning.class); }
 
   @Override
   public boolean equals(Object obj) {
