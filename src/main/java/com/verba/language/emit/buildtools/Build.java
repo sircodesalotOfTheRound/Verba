@@ -1,6 +1,6 @@
-package com.verba.language.build.buildtools;
+package com.verba.language.emit.buildtools;
 
-import com.verba.language.build.codepage.VerbaCodePage;
+import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parsing.VerbaMemoizingLexer;
 import com.verba.language.parsing.codestream.StringBasedCodeStream;

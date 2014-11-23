@@ -1,6 +1,6 @@
 package com.verba.scratchpad;
 
-import com.verba.language.build.buildtools.Build;
+import com.verba.language.emit.buildtools.Build;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 
 /**

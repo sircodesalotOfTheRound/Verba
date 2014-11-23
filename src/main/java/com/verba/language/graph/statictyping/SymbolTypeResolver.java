@@ -53,5 +53,4 @@ public class SymbolTypeResolver {
   public static void resolveNames(GlobalSymbolTable globalSymbolTable) {
     new SymbolTypeResolver(globalSymbolTable).resolveAll();
   }
-
 }

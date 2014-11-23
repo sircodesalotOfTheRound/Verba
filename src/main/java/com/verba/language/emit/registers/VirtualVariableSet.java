@@ -1,4 +1,4 @@
-package com.verba.language.build.registers;
+package com.verba.language.emit.registers;
 
 import com.javalinq.implementations.QSet;
 import com.verba.language.parsing.expressions.VerbaExpression;

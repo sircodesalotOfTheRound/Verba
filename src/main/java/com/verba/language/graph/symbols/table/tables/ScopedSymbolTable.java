@@ -2,7 +2,7 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.codepage.VerbaCodePage;
+import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.NestedSymbolTableMetadata;
 import com.verba.language.graph.symbols.meta.ParameterSymbolTableItem;
@@ -50,7 +50,7 @@ public class ScopedSymbolTable implements Serializable {
     this.entrySet = new SymbolTableEntrySet(this);
     this.name = resolveName(region);
     this.parent = null;
-    this.headerExpression = null;
+    this.headerExpression = region;
     this.fqn = resolveFqn(name);
 
     region.accept(this);

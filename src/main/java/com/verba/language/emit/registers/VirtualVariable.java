@@ -1,4 +1,4 @@
-package com.verba.language.build.registers;
+package com.verba.language.emit.registers;
 
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;

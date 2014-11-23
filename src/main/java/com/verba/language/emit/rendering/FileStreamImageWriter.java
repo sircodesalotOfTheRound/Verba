@@ -1,8 +1,8 @@
-package com.verba.language.build.rendering;
+package com.verba.language.emit.rendering;
 
-import com.verba.language.build.rendering.functions.MemoryStreamFunctionRenderer;
-import com.verba.language.build.rendering.images.ImageRenderer;
-import com.verba.language.build.rendering.images.ObjectImage;
+import com.verba.language.emit.rendering.functions.MemoryStreamFunctionRenderer;
+import com.verba.language.emit.rendering.images.ImageRenderer;
+import com.verba.language.emit.rendering.images.ObjectImage;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.FileOutputStream;

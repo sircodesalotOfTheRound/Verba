@@ -7,7 +7,6 @@ import com.verba.language.parsing.expressions.categories.TypeDeclarationExpressi
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.graph.tools.SyntaxTreeFlattener;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.build.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;

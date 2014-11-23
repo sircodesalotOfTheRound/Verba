@@ -2,7 +2,7 @@ package com.verba.language.graph.imagegen.function.variables;
 
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.build.codepage.VerbaCodePage;
+import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
