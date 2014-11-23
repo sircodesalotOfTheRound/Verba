@@ -2,7 +2,7 @@ package com.verba.language.parsing.expressions;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.validation.validation.ExpressionValidator;
+import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.graph.tools.SyntaxTreeFlattener;
@@ -90,7 +90,7 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
   }
 
   @Override
-  public QIterable<ExpressionValidator> validators() {
+  public ExpressionAnalysisBase expressionAnalysis() {
     return null;
   }
 }

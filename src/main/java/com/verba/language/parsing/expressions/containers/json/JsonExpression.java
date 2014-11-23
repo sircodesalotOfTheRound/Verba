@@ -2,7 +2,7 @@ package com.verba.language.parsing.expressions.containers.json;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.validation.validation.ExpressionValidator;
+import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.DataContainerExpression;
@@ -48,7 +48,7 @@ public class JsonExpression extends VerbaExpression implements RValueExpression,
   }
 
   @Override
-  public QIterable<ExpressionValidator> validators() {
+  public ExpressionAnalysisBase expressionAnalysis() {
     return null;
   }
 

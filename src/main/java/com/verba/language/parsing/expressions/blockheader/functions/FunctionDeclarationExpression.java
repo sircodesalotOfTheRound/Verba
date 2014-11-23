@@ -1,8 +1,9 @@
 package com.verba.language.parsing.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.analysis.expressions.analyzers.FunctionExpressionAnalyzer;
+import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
 import com.verba.language.graph.statictyping.SymbolTypeResolver;
-import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -24,13 +25,13 @@ public class FunctionDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression, TypedExpression, InvokableExpression, ParameterizedExpression,
   GenericallyParameterizedExpression, SymbolTableExpression, ResolvableTypeExpression {
 
+  private final FunctionExpressionAnalyzer analyzer = new FunctionExpressionAnalyzer(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
   private TypeDeclarationExpression returnType;
 
   public FunctionDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-
     lexer.readCurrentAndAdvance(KeywordToken.class, "fn");
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
@@ -48,10 +49,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public QIterable<ExpressionValidator> validators() {
-    return null;
-  }
-
+  public ExpressionAnalysisBase expressionAnalysis() { return analyzer; }
 
   public boolean hasGenericParameters() {
     return this.primaryIdentifier().hasGenericParameters();

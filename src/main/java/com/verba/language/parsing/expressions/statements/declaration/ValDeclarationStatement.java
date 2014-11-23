@@ -1,8 +1,7 @@
 package com.verba.language.parsing.expressions.statements.declaration;
 
-import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
 import com.verba.language.graph.statictyping.SymbolTypeResolver;
-import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -51,7 +50,7 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   @Override
-  public QIterable<ExpressionValidator> validators() {
+  public ExpressionAnalysisBase expressionAnalysis() {
     return null;
   }
 

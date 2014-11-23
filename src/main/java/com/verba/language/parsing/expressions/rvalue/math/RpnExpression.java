@@ -1,7 +1,6 @@
 package com.verba.language.parsing.expressions.rvalue.math;
 
-import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.validation.validation.ExpressionValidator;
+import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
@@ -40,7 +39,7 @@ public class RpnExpression extends VerbaExpression implements RValueExpression {
   }
 
   @Override
-  public QIterable<ExpressionValidator> validators() {
+  public ExpressionAnalysisBase expressionAnalysis() {
     return null;
   }
 
