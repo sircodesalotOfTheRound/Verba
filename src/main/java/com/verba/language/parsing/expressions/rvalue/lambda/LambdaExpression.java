@@ -7,8 +7,8 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
-import com.verba.language.parsing.Lexer;
-import com.verba.language.parsing.tokens.LambdaToken;
+import com.verba.language.parsing.lexing.Lexer;
+import com.verba.language.parsing.tokens.lambda.LambdaToken;
 
 /**
  * Created by sircodesalot on 14-2-28.

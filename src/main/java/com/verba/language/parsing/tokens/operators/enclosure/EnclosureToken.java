@@ -1,4 +1,4 @@
-package com.verba.language.parsing.tokens;
+package com.verba.language.parsing.tokens.operators.enclosure;
 
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.tokenization.Token;

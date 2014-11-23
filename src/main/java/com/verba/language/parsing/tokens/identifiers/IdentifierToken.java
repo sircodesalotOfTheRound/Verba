@@ -2,7 +2,6 @@ package com.verba.language.parsing.tokens.identifiers;
 
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.tokenization.Token;
-import com.verba.language.parsing.tokens.IterationKeywordToken;
 
 /**
  * Created by sircodesalot on 14-2-16.
@@ -38,7 +37,6 @@ public class IdentifierToken implements Token {
 
     if (KeywordToken.isKeyword(token)) return new KeywordToken(token);
     else if (SqlKeywordToken.isKeyword(token)) return new SqlKeywordToken(token);
-    else if (IterationKeywordToken.isKeyword(token)) return new IterationKeywordToken(token);
     else return new IdentifierToken(builder.toString());
   }
 

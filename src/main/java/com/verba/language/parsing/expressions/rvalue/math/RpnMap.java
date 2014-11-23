@@ -5,7 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.MathOperandExpression;
 import com.verba.language.parsing.expressions.rvalue.simple.MathOpExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.tokens.operators.mathop.MathOpToken;
 

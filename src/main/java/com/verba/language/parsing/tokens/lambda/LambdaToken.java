@@ -1,7 +1,7 @@
-package com.verba.language.parsing.tokens;
+package com.verba.language.parsing.tokens.lambda;
 
 import com.verba.language.parsing.codestream.CodeStream;
-import com.verba.language.parsing.tokens.operators.OperatorToken;
+import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

@@ -1,6 +1,5 @@
 package com.verba.language.parsing.tokens.operators.mathop;
 
-import com.verba.language.parsing.tokens.operators.OperatorToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

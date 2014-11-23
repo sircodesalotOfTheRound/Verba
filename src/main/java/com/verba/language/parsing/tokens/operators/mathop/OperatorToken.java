@@ -1,11 +1,10 @@
-package com.verba.language.parsing.tokens.operators;
+package com.verba.language.parsing.tokens.operators.mathop;
 
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.tokenization.Token;
-import com.verba.language.parsing.tokens.LambdaToken;
+import com.verba.language.parsing.tokens.lambda.LambdaToken;
 import com.verba.language.parsing.tokens.operators.assignment.AssignmentToken;
 import com.verba.language.parsing.tokens.operators.comparison.CompositeComparisonToken;
-import com.verba.language.parsing.tokens.operators.mathop.MathOpToken;
 import com.verba.language.parsing.tokens.operators.tags.TagToken;
 
 import java.util.HashSet;

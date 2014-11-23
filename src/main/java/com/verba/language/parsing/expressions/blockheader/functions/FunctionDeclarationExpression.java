@@ -12,9 +12,9 @@ import com.verba.language.parsing.expressions.categories.*;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parsing.expressions.members.MemberExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
-import com.verba.language.parsing.tokens.operators.OperatorToken;
+import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 
 /**

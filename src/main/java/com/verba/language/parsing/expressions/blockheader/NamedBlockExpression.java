@@ -6,7 +6,7 @@ import com.verba.language.parsing.expressions.backtracking.rules.*;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.categories.NamedExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 
 /**
  * Created by sircodesalot on 14-2-27.

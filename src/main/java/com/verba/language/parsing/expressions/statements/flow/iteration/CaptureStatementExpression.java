@@ -6,9 +6,9 @@ import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
-import com.verba.language.parsing.Lexer;
-import com.verba.language.parsing.tokens.EnclosureToken;
-import com.verba.language.parsing.tokens.operators.OperatorToken;
+import com.verba.language.parsing.lexing.Lexer;
+import com.verba.language.parsing.tokens.operators.enclosure.EnclosureToken;
+import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 
 /**
  * Created by sircodesalot on 14-4-28.

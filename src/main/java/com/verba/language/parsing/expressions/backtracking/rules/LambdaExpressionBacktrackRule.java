@@ -4,10 +4,10 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.expressions.rvalue.lambda.LambdaExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexList;
-import com.verba.language.parsing.tokens.EnclosureToken;
-import com.verba.language.parsing.tokens.LambdaToken;
+import com.verba.language.parsing.tokens.operators.enclosure.EnclosureToken;
+import com.verba.language.parsing.tokens.lambda.LambdaToken;
 import com.verba.language.parsing.tokens.identifiers.IdentifierToken;
 
 /**

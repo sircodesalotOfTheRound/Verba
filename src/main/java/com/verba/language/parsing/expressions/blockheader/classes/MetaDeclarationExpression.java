@@ -9,7 +9,7 @@ import com.verba.language.parsing.expressions.blockheader.NamedBlockExpression;
 import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeListExpression;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

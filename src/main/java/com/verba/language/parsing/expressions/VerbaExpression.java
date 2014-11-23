@@ -9,10 +9,8 @@ import com.verba.language.graph.validation.violations.ValidationWarning;
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parsing.expressions.backtracking.rules.*;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexInfo;
-
-import java.io.Serializable;
 
 /**
  * Created by sircodesalot on 14-2-19.

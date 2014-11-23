@@ -6,9 +6,9 @@ import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.identifiers.IdentifierToken;
-import com.verba.language.parsing.tokens.operators.OperatorToken;
+import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 
 import java.util.Iterator;
 

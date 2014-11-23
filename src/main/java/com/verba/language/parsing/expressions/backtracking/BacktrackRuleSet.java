@@ -2,7 +2,7 @@ package com.verba.language.parsing.expressions.backtracking;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexList;
 
 import java.util.ArrayList;

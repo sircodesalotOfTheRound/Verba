@@ -1,4 +1,4 @@
-package com.verba.language.parsing;
+package com.verba.language.parsing.lexing;
 
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.info.LexList;

@@ -4,11 +4,11 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
 import com.verba.language.parsing.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.info.LexList;
-import com.verba.language.parsing.tokens.NumericToken;
-import com.verba.language.parsing.tokens.QuoteToken;
+import com.verba.language.parsing.tokens.operators.mathop.NumericToken;
+import com.verba.language.parsing.tokens.literals.QuoteToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

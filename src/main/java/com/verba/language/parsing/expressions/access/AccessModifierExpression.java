@@ -4,7 +4,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.validation.validation.ExpressionValidator;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

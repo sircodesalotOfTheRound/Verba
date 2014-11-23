@@ -3,7 +3,7 @@ package com.verba.language.parsing.expressions.categories;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
-import com.verba.language.parsing.Lexer;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokenization.Token;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
