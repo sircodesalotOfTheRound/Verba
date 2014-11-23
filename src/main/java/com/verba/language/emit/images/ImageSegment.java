@@ -6,17 +6,16 @@ package com.verba.language.emit.images;
 public abstract class ImageSegment {
 
   public enum ImageSegmentType {
-    FUNCTION
+    FUNCTION,
+    STRING_TABLE
   }
 
   private final ImageSegmentType type;
-  private final Iterable<Byte> data;
 
-  public ImageSegment(ImageSegmentType type, Iterable<Byte> data) {
+  public ImageSegment(ImageSegmentType type) {
     this.type = type;
-    this.data = data;
   }
 
   public ImageSegmentType type() { return this.type; }
-  public Iterable<Byte> data() { return this.data; }
+  public abstract Iterable<Byte> data();
 }
