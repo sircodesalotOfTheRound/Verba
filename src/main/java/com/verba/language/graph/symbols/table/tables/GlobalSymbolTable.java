@@ -53,12 +53,6 @@ public class GlobalSymbolTable implements Serializable {
     this.getEntryListByFqn(fqn).add(entry);
   }
 
-  public void merge(GlobalSymbolTable symbolTable) {
-    for (SymbolTableEntry entry : symbolTable.entries) {
-      this.entries.add(entry);
-    }
-  }
-
   public QList<SymbolTableEntry> getEntryListByFriendlyName(String friendlyName) {
     // If there is already a list associated with this name,
     // then just return that.

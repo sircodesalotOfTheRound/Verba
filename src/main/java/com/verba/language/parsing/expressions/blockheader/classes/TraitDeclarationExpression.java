@@ -88,7 +88,7 @@ public class TraitDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public QIterable<SymbolTableEntry> scopedSymbolEntries() {
+  public QIterable<SymbolTableEntry> members() {
     return null;
   }
 

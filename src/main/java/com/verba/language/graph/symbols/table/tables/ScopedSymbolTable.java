@@ -90,8 +90,8 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   private String resolveFqn(String name) {
-    if (this.hasParentTable() && (!this.parent.fqn.isEmpty()) && (name != null)) {
-        return String.format("%s.%s", this.parent.fqn(), name);
+    if (this.hasParentTable() && !this.parent.fqn.isEmpty()) {
+      return String.format("%s.%s", this.parent.fqn(), name);
     }
 
     if (name != null) {
@@ -106,7 +106,7 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(VerbaCodePage page) {
-    this.visitAll(page.allExpressions());
+    this.visitAll(page.childExpressions());
   }
 
   public void visit(ClassDeclarationExpression classDeclaration) {
