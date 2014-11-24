@@ -1,15 +1,15 @@
 package com.verba.language.graph.imagegen.function;
 
 import com.javalinq.implementations.QList;
+import com.verba.language.emit.opcodes.VerbajOpCode;
 import com.verba.language.emit.registers.VirtualVariable;
+import com.verba.language.emit.registers.VirtualVariableSet;
+import com.verba.language.graph.imagegen.function.variables.VariableLifetime;
+import com.verba.language.graph.imagegen.function.variables.VariableLifetimeGraph;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.graph.imagegen.function.variables.VariableLifetime;
-import com.verba.language.graph.imagegen.function.variables.VariableLifetimeGraph;
-import com.verba.language.emit.opcodes.VerbajOpCode;
-import com.verba.language.emit.registers.VirtualVariableSet;
-import com.verba.language.parsing.expressions.StaticSpaceExpression;
 
 /**
  * Created by sircodesalot on 14/10/3.

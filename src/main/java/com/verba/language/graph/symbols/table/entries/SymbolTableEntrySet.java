@@ -2,9 +2,9 @@ package com.verba.language.graph.symbols.table.entries;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.parsing.expressions.VerbaExpression;
 
 import java.io.Serializable;
 import java.util.HashMap;

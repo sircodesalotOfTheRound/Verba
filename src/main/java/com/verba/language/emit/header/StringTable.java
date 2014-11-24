@@ -1,6 +1,5 @@
 package com.verba.language.emit.header;
 
-import com.javalinq.implementations.QSet;
 import com.verba.language.emit.images.ImageSegment;
 
 import java.util.HashMap;

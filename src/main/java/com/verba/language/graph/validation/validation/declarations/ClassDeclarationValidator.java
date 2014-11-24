@@ -1,16 +1,6 @@
 package com.verba.language.graph.validation.validation.declarations;
 
-import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.validation.validation.ExpressionValidator;
-import com.verba.language.graph.validation.validation.TupleListDeclarationValidator;
-import com.verba.language.graph.validation.validation.fqn.FullyQualifiedNameValidator;
-import com.verba.language.graph.validation.violations.ValidationError;
-import com.verba.language.graph.validation.violations.ValidationViolation;
-import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
-import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
 
 /**
  * Created by sircodesalot on 14-5-3.

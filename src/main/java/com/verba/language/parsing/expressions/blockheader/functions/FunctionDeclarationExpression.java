@@ -3,6 +3,7 @@ package com.verba.language.parsing.expressions.blockheader.functions;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.analysis.expressions.analyzers.FunctionExpressionAnalyzer;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
+import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -15,7 +16,6 @@ import com.verba.language.parsing.expressions.members.MemberExpression;
 import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
 import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 
 /**
  * Created by sircodesalot on 14-2-17.

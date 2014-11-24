@@ -4,8 +4,8 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
 import com.verba.language.parsing.expressions.categories.MathOperandExpression;
 import com.verba.language.parsing.expressions.rvalue.math.RpnExpression;
-import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexList;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.operators.mathop.MathOpToken;
 
 /**

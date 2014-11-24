@@ -1,10 +1,10 @@
 package com.verba.language.emit.rendering.functions;
 
-import com.verba.language.graph.imagegen.function.FunctionGraph;
 import com.verba.language.emit.opcodes.VerbajOpCode;
 import com.verba.language.emit.rendering.images.ImageRenderer;
 import com.verba.language.emit.rendering.images.ImageType;
 import com.verba.language.emit.rendering.images.ObjectImage;
+import com.verba.language.graph.imagegen.function.FunctionGraph;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;

@@ -5,14 +5,14 @@ import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.graph.analysis.expressions.analyzers.VerbaCodePageBuildProfile;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
+import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.parsing.codestream.CodeStream;
+import com.verba.language.parsing.codestream.FileBasedCodeStream;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.lexing.VerbaMemoizingLexer;
-import com.verba.language.parsing.codestream.CodeStream;
-import com.verba.language.parsing.codestream.FileBasedCodeStream;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.InputStream;

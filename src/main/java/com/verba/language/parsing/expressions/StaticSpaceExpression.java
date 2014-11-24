@@ -5,14 +5,9 @@ import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
-import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
-import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
+import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
-import com.verba.language.graph.symbols.meta.interfaces.SymbolTypeMetadata;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 
 /**
  * Created by sircodesalot on 14-5-14.

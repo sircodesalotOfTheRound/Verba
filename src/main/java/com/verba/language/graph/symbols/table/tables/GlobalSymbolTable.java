@@ -2,10 +2,9 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 
 import java.io.Serializable;
 import java.util.HashMap;

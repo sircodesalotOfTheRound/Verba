@@ -1,9 +1,7 @@
 package com.verba.language.graph.validation.validation.declarations;
 
 import com.verba.language.graph.validation.validation.ExpressionValidator;
-import com.verba.language.graph.validation.validation.fqn.FullyQualifiedNameValidator;
 import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
 

@@ -7,8 +7,8 @@ import com.verba.language.parsing.expressions.categories.RValueExpression;
 import com.verba.language.parsing.expressions.rvalue.simple.IdentifierExpression;
 import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parsing.lexing.Lexer;
-import com.verba.language.parsing.tokens.literals.QuoteToken;
 import com.verba.language.parsing.tokens.identifiers.IdentifierToken;
+import com.verba.language.parsing.tokens.literals.QuoteToken;
 import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

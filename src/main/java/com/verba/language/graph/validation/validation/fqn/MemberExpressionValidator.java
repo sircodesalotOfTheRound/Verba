@@ -1,11 +1,7 @@
 package com.verba.language.graph.validation.validation.fqn;
 
 
-import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.validation.validation.ExpressionValidator;
-import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.parsing.expressions.members.MemberExpression;
 
 /**
  * Created by sircodesalot on 14-5-5.

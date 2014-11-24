@@ -7,7 +7,6 @@ import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.parsing.expressions.VerbaExpression;
-import sun.jvm.hotspot.memory.SymbolTable;
 
 /**
  * Created by sircodesalot on 14/11/24.

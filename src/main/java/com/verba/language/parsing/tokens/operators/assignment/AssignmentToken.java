@@ -1,8 +1,8 @@
 package com.verba.language.parsing.tokens.operators.assignment;
 
 import com.verba.language.parsing.codestream.CodeStream;
-import com.verba.language.parsing.tokens.operators.mathop.PowerEqualsToken;
 import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
+import com.verba.language.parsing.tokens.operators.mathop.PowerEqualsToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

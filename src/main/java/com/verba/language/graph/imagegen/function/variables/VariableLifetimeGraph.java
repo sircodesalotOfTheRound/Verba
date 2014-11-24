@@ -1,8 +1,9 @@
 package com.verba.language.graph.imagegen.function.variables;
 
+import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.graph.analysis.facades.FunctionCallFacade;
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -20,7 +21,6 @@ import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parsing.expressions.statements.assignment.AssignmentStatementExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parsing.expressions.statements.returns.ReturnStatementExpression;
-import com.verba.language.graph.analysis.facades.FunctionCallFacade;
 import com.verba.language.parsing.expressions.withns.WithNsExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

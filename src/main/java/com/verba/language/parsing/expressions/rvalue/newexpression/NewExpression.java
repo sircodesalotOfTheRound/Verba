@@ -7,9 +7,9 @@ import com.verba.language.parsing.expressions.categories.MathOperandExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.lexing.Lexer;
-import com.verba.language.parsing.tokens.operators.enclosure.EnclosureToken;
 import com.verba.language.parsing.tokens.identifiers.IdentifierToken;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
+import com.verba.language.parsing.tokens.operators.enclosure.EnclosureToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

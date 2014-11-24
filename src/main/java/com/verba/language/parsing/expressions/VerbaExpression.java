@@ -4,8 +4,8 @@ import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parsing.expressions.backtracking.rules.*;
-import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.info.LexInfo;
+import com.verba.language.parsing.lexing.Lexer;
 
 /**
  * Created by sircodesalot on 14-2-19.

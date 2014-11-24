@@ -1,16 +1,16 @@
 package com.verba.language.parsing.tokenization;
 
-import com.verba.language.parsing.lexing.LexicalTokenizerBase;
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.info.LexInfo;
 import com.verba.language.parsing.info.TokenPosition;
-import com.verba.language.parsing.tokens.operators.enclosure.EnclosureToken;
-import com.verba.language.parsing.tokens.operators.mathop.NumericToken;
-import com.verba.language.parsing.tokens.literals.QuoteToken;
+import com.verba.language.parsing.lexing.LexicalTokenizerBase;
 import com.verba.language.parsing.tokens.identifiers.IdentifierToken;
 import com.verba.language.parsing.tokens.ignorable.LineCommentToken;
 import com.verba.language.parsing.tokens.ignorable.UnknownToken;
 import com.verba.language.parsing.tokens.ignorable.WhitespaceToken;
+import com.verba.language.parsing.tokens.literals.QuoteToken;
+import com.verba.language.parsing.tokens.operators.enclosure.EnclosureToken;
+import com.verba.language.parsing.tokens.operators.mathop.NumericToken;
 import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 
 /**

@@ -3,9 +3,12 @@ package com.verba.language.parsing.expressions.rvalue.simple;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.expressions.categories.*;
-import com.verba.language.parsing.lexing.Lexer;
+import com.verba.language.parsing.expressions.categories.LiteralExpression;
+import com.verba.language.parsing.expressions.categories.MathOperandExpression;
+import com.verba.language.parsing.expressions.categories.NativeTypeExpression;
+import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.info.LexInfo;
+import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.literals.QuoteToken;
 import com.verba.virtualmachine.VirtualMachineNativeTypes;
 

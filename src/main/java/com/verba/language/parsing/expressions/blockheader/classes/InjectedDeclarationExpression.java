@@ -1,6 +1,7 @@
 package com.verba.language.parsing.expressions.blockheader.classes;
 
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
+import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -9,7 +10,6 @@ import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeLis
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 
 /**
  * Created by sircodesalot on 14-2-17.
