@@ -2,6 +2,8 @@ package com.verba.language.parsing.expressions;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.javalinq.tools.Partition;
+import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
@@ -18,47 +20,49 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  */
 public class StaticSpaceExpression extends VerbaExpression implements SymbolTableExpression {
   private GlobalSymbolTable symbolTable;
-  private SyntaxTreeFlattener allSubExpressions;
-  private final QList<VerbaExpression> rootExpressions = new QList<>();
+  private final QList<VerbaExpression> allExpressions;
+  private final Partition<Class, VerbaExpression> expressionsByType;
+  private final QList<VerbaCodePage> pages;
 
-  public StaticSpaceExpression(Iterable<VerbaExpression> rootExpressions) {
+  public StaticSpaceExpression(Iterable<VerbaCodePage> pages) {
     super(null, null);
 
-    for (VerbaExpression expression : rootExpressions)
-      this.rootExpressions.add(expression);
+    this.pages = new QList<>(pages);
+    this.allExpressions = extractExpressionsFromPages(this.pages);
+    this.expressionsByType = partitionExpressions(allExpressions);
+    this.update();
+  }
+
+  public StaticSpaceExpression(VerbaCodePage ... pages) {
+    super(null, null);
+
+    this.pages = new QList<>(pages);
+    this.allExpressions = extractExpressionsFromPages(this.pages);
+    this.expressionsByType = partitionExpressions(allExpressions);
 
     this.update();
   }
 
-  public StaticSpaceExpression(VerbaExpression... rootExpressions) {
-    super(null, null);
-
-    for (VerbaExpression expression : rootExpressions)
-      this.rootExpressions.add(expression);
-
-    this.update();
+  private Partition<Class, VerbaExpression> partitionExpressions(QIterable<VerbaExpression> expressions) {
+    return this.allExpressions.parition(Object::getClass);
   }
 
-  /*
-  public StaticSpaceExpression(SourceFilePathInfo path) {
-    this(VerbaCodePage.fromFile(null, path.absolutePath()));
-  }*/
-
-  public QIterable<VerbaExpression> rootLevelExpressions() {
-    return this.rootExpressions;
+  private QList<VerbaExpression> extractExpressionsFromPages(QIterable<VerbaCodePage> pages) {
+    return pages.flatten(VerbaCodePage::expressions).toList();
   }
+
+  public QIterable<VerbaCodePage> pages() { return this.pages; }
 
   public GlobalSymbolTable globalSymbolTable() {
     return this.symbolTable;
   }
 
-  public SyntaxTreeFlattener allSubExpressions() {
-    return this.allSubExpressions;
-  }
+  public QIterable<VerbaExpression> allExpressions() { return this.allExpressions; }
+
+  public Partition<Class, VerbaExpression> expressionsByType() { return this.expressionsByType; }
 
   public void update() {
     this.symbolTable = new GlobalSymbolTable(this);
-    this.allSubExpressions = new SyntaxTreeFlattener(this);
   }
 
   public void resolveSymbolNames() {

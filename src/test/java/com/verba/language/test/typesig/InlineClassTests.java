@@ -13,7 +13,7 @@ public class InlineClassTests {
   @Test
   public void emptyInlineClassTest() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
-    ClassDeclarationExpression expression = singleFileTest.allSubExpressions()
+    ClassDeclarationExpression expression = singleFileTest.allExpressions()
       .ofType(ClassDeclarationExpression.class)
       .single(declaration -> declaration.name().equals("EmptyInlineClass"));
 
@@ -27,7 +27,7 @@ public class InlineClassTests {
   @Test
   public void parameterlessInlineClass() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
-    ClassDeclarationExpression expression = singleFileTest.allSubExpressions()
+    ClassDeclarationExpression expression = singleFileTest.allExpressions()
       .ofType(ClassDeclarationExpression.class)
       .single(declaration -> declaration.name().equals("ParameterlessInlineClass"));
 
@@ -40,7 +40,7 @@ public class InlineClassTests {
   @Test
   public void parameterlessDerivedClass() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
-    ClassDeclarationExpression expression = singleFileTest.allSubExpressions()
+    ClassDeclarationExpression expression = singleFileTest.allExpressions()
       .ofType(ClassDeclarationExpression.class)
       .single(declaration -> declaration.name().equals("ParameterlessDerivedClass"));
 

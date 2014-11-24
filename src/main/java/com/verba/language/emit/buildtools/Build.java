@@ -1,5 +1,7 @@
 package com.verba.language.emit.buildtools;
 
+import com.javalinq.interfaces.QIterable;
+import com.javalinq.tools.Partition;
 import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
@@ -13,30 +15,31 @@ import com.verba.language.parsing.expressions.VerbaExpression;
  */
 public class Build {
   private BuildAnalysis buildAnalysis = new BuildAnalysis();
-  private StaticSpaceExpression rootExpression;
+  private StaticSpaceExpression staticSpace;
   private GlobalSymbolTable symbolTable;
 
-  private Build(VerbaExpression expression) {
-    this.afterParse(expression);
-    this.rootExpression = new StaticSpaceExpression(expression);
-    this.symbolTable = rootExpression.symbolTable();
+  private Build(VerbaCodePage page) {
+    this.afterParse(page);
+    this.staticSpace = new StaticSpaceExpression(page);
+    this.symbolTable = staticSpace.symbolTable();
   }
 
   private void afterParse(VerbaExpression rootExpression) {
     rootExpression.expressionAnalysis().afterParse(buildAnalysis);
   }
+
   private void beforeSymbolTableAssociation() { }
   private void afterSymbolTableAssociation() { }
   private void beforeCodeGeneration() { }
 
   public GlobalSymbolTable symbolTable() { return this.symbolTable; }
+  public QIterable<VerbaExpression> allExpressions() { return this.staticSpace.allExpressions(); }
+  public Partition<Class, VerbaExpression> expressionsByType() { return this.staticSpace.expressionsByType(); }
 
   public static Build fromString(String code) {
     StringBasedCodeStream codeStream = new StringBasedCodeStream(code);
     VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("StringBasedCodes.v", codeStream);
 
-    VerbaExpression rootExpression = VerbaCodePage.read(null, lexer);
-
-    return new Build(rootExpression);
+    return new Build(VerbaCodePage.read(null, lexer));
   }
 }

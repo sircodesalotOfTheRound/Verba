@@ -57,7 +57,7 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
 
   public void visit(StaticSpaceExpression node) {
     add(node);
-    this.visitAll(node.rootLevelExpressions());
+    this.visitAll(node.pages());
   }
 
   public void visit(NamedValueExpression node) {

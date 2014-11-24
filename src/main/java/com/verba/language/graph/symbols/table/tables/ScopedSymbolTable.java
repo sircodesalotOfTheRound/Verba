@@ -95,7 +95,7 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(StaticSpaceExpression staticSpace) {
-    this.visitAll(staticSpace.rootLevelExpressions());
+
   }
 
   public void visit(VerbaCodePage page) {

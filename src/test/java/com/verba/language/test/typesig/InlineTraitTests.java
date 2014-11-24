@@ -13,7 +13,7 @@ public class InlineTraitTests {
   @Test
   public void emptyInlineTraitTest() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
-    TraitDeclarationExpression expression = singleFileTest.allSubExpressions()
+    TraitDeclarationExpression expression = singleFileTest.allExpressions()
       .ofType(TraitDeclarationExpression.class)
       .single(declaration -> declaration.name().equals("EmptyInlineTrait"));
 
@@ -26,7 +26,7 @@ public class InlineTraitTests {
   @Test
   public void parameterlessInlineTrait() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
-    TraitDeclarationExpression expression = singleFileTest.allSubExpressions()
+    TraitDeclarationExpression expression = singleFileTest.allExpressions()
       .ofType(TraitDeclarationExpression.class)
       .single(declaration -> declaration.name().equals("ParameterlessInlineTrait"));
 
@@ -39,7 +39,7 @@ public class InlineTraitTests {
   @Test
   public void parameterlessDerivedTrait() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
-    TraitDeclarationExpression expression = singleFileTest.allSubExpressions()
+    TraitDeclarationExpression expression = singleFileTest.allExpressions()
       .ofType(TraitDeclarationExpression.class)
       .single(declaration -> declaration.name().equals("ParameterlessDerivedTrait"));
 

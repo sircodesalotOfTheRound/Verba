@@ -18,7 +18,7 @@ public class FunctionSignatureTesting {
   public void testEmptyFunction() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    FunctionDeclarationExpression emptyFunction = singleFileTest.allSubExpressions()
+    FunctionDeclarationExpression emptyFunction = singleFileTest.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("empty_function"));
 
@@ -33,7 +33,7 @@ public class FunctionSignatureTesting {
   public void testSingleDynamicArgumentFunction() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    FunctionDeclarationExpression singleDynamicArgumentFunction = singleFileTest.allSubExpressions()
+    FunctionDeclarationExpression singleDynamicArgumentFunction = singleFileTest.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("single_dynamic_argument_function"));
 
@@ -54,7 +54,7 @@ public class FunctionSignatureTesting {
   public void testSingleStaticTypedArgumentFunction() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    FunctionDeclarationExpression singleStaticTypedArgumentFunction = singleFileTest.allSubExpressions()
+    FunctionDeclarationExpression singleStaticTypedArgumentFunction = singleFileTest.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("single_static_typed_argument_function"));
 
@@ -77,7 +77,7 @@ public class FunctionSignatureTesting {
   public void testMixedArgumentFunction() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    FunctionDeclarationExpression mixedArgumentFunction = singleFileTest.allSubExpressions()
+    FunctionDeclarationExpression mixedArgumentFunction = singleFileTest.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("mixed_argument_function"));
 
@@ -121,7 +121,7 @@ public class FunctionSignatureTesting {
   public void testExplicitReturnTypeFunction() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    FunctionDeclarationExpression explicitReturnTypeFunction = singleFileTest.allSubExpressions()
+    FunctionDeclarationExpression explicitReturnTypeFunction = singleFileTest.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("explicit_return_type_function"));
 
@@ -138,7 +138,7 @@ public class FunctionSignatureTesting {
   public void testGenericFunction() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    FunctionDeclarationExpression genericFunction = singleFileTest.allSubExpressions()
+    FunctionDeclarationExpression genericFunction = singleFileTest.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("generic_function"));
 

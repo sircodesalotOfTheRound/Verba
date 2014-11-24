@@ -16,7 +16,7 @@ public class ExplicitTypeResolution {
   public void testExplicitUnitFunction() {
     StaticSpaceExpression codeFile = TestFileLoader.TYPE_RESOLUTION_TESTS;
 
-    FunctionDeclarationExpression explicitUnitFunction = codeFile.allSubExpressions()
+    FunctionDeclarationExpression explicitUnitFunction = codeFile.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("explicitUnitFunction"));
 
@@ -28,7 +28,7 @@ public class ExplicitTypeResolution {
   public void testExplicitParameterFunction() {
     StaticSpaceExpression codeFile = TestFileLoader.TYPE_RESOLUTION_TESTS;
 
-    FunctionDeclarationExpression explicitParameterFunction = codeFile.allSubExpressions()
+    FunctionDeclarationExpression explicitParameterFunction = codeFile.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("explicitParameterFunction"));
 
@@ -51,7 +51,7 @@ public class ExplicitTypeResolution {
   public void testExplicitVariables() {
     StaticSpaceExpression codeFile = TestFileLoader.TYPE_RESOLUTION_TESTS;
 
-    FunctionDeclarationExpression explicitVariables = codeFile.allSubExpressions()
+    FunctionDeclarationExpression explicitVariables = codeFile.allExpressions()
       .ofType(FunctionDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("explicitVariables"));
 

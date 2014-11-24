@@ -15,7 +15,7 @@ public class TaskSignatureTesting {
   public void testEmptyTask() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    TaskDeclarationExpression emptyTask = singleFileTest.allSubExpressions()
+    TaskDeclarationExpression emptyTask = singleFileTest.allExpressions()
       .ofType(TaskDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("empty_task"));
 
@@ -30,7 +30,7 @@ public class TaskSignatureTesting {
   public void testSingleDynamicArgumentTask() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    TaskDeclarationExpression singleDynamicArgumentTask = singleFileTest.allSubExpressions()
+    TaskDeclarationExpression singleDynamicArgumentTask = singleFileTest.allExpressions()
       .ofType(TaskDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("single_dynamic_argument_task"));
 
@@ -51,7 +51,7 @@ public class TaskSignatureTesting {
   public void testSingleStaticTypedArgumentTask() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    TaskDeclarationExpression singleStaticTypedArgumentTask = singleFileTest.allSubExpressions()
+    TaskDeclarationExpression singleStaticTypedArgumentTask = singleFileTest.allExpressions()
       .ofType(TaskDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("single_static_typed_argument_task"));
 
@@ -74,7 +74,7 @@ public class TaskSignatureTesting {
   public void testMixedArgumentTask() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    TaskDeclarationExpression mixedArgumentTask = singleFileTest.allSubExpressions()
+    TaskDeclarationExpression mixedArgumentTask = singleFileTest.allExpressions()
       .ofType(TaskDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("mixed_argument_task"));
 
@@ -118,7 +118,7 @@ public class TaskSignatureTesting {
   public void testExplicitReturnTypeTask() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    TaskDeclarationExpression explicitReturnTypeTask = singleFileTest.allSubExpressions()
+    TaskDeclarationExpression explicitReturnTypeTask = singleFileTest.allExpressions()
       .ofType(TaskDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("explicit_return_type_task"));
 
@@ -135,7 +135,7 @@ public class TaskSignatureTesting {
   public void testGenericTask() {
     StaticSpaceExpression singleFileTest = TestFileLoader.TYPE_SIGNATURE_TESTS;
 
-    TaskDeclarationExpression genericTask = singleFileTest.allSubExpressions()
+    TaskDeclarationExpression genericTask = singleFileTest.allExpressions()
       .ofType(TaskDeclarationExpression.class)
       .singleOrNull(function -> function.name().equals("generic_task"));
 

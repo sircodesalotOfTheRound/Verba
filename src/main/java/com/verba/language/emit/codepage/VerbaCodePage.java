@@ -2,6 +2,7 @@ package com.verba.language.emit.codepage;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.javalinq.tools.Partition;
 import com.verba.language.graph.analysis.expressions.analyzers.VerbaCodePageAnalyzer;
 import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
@@ -21,7 +22,8 @@ import java.io.InputStream;
  */
 public class VerbaCodePage extends VerbaExpression implements SymbolTableExpression {
   private VerbaCodePageAnalyzer analysis = new VerbaCodePageAnalyzer(this);
-  private QList<VerbaExpression> expressions = new QList<>();
+  private QList<VerbaExpression> expressions;
+  private Partition<Class, VerbaExpression> expressionsByType;
   private String path;
 
   private VerbaCodePage(VerbaExpression parent, Lexer lexer) {
@@ -29,6 +31,7 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
 
     this.path = lexer.filename();
     this.expressions = this.readExpressions(lexer);
+    this.expressionsByType = this.expressions.parition(Object::getClass);
   }
 
   private QList<VerbaExpression> readExpressions(Lexer lexer) {
@@ -51,6 +54,14 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
 
   public QIterable<VerbaExpression> expressions() {
     return this.expressions;
+  }
+
+  public QIterable<VerbaExpression> expressionsByType(Class type) {
+    if (this.expressionsByType.containsKey(type)) {
+      return this.expressionsByType.get(type);
+    } else {
+      return new QList<>();
+    }
   }
 
   public String path() {
