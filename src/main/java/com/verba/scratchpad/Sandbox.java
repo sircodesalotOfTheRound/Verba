@@ -10,13 +10,6 @@ import sun.jvm.hotspot.memory.SymbolTable;
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString("fn function<T>(parameter) { val item = 10 fn second() { val subitem = 20 } } class MyClass<T, U, V>(first, second, third) { }");
-
-    QIterable<SymbolTableEntry> entries = build.symbolTable().getByFqn("function.second.subitem");
-
-    for (SymbolTableEntry entry : entries) {
-      System.out.println(entry.name());
-      System.out.println(entry.table().fqn());
-    }
+    Build build = Build.fromString("withns vm.nothing");
   }
 }

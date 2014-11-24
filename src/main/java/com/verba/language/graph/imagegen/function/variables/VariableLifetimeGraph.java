@@ -21,6 +21,7 @@ import com.verba.language.parsing.expressions.statements.assignment.AssignmentSt
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parsing.expressions.statements.returns.ReturnStatementExpression;
 import com.verba.language.graph.analysis.facades.FunctionCallFacade;
+import com.verba.language.parsing.expressions.withns.WithNsExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -75,6 +76,9 @@ public class VariableLifetimeGraph implements SyntaxGraphVisitor {
   public void visit(ValDeclarationStatement valDeclarationStatement) {
     lifetimes.updateLifetime(valDeclarationStatement.nameAsExpression());
   }
+
+  @Override
+  public void visit(WithNsExpression withNsExpression) {  }
 
   @Override
   public void visit(FunctionDeclarationExpression functionDeclarationExpression) {

@@ -17,6 +17,7 @@ import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parsing.expressions.statements.assignment.AssignmentStatementExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parsing.expressions.statements.returns.ReturnStatementExpression;
+import com.verba.language.parsing.expressions.withns.WithNsExpression;
 
 /**
  * Created by sircodesalot on 14/9/12.
@@ -55,4 +56,6 @@ public interface SyntaxGraphVisitor {
   void visit(NumericExpression expression);
 
   void visit(ValDeclarationStatement valDeclarationStatement);
+
+  void visit(WithNsExpression withNsExpression);
 }

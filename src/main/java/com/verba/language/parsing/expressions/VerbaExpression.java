@@ -26,6 +26,7 @@ public abstract class VerbaExpression implements SyntaxGraphVisitable {
     .addRule(new ClassDeclarationBacktrackRule())
     .addRule(new ValDeclarationBacktrackRule())
     .addRule(new IfStatementBacktrackRule())
+    .addRule(new WithNsExpressionBacktrackRule())
     .addRule(new NamedValueExpressionBacktrackRule())
     .addRule(new GrabExpressionBacktrackRule())
     .addRule(new ForStatementBacktrackRule())

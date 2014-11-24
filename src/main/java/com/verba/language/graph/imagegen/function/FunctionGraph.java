@@ -33,6 +33,7 @@ import com.verba.language.parsing.expressions.statements.assignment.AssignmentSt
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parsing.expressions.statements.returns.ReturnStatementExpression;
 import com.verba.language.graph.analysis.facades.FunctionCallFacade;
+import com.verba.language.parsing.expressions.withns.WithNsExpression;
 import com.verba.virtualmachine.VirtualMachineNativeTypes;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -173,6 +174,9 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   public void visit(ValDeclarationStatement statement) {
     valStatementProcessor.process(statement);
   }
+
+  @Override
+  public void visit(WithNsExpression withNsExpression) {  }
 
   @Override
   public void visit(FunctionDeclarationExpression functionDeclarationExpression) {

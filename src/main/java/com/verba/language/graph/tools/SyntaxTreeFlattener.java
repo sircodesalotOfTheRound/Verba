@@ -21,6 +21,7 @@ import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parsing.expressions.statements.assignment.AssignmentStatementExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parsing.expressions.statements.returns.ReturnStatementExpression;
+import com.verba.language.parsing.expressions.withns.WithNsExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Serializable;
@@ -140,6 +141,11 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
 
   @Override
   public void visit(ValDeclarationStatement valDeclarationStatement) {
+
+  }
+
+  @Override
+  public void visit(WithNsExpression withNsExpression) {
 
   }
 
