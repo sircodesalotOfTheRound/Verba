@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.graph.analysis.expressions.analyzers.VerbaCodePageAnalyzer;
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
@@ -50,7 +50,7 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
   }
 
   @Override
-  public ExpressionAnalysisBase expressionAnalysis() { return analysis; }
+  public BuildProfileBase buildProfile() { return analysis; }
 
   public QIterable<VerbaExpression> expressions() {
     return this.expressions;

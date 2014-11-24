@@ -1,11 +1,6 @@
 package com.verba.language.parsing.expressions;
 
-import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
-import com.verba.language.graph.validation.violations.ValidationError;
-import com.verba.language.graph.validation.violations.ValidationViolation;
-import com.verba.language.graph.validation.violations.ValidationViolationList;
-import com.verba.language.graph.validation.violations.ValidationWarning;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parsing.expressions.backtracking.rules.*;
@@ -116,7 +111,7 @@ public abstract class VerbaExpression implements SyntaxGraphVisitable {
 
 
 
-  public abstract ExpressionAnalysisBase expressionAnalysis();
+  public abstract BuildProfileBase buildProfile();
 
 
   @Override

@@ -10,10 +10,10 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 /**
  * Created by sircodesalot on 14/11/22.
  */
-public abstract class ExpressionAnalysis<T> implements ExpressionAnalysisBase {
+public abstract class BuildProfile<T> implements BuildProfileBase {
   private ValidationViolationList violations;
   private final T expression;
-  public ExpressionAnalysis(T expression) {
+  public BuildProfile(T expression) {
     this.expression = expression;
   }
 

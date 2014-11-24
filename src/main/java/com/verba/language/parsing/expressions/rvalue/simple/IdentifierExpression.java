@@ -1,6 +1,6 @@
 package com.verba.language.parsing.expressions.rvalue.simple;
 
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
@@ -26,7 +26,7 @@ public class IdentifierExpression extends VerbaExpression implements RValueExpre
   }
 
   @Override
-  public ExpressionAnalysisBase expressionAnalysis() {
+  public BuildProfileBase buildProfile() {
     return null;
   }
 

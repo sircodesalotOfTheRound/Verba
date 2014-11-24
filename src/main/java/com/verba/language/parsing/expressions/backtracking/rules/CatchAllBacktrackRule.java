@@ -1,6 +1,6 @@
 package com.verba.language.parsing.expressions.backtracking.rules;
 
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -21,7 +21,7 @@ public class CatchAllBacktrackRule extends BacktrackRule {
     }
 
     @Override
-    public ExpressionAnalysisBase expressionAnalysis() {
+    public BuildProfileBase buildProfile() {
       return null;
     }
 

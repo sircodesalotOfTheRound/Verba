@@ -4,10 +4,9 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.emit.codepage.VerbaCodePage;
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.graph.tools.SyntaxTreeFlattener;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTypeMetadata;
@@ -94,7 +93,7 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
   }
 
   @Override
-  public ExpressionAnalysisBase expressionAnalysis() {
+  public BuildProfileBase buildProfile() {
     return null;
   }
 }

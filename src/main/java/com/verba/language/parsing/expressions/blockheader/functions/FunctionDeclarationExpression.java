@@ -2,7 +2,7 @@ package com.verba.language.parsing.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.analysis.expressions.analyzers.FunctionExpressionAnalyzer;
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.statictyping.SymbolTypeResolver;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -49,7 +49,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public ExpressionAnalysisBase expressionAnalysis() { return analyzer; }
+  public BuildProfileBase buildProfile() { return analyzer; }
 
   public boolean hasGenericParameters() {
     return this.primaryIdentifier().hasGenericParameters();

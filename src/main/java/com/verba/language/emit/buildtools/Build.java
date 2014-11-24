@@ -25,7 +25,7 @@ public class Build {
   }
 
   private void afterParse(VerbaExpression rootExpression) {
-    rootExpression.expressionAnalysis().afterParse(buildAnalysis);
+    rootExpression.buildProfile().afterParse(buildAnalysis);
   }
 
   private void beforeSymbolTableAssociation() { }

@@ -2,7 +2,7 @@ package com.verba.language.parsing.expressions.containers.set;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.DataContainerExpression;
@@ -47,7 +47,7 @@ public class SetDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public ExpressionAnalysisBase expressionAnalysis() {
+  public BuildProfileBase buildProfile() {
     return null;
   }
 

@@ -1,6 +1,6 @@
 package com.verba.language.parsing.expressions.statements.declaration;
 
-import com.verba.language.graph.analysis.expressions.tools.ExpressionAnalysisBase;
+import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.statictyping.SymbolTypeResolver;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -50,7 +50,7 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   @Override
-  public ExpressionAnalysisBase expressionAnalysis() {
+  public BuildProfileBase buildProfile() {
     return null;
   }
 
