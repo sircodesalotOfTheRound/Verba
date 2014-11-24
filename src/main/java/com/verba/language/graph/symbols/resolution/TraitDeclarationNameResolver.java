@@ -28,5 +28,5 @@ public class TraitDeclarationNameResolver {
   }
 
   public PolymorphicExpression declaration() { return declaration; }
-  public QIterable<SymbolTableEntry> namesInScope() { return this.scopedEntries; }
+  public QIterable<SymbolTableEntry> immediateMembers() { return this.scopedEntries; }
 }

@@ -75,8 +75,8 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
     QIterable<PolymorphicExpression> traits = expression.traitSymbolTableEntries()
       .map(entry -> entry.instanceAs(PolymorphicExpression.class));
 
-    TraitDeclarationNameResolver namesInScope = new TraitDeclarationNameResolver(this.symbolTable, expression);
-    names.add(namesInScope.namesInScope());
+    TraitDeclarationNameResolver members = new TraitDeclarationNameResolver(this.symbolTable, expression);
+    names.add(members.immediateMembers());
 
     for (PolymorphicExpression trait : traits) {
       determineNamesInScope(trait, names);
