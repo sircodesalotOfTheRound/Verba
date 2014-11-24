@@ -2,7 +2,6 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.statictyping.SymbolTypeResolver;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
@@ -96,10 +95,6 @@ public class GlobalSymbolTable implements Serializable {
 
   public QIterable<SymbolTableEntry> getByFqn(String fqn) {
     return this.entriesByFqn.get(fqn);
-  }
-
-  public void resolveSymbolNames() {
-    SymbolTypeResolver.resolveNames(this);
   }
 
   public SymbolTableEntry getByIndex(int index) {

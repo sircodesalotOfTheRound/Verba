@@ -5,10 +5,12 @@ import com.javalinq.tools.Partition;
 import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.parsing.lexing.VerbaMemoizingLexer;
 import com.verba.language.parsing.codestream.StringBasedCodeStream;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
+import com.verba.language.parsing.lexing.VerbaMemoizingLexer;
+
+import java.util.function.Consumer;
 
 /**
  * Created by sircodesalot on 14/11/20.
@@ -19,18 +21,43 @@ public class Build {
   private GlobalSymbolTable symbolTable;
 
   private Build(VerbaCodePage page) {
-    this.afterParse(page);
-    this.staticSpace = new StaticSpaceExpression(page);
-    this.symbolTable = staticSpace.symbolTable();
+    this.staticSpace = this.afterParse(page);
+    this.symbolTable = this.beforeSymbolTableAssociation(staticSpace);
+    this.afterSymbolTableAssociation();
+    this.beforeCodeGeneration();
   }
 
-  private void afterParse(VerbaExpression rootExpression) {
-    rootExpression.buildProfile().afterParse(buildAnalysis);
+  private StaticSpaceExpression afterParse(VerbaCodePage page) {
+    StaticSpaceExpression staticSpace = new StaticSpaceExpression(page);
+    forEachExpression(staticSpace.allExpressions(), expression -> expression.buildProfile().afterParse(buildAnalysis));
+    return staticSpace;
   }
 
-  private void beforeSymbolTableAssociation() { }
-  private void afterSymbolTableAssociation() { }
-  private void beforeCodeGeneration() { }
+  private GlobalSymbolTable beforeSymbolTableAssociation(StaticSpaceExpression staticSpace) {
+    forEachExpression(staticSpace.allExpressions(),  expression -> {
+      expression.buildProfile().beforeSymbolTableAssociation(buildAnalysis);
+    });
+
+    return new GlobalSymbolTable(staticSpace);
+  }
+
+  private void afterSymbolTableAssociation() {
+    forEachExpression(staticSpace.allExpressions(),  expression ->  {
+      expression.buildProfile().afterSymbolTableAssociation(buildAnalysis);
+    });
+  }
+
+  private void beforeCodeGeneration() {
+    forEachExpression(staticSpace.allExpressions(), expression -> {
+      expression.buildProfile().beforeCodeGeneration(buildAnalysis);
+    });
+  }
+
+  private void forEachExpression(Iterable<VerbaExpression> expressions, Consumer<VerbaExpression> callback) {
+    for (VerbaExpression expression : expressions) {
+      callback.accept(expression);
+    }
+  }
 
   public GlobalSymbolTable symbolTable() { return this.symbolTable; }
   public QIterable<VerbaExpression> allExpressions() { return this.staticSpace.allExpressions(); }

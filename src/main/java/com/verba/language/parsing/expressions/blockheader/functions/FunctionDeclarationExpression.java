@@ -3,7 +3,6 @@ package com.verba.language.parsing.expressions.blockheader.functions;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.analysis.expressions.analyzers.FunctionExpressionAnalyzer;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
-import com.verba.language.graph.statictyping.SymbolTypeResolver;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -23,7 +22,7 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  */
 public class FunctionDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression, TypedExpression, InvokableExpression, ParameterizedExpression,
-  GenericallyParameterizedExpression, SymbolTableExpression, ResolvableTypeExpression {
+  GenericallyParameterizedExpression, SymbolTableExpression {
 
   private final FunctionExpressionAnalyzer analyzer = new FunctionExpressionAnalyzer(this);
   private final FullyQualifiedNameExpression identifier;
@@ -105,11 +104,6 @@ public class FunctionDeclarationExpression extends VerbaExpression
   @Override
   public void accept(ScopedSymbolTable symbolTable) {
     symbolTable.visit(this);
-  }
-
-  @Override
-  public void accept(SymbolTypeResolver resolver) {
-    resolver.visit(this);
   }
 
 }

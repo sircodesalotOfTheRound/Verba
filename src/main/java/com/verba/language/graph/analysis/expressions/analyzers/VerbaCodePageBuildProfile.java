@@ -10,10 +10,10 @@ import com.verba.language.parsing.expressions.withns.WithNsExpression;
 /**
  * Created by sircodesalot on 14/11/23.
  */
-public class VerbaCodePageAnalyzer extends BuildProfile<VerbaCodePage> {
+public class VerbaCodePageBuildProfile extends BuildProfile<VerbaCodePage> {
   private QList<String> namespaces = new QList<>();
 
-  public VerbaCodePageAnalyzer(VerbaCodePage expression) {
+  public VerbaCodePageBuildProfile(VerbaCodePage expression) {
     super(expression);
   }
 
@@ -24,12 +24,6 @@ public class VerbaCodePageAnalyzer extends BuildProfile<VerbaCodePage> {
       .map(ns -> ns.namespace().representation());
 
     this.namespaces.add(namespaceRepresentations);
-
-    System.out.println("The namespaces is: ");
-
-    for (String namespace : namespaces) {
-      System.out.println(namespace);
-    }
   }
 
   public QIterable<String> namespaces() { return namespaces; }

@@ -1,7 +1,6 @@
 package com.verba.language.parsing.expressions.statements.declaration;
 
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
-import com.verba.language.graph.statictyping.SymbolTypeResolver;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -15,7 +14,7 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  * Created by sircodesalot on 14-2-19.
  */
 public class ValDeclarationStatement extends VerbaExpression
-  implements NamedAndTypedExpression, AssignmentExpression, SymbolTableExpression, ResolvableTypeExpression {
+  implements NamedAndTypedExpression, AssignmentExpression, SymbolTableExpression {
 
   private NamedValueExpression identifier;
   private RValueExpression rvalue;
@@ -98,8 +97,4 @@ public class ValDeclarationStatement extends VerbaExpression
     symbolTable.visit(this);
   }
 
-  @Override
-  public void accept(SymbolTypeResolver resolver) {
-    resolver.visit(this);
-  }
 }

@@ -9,9 +9,5 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 public class Sandbox {
   public static void main(String[] args) throws Exception {
     Build build = Build.fromString("withns vm.nothing");
-
-    for (VerbaExpression expression : build.allExpressions()) {
-      System.out.println(expression);
-    }
   }
 }

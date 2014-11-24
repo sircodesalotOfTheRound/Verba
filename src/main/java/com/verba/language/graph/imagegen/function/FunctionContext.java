@@ -33,7 +33,7 @@ public class FunctionContext {
   public QList<VerbajOpCode> opcodes() { return this.opcodes; }
 
   // Todo: make this take more than just val declaration statements.
-  public TypeDeclarationExpression getObjectType(ValDeclarationStatement instance) { return staticSpaceExpression.getObjectType(instance); }
+  public TypeDeclarationExpression getObjectType(ValDeclarationStatement instance) { return null; }
 
   public VirtualVariable addVariable(VerbaExpression expression, TypeDeclarationExpression type) { return variableSet.add(expression, type); }
 

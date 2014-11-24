@@ -18,7 +18,6 @@ import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
  * Created by sircodesalot on 14-5-14.
  */
 public class StaticSpaceExpression extends VerbaExpression implements SymbolTableExpression {
-  private GlobalSymbolTable symbolTable;
   private final QList<VerbaExpression> allExpressions;
   private final Partition<Class, VerbaExpression> expressionsByType;
   private final QList<VerbaCodePage> pages;
@@ -29,7 +28,6 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
     this.pages = new QList<>(pages);
     this.allExpressions = extractExpressionsFromPages(this.pages);
     this.expressionsByType = partitionExpressions(allExpressions);
-    this.update();
   }
 
   public StaticSpaceExpression(VerbaCodePage ... pages) {
@@ -38,8 +36,6 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
     this.pages = new QList<>(pages);
     this.allExpressions = extractExpressionsFromPages(this.pages);
     this.expressionsByType = partitionExpressions(allExpressions);
-
-    this.update();
   }
 
   private Partition<Class, VerbaExpression> partitionExpressions(QIterable<VerbaExpression> expressions) {
@@ -47,30 +43,17 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
   }
 
   private QList<VerbaExpression> extractExpressionsFromPages(QIterable<VerbaCodePage> pages) {
-    return pages.flatten(VerbaCodePage::expressions).toList();
+    QList<VerbaExpression> allExpressionsFromPage = new QList<>(pages.cast(VerbaExpression.class));
+    allExpressionsFromPage.add(pages.flatten(VerbaCodePage::expressions));
+
+    return allExpressionsFromPage;
   }
 
   public QIterable<VerbaCodePage> pages() { return this.pages; }
 
-  public GlobalSymbolTable globalSymbolTable() {
-    return this.symbolTable;
-  }
-
   public QIterable<VerbaExpression> allExpressions() { return this.allExpressions; }
 
   public Partition<Class, VerbaExpression> expressionsByType() { return this.expressionsByType; }
-
-  public void update() {
-    this.symbolTable = new GlobalSymbolTable(this);
-  }
-
-  public void resolveSymbolNames() {
-    this.globalSymbolTable().resolveSymbolNames();
-  }
-
-  public SymbolTableEntry entryByInstance(VerbaExpression expression) {
-    return symbolTable.getByInstance(expression);
-  }
 
   @Override
   public void accept(SyntaxGraphVisitor visitor) {
@@ -78,19 +61,7 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) {
-    symbolTable.visit(this);
-  }
-
-  public GlobalSymbolTable symbolTable() { return this.symbolTable; }
-
-  public TypeDeclarationExpression getObjectType(ValDeclarationStatement statement) {
-    return entryByInstance(statement)
-      .metadata()
-      .ofType(SymbolTypeMetadata.class)
-      .single()
-      .symbolType();
-  }
+  public void accept(ScopedSymbolTable symbolTable) { symbolTable.visit(this); }
 
   @Override
   public BuildProfileBase buildProfile() {
