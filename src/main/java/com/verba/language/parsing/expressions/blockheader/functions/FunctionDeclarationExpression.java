@@ -1,7 +1,7 @@
 package com.verba.language.parsing.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.analyzers.FunctionExpressionAnalyzer;
+import com.verba.language.graph.analysis.expressions.profiles.FunctionExpressionAnalyzer;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
@@ -22,9 +22,9 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
  */
 public class FunctionDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression, TypedExpression, InvokableExpression, ParameterizedExpression,
-  GenericallyParameterizedExpression, SymbolTableExpression {
+  GenericallyParameterizedExpression, SymbolTableExpression, NamedAndTypedExpression {
 
-  private final FunctionExpressionAnalyzer analyzer = new FunctionExpressionAnalyzer(this);
+  private final FunctionExpressionAnalyzer buildProfile = new FunctionExpressionAnalyzer(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
   private TypeDeclarationExpression returnType;
@@ -48,7 +48,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public BuildProfileBase buildProfile() { return analyzer; }
+  public BuildProfileBase buildProfile() { return this.buildProfile; }
 
   public boolean hasGenericParameters() {
     return this.primaryIdentifier().hasGenericParameters();

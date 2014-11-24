@@ -1,22 +1,31 @@
-package com.verba.language.graph.analysis.expressions.analyzers;
+package com.verba.language.graph.analysis.expressions.profiles;
 
+import com.javalinq.implementations.QList;
+import com.javalinq.interfaces.QIterable;
+import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfile;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parsing.expressions.withns.WithNsExpression;
 
 /**
  * Created by sircodesalot on 14/11/23.
  */
-public class FunctionExpressionAnalyzer extends BuildProfile<FunctionDeclarationExpression> {
-  public FunctionExpressionAnalyzer(FunctionDeclarationExpression expression) {
+public class VerbaCodePageBuildProfile extends BuildProfile<VerbaCodePage> {
+  private QList<String> namespaces = new QList<>();
+
+  public VerbaCodePageBuildProfile(VerbaCodePage expression) {
     super(expression);
   }
 
   @Override
   public void afterParse(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
+    QIterable<String> namespaceRepresentations = expression
+      .expressionsByType(WithNsExpression.class)
+      .map(ns -> ns.namespace().representation());
 
+    this.namespaces.add(namespaceRepresentations);
   }
 
   @Override
@@ -33,4 +42,6 @@ public class FunctionExpressionAnalyzer extends BuildProfile<FunctionDeclaration
   public void beforeCodeGeneration(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
 
   }
+
+  public QIterable<String> namespaces() { return namespaces; }
 }

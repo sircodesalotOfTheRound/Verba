@@ -2,13 +2,19 @@ package com.verba.language.parsing.expressions.categories;
 
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 
 /**
  * Implemented on ClassDeclarationExpression and TraitDeclaration expression.
  * Means that this class can derive from other classes / traits.
  */
 public interface PolymorphicExpression {
-  public QIterable<TypeDeclarationExpression> traits();
+  QIterable<SymbolTableEntry> traitSymbolTableEntries();
+  QIterable<TypeDeclarationExpression> traits();
+  QIterable<SymbolTableEntry> scopedSymbolEntries();
+  boolean containsNameInScope(String name);
 
-  public boolean hasTraits();
+  boolean hasTraits();
+  BlockDeclarationExpression block();
 }

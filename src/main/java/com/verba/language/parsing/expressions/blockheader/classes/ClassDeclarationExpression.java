@@ -2,7 +2,9 @@ package com.verba.language.parsing.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.analysis.expressions.profiles.ClassExpressionBuildProfile;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -24,6 +26,7 @@ public class ClassDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression, PolymorphicExpression, ParameterizedExpression,
   GenericallyParameterizedExpression, SymbolTableExpression {
 
+  private final ClassExpressionBuildProfile buildProfile = new ClassExpressionBuildProfile(this);
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
 
@@ -34,13 +37,7 @@ public class ClassDeclarationExpression extends VerbaExpression
 
     lexer.readCurrentAndAdvance(KeywordToken.class, "class");
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-
-    if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ":")) {
-      lexer.readCurrentAndAdvance(OperatorToken.class, ":");
-
-      this.traits = readBaseTypes(lexer);
-    }
-
+    this.traits = readBaseTypes(lexer);
     this.block = BlockDeclarationExpression.read(this, lexer);
 
     this.closeLexingRegion();
@@ -49,14 +46,22 @@ public class ClassDeclarationExpression extends VerbaExpression
   private QIterable<TypeDeclarationExpression> readBaseTypes(Lexer lexer) {
     QList<TypeDeclarationExpression> baseTypes = new QList<>();
 
+    if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ":")) {
+      lexer.readCurrentAndAdvance(OperatorToken.class, ":");
+    } else {
+      return baseTypes;
+    }
+
     do {
       baseTypes.add(TypeDeclarationExpression.read(this, lexer));
 
       // Read a comma if that's the next item, else break.
-      if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ","))
+      if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ",")) {
         lexer.readCurrentAndAdvance(OperatorToken.class, ",");
-      else
+      }
+      else {
         break;
+      }
 
     } while (lexer.notEOF());
 
@@ -68,9 +73,7 @@ public class ClassDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public BuildProfileBase buildProfile() {
-    return null;
-  }
+  public BuildProfileBase buildProfile() { return buildProfile; }
 
   public FullyQualifiedNameExpression declaration() {
     return this.identifier;
@@ -89,8 +92,19 @@ public class ClassDeclarationExpression extends VerbaExpression
   }
 
   @Override
+  public QIterable<SymbolTableEntry> traitSymbolTableEntries() { return this.buildProfile.traitEntries(); }
+
+  @Override
   public QIterable<TypeDeclarationExpression> traits() {
     return this.traits;
+  }
+
+  @Override
+  public QIterable<SymbolTableEntry> scopedSymbolEntries() { return this.buildProfile.scopedNames(); }
+
+  @Override
+  public boolean containsNameInScope(String name) {
+    return false;
   }
 
   @Override

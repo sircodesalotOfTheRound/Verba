@@ -111,7 +111,7 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
 
   public void visit(VerbaCodePage page) {
     add(page);
-    this.visitAll(page.expressions());
+    this.visitAll(page.allExpressions());
   }
 
   @Override

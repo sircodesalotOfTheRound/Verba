@@ -3,6 +3,7 @@ package com.verba.language.parsing.expressions.blockheader.classes;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -77,8 +78,23 @@ public class TraitDeclarationExpression extends VerbaExpression
   }
 
   @Override
+  public QIterable<SymbolTableEntry> traitSymbolTableEntries() {
+    return null;
+  }
+
+  @Override
   public QIterable<TypeDeclarationExpression> traits() {
     return this.traits;
+  }
+
+  @Override
+  public QIterable<SymbolTableEntry> scopedSymbolEntries() {
+    return null;
+  }
+
+  @Override
+  public boolean containsNameInScope(String name) {
+    return false;
   }
 
   public FullyQualifiedNameExpression declaration() {

@@ -5,10 +5,13 @@ import com.javalinq.tools.Partition;
 import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.tools.SyntaxTreeFlattener;
 import com.verba.language.parsing.codestream.StringBasedCodeStream;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.lexing.VerbaMemoizingLexer;
+import jdk.nashorn.internal.runtime.regexp.joni.Syntax;
+import sun.rmi.rmic.iiop.StaticStringsHash;
 
 /**
  * Created by sircodesalot on 14/11/20.
@@ -27,6 +30,7 @@ public class Build {
 
   private StaticSpaceExpression afterParse(VerbaCodePage page) {
     StaticSpaceExpression staticSpace = new StaticSpaceExpression(page);
+
     for (VerbaExpression expression : staticSpace.allExpressions()) {
       expression.buildProfile().afterParse(buildAnalysis, staticSpace);
     }

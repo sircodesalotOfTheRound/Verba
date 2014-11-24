@@ -3,9 +3,10 @@ package com.verba.language.emit.codepage;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
-import com.verba.language.graph.analysis.expressions.analyzers.VerbaCodePageBuildProfile;
+import com.verba.language.graph.analysis.expressions.profiles.VerbaCodePageBuildProfile;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.tools.SyntaxTreeFlattener;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.codestream.CodeStream;
 import com.verba.language.parsing.codestream.FileBasedCodeStream;
@@ -22,7 +23,8 @@ import java.io.InputStream;
  */
 public class VerbaCodePage extends VerbaExpression implements SymbolTableExpression {
   private VerbaCodePageBuildProfile buildProfile = new VerbaCodePageBuildProfile(this);
-  private QList<VerbaExpression> expressions;
+  private QList<VerbaExpression> childExpressions;
+  private QIterable<VerbaExpression> allExpressions;
   private Partition<Class, VerbaExpression> expressionsByType;
   private String path;
 
@@ -30,11 +32,22 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
     super(parent, lexer);
 
     this.path = lexer.filename();
-    this.expressions = this.readExpressions(lexer);
-    this.expressionsByType = this.expressions.parition(Object::getClass);
+    this.childExpressions = this.readChildExpressions(lexer);
+    this.allExpressions = captureAllExpressions(this.childExpressions);
+    this.expressionsByType = this.allExpressions.parition(Object::getClass);
   }
 
-  private QList<VerbaExpression> readExpressions(Lexer lexer) {
+  private QIterable<VerbaExpression> captureAllExpressions(QList<VerbaExpression> childExpressions) {
+    QList<VerbaExpression> allExpressions = new QList<>();
+
+    for (VerbaExpression expression : childExpressions) {
+      allExpressions.add(new SyntaxTreeFlattener(expression).expressions());
+    }
+
+    return allExpressions;
+  }
+
+  private QList<VerbaExpression> readChildExpressions(Lexer lexer) {
     QList<VerbaExpression> expressionList = new QList<>();
 
     while (lexer.notEOF()) {
@@ -52,9 +65,9 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
   @Override
   public BuildProfileBase buildProfile() { return buildProfile; }
 
-  public QIterable<VerbaExpression> expressions() {
-    return this.expressions;
-  }
+  public QIterable<VerbaExpression> allExpressions() { return this.allExpressions; }
+
+  public QIterable<VerbaExpression> childExpressions() { return this.childExpressions; }
 
   public <T> QIterable<T> expressionsByType(Class<T> type) {
     if (this.expressionsByType.containsKey(type)) {

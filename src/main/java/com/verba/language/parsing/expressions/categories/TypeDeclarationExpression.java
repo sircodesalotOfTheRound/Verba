@@ -11,8 +11,6 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by sircodesalot on 14-2-25.
  */
 public interface TypeDeclarationExpression extends Token {
-
-
   public static TypeDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     if (FullyQualifiedNameExpression.IsFullyQualifiedName(lexer)) {
       return FullyQualifiedNameExpression.read(parent, lexer);

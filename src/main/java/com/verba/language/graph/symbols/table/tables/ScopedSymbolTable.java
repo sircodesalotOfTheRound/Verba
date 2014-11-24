@@ -106,7 +106,7 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void visit(VerbaCodePage page) {
-    this.visitAll(page.expressions());
+    this.visitAll(page.allExpressions());
   }
 
   public void visit(ClassDeclarationExpression classDeclaration) {

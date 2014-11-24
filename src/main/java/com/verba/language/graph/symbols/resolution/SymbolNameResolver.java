@@ -12,7 +12,6 @@ import com.verba.language.parsing.expressions.VerbaExpression;
  * Created by sircodesalot on 14/11/24.
  */
 public class SymbolNameResolver {
-  private final String EMPTY_NAMESPACE = "";
   private final GlobalSymbolTable symbolTable;
   private final ScopedSymbolTable scope;
   private final VerbaCodePage page;
@@ -66,7 +65,6 @@ public class SymbolNameResolver {
 
     namespaces.add(scope.fqnList());
     namespaces.add(page.importedNamespaces());
-    namespaces.add(EMPTY_NAMESPACE);
 
     return namespaces;
   }
