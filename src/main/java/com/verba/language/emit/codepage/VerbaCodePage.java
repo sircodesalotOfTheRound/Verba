@@ -56,9 +56,9 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
     return this.expressions;
   }
 
-  public QIterable<VerbaExpression> expressionsByType(Class type) {
+  public <T> QIterable<T> expressionsByType(Class<T> type) {
     if (this.expressionsByType.containsKey(type)) {
-      return this.expressionsByType.get(type);
+      return this.expressionsByType.get(type).cast(type);
     } else {
       return new QList<>();
     }

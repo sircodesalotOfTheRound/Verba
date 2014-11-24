@@ -6,6 +6,7 @@ import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parsing.lexing.Lexer;
+import com.verba.language.parsing.tokens.identifiers.KeywordToken;
 
 /**
  * Created by sircodesalot on 14/11/23.
@@ -17,6 +18,7 @@ public class WithNsExpression extends VerbaExpression {
   public WithNsExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+    lexer.readCurrentAndAdvance(KeywordToken.class, "withns");
     this.namespace = FullyQualifiedNameExpression.read(this, lexer);
   }
 

@@ -12,7 +12,7 @@ import com.verba.language.parsing.expressions.VerbaExpression;
  */
 public abstract class BuildProfile<T> implements BuildProfileBase {
   private ValidationViolationList violations;
-  private final T expression;
+  protected final T expression;
   public BuildProfile(T expression) {
     this.expression = expression;
   }
