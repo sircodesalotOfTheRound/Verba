@@ -26,5 +26,20 @@ public class VerbaCodePageBuildProfile extends BuildProfile<VerbaCodePage> {
     this.namespaces.add(namespaceRepresentations);
   }
 
+  @Override
+  public void beforeSymbolTableAssociation(BuildAnalysis buildAnalysis) {
+
+  }
+
+  @Override
+  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis) {
+
+  }
+
+  @Override
+  public void beforeCodeGeneration(BuildAnalysis buildAnalysis) {
+
+  }
+
   public QIterable<String> namespaces() { return namespaces; }
 }

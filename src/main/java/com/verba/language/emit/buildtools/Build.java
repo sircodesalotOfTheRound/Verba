@@ -16,13 +16,14 @@ import java.util.function.Consumer;
  * Created by sircodesalot on 14/11/20.
  */
 public class Build {
-  private BuildAnalysis buildAnalysis = new BuildAnalysis();
+  private BuildAnalysis buildAnalysis;
   private StaticSpaceExpression staticSpace;
   private GlobalSymbolTable symbolTable;
 
   private Build(VerbaCodePage page) {
     this.staticSpace = this.afterParse(page);
     this.symbolTable = this.beforeSymbolTableAssociation(staticSpace);
+    this.buildAnalysis = new BuildAnalysis(staticSpace, symbolTable);
     this.afterSymbolTableAssociation();
     this.beforeCodeGeneration();
   }

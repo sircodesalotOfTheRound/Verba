@@ -28,15 +28,5 @@ public abstract class BuildProfile<T> implements BuildProfileBase {
   public QIterable<ValidationViolation> violations() { return this.violations; }
   public QIterable<ValidationError> errors() { return this.violations.ofType(ValidationError.class); }
   public QIterable<ValidationWarning> warnings() { return this.violations.ofType(ValidationWarning.class); }
-  @Override
-  public void afterParse(BuildAnalysis buildAnalysis) { }
 
-  @Override
-  public void beforeSymbolTableAssociation(BuildAnalysis buildAnalysis) { }
-
-  @Override
-  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis) { }
-
-  @Override
-  public void beforeCodeGeneration(BuildAnalysis buildAnalysis) { }
 }
