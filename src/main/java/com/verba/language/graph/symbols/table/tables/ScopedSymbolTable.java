@@ -90,11 +90,15 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   private String resolveFqn(String name) {
-    if (this.hasParentTable() && (this.parent.fqn != null) && (name != null)) {
-      return String.format("%s.%s", this.parent.fqn(), name);
+    if (this.hasParentTable() && (!this.parent.fqn.isEmpty()) && (name != null)) {
+        return String.format("%s.%s", this.parent.fqn(), name);
     }
 
-    return name;
+    if (name != null) {
+      return name;
+    } else {
+      return "";
+    }
   }
 
   public void visit(StaticSpaceExpression staticSpace) {

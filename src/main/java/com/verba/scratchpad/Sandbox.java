@@ -14,6 +14,10 @@ public class Sandbox {
   public static void main(String[] args) throws Exception {
     Build build = Build.fromString("withns vm.nothing fn function() { val item = 10 }");
 
+    for (SymbolTableEntry entry : build.symbolTable().entries()) {
+      System.out.println(entry.fqn());
+    }
+
     SymbolTableEntry entry = build.symbolTable().getEntryListByFqn("function.item").first();
     SymbolNameResolver resolver = new SymbolNameResolver(build.symbolTable(), entry.table());
 

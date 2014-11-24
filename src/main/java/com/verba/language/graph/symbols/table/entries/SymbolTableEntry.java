@@ -17,6 +17,7 @@ public class SymbolTableEntry implements Serializable {
   private final ScopedSymbolTable table;
   private final VerbaExpression object;
   private final VerbaCodePage page;
+  private final String fqn;
   private final QList<SymbolTableMetadata> metadata = new QList<>();
 
   public SymbolTableEntry(String name, ScopedSymbolTable table, VerbaExpression object, SymbolTableMetadata... metadata) {
@@ -24,6 +25,7 @@ public class SymbolTableEntry implements Serializable {
     this.table = table;
     this.object = object;
     this.page = discoverPage(object);
+    this.fqn = determineFqn();
 
     for (SymbolTableMetadata item : metadata) {
       this.metadata.add(item);
@@ -66,11 +68,12 @@ public class SymbolTableEntry implements Serializable {
     }
   }
 
-  public String fqn() {
-    if (table.fqn() != null) return String.format("%s.%s", table.fqn(), name);
+  private String determineFqn() {
+    if (!table.fqn().isEmpty()) return String.format("%s.%s", table.fqn(), name);
     else return name;
   }
 
+  public String fqn() { return this.fqn; }
 
   public <T> boolean is(Class<T> type) {
     return type.isAssignableFrom(object.getClass());
