@@ -92,6 +92,8 @@ public class VerbaCodePage extends VerbaExpression implements SymbolTableExpress
     }
   }
 
+  public QIterable<String> importedNamespaces() { return this.buildProfile.namespaces(); }
+
   @Override
   public void accept(SyntaxGraphVisitor visitor) {
     visitor.visit(this);

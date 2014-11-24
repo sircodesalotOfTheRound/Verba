@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="javaLinq">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../javaLinq/out/artifacts/javaLinq/javaLinq.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

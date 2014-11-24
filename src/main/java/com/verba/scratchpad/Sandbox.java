@@ -2,6 +2,8 @@ package com.verba.scratchpad;
 
 import com.verba.language.emit.buildtools.Build;
 import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
+import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parsing.expressions.VerbaExpression;
 
@@ -12,9 +14,11 @@ public class Sandbox {
   public static void main(String[] args) throws Exception {
     Build build = Build.fromString("withns vm.nothing fn function() { val item = 10 }");
 
-    for (SymbolTableEntry entry : build.symbolTable().entries()) {
-      VerbaCodePage page = entry.page();
-      System.out.println(page.path());
+    SymbolTableEntry entry = build.symbolTable().getEntryListByFqn("function.item").first();
+    SymbolNameResolver resolver = new SymbolNameResolver(build.symbolTable(), entry.table());
+
+    for (SymbolResolutionMatch match : resolver.findSymbolsInScope("item")) {
+      System.out.println("found " + match.entry().fqn());
     }
   }
 }

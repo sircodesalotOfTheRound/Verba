@@ -43,6 +43,7 @@ public class ScopedSymbolTable implements Serializable {
   private final SymbolTableEntrySet entrySet;
   private final QList<ValidationViolation> violations = new QList<>();
   private final QList<ScopedSymbolTable> nestedTables = new QList<>();
+  private final QList<String> fqnList;
 
   // Construction
   // Anonymous block
@@ -52,6 +53,7 @@ public class ScopedSymbolTable implements Serializable {
     this.parent = null;
     this.headerExpression = region;
     this.fqn = resolveFqn(name);
+    this.fqnList = buildfqnList(this);
 
     region.accept(this);
   }
@@ -62,6 +64,7 @@ public class ScopedSymbolTable implements Serializable {
     this.parent = parentTable;
     this.headerExpression = blockHeader;
     this.fqn = resolveFqn(name);
+    this.fqnList = buildfqnList(this);
 
     if (blockHeader instanceof GenericallyParameterizedExpression) {
       this.visit(((GenericallyParameterizedExpression)blockHeader).genericParameters());
@@ -173,10 +176,27 @@ public class ScopedSymbolTable implements Serializable {
     this.nestedTables.add(nestedTable);
   }
 
+  private QList<String> buildfqnList(ScopedSymbolTable scope) {
+    QList<String> fqnList = new QList<>();
+    ScopedSymbolTable currentScope = scope;
+
+    while (currentScope != null) {
+      if (currentScope.fqn != null) {
+        fqnList.add(fqn);
+      }
+
+      currentScope = currentScope.parent;
+    }
+
+    return fqnList;
+  }
+
   // Accessing Items
   public String name() {
     return this.name;
   }
+
+  public QIterable<String> fqnList() { return this.fqnList; }
 
   public boolean hasName() {
     return this.name != null;
@@ -230,16 +250,10 @@ public class ScopedSymbolTable implements Serializable {
     return this.nestedTables;
   }
 
-  public String fqn() {
-    return this.fqn;
-  }
+  public String fqn() { return this.fqn; }
 
   public SymbolTableExpression header() {
     return this.headerExpression;
-  }
-
-  public QIterable<ValidationViolation> violations() {
-    return collectViolations(new QList<>(), this);
   }
 
   private void visitAll(QIterable<VerbaExpression> expressions) {
@@ -247,48 +261,4 @@ public class ScopedSymbolTable implements Serializable {
       expression.accept(this);
     }
   }
-
-  private void addNamedNestedBlockToSubTable(BlockDeclarationExpression subBlock) {
-    for (SymbolTableExpression subExpression : subBlock.expressions().ofType(SymbolTableExpression.class)) {
-      if (subExpression instanceof NamedBlockExpression) {
-        NamedBlockExpression block = (NamedBlockExpression) subExpression;
-        this.addNested(block.name(), block);
-      } else {
-        subExpression.accept(this);
-      }
-    }
-  }
-
-  private QList<ValidationViolation> collectViolations(QList<ValidationViolation> violations,
-                                                       ScopedSymbolTable onTable) {
-    // Tree descent
-    for (ScopedSymbolTable table : onTable.nestedTables) {
-      collectViolations(violations, table);
-    }
-
-    // Violation capturing
-    for (ValidationViolation violation : onTable.violations) {
-      violations.add(violation);
-    }
-
-    return violations;
-  }
-
-  public QIterable<SymbolTableEntry> resolveName(String name) {
-    QList<SymbolTableEntry> resolvedNames = new QList<>();
-    ScopedSymbolTable searchTable = this;
-
-    // Search upward through all parent scopes to find items
-    // that match the name.
-    do {
-      if (searchTable.containsKey(name)) {
-        resolvedNames.add(searchTable.get(name));
-      }
-
-      searchTable = searchTable.parent();
-    } while (searchTable != null);
-
-    return resolvedNames;
-  }
-
 }

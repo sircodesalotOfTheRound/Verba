@@ -15,6 +15,8 @@ import java.util.Map;
  * Created by sircodesalot on 14-5-16.
  */
 public class GlobalSymbolTable implements Serializable {
+  private static final QIterable<SymbolTableEntry> EMPTY_SET = new QList<>();
+
   private final ScopedSymbolTable rootTable;
   private final QList<SymbolTableEntry> entries = new QList<>();
   private final Map<VerbaExpression, SymbolTableEntry> entriesByInstance = new HashMap<>();
@@ -95,7 +97,13 @@ public class GlobalSymbolTable implements Serializable {
   }
 
   public QIterable<SymbolTableEntry> getByFqn(String fqn) {
-    return this.entriesByFqn.get(fqn);
+    QIterable<SymbolTableEntry> matches =  this.entriesByFqn.get(fqn);
+
+    if (matches != null) {
+      return matches;
+    } else {
+      return EMPTY_SET;
+    }
   }
 
   public SymbolTableEntry getByIndex(int index) {
