@@ -2,6 +2,7 @@ package com.verba.language.graph.symbols.table.entries;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.emit.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
@@ -15,12 +16,14 @@ public class SymbolTableEntry implements Serializable {
   private final String name;
   private final ScopedSymbolTable table;
   private final VerbaExpression object;
+  private final VerbaCodePage page;
   private final QList<SymbolTableMetadata> metadata = new QList<>();
 
   public SymbolTableEntry(String name, ScopedSymbolTable table, VerbaExpression object, SymbolTableMetadata... metadata) {
     this.name = name;
     this.table = table;
     this.object = object;
+    this.page = discoverPage(object);
 
     for (SymbolTableMetadata item : metadata) {
       this.metadata.add(item);
@@ -51,8 +54,16 @@ public class SymbolTableEntry implements Serializable {
     this.metadata.add(metadata);
   }
 
-  public QIterable<SymbolTableMetadata> metadata() {
-    return this.metadata;
+  public QIterable<SymbolTableMetadata> metadata() { return this.metadata; }
+
+  public VerbaCodePage page() { return this.page; }
+
+  private VerbaCodePage discoverPage(VerbaExpression object) {
+    if (object.is(VerbaCodePage.class)) {
+      return (VerbaCodePage)object;
+    } else {
+      return discoverPage(object.parent());
+    }
   }
 
   public String fqn() {

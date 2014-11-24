@@ -10,53 +10,47 @@ import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.lexing.VerbaMemoizingLexer;
 
-import java.util.function.Consumer;
-
 /**
  * Created by sircodesalot on 14/11/20.
  */
 public class Build {
-  private BuildAnalysis buildAnalysis;
+  private BuildAnalysis buildAnalysis = new BuildAnalysis();
   private StaticSpaceExpression staticSpace;
   private GlobalSymbolTable symbolTable;
 
   private Build(VerbaCodePage page) {
     this.staticSpace = this.afterParse(page);
     this.symbolTable = this.beforeSymbolTableAssociation(staticSpace);
-    this.buildAnalysis = new BuildAnalysis(staticSpace, symbolTable);
     this.afterSymbolTableAssociation();
     this.beforeCodeGeneration();
   }
 
   private StaticSpaceExpression afterParse(VerbaCodePage page) {
     StaticSpaceExpression staticSpace = new StaticSpaceExpression(page);
-    forEachExpression(staticSpace.allExpressions(), expression -> expression.buildProfile().afterParse(buildAnalysis));
+    for (VerbaExpression expression : staticSpace.allExpressions()) {
+      expression.buildProfile().afterParse(buildAnalysis, staticSpace);
+    }
+
     return staticSpace;
   }
 
   private GlobalSymbolTable beforeSymbolTableAssociation(StaticSpaceExpression staticSpace) {
-    forEachExpression(staticSpace.allExpressions(),  expression -> {
-      expression.buildProfile().beforeSymbolTableAssociation(buildAnalysis);
-    });
+    for (VerbaExpression expression : this.staticSpace.allExpressions()) {
+      expression.buildProfile().beforeSymbolTableAssociation(buildAnalysis, staticSpace);
+    }
 
     return new GlobalSymbolTable(staticSpace);
   }
 
   private void afterSymbolTableAssociation() {
-    forEachExpression(staticSpace.allExpressions(),  expression ->  {
-      expression.buildProfile().afterSymbolTableAssociation(buildAnalysis);
-    });
+    for (VerbaExpression expression : this.staticSpace.allExpressions()) {
+      expression.buildProfile().afterSymbolTableAssociation(buildAnalysis, staticSpace, symbolTable);
+    }
   }
 
   private void beforeCodeGeneration() {
-    forEachExpression(staticSpace.allExpressions(), expression -> {
-      expression.buildProfile().beforeCodeGeneration(buildAnalysis);
-    });
-  }
-
-  private void forEachExpression(Iterable<VerbaExpression> expressions, Consumer<VerbaExpression> callback) {
-    for (VerbaExpression expression : expressions) {
-      callback.accept(expression);
+    for (VerbaExpression expression : this.staticSpace.allExpressions()) {
+      expression.buildProfile().beforeCodeGeneration(buildAnalysis, staticSpace, symbolTable);
     }
   }
 
