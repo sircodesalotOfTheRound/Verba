@@ -1,6 +1,7 @@
 package com.verba.language.graph.analysis.expressions.tools;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.validation.violations.ValidationError;
 import com.verba.language.graph.validation.violations.ValidationViolation;
 import com.verba.language.graph.validation.violations.ValidationViolationList;

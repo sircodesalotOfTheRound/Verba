@@ -13,7 +13,7 @@ public class Sandbox {
 
     SymbolTableEntry entry = build.symbolTable().getEntryListByFqn("AnotherClass").first();
 
-    for (SymbolTableEntry expression : entry.instanceAs(ClassDeclarationExpression.class).members()) {
+    for (SymbolTableEntry expression : entry.instanceAs(ClassDeclarationExpression.class).allMembers()) {
       System.out.println("members: " + expression.fqn());
     }
   }

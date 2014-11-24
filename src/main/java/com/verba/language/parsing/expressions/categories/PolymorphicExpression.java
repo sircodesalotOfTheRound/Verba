@@ -12,7 +12,8 @@ import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 public interface PolymorphicExpression {
   QIterable<SymbolTableEntry> traitSymbolTableEntries();
   QIterable<TypeDeclarationExpression> traits();
-  QIterable<SymbolTableEntry> members();
+  QIterable<SymbolTableEntry> allMembers();
+  QIterable<SymbolTableEntry> immediateMembers();
   boolean containsNameInScope(String name);
 
   boolean hasTraits();

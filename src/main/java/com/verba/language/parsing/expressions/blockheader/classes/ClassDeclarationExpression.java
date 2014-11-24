@@ -100,7 +100,10 @@ public class ClassDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public QIterable<SymbolTableEntry> members() { return this.buildProfile.scopedNames(); }
+  public QIterable<SymbolTableEntry> allMembers() { return this.buildProfile.allMembers(); }
+
+  @Override
+  public QIterable<SymbolTableEntry> immediateMembers() { return this.buildProfile.immediateMembers(); }
 
   @Override
   public boolean containsNameInScope(String name) {

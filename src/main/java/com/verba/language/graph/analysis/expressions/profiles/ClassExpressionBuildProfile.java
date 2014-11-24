@@ -21,7 +21,8 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
   private GlobalSymbolTable symbolTable;
   private SymbolTableEntry thisEntry;
   private QIterable<SymbolTableEntry> traitEntries;
-  private QIterable<SymbolTableEntry> scopedNames;
+  private QIterable<SymbolTableEntry> immediateMembers;
+  private QIterable<SymbolTableEntry> allMembers;
 
   public ClassExpressionBuildProfile(ClassDeclarationExpression expression) {
     super(expression);
@@ -35,6 +36,7 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
 
   @Override
   public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
+
   }
 
   @Override
@@ -42,6 +44,8 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
     this.symbolTable = symbolTable;
     this.thisEntry = symbolTable.getByInstance(this.expression);
     this.traitEntries = determineTraitEntries(symbolTable);
+    this.immediateMembers = determineImmediateMembers(this.expression);
+    this.allMembers = determineAllMembers(this.expression, new QList<>());
   }
 
   private QIterable<SymbolTableEntry> determineTraitEntries(GlobalSymbolTable symbolTable) {
@@ -63,15 +67,15 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
 
   }
 
-  public QIterable<SymbolTableEntry> scopedNames() {
-    if (this.scopedNames == null) {
-      this.scopedNames = determineNamesInScope(this.expression, new QList<>());
-    }
+  public QIterable<SymbolTableEntry> immediateMembers() { return this.immediateMembers; }
+  public QIterable<SymbolTableEntry> allMembers() { return this.allMembers; }
 
-    return this.scopedNames;
+  private QIterable<SymbolTableEntry> determineImmediateMembers(PolymorphicExpression expression) {
+    TraitDeclarationNameResolver members = new TraitDeclarationNameResolver(this.symbolTable, expression);
+    return members.immediateMembers();
   }
 
-  private QIterable<SymbolTableEntry> determineNamesInScope(PolymorphicExpression expression, QList<SymbolTableEntry> names) {
+  private QIterable<SymbolTableEntry> determineAllMembers(PolymorphicExpression expression, QList<SymbolTableEntry> names) {
     QIterable<PolymorphicExpression> traits = expression.traitSymbolTableEntries()
       .map(entry -> entry.instanceAs(PolymorphicExpression.class));
 
@@ -79,9 +83,10 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
     names.add(members.immediateMembers());
 
     for (PolymorphicExpression trait : traits) {
-      determineNamesInScope(trait, names);
+      determineAllMembers(trait, names);
     }
 
     return names;
   }
+
 }
