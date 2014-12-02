@@ -19,6 +19,7 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 /**
  * Created by sircodesalot on 14-2-17.
  */
+@Deprecated
 public class TaskDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression, TypedExpression, InvokableExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 

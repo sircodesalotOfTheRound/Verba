@@ -12,12 +12,12 @@ public class KeywordToken extends IdentifierToken {
       "to", "in", "withns", "trait", "interface",
       "options", "option", "get", "set", "inline",
       "namespace", "class", "abstract", "extend", "sql", "native",
-      "signature", "fn", "task", "template", "fork", "proxy",
+      "signature", "fn", "meta", "template", "fork", "proxy",
       "event",
       "val", "mut", "yield",
       "new", "inject",
       "return",
-      "if", "then", "elseif", "else", "unless", "given", "otherwise",
+      "if", "then", "elseif", "else", "unless", "assuming", "otherwise",
       "until", "for", "while", "do", "break", "continue", "parallel",
       "isa", "hasa",
       "throw", "try", "catch", "finally",
@@ -26,15 +26,15 @@ public class KeywordToken extends IdentifierToken {
       "def", "resolve",
       "match", "case",
       "true", "false",
-      "sync", "threadlocal",
+      "sync", "async", "threadlocal",
 
       // System types
       "byte", "numeric", "dynamic", "default",
-      "int8", "int16", "int32", "int64",
+      "int", "int8", "int16", "int32", "int64",
       "uint8", "uint16", "uint32", "uint64",
       "float32", "float64",
       "char", "utc", "currency",
-      "utf8", "utf16", "utf32", "utf8be", "utf16be", "utf32be",
+      "utf", "utf8", "utf16", "utf32", "utf8be", "utf16be", "utf32be",
       "unit", "object",
       "json", "sensitive"
     };
