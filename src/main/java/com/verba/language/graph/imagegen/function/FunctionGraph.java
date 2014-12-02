@@ -45,7 +45,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
   private final StaticSpaceExpression staticSpaceExpression;
-  private QList<VerbajOpCode> opcodes = new QList<>();
+  private QList<VerbajOpCodeBase> opcodes = new QList<>();
 
   private final FunctionContext context;
 
@@ -85,11 +85,11 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private void closeOutFunction() {
     // If function doesn't end with return, put one there.
     if (opcodes.any() && !(opcodes.last() instanceof RetOpCode)) {
-      opcodes.add(new RetOpCode());
+      opcodes.add(VerbajOpCodeBase.ret());
     }
 
     // Also close out the function.
-    opcodes.add(new EndFunctionOpCode());
+    opcodes.add(VerbajOpCodeBase.endFunction());
   }
 
   public ObjectImage createImage() {
@@ -99,7 +99,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   public FunctionDeclarationExpression function() { return this.function; }
 
   public void visit(ReturnStatementExpression returnStatementExpression) {
-    opcodes.add(new RetOpCode());
+    opcodes.add(VerbajOpCodeBase.ret());
   }
 
   @Override
@@ -143,7 +143,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
 
       for (VerbaExpression expression : call.primaryParameters()) {
         VirtualVariable variable = this.variableSet.variableByExpression(expression);
-        opcodes.add(new StageArgOpCode(variable));
+        opcodes.add(VerbajOpCodeBase.stageArg(variable));
 
         if (this.lifetimeGraph.isLastOccurance(expression)) {
           // TODO: This is broken.
@@ -151,7 +151,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
         }
       }
 
-      opcodes.add(new CallOpCode(call.functionName()));
+      opcodes.add(VerbajOpCodeBase.call(call.functionName()));
   }
 
   public void visit(AssignmentStatementExpression assignmentStatementExpression) {
@@ -165,8 +165,8 @@ public class FunctionGraph implements SyntaxGraphVisitor {
       VirtualVariable source = variableSet.add(expression, VirtualMachineNativeTypes.UTF8);
       VirtualVariable destination = variableSet.add(expression, VirtualMachineNativeTypes.BOX_UINT64);
 
-      opcodes.add(new LdUint64OpCode(source, expression.asLong()));
-      opcodes.add(new BoxOpCode(source, destination));
+      opcodes.add(VerbajOpCodeBase.loaduint64(source, expression.asLong()));
+      opcodes.add(VerbajOpCodeBase.box(source, destination));
     }
   }
 
@@ -214,7 +214,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
     quoteNodeProcessor.process(expression);
   }
 
-  public Iterable<VerbajOpCode> opcodes() { return this.opcodes; }
+  public Iterable<VerbajOpCodeBase> opcodes() { return this.opcodes; }
 
   public String name() { return this.function.name(); }
 }

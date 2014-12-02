@@ -1,20 +1,20 @@
 package com.verba.language.emit.rendering.functions;
 
-import com.verba.language.emit.opcodes.VerbajOpCode;
+import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 
 /**
  * Created by sircodesalot on 14/9/19.
  */
 public class DebugOpCodeRenderer implements FunctionOpCodeRenderer {
-  private final Iterable<VerbajOpCode> opcodes;
+  private final Iterable<VerbajOpCodeBase> opcodes;
 
-  public DebugOpCodeRenderer(Iterable<VerbajOpCode> opcodes) {
+  public DebugOpCodeRenderer(Iterable<VerbajOpCodeBase> opcodes) {
     this.opcodes = opcodes;
   }
 
   public void display() {
-    for (VerbajOpCode opcode : opcodes) {
-      String prefix = String.format("(0x%s) %s: ", Integer.toHexString(opcode.opNumber()), opcode.opName());
+    for (VerbajOpCodeBase opcode : opcodes) {
+      String prefix = String.format("(0x%s) %s: ", Integer.toHexString(opcode.opcodeNumber()), opcode.opcodeName());
       System.out.print(prefix);
       opcode.render(this);
       System.out.println();

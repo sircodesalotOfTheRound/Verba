@@ -1,6 +1,7 @@
 package com.verba.language.graph.imagegen.function.nodes;
 
 import com.verba.language.emit.opcodes.LdStrOpCode;
+import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.imagegen.function.FunctionContext;
 import com.verba.language.graph.imagegen.function.variables.VariableLifetime;
@@ -23,7 +24,7 @@ public class QuoteNodeProcessor {
     // If this is the first time seeing this variable, add it.
     if (variableLifetime.isFirstInstance(expression)) {
       VirtualVariable variable = context.addVariable(expression, VirtualMachineNativeTypes.UTF8);
-      context.addOpCode(new LdStrOpCode(variable, expression.innerText()));
+      context.addOpCode(VerbajOpCodeBase.loadString(variable, expression.innerText()));
     }
   }
 }

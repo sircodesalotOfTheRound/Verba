@@ -1,6 +1,7 @@
 package com.verba.language.graph.imagegen.function.nodes;
 
 import com.verba.language.emit.opcodes.LdStrOpCode;
+import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.imagegen.function.FunctionContext;
 import com.verba.language.parsing.expressions.categories.LiteralExpression;
@@ -25,7 +26,7 @@ public class ValNodeStatementProcessor {
       QuoteExpression text = (QuoteExpression) statement.rvalue();
       VirtualVariable variable = context.addVariable(statement.nameAsExpression(), objectType);
 
-      context.addOpCode(new LdStrOpCode(variable, text.innerText()));
+      context.addOpCode(VerbajOpCodeBase.loadString(variable, text.innerText()));
     }
   }
 }

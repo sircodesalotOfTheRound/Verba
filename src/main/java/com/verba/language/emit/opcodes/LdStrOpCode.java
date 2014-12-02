@@ -6,20 +6,19 @@ import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 /**
  * Created by sircodesalot on 14/9/20.
  */
-public class LdStrOpCode implements VerbajOpCode {
+public class LdStrOpCode extends VerbajOpCodeBase {
+  private static final int opNumber = 0xD1;
+  private static final String opName = "LdStr";
+
   private final VirtualVariable variable;
   private final String text;
 
   public LdStrOpCode(VirtualVariable variable, String text) {
+    super(opNumber, opName);
+
     this.variable = variable;
     this.text = text;
   }
-
-  @Override
-  public int opNumber() { return 0xd1; }
-
-  @Override
-  public String opName() { return "LdStr"; }
 
   @Override
   public void render(FunctionOpCodeRenderer renderer) {

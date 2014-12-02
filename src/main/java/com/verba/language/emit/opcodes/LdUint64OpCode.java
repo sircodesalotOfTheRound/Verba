@@ -6,21 +6,20 @@ import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 /**
  * Created by sircodesalot on 14/9/20.
  */
-public class LdUint64OpCode implements VerbajOpCode {
+public class LdUint64OpCode extends VerbajOpCodeBase {
+  private static final int opNumber = 0xD3;
+  private static final String opName = "LdUi64";
+
   private final VirtualVariable variable;
   private final long value;
 
 
   public LdUint64OpCode(VirtualVariable variable, long value) {
+    super(opNumber, opName);
+
     this.variable = variable;
     this.value = value;
   }
-
-  @Override
-  public int opNumber() { return 0xd3; }
-
-  @Override
-  public String opName() { return "LdUi64"; }
 
   @Override
   public void render(FunctionOpCodeRenderer renderer) {

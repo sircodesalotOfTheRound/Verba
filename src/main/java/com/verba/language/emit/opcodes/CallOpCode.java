@@ -7,25 +7,22 @@ import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class CallOpCode implements VerbajOpCode {
+public class CallOpCode extends VerbajOpCodeBase {
+  private static final int opNumber = 0x43;
+  private static final String opName = "Call";
+
   public String function;
   public Iterable<VirtualVariable> variables;
 
   public CallOpCode(String function, Iterable<VirtualVariable> variables) {
+    super(opNumber, opName);
+
     this.function = function;
     this.variables = variables;
   }
 
   public CallOpCode(String function) {
     this(function, new QList<>());
-  }
-
-  @Override
-  public int opNumber() { return 0x43; }
-
-  @Override
-  public String opName() {
-    return "Call";
   }
 
   @Override

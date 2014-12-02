@@ -1,6 +1,6 @@
 package com.verba.language.emit.rendering.functions;
 
-import com.verba.language.emit.opcodes.VerbajOpCode;
+import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 import com.verba.language.emit.rendering.images.ImageRenderer;
 import com.verba.language.emit.rendering.images.ImageType;
 import com.verba.language.emit.rendering.images.ObjectImage;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MemoryStreamFunctionRenderer implements FunctionOpCodeRenderer, ObjectImage {
   private boolean isFrozen = false;
   private final String name;
-  private final Iterable<VerbajOpCode> opcodes;
+  private final Iterable<VerbajOpCodeBase> opcodes;
   private final List<Byte> data = new ArrayList<>();
   private byte[] byteData = null;
 
@@ -33,8 +33,8 @@ public class MemoryStreamFunctionRenderer implements FunctionOpCodeRenderer, Obj
     // Write the name of the function
     writeString("name", this.name);
 
-    for (VerbajOpCode opCode : opcodes) {
-      writeInt8(null, opCode.opNumber());
+    for (VerbajOpCodeBase opCode : opcodes) {
+      writeInt8(null, opCode.opcodeNumber());
       opCode.render(this);
     }
   }

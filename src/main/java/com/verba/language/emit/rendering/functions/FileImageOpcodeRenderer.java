@@ -1,6 +1,6 @@
 package com.verba.language.emit.rendering.functions;
 
-import com.verba.language.emit.opcodes.VerbajOpCode;
+import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.FileOutputStream;
@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class FileImageOpcodeRenderer implements FunctionOpCodeRenderer, AutoCloseable {
   private final FileOutputStream stream;
-  private final Iterable<VerbajOpCode> opcodes;
+  private final Iterable<VerbajOpCodeBase> opcodes;
   private final List<Byte> data = new ArrayList<>();
   private final String name;
 
-  public FileImageOpcodeRenderer(String imageName, String path, Iterable<VerbajOpCode> opcodes) {
+  public FileImageOpcodeRenderer(String imageName, String path, Iterable<VerbajOpCodeBase> opcodes) {
     this.name = imageName;
     this.opcodes = opcodes;
     try {
@@ -37,8 +37,8 @@ public class FileImageOpcodeRenderer implements FunctionOpCodeRenderer, AutoClos
   private List<Byte> renderOpCodes() {
     writeString("name", this.name);
 
-    for (VerbajOpCode opCode : opcodes) {
-      writeInt8(null, opCode.opNumber());
+    for (VerbajOpCodeBase opCode : opcodes) {
+      writeInt8(null, opCode.opcodeNumber());
       opCode.render(this);
     }
 

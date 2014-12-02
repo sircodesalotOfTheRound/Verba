@@ -6,18 +6,21 @@ import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 /**
  * Created by sircodesalot on 14/9/22.
  */
-public class StageArgOpCode implements VerbajOpCode {
+public class StageArgOpCode extends VerbajOpCodeBase {
+  private static final int opNumber = 0x29;
+  private static final String opName = "StgArg";
+
   private int variableNumber;
 
   public StageArgOpCode(VirtualVariable variable) {
+    super(opNumber, opName);
+
     this.variableNumber = variable.variableNumber();
   }
 
-  @Override
-  public int opNumber() { return 0x29; }
-
-  @Override
-  public String opName() { return "StgArg"; }
+  private StageArgOpCode() {
+    super(opNumber, opName);
+  }
 
   @Override
   public void render(FunctionOpCodeRenderer renderer) {
