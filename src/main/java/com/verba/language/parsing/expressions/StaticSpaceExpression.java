@@ -3,7 +3,7 @@ package com.verba.language.parsing.expressions;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
-import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.expressions.profiles.StaticSpaceBuildProfile;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
@@ -44,6 +44,10 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
     allExpressionsFromPage.add(pages.flatten(VerbaCodePage::allExpressions));
 
     return allExpressionsFromPage;
+  }
+
+  public boolean containsExpressionsOfType(Class type) {
+    return this.expressionsByType.containsKey(type);
   }
 
   public QIterable<VerbaCodePage> pages() { return this.pages; }

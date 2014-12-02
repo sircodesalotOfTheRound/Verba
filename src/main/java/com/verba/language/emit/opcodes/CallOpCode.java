@@ -1,7 +1,7 @@
 package com.verba.language.emit.opcodes;
 
 import com.javalinq.implementations.QList;
-import com.verba.language.emit.registers.VirtualVariable;
+import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 
 /**

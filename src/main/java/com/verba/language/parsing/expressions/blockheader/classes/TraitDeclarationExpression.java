@@ -96,8 +96,18 @@ public class TraitDeclarationExpression extends VerbaExpression
   public QIterable<SymbolTableEntry> immediateMembers() { return null; }
 
   @Override
-  public boolean containsNameInScope(String name) {
+  public boolean isMember(String name) {
     return false;
+  }
+
+  @Override
+  public boolean isImmediateMember(String name) {
+    return false;
+  }
+
+  @Override
+  public QIterable<SymbolTableExpression> findMembersByName(String name) {
+    return null;
   }
 
   public FullyQualifiedNameExpression declaration() {

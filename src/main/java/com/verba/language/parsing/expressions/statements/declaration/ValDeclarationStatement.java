@@ -29,19 +29,22 @@ public class ValDeclarationStatement extends VerbaExpression
   private void readExpression(Lexer lexer) {
     lexer.readCurrentAndAdvance(KeywordToken.class, "val");
 
-    if (lexer.currentIs(KeywordToken.class, "mut")) {
-      lexer.readCurrentAndAdvance(KeywordToken.class, "mut");
-      this.isMutable = true;
-    } else {
-      this.isMutable = false;
-    }
-
+    this.isMutable = determineMutability(lexer);
     this.identifier = NamedValueExpression.read(this, lexer);
 
     lexer.readCurrentAndAdvance(OperatorToken.class, "=");
 
     this.rvalue = RValueExpression.read(this, lexer);
     this.closeLexingRegion();
+  }
+
+  private boolean determineMutability(Lexer lexer) {
+    if (lexer.currentIs(KeywordToken.class, "mut")) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, "mut");
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public static ValDeclarationStatement read(VerbaExpression parent, Lexer lexer) {

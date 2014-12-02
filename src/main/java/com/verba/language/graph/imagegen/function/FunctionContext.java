@@ -2,8 +2,8 @@ package com.verba.language.graph.imagegen.function;
 
 import com.javalinq.implementations.QList;
 import com.verba.language.emit.opcodes.VerbajOpCode;
-import com.verba.language.emit.registers.VirtualVariable;
-import com.verba.language.emit.registers.VirtualVariableSet;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.emit.variables.VirtualVariableSet;
 import com.verba.language.graph.imagegen.function.variables.VariableLifetime;
 import com.verba.language.graph.imagegen.function.variables.VariableLifetimeGraph;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;

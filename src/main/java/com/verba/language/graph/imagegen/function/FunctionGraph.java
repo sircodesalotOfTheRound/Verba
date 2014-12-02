@@ -2,10 +2,10 @@ package com.verba.language.graph.imagegen.function;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.emit.opcodes.*;
-import com.verba.language.emit.registers.VirtualVariable;
-import com.verba.language.emit.registers.VirtualVariableSet;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.emit.variables.VirtualVariableSet;
 import com.verba.language.emit.rendering.functions.DebugOpCodeRenderer;
 import com.verba.language.emit.rendering.functions.MemoryStreamFunctionRenderer;
 import com.verba.language.emit.rendering.images.ObjectImage;

@@ -1,6 +1,6 @@
 package com.verba.language.graph.imagegen.function.variables;
 
-import com.verba.language.emit.codepage.VerbaCodePage;
+import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.facades.FunctionCallFacade;
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;

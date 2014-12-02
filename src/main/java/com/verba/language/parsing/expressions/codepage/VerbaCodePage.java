@@ -1,4 +1,4 @@
-package com.verba.language.emit.codepage;
+package com.verba.language.parsing.expressions.codepage;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;

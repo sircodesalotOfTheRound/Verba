@@ -1,6 +1,6 @@
 package com.verba.language.emit.opcodes;
 
-import com.verba.language.emit.registers.VirtualVariable;
+import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 
 /**

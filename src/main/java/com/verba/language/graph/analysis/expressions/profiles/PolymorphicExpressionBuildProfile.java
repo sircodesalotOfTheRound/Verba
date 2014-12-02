@@ -1,7 +1,9 @@
 package com.verba.language.graph.analysis.expressions.profiles;
 
 import com.javalinq.implementations.QList;
+import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
+import com.javalinq.tools.Partition;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfile;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
@@ -17,14 +19,15 @@ import com.verba.language.parsing.expressions.categories.TypeDeclarationExpressi
 /**
  * Created by sircodesalot on 14/11/24.
  */
-public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationExpression> {
+public class PolymorphicExpressionBuildProfile extends BuildProfile<ClassDeclarationExpression> {
   private GlobalSymbolTable symbolTable;
   private SymbolTableEntry thisEntry;
   private QIterable<SymbolTableEntry> traitEntries;
   private QIterable<SymbolTableEntry> immediateMembers;
   private QIterable<SymbolTableEntry> allMembers;
+  private Partition<String, SymbolTableEntry> symbolTableEntriesByName;
 
-  public ClassExpressionBuildProfile(ClassDeclarationExpression expression) {
+  public PolymorphicExpressionBuildProfile(ClassDeclarationExpression expression) {
     super(expression);
 
   }
@@ -46,6 +49,7 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
     this.traitEntries = determineTraitEntries(symbolTable);
     this.immediateMembers = determineImmediateMembers(this.expression);
     this.allMembers = determineAllMembers(this.expression, new QList<>());
+    this.symbolTableEntriesByName = this.allMembers.parition(SymbolTableEntry::name);
   }
 
   private QIterable<SymbolTableEntry> determineTraitEntries(GlobalSymbolTable symbolTable) {
@@ -69,6 +73,22 @@ public class ClassExpressionBuildProfile extends BuildProfile<ClassDeclarationEx
 
   public QIterable<SymbolTableEntry> immediateMembers() { return this.immediateMembers; }
   public QIterable<SymbolTableEntry> allMembers() { return this.allMembers; }
+
+  public QIterable<SymbolTableEntry> findMembersByName(String name) {
+    return this.symbolTableEntriesByName.get(name);
+  }
+
+  public boolean isMember(String name) {
+    return this.symbolTableEntriesByName.containsKey(name);
+  }
+
+  public boolean isImmediateMember(String name) {
+    if (isMember(name)) {
+      return this.symbolTableEntriesByName.get(name).any(entry -> entry.table() == this.thisEntry.table());
+    }
+
+    return false;
+  }
 
   private QIterable<SymbolTableEntry> determineImmediateMembers(PolymorphicExpression expression) {
     TraitDeclarationNameResolver members = new TraitDeclarationNameResolver(this.symbolTable, expression);

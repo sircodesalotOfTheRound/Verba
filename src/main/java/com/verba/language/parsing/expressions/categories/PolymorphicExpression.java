@@ -14,7 +14,10 @@ public interface PolymorphicExpression {
   QIterable<TypeDeclarationExpression> traits();
   QIterable<SymbolTableEntry> allMembers();
   QIterable<SymbolTableEntry> immediateMembers();
-  boolean containsNameInScope(String name);
+
+  boolean isMember(String name);
+  boolean isImmediateMember(String name);
+  QIterable<SymbolTableExpression> findMembersByName(String name);
 
   boolean hasTraits();
   BlockDeclarationExpression block();

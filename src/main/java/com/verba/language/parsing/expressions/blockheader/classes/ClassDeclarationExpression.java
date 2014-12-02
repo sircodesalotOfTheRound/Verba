@@ -2,7 +2,7 @@ package com.verba.language.parsing.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.profiles.ClassExpressionBuildProfile;
+import com.verba.language.graph.analysis.expressions.profiles.PolymorphicExpressionBuildProfile;
 import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
@@ -26,7 +26,7 @@ public class ClassDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression, PolymorphicExpression, ParameterizedExpression,
   GenericallyParameterizedExpression, SymbolTableExpression {
 
-  private final ClassExpressionBuildProfile buildProfile = new ClassExpressionBuildProfile(this);
+  private final PolymorphicExpressionBuildProfile buildProfile = new PolymorphicExpressionBuildProfile(this);
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
 
@@ -106,8 +106,18 @@ public class ClassDeclarationExpression extends VerbaExpression
   public QIterable<SymbolTableEntry> immediateMembers() { return this.buildProfile.immediateMembers(); }
 
   @Override
-  public boolean containsNameInScope(String name) {
+  public boolean isMember(String name) {
     return false;
+  }
+
+  @Override
+  public boolean isImmediateMember(String name) {
+    return buildProfile.isImmediateMember(name);
+  }
+
+  @Override
+  public QIterable<SymbolTableExpression> findMembersByName(String name) {
+    return null;
   }
 
   @Override
