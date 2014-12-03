@@ -15,7 +15,6 @@ import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.NamedBlockExpression;
 import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.TraitDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeListExpression;
@@ -110,11 +109,6 @@ public class ScopedSymbolTable implements Serializable {
 
   public void visit(ClassDeclarationExpression classDeclaration) {
     this.visit(classDeclaration.block());
-  }
-
-  public void visit(TraitDeclarationExpression trait) {
-    this.visit(trait.genericParameters());
-    this.visit(trait.block());
   }
 
   public void visit(NamespaceDeclarationExpression namespace) {

@@ -18,7 +18,6 @@ public interface NamedBlockExpression extends SymbolTableExpression, NamedExpres
     .addRule(new ClassDeclarationBacktrackRule())
     .addRule(new FunctionDeclarationBacktrackRule())
     .addRule(new InjectedClassDeclarationBacktrackRule())
-    .addRule(new TraitDeclarationBacktrackRule())
     .addRule(new MetaDeclarationBacktrackRule())
     .addRule(new ExtendDeclarationBacktrackRule())
     .addRule(new SignatureDeclarationBacktrackRule());

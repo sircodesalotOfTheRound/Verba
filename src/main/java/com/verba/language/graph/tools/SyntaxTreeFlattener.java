@@ -8,7 +8,6 @@ import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.TraitDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -47,11 +46,6 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
 
   private void add(VerbaExpression expression) {
     this.expressions.add(expression);
-  }
-
-  public void visit(TraitDeclarationExpression node) {
-    add(node);
-    this.visitAll(node.block());
   }
 
   public void visit(StaticSpaceExpression node) {

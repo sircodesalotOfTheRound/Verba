@@ -4,7 +4,6 @@ import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.TraitDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -23,8 +22,6 @@ import com.verba.language.parsing.expressions.withns.WithNsExpression;
  */
 public interface SyntaxGraphVisitor {
   void visit(BlockDeclarationExpression verbaExpressions);
-
-  void visit(TraitDeclarationExpression traitDeclarationExpression);
 
   void visit(StaticSpaceExpression staticSpaceExpression);
 
