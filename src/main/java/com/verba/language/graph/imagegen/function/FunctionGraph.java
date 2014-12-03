@@ -3,7 +3,7 @@ package com.verba.language.graph.imagegen.function;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
-import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.emit.opcodes.*;
 import com.verba.language.emit.variables.VirtualVariable;
@@ -116,7 +116,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   }
 
   @Override
-  public void visit(PolymorphicExpression classDeclarationExpression) {
+  public void visit(PolymorphicDeclarationExpression classDeclarationExpression) {
     throw new NotImplementedException();
   }
 

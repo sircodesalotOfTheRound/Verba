@@ -2,7 +2,7 @@ package com.verba.language.parsing.expressions.backtracking.rules;
 
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
-import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parsing.info.LexList;
 import com.verba.language.parsing.lexing.Lexer;
 import com.verba.language.parsing.tokens.identifiers.KeywordToken;
@@ -18,6 +18,6 @@ public class PolymorphicExpressionBacktrackRule extends BacktrackRule {
 
   @Override
   public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return PolymorphicExpression.read(parent, lexer);
+    return PolymorphicDeclarationExpression.read(parent, lexer);
   }
 }

@@ -25,7 +25,7 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 /**
  * Created by sircodesalot on 14-2-17.
  */
-public class PolymorphicExpression extends VerbaExpression
+public class PolymorphicDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression,
   ParameterizedExpression,
   GenericallyParameterizedExpression,
@@ -38,7 +38,7 @@ public class PolymorphicExpression extends VerbaExpression
 
   private QIterable<TypeDeclarationExpression> traits;
 
-  private PolymorphicExpression(VerbaExpression parent, Lexer lexer) {
+  private PolymorphicDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
     if (lexer.currentIs(KeywordToken.class, "class") || lexer.currentIs(KeywordToken.class, "trait")) {
@@ -77,8 +77,8 @@ public class PolymorphicExpression extends VerbaExpression
     return baseTypes;
   }
 
-  public static PolymorphicExpression read(VerbaExpression parent, Lexer lexer) {
-    return new PolymorphicExpression(parent, lexer);
+  public static PolymorphicDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
+    return new PolymorphicDeclarationExpression(parent, lexer);
   }
 
   // Build Events
@@ -119,6 +119,8 @@ public class PolymorphicExpression extends VerbaExpression
 
   public QIterable<SymbolTableEntry> immediateMembers() { return this.buildProfile.immediateMembers(); }
 
+  public boolean isDerivedFrom(String name) { return buildProfile.isDerivedFrom(name); }
+
   public boolean isMember(String name) {
     return false;
   }
@@ -127,8 +129,8 @@ public class PolymorphicExpression extends VerbaExpression
     return buildProfile.isImmediateMember(name);
   }
 
-  public QIterable<SymbolTableExpression> findMembersByName(String name) {
-    return null;
+  public QIterable<SymbolTableEntry> findMembersByName(String name) {
+    return buildProfile.findMembersByName(name);
   }
 
   @Override

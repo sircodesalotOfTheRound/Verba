@@ -1,6 +1,6 @@
 package com.verba.language.graph.imagegen.function.variables;
 
-import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.graph.analysis.facades.FunctionCallFacade;
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
@@ -127,7 +127,7 @@ public class VariableLifetimeGraph implements SyntaxGraphVisitor {
   }
 
   @Override
-  public void visit(PolymorphicExpression classDeclarationExpression) {
+  public void visit(PolymorphicDeclarationExpression classDeclarationExpression) {
     throw new NotImplementedException();
   }
 

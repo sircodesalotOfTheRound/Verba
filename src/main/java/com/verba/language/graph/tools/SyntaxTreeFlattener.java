@@ -2,7 +2,7 @@ package com.verba.language.graph.tools;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
@@ -64,7 +64,7 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
 
   // Todo: Should this also read statements as well? Probabaly?
 
-  public void visit(PolymorphicExpression classDeclaration) {
+  public void visit(PolymorphicDeclarationExpression classDeclaration) {
     add(classDeclaration);
 
     this.visitAll(classDeclaration.block());
