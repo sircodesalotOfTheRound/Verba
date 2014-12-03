@@ -1,8 +1,7 @@
 package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
-import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 
 /**
  * Created by sircodesalot on 14-2-16.

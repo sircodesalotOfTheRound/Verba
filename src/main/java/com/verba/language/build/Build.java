@@ -6,14 +6,12 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventLauncher;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
-import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
-import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.parsing.codestream.StringBasedCodeStream;
-import com.verba.language.parsing.expressions.StaticSpaceExpression;
-import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.lexing.VerbaMemoizingLexer;
+import com.verba.language.parse.codestream.StringBasedCodeStream;
+import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.lexing.VerbaMemoizingLexer;
 
 /**
  * Created by sircodesalot on 14/11/20.

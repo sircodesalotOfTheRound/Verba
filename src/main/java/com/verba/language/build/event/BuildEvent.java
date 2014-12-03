@@ -1,9 +1,9 @@
 package com.verba.language.build.event;
 
+import com.verba.language.build.BuildAnalysis;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.StaticSpaceExpression;
 
 /**
  * Created by sircodesalot on 14/12/3.

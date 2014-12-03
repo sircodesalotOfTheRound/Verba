@@ -1,8 +1,7 @@
 package com.verba.language.build.event;
 
-import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.parsing.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.VerbaExpression;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

@@ -1,11 +1,7 @@
 package com.verba.language.emit.images.types.basic;
 
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
-import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 import com.verba.language.emit.images.interfaces.ImageType;
-import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
-import com.verba.language.graph.imagegen.function.FunctionGraph;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;

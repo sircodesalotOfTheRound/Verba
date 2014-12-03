@@ -4,9 +4,8 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
-import com.verba.language.parsing.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.VerbaExpression;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +13,7 @@ import java.util.Set;
 /**
  * Created by sircodesalot on 14-5-8.
  */
-public class SymbolTableEntrySet implements Serializable {
+public class SymbolTableEntrySet {
   private final ScopedSymbolTable table;
   private final Map<String, QList<SymbolTableEntry>> entriesByName = new HashMap<>();
   private final QList<SymbolTableEntry> entries = new QList<>();

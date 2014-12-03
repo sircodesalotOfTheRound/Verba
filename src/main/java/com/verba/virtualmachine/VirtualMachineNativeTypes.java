@@ -1,9 +1,9 @@
 package com.verba.virtualmachine;
 
-import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.expressions.categories.LiteralExpression;
-import com.verba.language.parsing.expressions.categories.NativeTypeExpression;
-import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.categories.LiteralExpression;
+import com.verba.language.parse.expressions.categories.NativeTypeExpression;
+import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

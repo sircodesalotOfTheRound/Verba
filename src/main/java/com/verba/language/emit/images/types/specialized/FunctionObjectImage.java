@@ -5,9 +5,9 @@ import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
 import com.verba.language.emit.opcodes.VerbajOpCodeBase;
-import com.verba.language.graph.imagegen.function.FunctionGraph;
-import com.verba.language.parsing.expressions.StaticSpaceExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.graph.expressions.functions.FunctionGraph;
+import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 
 /**
  * This facade makes it easier to write an object image.
@@ -45,7 +45,7 @@ public class FunctionObjectImage implements ObjectImage {
 
       System.out.print(String.format("%02x ", data));
     }
-    
+
     System.out.println();
   }
 

@@ -3,9 +3,9 @@ package com.verba.language.graph.symbols.resolution;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicDeclarationExpression;
-import com.verba.language.parsing.expressions.categories.NamedExpression;
+import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
+import com.verba.language.parse.expressions.categories.NamedExpression;
 
 /**
  * Created by sircodesalot on 14/11/24.

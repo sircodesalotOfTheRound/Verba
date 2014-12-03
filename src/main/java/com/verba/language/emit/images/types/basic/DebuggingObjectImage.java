@@ -1,7 +1,7 @@
 package com.verba.language.emit.images.types.basic;
 
-import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.VerbajOpCodeBase;
 
 /**
  * Created by sircodesalot on 14/9/19.

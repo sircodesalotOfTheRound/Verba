@@ -2,24 +2,24 @@ package com.verba.language.graph.tools;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicDeclarationExpression;
-import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.parsing.expressions.StaticSpaceExpression;
-import com.verba.language.parsing.expressions.VerbaExpression;
-import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.parsing.expressions.containers.array.ArrayDeclarationExpression;
-import com.verba.language.parsing.expressions.containers.json.JsonExpression;
-import com.verba.language.parsing.expressions.containers.tuple.TupleDeclarationExpression;
-import com.verba.language.parsing.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.parsing.expressions.rvalue.simple.QuoteExpression;
-import com.verba.language.parsing.expressions.statements.assignment.AssignmentStatementExpression;
-import com.verba.language.parsing.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.parsing.expressions.statements.returns.ReturnStatementExpression;
-import com.verba.language.parsing.expressions.withns.WithNsExpression;
+import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
+import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
+import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parse.expressions.blockheader.functions.SignatureDeclarationExpression;
+import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;
+import com.verba.language.parse.expressions.containers.json.JsonExpression;
+import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
+import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
+import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
+import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
+import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
+import com.verba.language.parse.expressions.withns.WithNsExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.Serializable;
@@ -57,7 +57,7 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
     add(node);
 
     if (node.hasTypeConstraint()) {
-      VerbaExpression expression = (VerbaExpression)node.typeDeclaration();
+      VerbaExpression expression = (VerbaExpression)node.typeConstraint();
       expression.accept(this);
     }
   }
