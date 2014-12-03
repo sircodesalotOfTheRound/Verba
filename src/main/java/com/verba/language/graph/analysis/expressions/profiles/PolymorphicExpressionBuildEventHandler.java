@@ -25,6 +25,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   private GlobalSymbolTable symbolTable;
   private SymbolTableEntry thisEntry;
   private QIterable<SymbolTableEntry> traitEntries;
+  private Partition<String, SymbolTableEntry> traitEntriesByName;
   private QIterable<SymbolTableEntry> immediateMembers;
   private QIterable<SymbolTableEntry> allMembers;
   private Partition<String, SymbolTableEntry> symbolTableEntriesByName;
@@ -42,6 +43,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     this.symbolTable = symbolTable;
     this.thisEntry = symbolTable.getByInstance(this.expression());
     this.traitEntries = determineTraitEntries(symbolTable);
+    this.traitEntriesByName = this.traitEntries.parition(SymbolTableEntry::fqn);
     this.immediateMembers = determineImmediateMembers(this.expression());
     this.allMembers = determineAllMembers(this.expression(), new QList<>());
     this.symbolTableEntriesByName = this.allMembers.parition(SymbolTableEntry::name);
@@ -69,7 +71,11 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   public QIterable<SymbolTableEntry> immediateMembers() { return this.immediateMembers; }
   public QIterable<SymbolTableEntry> allMembers() { return this.allMembers; }
   public QIterable<SymbolTableEntry> findMembersByName(String name) {
-    return this.symbolTableEntriesByName.get(name);
+    if (this.symbolTableEntriesByName.containsKey(name)) {
+      return this.symbolTableEntriesByName.get(name);
+    }
+
+    return new QList<>();
   }
 
   public boolean isMember(String name) {
@@ -104,6 +110,6 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   }
 
   public boolean isDerivedFrom(String name) {
-    return false;
+    return this.traitEntriesByName.containsKey(name);
   }
 }

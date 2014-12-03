@@ -25,7 +25,6 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
   @Override
   public void writeInt8(String label, int value) {
     printFormatted("\t[%s] \t%s", label, asHex(value));
-
   }
 
   @Override
