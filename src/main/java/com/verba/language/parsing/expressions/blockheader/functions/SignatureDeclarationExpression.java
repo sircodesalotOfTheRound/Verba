@@ -18,6 +18,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14-2-17.
  */
+// TODO: Merge with function declaration expression.
+@Deprecated
 public class SignatureDeclarationExpression extends VerbaExpression implements NamedExpression,
   TypedExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 
@@ -57,16 +59,6 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
 
   public FullyQualifiedNameExpression declaration() {
     return this.identifier;
-  }
-
-  @Override
-  public QIterable<TupleDeclarationExpression> parameterSets() {
-    return this.primaryIdentifier().parameterLists();
-  }
-
-  @Override
-  public BlockDeclarationExpression block() {
-    throw new NotImplementedException();
   }
 
   public GenericTypeListExpression genericParameters() {
