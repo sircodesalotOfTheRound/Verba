@@ -3,7 +3,7 @@ package com.verba.language.parsing.expressions.blockheader.classes;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.event.BuildEvent;
-import com.verba.language.graph.analysis.expressions.profiles.PolymorphicExpressionBuildEventSubscription;
+import com.verba.language.graph.analysis.expressions.profiles.PolymorphicExpressionBuildEventHandler;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
@@ -33,8 +33,7 @@ public class ClassDeclarationExpression extends VerbaExpression
   SymbolTableExpression,
   BuildEvent.NotifySymbolTableBuildEvent
 {
-
-  private final PolymorphicExpressionBuildEventSubscription buildProfile = new PolymorphicExpressionBuildEventSubscription(this);
+  private final PolymorphicExpressionBuildEventHandler buildProfile = new PolymorphicExpressionBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
 

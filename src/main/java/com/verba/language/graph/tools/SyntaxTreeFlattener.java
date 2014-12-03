@@ -11,7 +11,6 @@ import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarati
 import com.verba.language.parsing.expressions.blockheader.classes.TraitDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.TaskDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parsing.expressions.containers.array.ArrayDeclarationExpression;
 import com.verba.language.parsing.expressions.containers.json.JsonExpression;
@@ -81,12 +80,6 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
     add(function);
 
     this.visitAll(function.block());
-  }
-
-  public void visit(TaskDeclarationExpression task) {
-    add(task);
-
-    this.visitAll(task.block());
   }
 
   public void visit(ArrayDeclarationExpression array) {

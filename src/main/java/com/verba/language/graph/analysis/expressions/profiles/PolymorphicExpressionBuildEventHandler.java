@@ -19,7 +19,7 @@ import com.verba.language.parsing.expressions.categories.TypeDeclarationExpressi
 /**
  * Created by sircodesalot on 14/11/24.
  */
-public class PolymorphicExpressionBuildEventSubscription extends ExpressionBuildEventSubscription<ClassDeclarationExpression>
+public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEventSubscription<ClassDeclarationExpression>
   implements BuildEvent.NotifySymbolTableBuildEvent,
   BuildEvent.NotifyCodeGenerationEvent
 {
@@ -30,7 +30,7 @@ public class PolymorphicExpressionBuildEventSubscription extends ExpressionBuild
   private QIterable<SymbolTableEntry> allMembers;
   private Partition<String, SymbolTableEntry> symbolTableEntriesByName;
 
-  public PolymorphicExpressionBuildEventSubscription(ClassDeclarationExpression expression) {
+  public PolymorphicExpressionBuildEventHandler(ClassDeclarationExpression expression) {
     super(expression);
 
   }

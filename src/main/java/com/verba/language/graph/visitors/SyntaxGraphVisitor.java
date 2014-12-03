@@ -7,7 +7,6 @@ import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarati
 import com.verba.language.parsing.expressions.blockheader.classes.TraitDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.functions.TaskDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parsing.expressions.containers.array.ArrayDeclarationExpression;
 import com.verba.language.parsing.expressions.containers.json.JsonExpression;
@@ -34,8 +33,6 @@ public interface SyntaxGraphVisitor {
   void visit(ClassDeclarationExpression classDeclarationExpression);
 
   void visit(FunctionDeclarationExpression functionDeclarationExpression);
-
-  void visit(TaskDeclarationExpression taskDeclarationExpression);
 
   void visit(ArrayDeclarationExpression arrayDeclarationExpression);
 
