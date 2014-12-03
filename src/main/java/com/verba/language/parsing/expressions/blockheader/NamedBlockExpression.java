@@ -15,7 +15,7 @@ public interface NamedBlockExpression extends SymbolTableExpression, NamedExpres
   public static BacktrackRuleSet<NamedBlockExpression> declarations
     = new BacktrackRuleSet<NamedBlockExpression>()
     .addRule(new NamespaceDeclarationBacktrackRule())
-    .addRule(new ClassDeclarationBacktrackRule())
+    .addRule(new PolymorphicExpressionBacktrackRule())
     .addRule(new FunctionDeclarationBacktrackRule())
     .addRule(new InjectedClassDeclarationBacktrackRule())
     .addRule(new MetaDeclarationBacktrackRule())

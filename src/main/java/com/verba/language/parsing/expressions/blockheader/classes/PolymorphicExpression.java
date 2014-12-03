@@ -25,9 +25,8 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 /**
  * Created by sircodesalot on 14-2-17.
  */
-public class ClassDeclarationExpression extends VerbaExpression
+public class PolymorphicExpression extends VerbaExpression
   implements NamedBlockExpression,
-  PolymorphicExpression,
   ParameterizedExpression,
   GenericallyParameterizedExpression,
   SymbolTableExpression,
@@ -39,10 +38,13 @@ public class ClassDeclarationExpression extends VerbaExpression
 
   private QIterable<TypeDeclarationExpression> traits;
 
-  private ClassDeclarationExpression(VerbaExpression parent, Lexer lexer) {
+  private PolymorphicExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "class");
+    if (lexer.currentIs(KeywordToken.class, "class") || lexer.currentIs(KeywordToken.class, "trait")) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, "class");
+    }
+
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
     this.traits = readBaseTypes(lexer);
     this.block = BlockDeclarationExpression.read(this, lexer);
@@ -75,8 +77,8 @@ public class ClassDeclarationExpression extends VerbaExpression
     return baseTypes;
   }
 
-  public static ClassDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
-    return new ClassDeclarationExpression(parent, lexer);
+  public static PolymorphicExpression read(VerbaExpression parent, Lexer lexer) {
+    return new PolymorphicExpression(parent, lexer);
   }
 
   // Build Events
@@ -107,31 +109,24 @@ public class ClassDeclarationExpression extends VerbaExpression
     return this.primaryIdentifier().genericParameterList();
   }
 
-  @Override
   public QIterable<SymbolTableEntry> traitSymbolTableEntries() { return this.buildProfile.traitEntries(); }
 
-  @Override
   public QIterable<TypeDeclarationExpression> traits() {
     return this.traits;
   }
 
-  @Override
   public QIterable<SymbolTableEntry> allMembers() { return this.buildProfile.allMembers(); }
 
-  @Override
   public QIterable<SymbolTableEntry> immediateMembers() { return this.buildProfile.immediateMembers(); }
 
-  @Override
   public boolean isMember(String name) {
     return false;
   }
 
-  @Override
   public boolean isImmediateMember(String name) {
     return buildProfile.isImmediateMember(name);
   }
 
-  @Override
   public QIterable<SymbolTableExpression> findMembersByName(String name) {
     return null;
   }
@@ -150,7 +145,6 @@ public class ClassDeclarationExpression extends VerbaExpression
     return this.primaryIdentifier().hasGenericParameters();
   }
 
-  @Override
   public boolean hasTraits() {
     return (this.traits != null);
   }

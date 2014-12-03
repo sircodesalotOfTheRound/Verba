@@ -6,20 +6,19 @@ import com.javalinq.tools.Partition;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.analysis.expressions.tools.ExpressionBuildEventSubscription;
+import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
-import com.verba.language.graph.symbols.resolution.TraitDeclarationNameResolver;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
-import com.verba.language.parsing.expressions.categories.PolymorphicExpression;
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
 import com.verba.language.parsing.expressions.categories.TypeDeclarationExpression;
 
 /**
  * Created by sircodesalot on 14/11/24.
  */
-public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEventSubscription<ClassDeclarationExpression>
+public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEventSubscription<PolymorphicExpression>
   implements BuildEvent.NotifySymbolTableBuildEvent,
   BuildEvent.NotifyCodeGenerationEvent
 {
@@ -30,7 +29,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   private QIterable<SymbolTableEntry> allMembers;
   private Partition<String, SymbolTableEntry> symbolTableEntriesByName;
 
-  public PolymorphicExpressionBuildEventHandler(ClassDeclarationExpression expression) {
+  public PolymorphicExpressionBuildEventHandler(PolymorphicExpression expression) {
     super(expression);
 
   }
@@ -87,7 +86,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   }
 
   private QIterable<SymbolTableEntry> determineImmediateMembers(PolymorphicExpression expression) {
-    TraitDeclarationNameResolver members = new TraitDeclarationNameResolver(this.symbolTable, expression);
+    PolymorphicDeclarationNameResolver members = new PolymorphicDeclarationNameResolver(this.symbolTable, expression);
     return members.immediateMembers();
   }
 
@@ -95,7 +94,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     QIterable<PolymorphicExpression> traits = expression.traitSymbolTableEntries()
       .map(entry -> entry.instanceAs(PolymorphicExpression.class));
 
-    TraitDeclarationNameResolver members = new TraitDeclarationNameResolver(this.symbolTable, expression);
+    PolymorphicDeclarationNameResolver members = new PolymorphicDeclarationNameResolver(this.symbolTable, expression);
     names.add(members.immediateMembers());
 
     for (PolymorphicExpression trait : traits) {

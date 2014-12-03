@@ -1,9 +1,9 @@
 package com.verba.language.graph.visitors;
 
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -27,7 +27,7 @@ public interface SyntaxGraphVisitor {
 
   void visit(NamedValueExpression namedObjectDeclarationExpression);
 
-  void visit(ClassDeclarationExpression classDeclarationExpression);
+  void visit(PolymorphicExpression classDeclarationExpression);
 
   void visit(FunctionDeclarationExpression functionDeclarationExpression);
 

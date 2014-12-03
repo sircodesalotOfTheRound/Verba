@@ -5,7 +5,7 @@ import com.verba.language.graph.validation.validation.ExpressionValidator;
 /**
  * Created by sircodesalot on 14-5-3.
  */
-public class ClassDeclarationValidator extends ExpressionValidator {
+public class PolymorphicExpressionValidator extends ExpressionValidator {
 //  public void validate() {
 //    this.validateName();
 //    this.validateParameters();

@@ -2,6 +2,7 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.NestedSymbolTableMetadata;
@@ -14,7 +15,6 @@ import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.NamedBlockExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.generic.GenericTypeListExpression;
@@ -107,7 +107,7 @@ public class ScopedSymbolTable implements Serializable {
     this.visitAll(page.childExpressions());
   }
 
-  public void visit(ClassDeclarationExpression classDeclaration) {
+  public void visit(PolymorphicExpression classDeclaration) {
     this.visit(classDeclaration.block());
   }
 

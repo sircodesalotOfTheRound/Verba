@@ -3,12 +3,11 @@ package com.verba.language.graph.imagegen.function;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
-import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
+import com.verba.language.parsing.expressions.blockheader.classes.PolymorphicExpression;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.emit.opcodes.*;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableSet;
-import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.analysis.facades.FunctionCallFacade;
 import com.verba.language.graph.imagegen.function.nodes.QuoteNodeProcessor;
 import com.verba.language.graph.imagegen.function.nodes.ValNodeStatementProcessor;
@@ -19,7 +18,6 @@ import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
-import com.verba.language.parsing.expressions.blockheader.classes.ClassDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -118,7 +116,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   }
 
   @Override
-  public void visit(ClassDeclarationExpression classDeclarationExpression) {
+  public void visit(PolymorphicExpression classDeclarationExpression) {
     throw new NotImplementedException();
   }
 
