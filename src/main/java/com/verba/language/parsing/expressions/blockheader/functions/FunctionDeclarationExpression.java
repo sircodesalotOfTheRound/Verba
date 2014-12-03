@@ -5,6 +5,7 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.analysis.expressions.profiles.FunctionExpressionEventSubscription;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
@@ -32,13 +33,14 @@ public class FunctionDeclarationExpression extends VerbaExpression
     SymbolTableExpression,
     NamedAndTypedExpression,
 
+    BuildEvent.NotifySymbolTableBuildEvent,
     BuildEvent.NotifyObjectEmitEvent
 {
 
   private final FunctionExpressionEventSubscription buildEvents = new FunctionExpressionEventSubscription(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
-  private TypeDeclarationExpression returnType;
+  private TypeDeclarationExpression explicitReturnType;
 
   public FunctionDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -47,7 +49,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
     if (lexer.currentIs(OperatorToken.class, ":")) {
       lexer.readCurrentAndAdvance(OperatorToken.class, ":");
-      this.returnType = TypeDeclarationExpression.read(this, lexer);
+      this.explicitReturnType = TypeDeclarationExpression.read(this, lexer);
     }
 
     this.block = BlockDeclarationExpression.read(this, lexer);
@@ -63,6 +65,16 @@ public class FunctionDeclarationExpression extends VerbaExpression
   @Override
   public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
     return this.buildEvents.onGenerateObjectImage(buildAnalysis, staticSpace, symbolTable);
+  }
+
+  @Override
+  public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
+    buildEvents.beforeSymbolTableAssociation(analysis, buildAnalysis);
+  }
+
+  @Override
+  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+    buildEvents.afterSymbolTableAssociation(buildAnalysis, staticSpace, symbolTable);
   }
 
   // Accessors
@@ -104,12 +116,12 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   @Override
   public boolean hasTypeConstraint() {
-    return this.returnType != null;
+    return this.explicitReturnType != null;
   }
 
   @Override
   public TypeDeclarationExpression typeDeclaration() {
-    return this.returnType;
+    return this.explicitReturnType;
   }
 
   @Override
@@ -120,5 +132,9 @@ public class FunctionDeclarationExpression extends VerbaExpression
   @Override
   public void accept(ScopedSymbolTable symbolTable) {
     symbolTable.visit(this);
+  }
+
+  public SymbolTableEntry returnType() {
+    return this.buildEvents.returnType();
   }
 }

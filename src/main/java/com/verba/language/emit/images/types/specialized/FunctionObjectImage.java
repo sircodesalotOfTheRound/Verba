@@ -45,6 +45,8 @@ public class FunctionObjectImage implements ObjectImage {
 
       System.out.print(String.format("%02x ", data));
     }
+    
+    System.out.println();
   }
 
   @Override
