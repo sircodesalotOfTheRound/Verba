@@ -1,4 +1,4 @@
-package com.verba.language.emit.rendering.images;
+package com.verba.language.emit.images.interfaces;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

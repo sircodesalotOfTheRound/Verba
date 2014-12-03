@@ -1,0 +1,68 @@
+package com.verba.language.emit.images.types.specialized;
+
+import com.verba.language.emit.images.interfaces.AppendableObjectImage;
+import com.verba.language.emit.images.interfaces.ImageType;
+import com.verba.language.emit.images.interfaces.ObjectImage;
+import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
+import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.graph.imagegen.function.FunctionGraph;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
+import com.verba.language.parsing.expressions.blockheader.functions.FunctionDeclarationExpression;
+
+/**
+ * This facade makes it easier to write an object image.
+ */
+public class FunctionObjectImage implements ObjectImage {
+  private final FunctionGraph functionGraph;
+  private final AppendableObjectImage objectImage;
+  private boolean isFrozen = false;
+
+  public FunctionObjectImage(FunctionDeclarationExpression declaration,
+                             StaticSpaceExpression staticSpace) {
+
+    this.functionGraph = new FunctionGraph(declaration, staticSpace);
+    this.objectImage = new InMemoryObjectImage(declaration.name(), ImageType.FUNCTION);
+  }
+
+  private void generateOpCodeList() {
+    objectImage.writeString("name", this.functionGraph.name());
+
+    for (VerbajOpCodeBase opCode : functionGraph.opcodes()) {
+      objectImage.writeInt8(null, opCode.opcodeNumber());
+      opCode.render(objectImage);
+    }
+  }
+
+  public void displayCoreDump() {
+    byte[] byteData = this.data();
+    System.out.println(String.format("Image: %s (%s bytes)", objectImage.name(), objectImage.data().length));
+
+    int count = 0;
+    for (byte data : byteData) {
+      if (count++ > 0 && count % 10 == 0) {
+        System.out.println();
+      }
+
+      System.out.print(String.format("%02x ", data));
+    }
+  }
+
+  @Override
+  public String name() { return objectImage.name(); }
+
+  @Override
+  public ImageType imageType() { return objectImage.imageType(); }
+
+  @Override
+  public int size() { return objectImage.size(); }
+
+  @Override
+  public byte[] data() {
+    if (!isFrozen) {
+      this.generateOpCodeList();
+      this.isFrozen = true;
+    }
+
+    return objectImage.data();
+  }
+}

@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.statements.declaration;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -49,11 +48,6 @@ public class ValDeclarationStatement extends VerbaExpression
 
   public static ValDeclarationStatement read(VerbaExpression parent, Lexer lexer) {
     return new ValDeclarationStatement(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   @Override

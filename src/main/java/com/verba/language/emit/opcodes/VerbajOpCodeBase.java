@@ -1,6 +1,6 @@
 package com.verba.language.emit.opcodes;
 
-import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
+import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
 
 /**
@@ -18,7 +18,7 @@ public abstract class VerbajOpCodeBase {
   public int opcodeNumber() { return opcodeNumber;}
   public String opcodeName() { return opcodeName; }
 
-  public abstract void render(FunctionOpCodeRenderer renderer);
+  public abstract void render(ObjectImageOutputStream renderer);
 
   // Static Op-codes
   private static VerbajOpCodeBase endFunctionOpCode = new EndFunctionOpCode();

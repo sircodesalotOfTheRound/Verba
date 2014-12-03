@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.statements.flow.branch;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -30,11 +29,6 @@ public class IfStatementExpression extends VerbaExpression {
 
   public static IfStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new IfStatementExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public RValueExpression testExpression() {

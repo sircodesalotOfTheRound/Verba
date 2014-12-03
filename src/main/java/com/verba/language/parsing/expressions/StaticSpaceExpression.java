@@ -3,9 +3,8 @@ package com.verba.language.parsing.expressions;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
+import com.verba.language.graph.analysis.expressions.profiles.StaticSpaceExpressionBuildEventSubscription;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
-import com.verba.language.graph.analysis.expressions.profiles.StaticSpaceBuildProfile;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
@@ -14,7 +13,7 @@ import com.verba.language.parsing.expressions.categories.SymbolTableExpression;
  * Created by sircodesalot on 14-5-14.
  */
 public class StaticSpaceExpression extends VerbaExpression implements SymbolTableExpression {
-  private final StaticSpaceBuildProfile buildProfile = new StaticSpaceBuildProfile(this);
+  private final StaticSpaceExpressionBuildEventSubscription buildProfile = new StaticSpaceExpressionBuildEventSubscription(this);
   private final QList<VerbaExpression> allExpressions;
   private final Partition<Class, VerbaExpression> expressionsByType;
   private final QList<VerbaCodePage> pages;
@@ -64,8 +63,4 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
   @Override
   public void accept(ScopedSymbolTable symbolTable) { symbolTable.visit(this); }
 
-  @Override
-  public BuildProfileBase buildProfile() {
-    return this.buildProfile;
-  }
 }

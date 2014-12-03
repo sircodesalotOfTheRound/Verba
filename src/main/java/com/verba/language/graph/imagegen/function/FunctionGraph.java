@@ -2,13 +2,13 @@ package com.verba.language.graph.imagegen.function;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
+import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
 import com.verba.language.parsing.expressions.codepage.VerbaCodePage;
 import com.verba.language.emit.opcodes.*;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableSet;
-import com.verba.language.emit.rendering.functions.DebugOpCodeRenderer;
-import com.verba.language.emit.rendering.functions.MemoryStreamFunctionRenderer;
-import com.verba.language.emit.rendering.images.ObjectImage;
+import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.analysis.facades.FunctionCallFacade;
 import com.verba.language.graph.imagegen.function.nodes.QuoteNodeProcessor;
 import com.verba.language.graph.imagegen.function.nodes.ValNodeStatementProcessor;
@@ -69,7 +69,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
 
     buildImage(function);
 
-    DebugOpCodeRenderer renderer = new DebugOpCodeRenderer(opcodes);
+    DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
     renderer.display();
   }
 
@@ -90,10 +90,6 @@ public class FunctionGraph implements SyntaxGraphVisitor {
 
     // Also close out the function.
     opcodes.add(VerbajOpCodeBase.endFunction());
-  }
-
-  public ObjectImage createImage() {
-    return new MemoryStreamFunctionRenderer(this);
   }
 
   public FunctionDeclarationExpression function() { return this.function; }

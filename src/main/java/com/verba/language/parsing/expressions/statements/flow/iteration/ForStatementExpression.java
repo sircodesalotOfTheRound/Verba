@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.statements.flow.iteration;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
@@ -42,11 +41,6 @@ public class ForStatementExpression extends VerbaExpression {
 
   public static ForStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new ForStatementExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public TypeDeclarationExpression variable() {

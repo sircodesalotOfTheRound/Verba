@@ -1,6 +1,6 @@
 package com.verba.language.emit.opcodes;
 
-import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
+import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 
 /**
  * Created by sircodesalot on 14/9/19.
@@ -14,6 +14,6 @@ public class RetOpCode extends VerbajOpCodeBase {
   }
 
   @Override
-  public void render(FunctionOpCodeRenderer renderer) { /* The op will automatically be written*/ }
+  public void render(ObjectImageOutputStream renderer) { /* The op will automatically be written*/ }
 
 }

@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.blockheader.namespaces;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -29,11 +28,6 @@ public class NamespaceDeclarationExpression extends VerbaExpression implements N
 
   public static NamespaceDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamespaceDeclarationExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public FullyQualifiedNameExpression identifier() {

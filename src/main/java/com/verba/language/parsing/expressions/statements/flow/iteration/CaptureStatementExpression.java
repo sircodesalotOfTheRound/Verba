@@ -1,7 +1,6 @@
 package com.verba.language.parsing.expressions.statements.flow.iteration;
 
 import com.javalinq.implementations.QList;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
@@ -38,11 +37,6 @@ public class CaptureStatementExpression extends VerbaExpression {
 
   public static CaptureStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new CaptureStatementExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   @Override

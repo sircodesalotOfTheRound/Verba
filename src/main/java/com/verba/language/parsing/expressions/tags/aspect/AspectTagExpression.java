@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.tags.aspect;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.MetaTagExpression;
@@ -81,11 +80,6 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
 
   public static AspectTagExpression read(VerbaExpression parent, Lexer lexer) {
     return new AspectTagExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   @Override

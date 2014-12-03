@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.statements.returns;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
@@ -29,11 +28,6 @@ public class ReturnStatementExpression extends VerbaExpression {
 
   public static ReturnStatementExpression read(VerbaExpression expression, Lexer lexer) {
     return new ReturnStatementExpression(expression, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public RValueExpression value() {

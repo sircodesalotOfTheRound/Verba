@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.containers.tuple;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.DataContainerExpression;
@@ -48,11 +47,6 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeD
 
   public static TupleDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new TupleDeclarationExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public String representation() {

@@ -1,8 +1,8 @@
 package com.verba.language.emit.opcodes;
 
 import com.javalinq.implementations.QList;
+import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 
 /**
  * Created by sircodesalot on 14/9/19.
@@ -26,7 +26,7 @@ public class CallOpCode extends VerbajOpCodeBase {
   }
 
   @Override
-  public void render(FunctionOpCodeRenderer renderer) {
+  public void render(ObjectImageOutputStream renderer) {
     renderer.writeString("function_name", function);
   }
 

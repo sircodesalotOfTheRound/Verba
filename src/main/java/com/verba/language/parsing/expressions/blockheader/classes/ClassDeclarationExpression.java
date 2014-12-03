@@ -2,11 +2,14 @@ package com.verba.language.parsing.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.profiles.PolymorphicExpressionBuildProfile;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
+import com.verba.language.build.event.BuildEvent;
+import com.verba.language.graph.analysis.expressions.profiles.PolymorphicExpressionBuildEventSubscription;
+import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.NamedBlockExpression;
@@ -23,10 +26,15 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-17.
  */
 public class ClassDeclarationExpression extends VerbaExpression
-  implements NamedBlockExpression, PolymorphicExpression, ParameterizedExpression,
-  GenericallyParameterizedExpression, SymbolTableExpression {
+  implements NamedBlockExpression,
+  PolymorphicExpression,
+  ParameterizedExpression,
+  GenericallyParameterizedExpression,
+  SymbolTableExpression,
+  BuildEvent.NotifySymbolTableBuildEvent
+{
 
-  private final PolymorphicExpressionBuildProfile buildProfile = new PolymorphicExpressionBuildProfile(this);
+  private final PolymorphicExpressionBuildEventSubscription buildProfile = new PolymorphicExpressionBuildEventSubscription(this);
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
 
@@ -72,9 +80,18 @@ public class ClassDeclarationExpression extends VerbaExpression
     return new ClassDeclarationExpression(parent, lexer);
   }
 
+  // Build Events
   @Override
-  public BuildProfileBase buildProfile() { return buildProfile; }
+  public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
+    this.buildProfile.beforeSymbolTableAssociation(analysis, buildAnalysis);
+  }
 
+  @Override
+  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+    this.buildProfile.afterSymbolTableAssociation(buildAnalysis, staticSpace, symbolTable);
+  }
+
+  // Accessors
   public FullyQualifiedNameExpression declaration() {
     return this.identifier;
   }
@@ -163,4 +180,6 @@ public class ClassDeclarationExpression extends VerbaExpression
 
   @Override
   public QIterable<TupleDeclarationExpression> parameterSets() { return this.primaryIdentifier().parameterLists(); }
+
+
 }

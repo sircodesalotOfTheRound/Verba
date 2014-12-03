@@ -1,10 +1,14 @@
 package com.verba.language.parsing.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.profiles.FunctionExpressionAnalyzer;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
+import com.verba.language.build.event.BuildEvent;
+import com.verba.language.emit.images.interfaces.ObjectImage;
+import com.verba.language.graph.analysis.expressions.profiles.FunctionExpressionEventSubscription;
+import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
+import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.parsing.expressions.StaticSpaceExpression;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parsing.expressions.blockheader.NamedBlockExpression;
@@ -21,10 +25,18 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-17.
  */
 public class FunctionDeclarationExpression extends VerbaExpression
-  implements NamedBlockExpression, TypedExpression, InvokableExpression, ParameterizedExpression,
-  GenericallyParameterizedExpression, SymbolTableExpression, NamedAndTypedExpression {
+  implements NamedBlockExpression,
+    TypedExpression,
+    InvokableExpression,
+    ParameterizedExpression,
+    GenericallyParameterizedExpression,
+    SymbolTableExpression,
+    NamedAndTypedExpression,
 
-  private final FunctionExpressionAnalyzer buildProfile = new FunctionExpressionAnalyzer(this);
+    BuildEvent.NotifyObjectEmitEvent
+{
+
+  private final FunctionExpressionEventSubscription buildEvents = new FunctionExpressionEventSubscription(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
   private TypeDeclarationExpression returnType;
@@ -47,9 +59,14 @@ public class FunctionDeclarationExpression extends VerbaExpression
     return new FunctionDeclarationExpression(parent, lexer);
   }
 
-  @Override
-  public BuildProfileBase buildProfile() { return this.buildProfile; }
 
+  // Events
+  @Override
+  public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+    return this.buildEvents.onGenerateObjectImage(buildAnalysis, staticSpace, symbolTable);
+  }
+
+  // Accessors
   public boolean hasGenericParameters() {
     return this.primaryIdentifier().hasGenericParameters();
   }
@@ -105,5 +122,4 @@ public class FunctionDeclarationExpression extends VerbaExpression
   public void accept(ScopedSymbolTable symbolTable) {
     symbolTable.visit(this);
   }
-
 }

@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.statements.meta;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.lexing.Lexer;
@@ -24,11 +23,6 @@ public class MetaStatementExpression extends VerbaExpression {
 
   public static MetaStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaStatementExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public VerbaExpression statement() {

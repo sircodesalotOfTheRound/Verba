@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.containers.json;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.DataContainerExpression;
@@ -45,11 +44,6 @@ public class JsonExpression extends VerbaExpression implements RValueExpression,
 
   public static JsonExpression read(VerbaExpression parent, Lexer lexer) {
     return new JsonExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   @Override

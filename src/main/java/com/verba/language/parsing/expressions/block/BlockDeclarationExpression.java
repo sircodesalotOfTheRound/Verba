@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.block;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -53,11 +52,6 @@ public class BlockDeclarationExpression extends VerbaExpression
 
   public static BlockDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new BlockDeclarationExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   @Override

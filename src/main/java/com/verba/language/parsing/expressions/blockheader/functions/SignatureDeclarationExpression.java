@@ -1,7 +1,6 @@
 package com.verba.language.parsing.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -41,11 +40,6 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
 
   public static SignatureDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new SignatureDeclarationExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
 

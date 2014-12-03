@@ -1,11 +1,11 @@
 package com.verba.language.graph.analysis.expressions.profiles;
 
 import com.javalinq.implementations.QList;
-import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
+import com.verba.language.build.event.BuildEvent;
 import com.verba.language.graph.analysis.expressions.tools.BuildAnalysis;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfile;
+import com.verba.language.graph.analysis.expressions.tools.ExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.resolution.TraitDeclarationNameResolver;
@@ -19,7 +19,10 @@ import com.verba.language.parsing.expressions.categories.TypeDeclarationExpressi
 /**
  * Created by sircodesalot on 14/11/24.
  */
-public class PolymorphicExpressionBuildProfile extends BuildProfile<ClassDeclarationExpression> {
+public class PolymorphicExpressionBuildEventSubscription extends ExpressionBuildEventSubscription<ClassDeclarationExpression>
+  implements BuildEvent.NotifySymbolTableBuildEvent,
+  BuildEvent.NotifyCodeGenerationEvent
+{
   private GlobalSymbolTable symbolTable;
   private SymbolTableEntry thisEntry;
   private QIterable<SymbolTableEntry> traitEntries;
@@ -27,28 +30,21 @@ public class PolymorphicExpressionBuildProfile extends BuildProfile<ClassDeclara
   private QIterable<SymbolTableEntry> allMembers;
   private Partition<String, SymbolTableEntry> symbolTableEntriesByName;
 
-  public PolymorphicExpressionBuildProfile(ClassDeclarationExpression expression) {
+  public PolymorphicExpressionBuildEventSubscription(ClassDeclarationExpression expression) {
     super(expression);
 
   }
 
   @Override
-  public void afterParse(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
-
-  }
-
-  @Override
-  public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
-
-  }
+  public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) { }
 
   @Override
   public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
     this.symbolTable = symbolTable;
-    this.thisEntry = symbolTable.getByInstance(this.expression);
+    this.thisEntry = symbolTable.getByInstance(this.expression());
     this.traitEntries = determineTraitEntries(symbolTable);
-    this.immediateMembers = determineImmediateMembers(this.expression);
-    this.allMembers = determineAllMembers(this.expression, new QList<>());
+    this.immediateMembers = determineImmediateMembers(this.expression());
+    this.allMembers = determineAllMembers(this.expression(), new QList<>());
     this.symbolTableEntriesByName = this.allMembers.parition(SymbolTableEntry::name);
   }
 
@@ -56,7 +52,7 @@ public class PolymorphicExpressionBuildProfile extends BuildProfile<ClassDeclara
     SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.table());
 
     QList<SymbolTableEntry> entriesForTraits = new QList<>() ;
-    for (TypeDeclarationExpression expression : this.expression.traits()) {
+    for (TypeDeclarationExpression expression : this.expression().traits()) {
       SymbolResolutionMatch match = nameResolver.findSymbolsInScope(expression.representation()).first();
       entriesForTraits.add(match.entry());
     }

@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.blockheader.classes;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -36,11 +35,6 @@ public class MetaDeclarationExpression extends VerbaExpression implements NamedB
 
   public static MetaDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaDeclarationExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public FullyQualifiedNameExpression identifier() {

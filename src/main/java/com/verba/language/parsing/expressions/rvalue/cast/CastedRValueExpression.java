@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.rvalue.cast;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.RValueExpression;
@@ -28,11 +27,6 @@ public class CastedRValueExpression extends VerbaExpression implements RValueExp
 
   public static CastedRValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new CastedRValueExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public TypeDeclarationExpression toType() {

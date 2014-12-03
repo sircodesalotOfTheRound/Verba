@@ -1,7 +1,5 @@
 package com.verba.language.parsing.expressions.withns;
 
-import com.verba.language.graph.analysis.expressions.profiles.WithNsExpressionAnalyzer;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.members.FullyQualifiedNameExpression;
@@ -12,7 +10,6 @@ import com.verba.language.parsing.tokens.identifiers.KeywordToken;
  * Created by sircodesalot on 14/11/23.
  */
 public class WithNsExpression extends VerbaExpression {
-  private final WithNsExpressionAnalyzer analysis = new WithNsExpressionAnalyzer(this);
   private final FullyQualifiedNameExpression namespace;
 
   public WithNsExpression(VerbaExpression parent, Lexer lexer) {
@@ -23,11 +20,6 @@ public class WithNsExpression extends VerbaExpression {
   }
 
   public FullyQualifiedNameExpression namespace() { return this.namespace; }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return analysis;
-  }
 
   @Override
   public void accept(SyntaxGraphVisitor visitor) {

@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.containers.markup;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.lexing.Lexer;
@@ -85,11 +84,6 @@ public class MarkupTagItemExpression extends VerbaExpression {
 
   public static MarkupTagItemExpression read(VerbaExpression parent, Lexer lexer) {
     return new MarkupTagItemExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   @Override

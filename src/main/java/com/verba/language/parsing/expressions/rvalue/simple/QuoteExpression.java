@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.rvalue.simple;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.categories.LiteralExpression;
@@ -28,11 +27,6 @@ public class QuoteExpression extends VerbaExpression
 
   public static QuoteExpression read(VerbaExpression parent, Lexer lexer) {
     return new QuoteExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public String representation() {

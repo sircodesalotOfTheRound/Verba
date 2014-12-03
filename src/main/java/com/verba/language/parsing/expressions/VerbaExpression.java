@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitable;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parsing.expressions.backtracking.rules.*;
@@ -108,11 +107,6 @@ public abstract class VerbaExpression implements SyntaxGraphVisitable {
   public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {
     return rules.resolve(parent, lexer);
   }
-
-
-
-  public abstract BuildProfileBase buildProfile();
-
 
   @Override
   public boolean equals(Object obj) {

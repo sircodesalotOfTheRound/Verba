@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.blockheader.classes;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
@@ -32,11 +31,6 @@ public class InjectedDeclarationExpression extends VerbaExpression implements Na
 
   public static InjectedDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new InjectedDeclarationExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public FullyQualifiedNameExpression identifier() {

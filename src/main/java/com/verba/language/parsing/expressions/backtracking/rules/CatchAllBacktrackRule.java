@@ -1,6 +1,5 @@
 package com.verba.language.parsing.expressions.backtracking.rules;
 
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.backtracking.BacktrackRule;
@@ -18,11 +17,6 @@ public class CatchAllBacktrackRule extends BacktrackRule {
     public CatchAllExpression(VerbaExpression parent, Lexer lexer) {
       super(parent, lexer);
       this.lexInfo = lexer.readCurrentAndAdvance();
-    }
-
-    @Override
-    public BuildProfileBase buildProfile() {
-      return null;
     }
 
     public LexInfo lexInfo() { return this.lexInfo; }

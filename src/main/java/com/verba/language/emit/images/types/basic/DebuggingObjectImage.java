@@ -1,14 +1,15 @@
-package com.verba.language.emit.rendering.functions;
+package com.verba.language.emit.images.types.basic;
 
 import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class DebugOpCodeRenderer implements FunctionOpCodeRenderer {
+public class DebuggingObjectImage implements ObjectImageOutputStream {
   private final Iterable<VerbajOpCodeBase> opcodes;
 
-  public DebugOpCodeRenderer(Iterable<VerbajOpCodeBase> opcodes) {
+  public DebuggingObjectImage(Iterable<VerbajOpCodeBase> opcodes) {
     this.opcodes = opcodes;
   }
 

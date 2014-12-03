@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.blockheader.generic;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parsing.expressions.VerbaExpression;
 import com.verba.language.parsing.expressions.blockheader.varname.NamedValueExpression;
@@ -43,11 +42,6 @@ public class GenericTypeListExpression extends VerbaExpression
 
   public static GenericTypeListExpression read(VerbaExpression parent, Lexer lexer) {
     return new GenericTypeListExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public boolean hasItems() {

@@ -2,7 +2,6 @@ package com.verba.language.parsing.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.analysis.expressions.tools.BuildProfileBase;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
@@ -24,6 +23,7 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 /**
  * Created by sircodesalot on 14-2-17.
  */
+@Deprecated
 public class TraitDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression, PolymorphicExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 
@@ -66,11 +66,6 @@ public class TraitDeclarationExpression extends VerbaExpression
 
   public static TraitDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new TraitDeclarationExpression(parent, lexer);
-  }
-
-  @Override
-  public BuildProfileBase buildProfile() {
-    return null;
   }
 
   public BlockDeclarationExpression block() {

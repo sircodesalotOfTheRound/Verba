@@ -1,7 +1,7 @@
 package com.verba.language.emit.opcodes;
 
+import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.emit.rendering.functions.FunctionOpCodeRenderer;
 
 /**
  * Created by sircodesalot on 14/9/22.
@@ -23,7 +23,7 @@ public class StageArgOpCode extends VerbajOpCodeBase {
   }
 
   @Override
-  public void render(FunctionOpCodeRenderer renderer) {
+  public void render(ObjectImageOutputStream renderer) {
     renderer.writeInt8("varnum", variableNumber);
   }
 }

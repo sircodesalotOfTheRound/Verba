@@ -1,62 +1,58 @@
-package com.verba.language.emit.rendering.functions;
+package com.verba.language.emit.images.types.basic;
 
+import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.emit.images.interfaces.ImageType;
+import com.verba.language.emit.images.interfaces.ObjectImage;
+import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.graph.imagegen.function.FunctionGraph;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by sircodesalot on 14/9/23.
  */
-public class FileImageOpcodeRenderer implements FunctionOpCodeRenderer, AutoCloseable {
-  private final FileOutputStream stream;
-  private final Iterable<VerbajOpCodeBase> opcodes;
-  private final List<Byte> data = new ArrayList<>();
+public class InMemoryObjectImage implements AppendableObjectImage {
+  private boolean isFrozen = false;
   private final String name;
+  private final ImageType type;
+  private final List<Byte> data = new ArrayList<>();
+  private byte[] byteData = null;
 
-  public FileImageOpcodeRenderer(String imageName, String path, Iterable<VerbajOpCodeBase> opcodes) {
-    this.name = imageName;
-    this.opcodes = opcodes;
-    try {
-      this.stream = new FileOutputStream(path);
-
-    } catch (IOException ex) {
-      throw new NotImplementedException();
-    }
+  public InMemoryObjectImage(String name, ImageType type) {
+    this.name = name;
+    this.type = type;
   }
 
-  public void save() throws Exception {
-    List<Byte> renderedContent = renderOpCodes();
-    byte[] content = toArray(renderedContent);
-    stream.write(content, 0, content.length);
-  }
+  public int size() { return this.data.size(); }
 
-  private List<Byte> renderOpCodes() {
-    writeString("name", this.name);
 
-    for (VerbajOpCodeBase opCode : opcodes) {
-      writeInt8(null, opCode.opcodeNumber());
-      opCode.render(this);
+  public byte[] data() {
+    if (this.byteData != null) {
+      return this.byteData;
     }
 
-    return this.data;
-  }
-
-  private byte[] toArray(List<Byte> data) {
-    byte[] content = new byte[data.size()];
+    this.byteData = new byte[data.size()];
 
     for (int index = 0; index < data.size(); index++) {
-      content[index] = data.get(index);
+      byteData[index] = data.get(index);
     }
 
-    return content;
+    // Clear the list since we don't need it any more.
+    this.data.clear();
+    this.isFrozen = true;
+
+    return byteData;
   }
 
   @Override
   public void writeInt8(String label, int value) {
+    if (isFrozen) {
+      throw new NotImplementedException();
+    }
+
     data.add((byte)value);
   }
 
@@ -95,10 +91,10 @@ public class FileImageOpcodeRenderer implements FunctionOpCodeRenderer, AutoClos
       }
   }
 
+  @Override
   public String name() { return this.name; }
 
+
   @Override
-  public void close() throws Exception {
-    stream.close();
-  }
+  public ImageType imageType() { return this.type; }
 }
