@@ -6,6 +6,7 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventLauncher;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
+import com.verba.language.emit.vbaj.VerbatimFileWriter;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parse.codestream.StringBasedCodeStream;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
@@ -73,6 +74,11 @@ public class Build {
   public Partition<Class, VerbaExpression> expressionsByType() { return this.staticSpace.expressionsByType(); }
 
   public ObjectImageSet images() { return this.images; }
+
+  public boolean save(String path) {
+    VerbatimFileWriter writer = new VerbatimFileWriter(this.images);
+    return writer.save(path);
+  }
 
   public static Build fromString(boolean isDebugBuild, String code) {
     StringBasedCodeStream codeStream = new StringBasedCodeStream(code);

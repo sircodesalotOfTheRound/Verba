@@ -40,6 +40,16 @@ public class GenericTypeListExpression extends VerbaExpression
     lexer.readCurrentAndAdvance(OperatorToken.class, ">");
   }
 
+  public static boolean isGenericTypeList(Lexer lexer) {
+    return lexer.withRollback(lex -> {
+      if (!lex.currentIs(OperatorToken.class, "<")) {
+        return false;
+      }
+
+      return true;
+    });
+  }
+
   public static GenericTypeListExpression read(VerbaExpression parent, Lexer lexer) {
     return new GenericTypeListExpression(parent, lexer);
   }

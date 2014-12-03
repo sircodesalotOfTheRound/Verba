@@ -4,6 +4,9 @@ import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.tokenization.Token;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 /**
  * Created by sircodesalot on 14-2-20.
  */
@@ -85,6 +88,14 @@ public interface Lexer extends Iterable<LexInfo> {
   public void moveToFirst();
 
   public int size();
+
+  default public <U> U withRollback(Function<Lexer, U> callback) {
+    this.setUndoPoint();
+    U result = callback.apply(this);
+    this.rollbackToUndoPoint();
+
+    return result;
+  }
 
   int getCurrentLine();
 }
