@@ -1,4 +1,4 @@
-package com.verba.language.emit.vbaj;
+package com.verba.language.emit.verbatim;
 
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;

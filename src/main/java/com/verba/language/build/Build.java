@@ -6,7 +6,7 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventLauncher;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.emit.vbaj.VerbatimFileWriter;
+import com.verba.language.emit.verbatim.VerbatimFileWriter;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parse.codestream.StringBasedCodeStream;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
