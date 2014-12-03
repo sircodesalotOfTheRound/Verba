@@ -12,7 +12,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public interface TypeDeclarationExpression extends Token {
   public static TypeDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
-    if (FullyQualifiedNameExpression.IsFullyQualifiedName(lexer)) {
+    if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
       return FullyQualifiedNameExpression.read(parent, lexer);
     } else if (TupleDeclarationExpression.isTupleTypeDeclaration(lexer)) {
       return TupleDeclarationExpression.read(parent, lexer);

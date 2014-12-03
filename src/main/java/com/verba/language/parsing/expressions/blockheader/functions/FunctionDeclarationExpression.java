@@ -27,7 +27,6 @@ import com.verba.language.parsing.tokens.operators.mathop.OperatorToken;
 public class FunctionDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression,
     TypedExpression,
-    InvokableExpression,
     ParameterizedExpression,
     GenericallyParameterizedExpression,
     SymbolTableExpression,

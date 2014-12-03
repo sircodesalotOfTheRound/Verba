@@ -51,7 +51,7 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
     }
 
     // @ [ ... : AspectFQN ] (is the same as new aspectFQN)
-    else if (FullyQualifiedNameExpression.IsFullyQualifiedName(lexer)) {
+    else if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
       throw new NotImplementedException();
     }
 
