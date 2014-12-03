@@ -7,7 +7,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class CallOpCode extends VerbajOpCodeBase {
+public class CallOpCode extends VerbatimOpCodeBase {
   private static final int opNumber = 0x43;
   private static final String opName = "Call";
 

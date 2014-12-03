@@ -4,7 +4,7 @@ import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
-import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.graph.expressions.functions.FunctionGraph;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -27,7 +27,7 @@ public class FunctionObjectImage implements ObjectImage {
   private void generateOpCodeList() {
     objectImage.writeString("name", this.functionGraph.name());
 
-    for (VerbajOpCodeBase opCode : functionGraph.opcodes()) {
+    for (VerbatimOpCodeBase opCode : functionGraph.opcodes()) {
       objectImage.writeInt8(null, opCode.opcodeNumber());
       opCode.render(objectImage);
     }

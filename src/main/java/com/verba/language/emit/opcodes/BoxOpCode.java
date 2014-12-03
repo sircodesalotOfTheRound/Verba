@@ -6,7 +6,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 /**
  * Created by sircodesalot on 14/9/23.
  */
-public class BoxOpCode extends VerbajOpCodeBase {
+public class BoxOpCode extends VerbatimOpCodeBase {
   private static final int opNumber = 0x31;
   private static final String opName = "Box";
 

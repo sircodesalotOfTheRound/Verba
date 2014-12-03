@@ -6,7 +6,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 /**
  * Created by sircodesalot on 14/9/22.
  */
-public class StageArgOpCode extends VerbajOpCodeBase {
+public class StageArgOpCode extends VerbatimOpCodeBase {
   private static final int opNumber = 0x29;
   private static final String opName = "StgArg";
 

@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions.nodes;
 
-import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
@@ -25,7 +25,7 @@ public class ValNodeStatementProcessor {
       QuoteExpression text = (QuoteExpression) statement.rvalue();
       VirtualVariable variable = context.addVariable(statement.nameAsExpression(), objectType);
 
-      context.addOpCode(VerbajOpCodeBase.loadString(variable, text.innerText()));
+      context.addOpCode(VerbatimOpCodeBase.loadString(variable, text.innerText()));
     }
   }
 }

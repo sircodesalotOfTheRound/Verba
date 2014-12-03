@@ -6,11 +6,11 @@ import com.verba.language.emit.variables.VirtualVariable;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public abstract class VerbajOpCodeBase {
+public abstract class VerbatimOpCodeBase {
   private final int opcodeNumber;
   private final String opcodeName;
 
-  protected VerbajOpCodeBase(int opcodeNumber, String opcodeName) {
+  protected VerbatimOpCodeBase(int opcodeNumber, String opcodeName) {
     this.opcodeNumber = opcodeNumber;
     this.opcodeName = opcodeName;
   }
@@ -21,39 +21,39 @@ public abstract class VerbajOpCodeBase {
   public abstract void render(ObjectImageOutputStream renderer);
 
   // Static Op-codes
-  private static VerbajOpCodeBase endFunctionOpCode = new EndFunctionOpCode();
-  private static VerbajOpCodeBase returnOpCode = new RetOpCode();
+  private static VerbatimOpCodeBase endFunctionOpCode = new EndFunctionOpCode();
+  private static VerbatimOpCodeBase returnOpCode = new RetOpCode();
 
   // Factory methods
-  public static VerbajOpCodeBase box(VirtualVariable source, VirtualVariable destination) {
+  public static VerbatimOpCodeBase box(VirtualVariable source, VirtualVariable destination) {
     return new BoxOpCode(source, destination);
   }
 
-  public static VerbajOpCodeBase call(String functionName) {
+  public static VerbatimOpCodeBase call(String functionName) {
     return new CallOpCode(functionName);
   }
 
-  public static VerbajOpCodeBase call(String functionName, Iterable<VirtualVariable> variables) {
+  public static VerbatimOpCodeBase call(String functionName, Iterable<VirtualVariable> variables) {
     return new CallOpCode(functionName, variables);
   }
 
-  public static VerbajOpCodeBase endFunction() {
+  public static VerbatimOpCodeBase endFunction() {
     return endFunctionOpCode;
   }
 
-  public static VerbajOpCodeBase ret() {
+  public static VerbatimOpCodeBase ret() {
     return returnOpCode;
   }
 
-  public static VerbajOpCodeBase loadString(VirtualVariable variable, String text) {
+  public static VerbatimOpCodeBase loadString(VirtualVariable variable, String text) {
     return new LdStrOpCode(variable, text);
   }
 
-  public static VerbajOpCodeBase stageArg(VirtualVariable variable) {
+  public static VerbatimOpCodeBase stageArg(VirtualVariable variable) {
     return new StageArgOpCode(variable);
   }
 
-  public static VerbajOpCodeBase loaduint64(VirtualVariable variable, long value) {
+  public static VerbatimOpCodeBase loaduint64(VirtualVariable variable, long value) {
     return new LdUint64OpCode(variable, value);
   }
 }

@@ -6,7 +6,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 /**
  * Created by sircodesalot on 14/9/20.
  */
-public class LdStrOpCode extends VerbajOpCodeBase {
+public class LdStrOpCode extends VerbatimOpCodeBase {
   private static final int opNumber = 0xD1;
   private static final String opName = "LdStr";
 

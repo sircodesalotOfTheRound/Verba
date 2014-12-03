@@ -5,7 +5,7 @@ import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class RetOpCode extends VerbajOpCodeBase {
+public class RetOpCode extends VerbatimOpCodeBase {
   private static final int opNumber = 0xC7;
   private static final String opName = "Ret";
 

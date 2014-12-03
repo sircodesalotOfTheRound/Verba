@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
-import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableSet;
 import com.verba.language.graph.expressions.functions.nodes.QuoteNodeProcessor;
@@ -42,7 +42,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
   private final StaticSpaceExpression staticSpaceExpression;
-  private QList<VerbajOpCodeBase> opcodes = new QList<>();
+  private QList<VerbatimOpCodeBase> opcodes = new QList<>();
 
   private final FunctionContext context;
 
@@ -82,17 +82,17 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private void closeOutFunction() {
     // If function doesn't end with return, put one there.
     if (opcodes.any() && !(opcodes.last() instanceof RetOpCode)) {
-      opcodes.add(VerbajOpCodeBase.ret());
+      opcodes.add(VerbatimOpCodeBase.ret());
     }
 
     // Also close out the function.
-    opcodes.add(VerbajOpCodeBase.endFunction());
+    opcodes.add(VerbatimOpCodeBase.endFunction());
   }
 
   public FunctionDeclarationExpression function() { return this.function; }
 
   public void visit(ReturnStatementExpression returnStatementExpression) {
-    opcodes.add(VerbajOpCodeBase.ret());
+    opcodes.add(VerbatimOpCodeBase.ret());
   }
 
   @Override
@@ -131,7 +131,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
 
       for (VerbaExpression expression : call.primaryParameters()) {
         VirtualVariable variable = this.variableSet.variableByExpression(expression);
-        opcodes.add(VerbajOpCodeBase.stageArg(variable));
+        opcodes.add(VerbatimOpCodeBase.stageArg(variable));
 
         if (this.lifetimeGraph.isLastOccurance(expression)) {
           // TODO: This is broken.
@@ -139,7 +139,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
         }
       }
 
-      opcodes.add(VerbajOpCodeBase.call(call.functionName()));
+      opcodes.add(VerbatimOpCodeBase.call(call.functionName()));
   }
 
   public void visit(AssignmentStatementExpression assignmentStatementExpression) {
@@ -153,8 +153,8 @@ public class FunctionGraph implements SyntaxGraphVisitor {
       VirtualVariable source = variableSet.add(expression, VirtualMachineNativeTypes.UTF8);
       VirtualVariable destination = variableSet.add(expression, VirtualMachineNativeTypes.BOX_UINT64);
 
-      opcodes.add(VerbajOpCodeBase.loaduint64(source, expression.asLong()));
-      opcodes.add(VerbajOpCodeBase.box(source, destination));
+      opcodes.add(VerbatimOpCodeBase.loaduint64(source, expression.asLong()));
+      opcodes.add(VerbatimOpCodeBase.box(source, destination));
     }
   }
 
@@ -196,7 +196,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
     quoteNodeProcessor.process(expression);
   }
 
-  public Iterable<VerbajOpCodeBase> opcodes() { return this.opcodes; }
+  public Iterable<VerbatimOpCodeBase> opcodes() { return this.opcodes; }
 
   public String name() { return this.function.name(); }
 }

@@ -5,7 +5,7 @@ import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 /**
  * Created by sircodesalot on 14/9/26.
  */
-public class EndFunctionOpCode extends VerbajOpCodeBase {
+public class EndFunctionOpCode extends VerbatimOpCodeBase {
   private static final int opNumber = 0xFF;
   private static final String opName = "EndFunc";
 

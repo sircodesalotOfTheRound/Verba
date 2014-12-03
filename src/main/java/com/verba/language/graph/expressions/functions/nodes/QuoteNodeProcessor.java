@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions.nodes;
 
-import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
@@ -23,7 +23,7 @@ public class QuoteNodeProcessor {
     // If this is the first time seeing this variable, add it.
     if (variableLifetime.isFirstInstance(expression)) {
       VirtualVariable variable = context.addVariable(expression, VirtualMachineNativeTypes.UTF8);
-      context.addOpCode(VerbajOpCodeBase.loadString(variable, expression.innerText()));
+      context.addOpCode(VerbatimOpCodeBase.loadString(variable, expression.innerText()));
     }
   }
 }

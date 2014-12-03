@@ -1,20 +1,20 @@
 package com.verba.language.emit.images.types.basic;
 
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
-import com.verba.language.emit.opcodes.VerbajOpCodeBase;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 
 /**
  * Created by sircodesalot on 14/9/19.
  */
 public class DebuggingObjectImage implements ObjectImageOutputStream {
-  private final Iterable<VerbajOpCodeBase> opcodes;
+  private final Iterable<VerbatimOpCodeBase> opcodes;
 
-  public DebuggingObjectImage(Iterable<VerbajOpCodeBase> opcodes) {
+  public DebuggingObjectImage(Iterable<VerbatimOpCodeBase> opcodes) {
     this.opcodes = opcodes;
   }
 
   public void display() {
-    for (VerbajOpCodeBase opcode : opcodes) {
+    for (VerbatimOpCodeBase opcode : opcodes) {
       String prefix = String.format("(0x%s) %s: ", Integer.toHexString(opcode.opcodeNumber()), opcode.opcodeName());
       System.out.print(prefix);
       opcode.render(this);
