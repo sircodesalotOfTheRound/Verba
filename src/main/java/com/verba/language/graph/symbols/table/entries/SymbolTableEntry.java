@@ -61,6 +61,10 @@ public class SymbolTableEntry implements Serializable {
   public VerbaCodePage page() { return this.page; }
 
   private VerbaCodePage discoverPage(VerbaExpression object) {
+    if (object == null) {
+      return null;
+    }
+
     if (object.is(VerbaCodePage.class)) {
       return (VerbaCodePage)object;
     } else {

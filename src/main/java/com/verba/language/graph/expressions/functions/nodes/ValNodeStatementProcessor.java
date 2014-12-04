@@ -3,6 +3,7 @@ package com.verba.language.graph.expressions.functions.nodes;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
@@ -23,7 +24,7 @@ public class ValNodeStatementProcessor {
 
     if (statement.rvalue() instanceof LiteralExpression) {
       QuoteExpression text = (QuoteExpression) statement.rvalue();
-      VirtualVariable variable = context.addVariable(statement.nameAsExpression(), objectType);
+      VirtualVariable variable = context.addVariable(statement.name(), context.nativeTypeSymbols().UTF8);
 
       context.addOpCode(VerbatimOpCodeBase.loadString(variable, text.innerText()));
     }

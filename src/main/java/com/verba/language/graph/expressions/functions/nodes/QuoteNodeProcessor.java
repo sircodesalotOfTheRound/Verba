@@ -4,6 +4,7 @@ import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
+import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.virtualmachine.VirtualMachineNativeTypes;
 
@@ -22,7 +23,7 @@ public class QuoteNodeProcessor {
 
     // If this is the first time seeing this variable, add it.
     if (variableLifetime.isFirstInstance(expression)) {
-      VirtualVariable variable = context.addVariable(expression, VirtualMachineNativeTypes.UTF8);
+      VirtualVariable variable = context.addVariable(expression.innerText(), context.nativeTypeSymbols().UTF8);
       context.addOpCode(VerbatimOpCodeBase.loadString(variable, expression.innerText()));
     }
   }

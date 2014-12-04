@@ -39,7 +39,7 @@ public class FunctionExpressionEventSubscription extends ExpressionBuildEventSub
 
   @Override
   public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
-    FunctionObjectImage image = new FunctionObjectImage(this.expression(), staticSpace);
+    FunctionObjectImage image = new FunctionObjectImage(this.expression(), staticSpace, symbolTable);
 
     if (buildAnalysis.isDebugBuild()) {
       image.displayCoreDump();

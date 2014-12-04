@@ -1,12 +1,24 @@
 package com.verba.language.parse.tokens.identifiers;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.javalinq.implementations.QSet;
+import com.javalinq.interfaces.QIterable;
+
 import java.util.function.Supplier;
 
 public class KeywordToken extends IdentifierToken {
-  private static final Set<String> keywords = ((Supplier<Set<String>>) () -> {
-    String[] basicKeywords = new String[]{
+
+  private static final QSet<String> nativeTypes = new QSet<String>(
+      // System types
+      "byte", "numeric", "dynamic", "default",
+      "int8", "int16", "int32", "int64",
+      "uint8", "uint16", "uint32", "uint64", "ascii",
+      "float32", "float64",
+      "char", "utc", "currency",
+      "utf8", "utf16", "utf32", "utf8be", "utf16be", "utf32be",
+      "unit", "object",
+      "json", "sensitive");
+
+  private static final QSet<String> otherKeywords = new QSet<String>(
       "public", "private", "protected", "internal",
       "static", "operator", "override", "segment", "virtual", "injected",
       "to", "in", "withns", "trait", "interface",
@@ -25,27 +37,20 @@ public class KeywordToken extends IdentifierToken {
       "def", "resolve",
       "match", "case",
       "true", "false",
-      "sync", "async", "threadlocal",
+      "sync", "async", "threadlocal");
 
-      // System types
-      "byte", "numeric", "dynamic", "default",
-      "int8", "int16", "int32", "int64",
-      "uint8", "uint16", "uint32", "uint64", "ascii",
-      "float32", "float64",
-      "char", "utc", "currency",
-      "utf8", "utf16", "utf32", "utf8be", "utf16be", "utf32be",
-      "unit", "object",
-      "json", "sensitive"
-    };
+  private static QSet<String> keywords = new Supplier<QSet<String>>() {
+    @Override
+    public QSet<String> get() {
+      QSet<String> allKeywords = new QSet<String>();
+      allKeywords.add(nativeTypes);
+      allKeywords.add(otherKeywords);
 
-    Set<String> keywordSet = new HashSet<String>();
-    for (String keyword : basicKeywords) {
-      keywordSet.add(keyword);
+      return allKeywords;
     }
+  }.get();
 
-    return keywordSet;
-  }).get();
-
+  public static QIterable<String> nativeTypeKeywords() { return KeywordToken.nativeTypes; }
   public KeywordToken(String representation) {
     super(representation);
   }

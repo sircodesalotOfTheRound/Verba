@@ -2,9 +2,13 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.expressions.functions.NativeTypeSymbols;
+import com.verba.language.graph.symbols.meta.NativeTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import sun.jvm.hotspot.memory.SymbolTable;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -17,6 +21,7 @@ public class GlobalSymbolTable implements Serializable {
   private static final QIterable<SymbolTableEntry> EMPTY_SET = new QList<>();
 
   private final ScopedSymbolTable rootTable;
+  private final NativeTypeSymbols nativeTypeSymbols;
   private final QList<SymbolTableEntry> entries = new QList<>();
   private final Map<VerbaExpression, SymbolTableEntry> entriesByInstance = new HashMap<>();
   private final Map<String, QList<SymbolTableEntry>> entriesByFriendlyName = new HashMap<>();
@@ -28,7 +33,19 @@ public class GlobalSymbolTable implements Serializable {
 
   public GlobalSymbolTable(ScopedSymbolTable table) {
     this.rootTable = table;
+    this.nativeTypeSymbols = this.addNativeTypes();
     this.scanTableHierarchy(table);
+  }
+
+  private NativeTypeSymbols addNativeTypes() {
+    QIterable<SymbolTableEntry> nativeTypeSymbolTableEntries = KeywordToken.nativeTypeKeywords()
+      .map(primitive -> new SymbolTableEntry(primitive, rootTable, null));
+
+    for (SymbolTableEntry entry : nativeTypeSymbolTableEntries) {
+      this.putEntry(entry);
+    }
+
+    return new NativeTypeSymbols(this);
   }
 
   private void scanTableHierarchy(ScopedSymbolTable table) {
@@ -81,6 +98,7 @@ public class GlobalSymbolTable implements Serializable {
     return entryList;
   }
 
+  public NativeTypeSymbols nativeTypeSymbols() { return this.nativeTypeSymbols; }
   public QIterable<SymbolTableEntry> entries() {
     return this.entries;
   }
