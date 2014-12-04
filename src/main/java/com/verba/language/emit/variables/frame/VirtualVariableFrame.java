@@ -1,7 +1,8 @@
-package com.verba.language.emit.variables;
+package com.verba.language.emit.variables.frame;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.tools.exceptions.CompilerException;
 
 /**

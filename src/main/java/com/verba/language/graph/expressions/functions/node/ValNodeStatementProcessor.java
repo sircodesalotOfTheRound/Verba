@@ -1,9 +1,7 @@
-package com.verba.language.graph.expressions.functions.nodes;
+package com.verba.language.graph.expressions.functions.node;
 
-import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
@@ -20,13 +18,13 @@ public class ValNodeStatementProcessor {
   }
 
   public void process(ValDeclarationStatement statement) {
-    TypeDeclarationExpression objectType = context.getObjectType(statement);
+    /*TypeDeclarationExpression objectType = context.getObjectType(statement);
 
     if (statement.rvalue() instanceof LiteralExpression) {
       QuoteExpression text = (QuoteExpression) statement.rvalue();
-      VirtualVariable variable = context.addVariable(statement.name(), context.nativeTypeSymbols().UTF8);
+      VirtualVariable variable = context.variableStack().add(statement.name(), context.nativeTypeSymbols().UTF8);
 
       context.opcodes().loadString(variable, text.innerText());
-    }
+    }*/
   }
 }

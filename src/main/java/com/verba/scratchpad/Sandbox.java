@@ -16,6 +16,7 @@ public class Sandbox {
     VirtualVariableStack set = new VirtualVariableStack(20);
 
     set.pushFrame();
+
     set.add("Nothing", symbolTable.getEntryForSymbolType("MyClass"));
     VirtualVariable returnValueStorage = set.add("my_return_value", symbolTable.getEntryForSymbolType("MyClass"));
 

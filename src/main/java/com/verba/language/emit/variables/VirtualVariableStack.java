@@ -2,6 +2,7 @@ package com.verba.language.emit.variables;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.emit.variables.frame.VirtualVariableFrame;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.tools.exceptions.CompilerException;
 
@@ -66,12 +67,23 @@ public class VirtualVariableStack {
 
   public VirtualVariableFrame currentFrame() { return this.callFrames.peek(); }
 
-  public void popFrame() {
+  public VirtualVariable popFrame() {
     VirtualVariableFrame frame = this.callFrames.pop();
 
-    for (VirtualVariable variable : frame.variables()) {
+    // Pop all variables from this frame execpt for the return value.
+    QIterable<VirtualVariable> variablesExceptForReturnValue = frame.variables()
+      .where(variable -> variable != frame.returnValue());
+
+    for (VirtualVariable variable : variablesExceptForReturnValue) {
       this.expireVariable(variable);
     }
+
+    // Move the return value down to the previous frame.
+    if (frame.hasReturnValue() && !this.callFrames.empty()) {
+      this.callFrames.peek().add(frame.returnValue());
+    }
+
+    return frame.returnValue();
   }
 
   private void expireVariable(int variableNumber) {
