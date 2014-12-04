@@ -8,12 +8,17 @@ Compiling
 To build the Verba language compiler, simply copy and paste the following commands:
 
 ```
+# Clone from repository.
 git clone https://github.com/sircodesalotOfTheRound/javaLinq.git
 git clone https://github.com/sircodesalotOfTheRound/Verba.git
-cd Verba
+
+# Compile javaLinq
+cd javaLinq
 mvn clean install
 
 cd ..
-cd javaLinq
+
+# Compile Verba Languge Compiler
+cd Verba
 mvn clean install
 ```
