@@ -1,9 +1,7 @@
 package com.verba.language.graph.expressions.functions;
 
-import com.javalinq.implementations.QList;
-import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.emit.variables.VirtualVariableSet;
+import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
@@ -18,7 +16,7 @@ import com.verba.language.parse.expressions.statements.declaration.ValDeclaratio
  */
 public class FunctionContext {
   private final StaticSpaceExpression staticSpaceExpression;
-  private final VirtualVariableSet variableSet;
+  private final VirtualVariableStack variableSet;
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
   private final GlobalSymbolTable symbolTable;
@@ -26,7 +24,7 @@ public class FunctionContext {
 
   public FunctionContext(StaticSpaceExpression staticSpaceExpression,
                          GlobalSymbolTable symbolTable,
-                         VirtualVariableSet variableSet,
+                         VirtualVariableStack variableSet,
                          VariableLifetimeGraph lifetimeGraph,
                          FunctionOpCodeSet opcodes) {
 
@@ -39,7 +37,7 @@ public class FunctionContext {
   }
 
   public StaticSpaceExpression staticSpaceExpression() { return this.staticSpaceExpression; }
-  public VirtualVariableSet variableSet() { return this.variableSet; }
+  public VirtualVariableStack variableSet() { return this.variableSet; }
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }
   public GlobalSymbolTable symbolTable() { return this.symbolTable; }

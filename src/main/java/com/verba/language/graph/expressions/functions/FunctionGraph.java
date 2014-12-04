@@ -1,12 +1,11 @@
 package com.verba.language.graph.expressions.functions;
 
-import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.emit.variables.VirtualVariableSet;
+import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.nodes.QuoteNodeProcessor;
 import com.verba.language.graph.expressions.functions.nodes.ValNodeStatementProcessor;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
@@ -32,14 +31,13 @@ import com.verba.language.parse.expressions.statements.assignment.AssignmentStat
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 import com.verba.language.parse.expressions.withns.WithNsExpression;
-import com.verba.virtualmachine.VirtualMachineNativeTypes;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14/9/19.
  */
 public class FunctionGraph implements SyntaxGraphVisitor {
-  private final VirtualVariableSet variableSet;
+  private final VirtualVariableStack variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
   private final StaticSpaceExpression staticSpaceExpression;
@@ -53,7 +51,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private final QuoteNodeProcessor quoteNodeProcessor;
 
   public FunctionGraph(FunctionDeclarationExpression function, GlobalSymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
-    this.variableSet = new VirtualVariableSet(20);
+    this.variableSet = new VirtualVariableStack(20);
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);
     this.staticSpaceExpression = staticSpaceExpression;
@@ -134,7 +132,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
       }
 
       for (VerbaExpression expression : call.primaryParameters()) {
-        VirtualVariable variable = this.variableSet.variableByExpression(expression);
+        VirtualVariable variable = this.variableSet.variableByName(expression.text());
         opcodes.stageArg(variable);
 
         if (this.lifetimeGraph.isLastOccurance(expression)) {
