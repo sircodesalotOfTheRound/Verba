@@ -1,6 +1,5 @@
 package com.verba.language.emit.variables;
 
-import com.javalinq.implementations.QList;
 import com.javalinq.implementations.QSet;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 

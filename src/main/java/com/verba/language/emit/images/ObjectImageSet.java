@@ -4,7 +4,6 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
 
 /**
  * Created by sircodesalot on 14/12/3.

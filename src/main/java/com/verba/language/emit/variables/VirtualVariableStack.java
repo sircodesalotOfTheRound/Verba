@@ -6,7 +6,6 @@ import com.verba.language.emit.variables.frame.VirtualVariableFrame;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.tools.exceptions.CompilerException;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;

@@ -4,7 +4,6 @@ import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.tokenization.Token;
 
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**

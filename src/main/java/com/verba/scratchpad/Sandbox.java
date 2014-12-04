@@ -1,7 +1,6 @@
 package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
-import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 

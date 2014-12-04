@@ -3,13 +3,11 @@ package com.verba.language.graph.symbols.table.tables;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.expressions.functions.NativeTypeSymbols;
-import com.verba.language.graph.symbols.meta.NativeTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import sun.jvm.hotspot.memory.SymbolTable;
 
 import java.io.Serializable;
 import java.util.HashMap;
