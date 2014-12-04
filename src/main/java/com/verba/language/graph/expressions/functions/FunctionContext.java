@@ -27,14 +27,15 @@ public class FunctionContext {
   public FunctionContext(StaticSpaceExpression staticSpaceExpression,
                          GlobalSymbolTable symbolTable,
                          VirtualVariableSet variableSet,
-                         VariableLifetimeGraph lifetimeGraph) {
+                         VariableLifetimeGraph lifetimeGraph,
+                         FunctionOpCodeSet opcodes) {
 
     this.symbolTable = symbolTable;
     this.nativeTypeSymbols= this.symbolTable.nativeTypeSymbols();
     this.staticSpaceExpression = staticSpaceExpression;
     this.variableSet = variableSet;
     this.lifetimeGraph = lifetimeGraph;
-    this.opcodes = new FunctionOpCodeSet();
+    this.opcodes = opcodes;
   }
 
   public StaticSpaceExpression staticSpaceExpression() { return this.staticSpaceExpression; }

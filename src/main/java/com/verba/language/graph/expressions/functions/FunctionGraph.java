@@ -58,8 +58,8 @@ public class FunctionGraph implements SyntaxGraphVisitor {
     this.lifetimeGraph = new VariableLifetimeGraph(function);
     this.staticSpaceExpression = staticSpaceExpression;
     this.symbolTable = symbolTable;
-    this.context = new FunctionContext(staticSpaceExpression, symbolTable, variableSet, lifetimeGraph);
-    this.opcodes = this.context.opcodes();
+    this.opcodes = new FunctionOpCodeSet();
+    this.context = new FunctionContext(staticSpaceExpression, symbolTable, variableSet, lifetimeGraph, opcodes);
 
     // Statement processors.
     this.valStatementProcessor = new ValNodeStatementProcessor(context);
