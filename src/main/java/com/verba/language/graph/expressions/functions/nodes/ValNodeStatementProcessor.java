@@ -26,7 +26,7 @@ public class ValNodeStatementProcessor {
       QuoteExpression text = (QuoteExpression) statement.rvalue();
       VirtualVariable variable = context.addVariable(statement.name(), context.nativeTypeSymbols().UTF8);
 
-      context.addOpCode(VerbatimOpCodeBase.loadString(variable, text.innerText()));
+      context.opcodes().loadString(variable, text.innerText());
     }
   }
 }

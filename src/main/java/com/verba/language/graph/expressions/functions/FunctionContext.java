@@ -20,28 +20,27 @@ public class FunctionContext {
   private final StaticSpaceExpression staticSpaceExpression;
   private final VirtualVariableSet variableSet;
   private final VariableLifetimeGraph lifetimeGraph;
-  private final QList<VerbatimOpCodeBase> opcodes;
+  private final FunctionOpCodeSet opcodes;
   private final GlobalSymbolTable symbolTable;
   private final NativeTypeSymbols nativeTypeSymbols;
 
   public FunctionContext(StaticSpaceExpression staticSpaceExpression,
                          GlobalSymbolTable symbolTable,
                          VirtualVariableSet variableSet,
-                         VariableLifetimeGraph lifetimeGraph,
-                         QList<VerbatimOpCodeBase> opcodes) {
+                         VariableLifetimeGraph lifetimeGraph) {
 
     this.symbolTable = symbolTable;
     this.nativeTypeSymbols= this.symbolTable.nativeTypeSymbols();
     this.staticSpaceExpression = staticSpaceExpression;
     this.variableSet = variableSet;
     this.lifetimeGraph = lifetimeGraph;
-    this.opcodes = opcodes;
+    this.opcodes = new FunctionOpCodeSet();
   }
 
   public StaticSpaceExpression staticSpaceExpression() { return this.staticSpaceExpression; }
   public VirtualVariableSet variableSet() { return this.variableSet; }
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
-  public QList<VerbatimOpCodeBase> opcodes() { return this.opcodes; }
+  public FunctionOpCodeSet opcodes() { return this.opcodes; }
   public GlobalSymbolTable symbolTable() { return this.symbolTable; }
   public NativeTypeSymbols nativeTypeSymbols() { return this.nativeTypeSymbols; }
 
@@ -51,8 +50,6 @@ public class FunctionContext {
   public VirtualVariable addVariable(String key, SymbolTableEntry type) {
     return variableSet.add(key, type);
   }
-
-  public void addOpCode(VerbatimOpCodeBase opcode) { opcodes.add(opcode); }
 
   public VariableLifetime getVariableLifetime(VerbaExpression expression) { return lifetimeGraph.getVariableLifetime(expression); }
 }

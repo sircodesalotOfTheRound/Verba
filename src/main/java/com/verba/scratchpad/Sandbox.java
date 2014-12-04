@@ -8,7 +8,7 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "class MyClass fn my_function() : MyClass { } ");
+    Build build = Build.fromString(true, "class MyClass fn my_function() : MyClass { val item = \"Something\" } ");
 
     FunctionDeclarationExpression myFunction = build.symbolTable()
       .getByFqn("my_function")
