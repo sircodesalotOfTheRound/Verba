@@ -11,7 +11,7 @@ import com.verba.language.graph.expressions.functions.node.ValNodeStatementProce
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.graph.visitors.SyntaxGraphVisitable;
+import com.verba.language.graph.visitors.SyntaxGraphNode;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -57,7 +57,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
     this.staticSpaceExpression = staticSpaceExpression;
     this.symbolTable = symbolTable;
     this.opcodes = new FunctionOpCodeSet();
-    this.context = new FunctionContext(staticSpaceExpression, symbolTable, variableSet, lifetimeGraph, opcodes);
+    this.context = new FunctionContext(this, staticSpaceExpression, symbolTable, variableSet, lifetimeGraph, opcodes);
 
     // Statement processors.
     this.valStatementProcessor = new ValNodeStatementProcessor(context);
@@ -74,7 +74,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
 
   private void buildImage(FunctionDeclarationExpression function) {
     BlockDeclarationExpression block = function.block();
-    for (SyntaxGraphVisitable expression : block.expressions().cast(SyntaxGraphVisitable.class)) {
+    for (SyntaxGraphNode expression : block.expressions().cast(SyntaxGraphNode.class)) {
       expression.accept(this);
     }
 
@@ -124,10 +124,10 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   }
 
   private void visitMethodCall(FunctionCallFacade call) {
-      QIterable<SyntaxGraphVisitable> parametersAsFunctionElements
-        = call.primaryParameters().cast(SyntaxGraphVisitable.class);
+      QIterable<SyntaxGraphNode> parametersAsFunctionElements
+        = call.primaryParameters().cast(SyntaxGraphNode.class);
 
-      for (SyntaxGraphVisitable declaration : parametersAsFunctionElements) {
+      for (SyntaxGraphNode declaration : parametersAsFunctionElements) {
         declaration.accept(this);
       }
 

@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions.variables;
 
-import com.verba.language.graph.visitors.SyntaxGraphVisitable;
+import com.verba.language.graph.visitors.SyntaxGraphNode;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -37,7 +37,7 @@ public class VariableLifetimeGraph implements SyntaxGraphVisitor {
 
   private void buildGraph(FunctionDeclarationExpression function) {
     BlockDeclarationExpression block = function.block();
-    for (SyntaxGraphVisitable expression : block.expressions().cast(SyntaxGraphVisitable.class)) {
+    for (SyntaxGraphNode expression : block.expressions().cast(SyntaxGraphNode.class)) {
       expression.accept(this);
     }
   }
@@ -120,7 +120,7 @@ public class VariableLifetimeGraph implements SyntaxGraphVisitor {
   public void visit(NamedValueExpression namedValueExpression) {
     if (FunctionCallFacade.isFunctionCall(namedValueExpression)) {
       FunctionCallFacade call = new FunctionCallFacade(namedValueExpression);
-      for (SyntaxGraphVisitable declaration : call.primaryParameters().cast(SyntaxGraphVisitable.class)) {
+      for (SyntaxGraphNode declaration : call.primaryParameters().cast(SyntaxGraphNode.class)) {
         declaration.accept(this);
       }
     }

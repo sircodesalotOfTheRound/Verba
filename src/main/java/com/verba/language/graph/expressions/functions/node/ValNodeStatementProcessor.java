@@ -2,9 +2,7 @@ package com.verba.language.graph.expressions.functions.node;
 
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
-import com.verba.language.parse.expressions.categories.LiteralExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.graph.visitors.SyntaxGraphNode;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 
 /**
@@ -17,14 +15,13 @@ public class ValNodeStatementProcessor {
     this.context = context;
   }
 
-  public void process(ValDeclarationStatement statement) {
-    /*TypeDeclarationExpression objectType = context.getObjectType(statement);
+  public void process(ValDeclarationStatement declaration) {
+    // First generate the R-Value. Then rename it.
+    VirtualVariable calculatedRValue = this.calculateRValue(declaration);
+    calculatedRValue.renameVariable(declaration.name());
+  }
 
-    if (statement.rvalue() instanceof LiteralExpression) {
-      QuoteExpression text = (QuoteExpression) statement.rvalue();
-      VirtualVariable variable = context.variableStack().add(statement.name(), context.nativeTypeSymbols().UTF8);
-
-      context.opcodes().loadString(variable, text.innerText());
-    }*/
+  public VirtualVariable calculateRValue(ValDeclarationStatement statement) {
+    return context.visitWithNewStackFrame((SyntaxGraphNode) statement.rvalue());
   }
 }

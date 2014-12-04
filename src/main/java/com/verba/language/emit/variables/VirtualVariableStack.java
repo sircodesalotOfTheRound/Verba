@@ -6,19 +6,24 @@ import com.verba.language.emit.variables.frame.VirtualVariableFrame;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.tools.exceptions.CompilerException;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.function.Consumer;
 
 /**
  * Created by sircodesalot on 14/9/20.
  */
 public class VirtualVariableStack {
+  private static final Object EMPTY_OBJECT = new Object();
+
   private final VirtualVariable[] variableArray;
   private final Map<String, VirtualVariable> variablesByName = new HashMap<>();
-  private final QSet<VirtualVariable> variablesBySet = new QSet<>();
   private final QSet<Integer> availableRegisters = new QSet<>();
+  private final QSet<VirtualVariable> variableSet = new QSet<>();
   private final Stack<VirtualVariableFrame> callFrames = new Stack<>();
+  private final Map<VirtualVariable, VirtualVariable.VirtualVariableEventSubscription> eventsPerVariable = new HashMap<>();
 
   public VirtualVariableStack(int size) {
     this.variableArray = new VirtualVariable[size];
@@ -30,42 +35,78 @@ public class VirtualVariableStack {
     this.callFrames.push(new VirtualVariableFrame());
   }
 
-  public VirtualVariable add(String key, SymbolTableEntry type) {
+  public VirtualVariable addToFrame(String key, SymbolTableEntry type) {
     if (this.containsKey(key)) {
       throw new CompilerException("Key already exists");
     }
 
-    return add(key, type, nextAvailableIndex());
+    return addToFrame(key, type, nextAvailableIndex());
   }
 
-  public VirtualVariable add(String key, SymbolTableEntry type, int variableNumber) {
+  public VirtualVariable addToFrame(String key, SymbolTableEntry type, int variableNumber) {
     VirtualVariable variable = new VirtualVariable(key, variableNumber, type);
-    add(variable);
+    addToFrame(variable);
 
     return variable;
+  }
+
+  private void addToFrame(VirtualVariable variable) {
+    this.variableArray[variable.variableNumber()] = variable;
+    this.variableSet.add(variable);
+    this.variablesByName.put(variable.key(), variable);
+    this.availableRegisters.remove(variable.variableNumber());
+    this.subscribeToVariableEvents(variable);
+  }
+
+  private void subscribeToVariableEvents(VirtualVariable variable) {
+    VirtualVariable.VirtualVariableEventSubscription eventsForVariable = new VirtualVariable.VirtualVariableEventSubscription() {
+      @Override
+      public void onRenameVariable(VirtualVariable variable, String newKey) {
+        VirtualVariableStack.this.onVariableNameChange(variable, newKey);
+      }
+    };
+
+    this.eventsPerVariable.put(variable, eventsForVariable);
+    variable.addVariableEventSubscription(eventsForVariable);
+  }
+
+  private void unsubscripeToVariableEvents(VirtualVariable variable) {
+    VirtualVariable.VirtualVariableEventSubscription subscription = this.eventsPerVariable.get(variable);
+    variable.addVariableEventSubscription(subscription);
+
+    this.eventsPerVariable.remove(variable);
   }
 
   public VirtualVariable variableByName(String key) {
     return this.variablesByName.get(key);
   }
 
+  public boolean containsVariableMatching(String key, SymbolTableEntry entry) {
+    if (!this.containsKey(key)) {
+      return false;
+    }
+
+    return this.variableByName(key).type() == entry;
+  }
+
+  public VirtualVariable withNewStackFrame(Consumer<Object> callback) {
+    this.pushFrame();
+    callback.accept(EMPTY_OBJECT);
+    return this.popFrame();
+  }
+
   public boolean containsKey(String key) {
     return this.variablesByName.containsKey(key);
   }
 
-  public void add(VirtualVariable variable) {
-    this.variableArray[variable.variableNumber()] = variable;
-
-    this.variablesByName.put(variable.key(), variable);
-    this.variablesBySet.add(variable);
-    this.availableRegisters.remove(variable.variableNumber());
-  }
 
   public void pushFrame() {
     this.callFrames.push(new VirtualVariableFrame());
   }
 
-  public VirtualVariableFrame currentFrame() { return this.callFrames.peek(); }
+  public void setFrameReturnValue(VirtualVariable variable) {
+    this.callFrames.peek().setReturnValue(variable);
+  }
 
   public VirtualVariable popFrame() {
     VirtualVariableFrame frame = this.callFrames.pop();
@@ -75,7 +116,7 @@ public class VirtualVariableStack {
       .where(variable -> variable != frame.returnValue());
 
     for (VirtualVariable variable : variablesExceptForReturnValue) {
-      this.expireVariable(variable);
+      this.clearVariable(variable);
     }
 
     // Move the return value down to the previous frame.
@@ -86,17 +127,27 @@ public class VirtualVariableStack {
     return frame.returnValue();
   }
 
-  private void expireVariable(int variableNumber) {
-    this.availableRegisters.add(variableNumber);
+  private void clearVariable(int variableNumber) {
+    clearVariable(this.variableArray[variableNumber]);
   }
 
-  public void expireVariable(VirtualVariable variable) {
-    expireVariable(variable.variableNumber());
+  public void clearVariable(VirtualVariable variable) {
+    this.unsubscripeToVariableEvents(variable);
+    this.variableSet.remove(variable);
+    this.variablesByName.remove(variable.key());
+    this.availableRegisters.add(variable.variableNumber());
   }
 
   public int size() { return this.variableArray.length; }
 
   private int nextAvailableIndex() {
     return this.availableRegisters.first();
+  }
+
+  public void onVariableNameChange(VirtualVariable variable, String newKey) {
+    if (variableSet.contains(variable)) {
+      this.variablesByName.remove(variable.key());
+      this.variablesByName.put(newKey, variable);
+    }
   }
 }

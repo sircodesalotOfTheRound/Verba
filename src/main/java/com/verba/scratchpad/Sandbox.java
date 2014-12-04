@@ -10,20 +10,9 @@ import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "class MyClass class AnotherClass { class InnerClass } ");
+    Build build = Build.fromString(true, "class MyClass fn function : MyClass { val item = \"something\" }");
     GlobalSymbolTable symbolTable = build.symbolTable();
 
     VirtualVariableStack set = new VirtualVariableStack(20);
-
-    set.pushFrame();
-
-    set.add("Nothing", symbolTable.getEntryForSymbolType("MyClass"));
-    VirtualVariable returnValueStorage = set.add("my_return_value", symbolTable.getEntryForSymbolType("MyClass"));
-
-    set.currentFrame().setReturnValue(returnValueStorage);
-
-    System.out.println(set.currentFrame().returnValue().key());
-
-    set.popFrame();
   }
 }

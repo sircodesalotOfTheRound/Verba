@@ -1,8 +1,9 @@
 package com.verba.language.graph.expressions.functions.node;
 
 import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.FunctionContext;
-import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
+import com.verba.language.graph.expressions.functions.NativeTypeSymbols;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 
 /**
@@ -10,18 +11,26 @@ import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
  */
 public class QuoteNodeProcessor {
   private final FunctionContext context;
+  private final VirtualVariableStack variableStack;
+  private final NativeTypeSymbols nativeTypes;
 
   public QuoteNodeProcessor(FunctionContext context) {
     this.context = context;
+    this.variableStack = context.variableStack();
+    this.nativeTypes = context.nativeTypeSymbols();
   }
 
   public void process(QuoteExpression expression) {
-    VariableLifetime variableLifetime = context.getVariableLifetime(expression);
+    String variableName = expression.representation();
 
-    // If this is the first time seeing this variable, add it.
-    if (variableLifetime.isFirstInstance(expression)) {
-      VirtualVariable variable = context.variableStack().add(expression.innerText(), context.nativeTypeSymbols().UTF8);
-      context.opcodes().loadString(variable, expression.innerText());
+    VirtualVariable variable;
+    if (variableStack.containsVariableMatching(variableName, nativeTypes.UTF8)) {
+      variable = variableStack.variableByName(variableName);
+    } else {
+      variable = variableStack.addToFrame(variableName, nativeTypes.UTF8);
     }
+
+    variableStack.setFrameReturnValue(variable);
+    context.opcodes().loadString(variable, expression.innerText());
   }
 }
