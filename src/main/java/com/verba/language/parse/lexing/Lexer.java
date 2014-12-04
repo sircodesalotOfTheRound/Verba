@@ -89,6 +89,7 @@ public interface Lexer extends Iterable<LexInfo> {
 
   public int size();
 
+
   default public <U> U withRollback(Function<Lexer, U> callback) {
     this.setUndoPoint();
     U result = callback.apply(this);
