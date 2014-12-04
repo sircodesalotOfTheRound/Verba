@@ -6,6 +6,7 @@ import com.verba.language.graph.expressions.functions.NativeTypeSymbols;
 import com.verba.language.graph.symbols.meta.NativeTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import sun.jvm.hotspot.memory.SymbolTable;
@@ -115,6 +116,10 @@ public class GlobalSymbolTable implements Serializable {
     } else {
       return EMPTY_SET;
     }
+  }
+
+  public SymbolTableEntry getEntryForSymbolType(String fqn) {
+    return this.getByFqn(fqn).single(entry -> entry.is(PolymorphicDeclarationExpression.class));
   }
 
   public SymbolTableEntry getByIndex(int index) {
