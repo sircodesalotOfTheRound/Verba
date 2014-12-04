@@ -2,7 +2,7 @@ Verba
 =====
 
 Compiling
-=========
+---------
 To build the Verba language compiler, simply copy and paste the following commands:
 
 ```
