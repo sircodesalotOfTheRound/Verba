@@ -10,11 +10,11 @@ public class KeywordToken extends IdentifierToken {
   private static final QSet<String> nativeTypes = new QSet<String>(
       // System types
       "byte", "numeric", "dynamic", "default",
-      "int8", "int16", "int32", "int64",
-      "uint8", "uint16", "uint32", "uint64", "ascii",
+      "int", "int8", "int16", "int32", "int64",
+      "uint", "uint8", "uint16", "uint32", "uint64", "ascii",
       "float32", "float64",
       "char", "utc", "currency",
-      "utf8", "utf16", "utf32", "utf8be", "utf16be", "utf32be",
+      "utf", "utf8", "utf16", "utf32", "utf8be", "utf16be", "utf32be",
       "unit", "object",
       "json", "sensitive");
 
@@ -62,6 +62,10 @@ public class KeywordToken extends IdentifierToken {
 
   public static boolean isKeyword(String text) {
     return KeywordToken.keywords.contains(text);
+  }
+
+  public static boolean isNativeTypeKeyword(String fqn) {
+    return KeywordToken.nativeTypes.contains(fqn);
   }
 }
 

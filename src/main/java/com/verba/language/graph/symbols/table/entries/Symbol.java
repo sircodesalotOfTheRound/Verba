@@ -13,7 +13,7 @@ import java.io.Serializable;
 /**
  * Created by sircodesalot on 14-3-9.
  */
-public class SymbolTableEntry implements Serializable {
+public class Symbol implements Serializable {
   private final String name;
   private final ScopedSymbolTable table;
   private final VerbaExpression object;
@@ -21,7 +21,7 @@ public class SymbolTableEntry implements Serializable {
   private final String fqn;
   private final QList<SymbolTableMetadata> metadata = new QList<>();
 
-  public SymbolTableEntry(String name, ScopedSymbolTable table, VerbaExpression object, SymbolTableMetadata... metadata) {
+  public Symbol(String name, ScopedSymbolTable table, VerbaExpression object, SymbolTableMetadata... metadata) {
     this.name = name;
     this.table = table;
     this.object = object;

@@ -6,7 +6,7 @@ import com.verba.language.build.event.ExpressionBuildEventSubscription;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
 import com.verba.language.graph.symbols.resolution.FunctionReturnTypeResolver;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
 public class FunctionExpressionEventSubscription extends ExpressionBuildEventSubscription<FunctionDeclarationExpression>
   implements BuildEvent.NotifySymbolTableBuildEvent, BuildEvent.NotifyObjectEmitEvent
 {
-  private SymbolTableEntry returnType;
+  private Symbol returnType;
   public FunctionExpressionEventSubscription(FunctionDeclarationExpression expression) {
     super(expression);
   }
@@ -32,7 +32,7 @@ public class FunctionExpressionEventSubscription extends ExpressionBuildEventSub
     this.returnType = this.determineReturnType(symbolTable);
   }
 
-  private SymbolTableEntry determineReturnType(GlobalSymbolTable symbolTable) {
+  private Symbol determineReturnType(GlobalSymbolTable symbolTable) {
     FunctionReturnTypeResolver returnTypeResolver = new FunctionReturnTypeResolver(symbolTable, this.expression());
     return returnTypeResolver.resolve();
   }
@@ -48,5 +48,5 @@ public class FunctionExpressionEventSubscription extends ExpressionBuildEventSub
     return image;
   }
 
-  public SymbolTableEntry returnType() { return this.returnType; }
+  public Symbol returnType() { return this.returnType; }
 }

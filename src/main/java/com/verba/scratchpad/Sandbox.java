@@ -1,7 +1,7 @@
 package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
-import com.verba.language.emit.variables.VirtualVariableStack;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 
 /**
@@ -9,9 +9,10 @@ import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "class MyClass fn function : MyClass { val item = \"something\" }");
+    Build build = Build.fromString(true, "class MyClass");
     GlobalSymbolTable symbolTable = build.symbolTable();
+    Symbol symbol = symbolTable.findSymbolForType("unit");
 
-    VirtualVariableStack set = new VirtualVariableStack(20);
+    System.out.println(symbol.fqn());
   }
 }

@@ -5,7 +5,7 @@ import com.verba.language.build.BuildAnalysis;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.subscriptions.FunctionExpressionEventSubscription;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
@@ -134,7 +134,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
     symbolTable.visit(this);
   }
 
-  public SymbolTableEntry returnType() {
+  public Symbol returnType() {
     return this.buildEvents.returnType();
   }
 }

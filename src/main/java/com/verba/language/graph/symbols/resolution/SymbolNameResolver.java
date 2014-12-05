@@ -2,11 +2,10 @@ package com.verba.language.graph.symbols.resolution;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
-import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
 /**
@@ -36,7 +35,7 @@ public class SymbolNameResolver {
         fqn = name;
       }
 
-      for (SymbolTableEntry entry : symbolTable.getByFqn(fqn)) {
+      for (Symbol entry : symbolTable.findAllMatchingFqn(fqn)) {
         SymbolResolutionMatch match = new SymbolResolutionMatch(entry);
         matchingEntries.add(match);
       }

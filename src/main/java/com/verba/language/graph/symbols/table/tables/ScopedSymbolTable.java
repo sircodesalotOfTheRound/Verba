@@ -7,7 +7,7 @@ import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.NestedSymbolTableMetadata;
 import com.verba.language.graph.symbols.meta.ParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntrySet;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -147,13 +147,13 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   // Additions
-  public void add(SymbolTableEntry entry) {
+  public void add(Symbol entry) {
     this.entrySet.add(entry);
   }
 
   public void add(String name, VerbaExpression object, SymbolTableMetadata... metadata) {
     // Add a new symbol table entry, mark it as a nested symbol table item.
-    SymbolTableEntry entry = new SymbolTableEntry(name, this, object);
+    Symbol entry = new Symbol(name, this, object);
 
     // Add Metadata
     for (SymbolTableMetadata metadataItem : metadata) {
@@ -217,11 +217,11 @@ public class ScopedSymbolTable implements Serializable {
     this.violations.add(violation);
   }
 
-  public QIterable<SymbolTableEntry> get(String key) {
+  public QIterable<Symbol> get(String key) {
     return this.entrySet.get(key);
   }
 
-  public SymbolTableEntry get(int index) {
+  public Symbol get(int index) {
     return this.entrySet.get(index);
   }
 
@@ -233,11 +233,11 @@ public class ScopedSymbolTable implements Serializable {
     return this.entrySet.containsKey(key);
   }
 
-  public QIterable<SymbolTableEntry> entries() {
+  public QIterable<Symbol> entries() {
     return this.entrySet.entries();
   }
 
-  public int getIndex(SymbolTableEntry entry) {
+  public int getIndex(Symbol entry) {
     return this.entrySet.getIndex(entry);
   }
 

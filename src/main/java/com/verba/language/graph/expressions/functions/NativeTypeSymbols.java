@@ -1,25 +1,46 @@
 package com.verba.language.graph.expressions.functions;
 
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by sircodesalot on 14/12/3.
  */
 public class NativeTypeSymbols {
-  public final SymbolTableEntry UNIT;
+  public final Symbol UNIT;
+  public final Symbol ASCII;
+  public final Symbol UTF8;
+  public final Symbol UTF16;
+  public final Symbol UTF32;
 
-  public final SymbolTableEntry ASCII;
-  public final SymbolTableEntry UTF8;
-  public final SymbolTableEntry UTF16;
-  public final SymbolTableEntry UTF32;
+  private final GlobalSymbolTable symbolTable;
+  private final Map<String, Symbol> entriesByName = new HashMap<>();
 
   public NativeTypeSymbols(GlobalSymbolTable symbolTable) {
-    this.UNIT = symbolTable.getByFqn("unit").single();
+    this.symbolTable = symbolTable;
+    this.UNIT = captureEntryByKey("unit");
 
-    this.ASCII = symbolTable.getByFqn("ascii").single();
-    this.UTF8 = symbolTable.getByFqn("utf8").single();
-    this.UTF16 = symbolTable.getByFqn("utf16").single();
-    this.UTF32 = symbolTable.getByFqn("utf32").single();
+    this.ASCII = captureEntryByKey("ascii");
+    this.UTF8 = captureEntryByKey("utf8");
+    this.UTF16 = captureEntryByKey("utf16");
+    this.UTF32 = captureEntryByKey("utf32");
+  }
+
+  private Symbol captureEntryByKey(String key) {
+    Symbol entry = symbolTable.findAllMatchingFqn(key).single();
+    this.entriesByName.put(key, entry);
+
+    return entry;
+  }
+
+  public Symbol findNativeTypeSymbolByName(String name) {
+    return this.entriesByName.get(name);
+  }
+
+  public boolean isNativeTypeSymbol(String name) {
+    return this.entriesByName.containsKey(name);
   }
 }

@@ -3,7 +3,7 @@ package com.verba.language.emit.variables;
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.variables.frame.VirtualVariableFrame;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.tools.exceptions.CompilerException;
 
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class VirtualVariableStack {
     this.callFrames.push(new VirtualVariableFrame());
   }
 
-  public VirtualVariable addToFrame(String key, SymbolTableEntry type) {
+  public VirtualVariable addToFrame(String key, Symbol type) {
     if (this.containsKey(key)) {
       throw new CompilerException("Key already exists");
     }
@@ -42,7 +42,7 @@ public class VirtualVariableStack {
     return addToFrame(key, type, nextAvailableIndex());
   }
 
-  public VirtualVariable addToFrame(String key, SymbolTableEntry type, int variableNumber) {
+  public VirtualVariable addToFrame(String key, Symbol type, int variableNumber) {
     VirtualVariable variable = new VirtualVariable(key, variableNumber, type);
     addToFrame(variable);
 
@@ -80,7 +80,7 @@ public class VirtualVariableStack {
     return this.variablesByName.get(key);
   }
 
-  public boolean containsVariableMatching(String key, SymbolTableEntry entry) {
+  public boolean containsVariableMatching(String key, Symbol entry) {
     if (!this.containsKey(key)) {
       return false;
     }

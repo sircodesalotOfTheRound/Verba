@@ -1,7 +1,7 @@
 package com.verba.language.graph.symbols.resolution;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -23,7 +23,7 @@ public class FunctionReturnTypeResolver {
     this.scope = symbolTable.getByInstance(declaration).table();
   }
 
-  public SymbolTableEntry resolve() {
+  public Symbol resolve() {
     SymbolNameResolver resolver = new SymbolNameResolver(symbolTable, scope);
 
     if (this.declaration.hasTypeConstraint()) {

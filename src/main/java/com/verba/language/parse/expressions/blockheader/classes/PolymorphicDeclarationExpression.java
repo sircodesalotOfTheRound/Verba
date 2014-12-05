@@ -5,7 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildAnalysis;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.subscriptions.PolymorphicExpressionBuildEventHandler;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
@@ -112,15 +112,15 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     return this.primaryIdentifier().genericParameterList();
   }
 
-  public QIterable<SymbolTableEntry> traitSymbolTableEntries() { return this.buildProfile.traitEntries(); }
+  public QIterable<Symbol> traitSymbolTableEntries() { return this.buildProfile.traitEntries(); }
 
   public QIterable<TypeDeclarationExpression> traits() {
     return this.traits;
   }
 
-  public QIterable<SymbolTableEntry> allMembers() { return this.buildProfile.allMembers(); }
+  public QIterable<Symbol> allMembers() { return this.buildProfile.allMembers(); }
 
-  public QIterable<SymbolTableEntry> immediateMembers() { return this.buildProfile.immediateMembers(); }
+  public QIterable<Symbol> immediateMembers() { return this.buildProfile.immediateMembers(); }
 
   public boolean isDerivedFrom(String name) { return buildProfile.isDerivedFrom(name); }
 
@@ -132,7 +132,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     return buildProfile.isImmediateMember(name);
   }
 
-  public QIterable<SymbolTableEntry> findMembersByName(String name) {
+  public QIterable<Symbol> findMembersByName(String name) {
     return buildProfile.findMembersByName(name);
   }
 

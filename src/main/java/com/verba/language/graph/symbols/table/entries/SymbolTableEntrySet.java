@@ -15,14 +15,14 @@ import java.util.Set;
  */
 public class SymbolTableEntrySet {
   private final ScopedSymbolTable table;
-  private final Map<String, QList<SymbolTableEntry>> entriesByName = new HashMap<>();
-  private final QList<SymbolTableEntry> entries = new QList<>();
+  private final Map<String, QList<Symbol>> entriesByName = new HashMap<>();
+  private final QList<Symbol> entries = new QList<>();
 
   public SymbolTableEntrySet(ScopedSymbolTable table) {
     this.table = table;
   }
 
-  public void add(SymbolTableEntry entry) {
+  public void add(Symbol entry) {
     String name = entry.name();
     VerbaExpression instance = entry.instance();
 
@@ -31,7 +31,7 @@ public class SymbolTableEntrySet {
     this.entries.add(entry);
   }
 
-  public QList<SymbolTableEntry> getEntryListByName(String forName) {
+  public QList<Symbol> getEntryListByName(String forName) {
     // If there is already a list associated with this name,
     // then just return that.
     if (this.entriesByName.containsKey(forName)) {
@@ -39,18 +39,18 @@ public class SymbolTableEntrySet {
     }
 
     // Else create a new list
-    QList<SymbolTableEntry> entryList = new QList<>();
+    QList<Symbol> entryList = new QList<>();
     this.entriesByName.put(forName, entryList);
 
     return entryList;
   }
 
   public void add(String name, VerbaExpression expression, SymbolTableMetadata... metadata) {
-    SymbolTableEntry entry = new SymbolTableEntry(name, table, expression, metadata);
+    Symbol entry = new Symbol(name, table, expression, metadata);
     this.add(entry);
   }
 
-  public QIterable<SymbolTableEntry> entries() {
+  public QIterable<Symbol> entries() {
     return this.entries;
   }
 
@@ -63,11 +63,11 @@ public class SymbolTableEntrySet {
     this.entries.clear();
   }
 
-  public int getIndex(SymbolTableEntry entry) {
+  public int getIndex(Symbol entry) {
     return this.entries.indexOf(entry);
   }
 
-  public QIterable<SymbolTableEntry> get(String key) {
+  public QIterable<Symbol> get(String key) {
     return this.entriesByName.get(key);
   }
 
@@ -95,7 +95,7 @@ public class SymbolTableEntrySet {
 //        }
 //    }
 
-  public SymbolTableEntry get(int index) {
+  public Symbol get(int index) {
     return this.entries.get(index);
   }
 }

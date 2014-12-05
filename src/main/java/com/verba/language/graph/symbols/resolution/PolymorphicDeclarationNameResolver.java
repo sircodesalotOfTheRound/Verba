@@ -1,7 +1,7 @@
 package com.verba.language.graph.symbols.resolution;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -13,7 +13,7 @@ import com.verba.language.parse.expressions.categories.NamedExpression;
 public class PolymorphicDeclarationNameResolver {
   private final GlobalSymbolTable symbolTable;
   private final PolymorphicDeclarationExpression declaration;
-  private final QIterable<SymbolTableEntry> scopedEntries;
+  private final QIterable<Symbol> scopedEntries;
 
   public PolymorphicDeclarationNameResolver(GlobalSymbolTable symbolTable, PolymorphicDeclarationExpression declaration) {
     this.symbolTable = symbolTable;
@@ -21,12 +21,12 @@ public class PolymorphicDeclarationNameResolver {
     this.scopedEntries = determineNamesInScope(declaration);
   }
 
-  public QIterable<SymbolTableEntry> determineNamesInScope(PolymorphicDeclarationExpression declaration) {
+  public QIterable<Symbol> determineNamesInScope(PolymorphicDeclarationExpression declaration) {
     return declaration.block().expressions()
       .ofType(NamedExpression.class)
       .map(expression -> this.symbolTable.getByInstance((VerbaExpression) expression));
   }
 
   public PolymorphicDeclarationExpression declaration() { return declaration; }
-  public QIterable<SymbolTableEntry> immediateMembers() { return this.scopedEntries; }
+  public QIterable<Symbol> immediateMembers() { return this.scopedEntries; }
 }

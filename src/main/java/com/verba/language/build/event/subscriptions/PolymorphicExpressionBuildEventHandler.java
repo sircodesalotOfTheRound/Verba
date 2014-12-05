@@ -9,7 +9,7 @@ import com.verba.language.build.event.ExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
-import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -23,12 +23,12 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   BuildEvent.NotifyCodeGenerationEvent
 {
   private GlobalSymbolTable symbolTable;
-  private SymbolTableEntry thisEntry;
-  private QIterable<SymbolTableEntry> traitEntries;
-  private Partition<String, SymbolTableEntry> traitEntriesByName;
-  private QIterable<SymbolTableEntry> immediateMembers;
-  private QIterable<SymbolTableEntry> allMembers;
-  private Partition<String, SymbolTableEntry> symbolTableEntriesByName;
+  private Symbol thisEntry;
+  private QIterable<Symbol> traitEntries;
+  private Partition<String, Symbol> traitEntriesByName;
+  private QIterable<Symbol> immediateMembers;
+  private QIterable<Symbol> allMembers;
+  private Partition<String, Symbol> symbolTableEntriesByName;
 
   public PolymorphicExpressionBuildEventHandler(PolymorphicDeclarationExpression expression) {
     super(expression);
@@ -43,16 +43,16 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     this.symbolTable = symbolTable;
     this.thisEntry = symbolTable.getByInstance(this.expression());
     this.traitEntries = determineTraitEntries(symbolTable);
-    this.traitEntriesByName = this.traitEntries.parition(SymbolTableEntry::fqn);
+    this.traitEntriesByName = this.traitEntries.parition(Symbol::fqn);
     this.immediateMembers = determineImmediateMembers(this.expression());
     this.allMembers = determineAllMembers(this.expression(), new QList<>());
-    this.symbolTableEntriesByName = this.allMembers.parition(SymbolTableEntry::name);
+    this.symbolTableEntriesByName = this.allMembers.parition(Symbol::name);
   }
 
-  private QIterable<SymbolTableEntry> determineTraitEntries(GlobalSymbolTable symbolTable) {
+  private QIterable<Symbol> determineTraitEntries(GlobalSymbolTable symbolTable) {
     SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.table());
 
-    QList<SymbolTableEntry> entriesForTraits = new QList<>() ;
+    QList<Symbol> entriesForTraits = new QList<>() ;
     for (TypeDeclarationExpression expression : this.expression().traits()) {
       SymbolResolutionMatch match = nameResolver.findSymbolsInScope(expression.representation()).first();
       entriesForTraits.add(match.entry());
@@ -61,16 +61,16 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     return entriesForTraits;
   }
 
-  public QIterable<SymbolTableEntry> traitEntries() { return this.traitEntries; }
+  public QIterable<Symbol> traitEntries() { return this.traitEntries; }
 
   @Override
   public void beforeCodeGeneration(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
 
   }
 
-  public QIterable<SymbolTableEntry> immediateMembers() { return this.immediateMembers; }
-  public QIterable<SymbolTableEntry> allMembers() { return this.allMembers; }
-  public QIterable<SymbolTableEntry> findMembersByName(String name) {
+  public QIterable<Symbol> immediateMembers() { return this.immediateMembers; }
+  public QIterable<Symbol> allMembers() { return this.allMembers; }
+  public QIterable<Symbol> findMembersByName(String name) {
     if (this.symbolTableEntriesByName.containsKey(name)) {
       return this.symbolTableEntriesByName.get(name);
     }
@@ -90,12 +90,12 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     return false;
   }
 
-  private QIterable<SymbolTableEntry> determineImmediateMembers(PolymorphicDeclarationExpression expression) {
+  private QIterable<Symbol> determineImmediateMembers(PolymorphicDeclarationExpression expression) {
     PolymorphicDeclarationNameResolver members = new PolymorphicDeclarationNameResolver(this.symbolTable, expression);
     return members.immediateMembers();
   }
 
-  private QIterable<SymbolTableEntry> determineAllMembers(PolymorphicDeclarationExpression expression, QList<SymbolTableEntry> names) {
+  private QIterable<Symbol> determineAllMembers(PolymorphicDeclarationExpression expression, QList<Symbol> names) {
     QIterable<PolymorphicDeclarationExpression> traits = expression.traitSymbolTableEntries()
       .map(entry -> entry.instanceAs(PolymorphicDeclarationExpression.class));
 
