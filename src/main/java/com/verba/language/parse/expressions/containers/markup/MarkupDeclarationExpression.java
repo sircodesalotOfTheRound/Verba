@@ -6,7 +6,10 @@ import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.MarkupTagExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
+import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 
 /**
@@ -16,11 +19,18 @@ public class MarkupDeclarationExpression extends VerbaExpression
   implements MarkupTagExpression, RValueExpression {
 
   private final QIterable<VerbaExpression> tags;
+  private final FullyQualifiedNameExpression name;
 
   private MarkupDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+    lexer.readCurrentAndAdvance(KeywordToken.class, "markup");
+    this.name = FullyQualifiedNameExpression.read(this, lexer);
+
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "{");
     this.tags = this.readAllTags(lexer);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "}");
+
     this.closeLexingRegion();
   }
 
@@ -46,6 +56,6 @@ public class MarkupDeclarationExpression extends VerbaExpression
 
   @Override
   public void accept(SyntaxGraphVisitor visitor) {
-
+    visitor.visit(this);
   }
 }

@@ -12,7 +12,7 @@ import com.verba.language.parse.lexing.Lexer;
 public abstract class VerbaExpression implements SyntaxGraphNode {
   private static BacktrackRuleSet<VerbaExpression> rules
     = new BacktrackRuleSet<VerbaExpression>()
-    .addRule(new MathExpressionBacktrackRule())
+    //.addRule(new MathExpressionBacktrackRule()) Broken for the moment.
     .addRule(new LiteralExpressionRule())
     .addRule(new FunctionDeclarationBacktrackRule())
     .addRule(new NamespaceDeclarationBacktrackRule())
@@ -20,6 +20,7 @@ public abstract class VerbaExpression implements SyntaxGraphNode {
     .addRule(new ValDeclarationBacktrackRule())
     .addRule(new IfStatementBacktrackRule())
     .addRule(new WithNsExpressionBacktrackRule())
+    .addRule(new MarkupDeclarationExpressionBacktrackRule())
     .addRule(new NamedValueExpressionBacktrackRule())
     .addRule(new GrabExpressionBacktrackRule())
     .addRule(new ForStatementBacktrackRule())

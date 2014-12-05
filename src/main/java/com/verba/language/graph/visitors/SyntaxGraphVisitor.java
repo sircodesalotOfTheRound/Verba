@@ -9,6 +9,7 @@ import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpres
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
+import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
@@ -52,4 +53,6 @@ public interface SyntaxGraphVisitor {
   void visit(ValDeclarationStatement valDeclarationStatement);
 
   void visit(WithNsExpression withNsExpression);
+
+  void visit(MarkupDeclarationExpression markupDeclarationExpression);
 }

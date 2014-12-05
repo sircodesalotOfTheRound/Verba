@@ -5,6 +5,7 @@ import com.verba.language.parse.expressions.backtracking.BacktrackRule;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 
 /**
@@ -13,7 +14,7 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class MarkupDeclarationExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return lexer.currentIs(OperatorToken.class, "<");
+    return lexer.currentIs(KeywordToken.class, "markup");
   }
 
   @Override
