@@ -10,7 +10,7 @@ import com.verba.language.graph.expressions.functions.node.QuoteNodeProcessor;
 import com.verba.language.graph.expressions.functions.node.ValNodeStatementProcessor;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphNode;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
@@ -41,7 +41,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
   private final StaticSpaceExpression staticSpaceExpression;
-  private final GlobalSymbolTable symbolTable;
+  private final SymbolTable symbolTable;
 
   private final FunctionContext context;
   private final FunctionOpCodeSet opcodes;
@@ -50,7 +50,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private final ValNodeStatementProcessor valStatementProcessor;
   private final QuoteNodeProcessor quoteNodeProcessor;
 
-  public FunctionGraph(FunctionDeclarationExpression function, GlobalSymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
+  public FunctionGraph(FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
     this.variableSet = new VirtualVariableStack(20);
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);

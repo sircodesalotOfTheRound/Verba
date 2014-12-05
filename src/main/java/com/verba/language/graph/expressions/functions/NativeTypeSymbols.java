@@ -1,7 +1,7 @@
 package com.verba.language.graph.expressions.functions;
 
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +16,10 @@ public class NativeTypeSymbols {
   public final Symbol UTF16;
   public final Symbol UTF32;
 
-  private final GlobalSymbolTable symbolTable;
+  private final SymbolTable symbolTable;
   private final Map<String, Symbol> entriesByName = new HashMap<>();
 
-  public NativeTypeSymbols(GlobalSymbolTable symbolTable) {
+  public NativeTypeSymbols(SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
     this.UNIT = captureEntryByKey("unit");
 

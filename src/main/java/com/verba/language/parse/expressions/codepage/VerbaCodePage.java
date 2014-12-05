@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.event.subscriptions.VerbaCodePageBuildEventSubscription;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.tools.SyntaxTreeFlattener;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.codestream.CodeStream;
@@ -112,7 +112,7 @@ public class VerbaCodePage extends VerbaExpression
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) {
+  public void accept(Scope symbolTable) {
     symbolTable.visit(this);
   }
 }

@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.event.subscriptions.StaticSpaceExpressionBuildEventSubscription;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
@@ -61,6 +61,6 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) { symbolTable.visit(this); }
+  public void accept(Scope symbolTable) { symbolTable.visit(this); }
 
 }

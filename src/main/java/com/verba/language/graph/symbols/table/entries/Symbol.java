@@ -3,10 +3,9 @@ package com.verba.language.graph.symbols.table.entries;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.ExpressionSource;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
 import java.io.Serializable;
 
@@ -15,13 +14,13 @@ import java.io.Serializable;
  */
 public class Symbol implements Serializable {
   private final String name;
-  private final ScopedSymbolTable table;
+  private final Scope table;
   private final VerbaExpression object;
   private final ExpressionSource source;
   private final String fqn;
   private final QList<SymbolTableMetadata> metadata = new QList<>();
 
-  public Symbol(String name, ScopedSymbolTable table, VerbaExpression object, SymbolTableMetadata... metadata) {
+  public Symbol(String name, Scope table, VerbaExpression object, SymbolTableMetadata... metadata) {
     this.name = name;
     this.table = table;
     this.object = object;
@@ -37,7 +36,7 @@ public class Symbol implements Serializable {
     return this.name;
   }
 
-  public ScopedSymbolTable table() {
+  public Scope table() {
     return this.table;
   }
 

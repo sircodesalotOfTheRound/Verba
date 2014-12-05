@@ -3,8 +3,8 @@ package com.verba.language.graph.symbols.resolution;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
@@ -12,12 +12,12 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
  * Created by sircodesalot on 14/11/24.
  */
 public class SymbolNameResolver {
-  private final GlobalSymbolTable symbolTable;
-  private final ScopedSymbolTable scope;
+  private final SymbolTable symbolTable;
+  private final Scope scope;
   private final VerbaCodePage page;
   private final QIterable<String> namespacesInScope;
 
-  public SymbolNameResolver(GlobalSymbolTable symbolTable, ScopedSymbolTable scope) {
+  public SymbolNameResolver(SymbolTable symbolTable, Scope scope) {
     this.symbolTable = symbolTable;
     this.scope = scope;
     this.page = discoverPage(scope);
@@ -44,7 +44,7 @@ public class SymbolNameResolver {
     return matchingEntries;
   }
 
-  private VerbaCodePage discoverPage(ScopedSymbolTable scope) {
+  private VerbaCodePage discoverPage(Scope scope) {
     if (scope.entries().any()) {
       return (VerbaCodePage) scope.entries().first().source();
     } else {
@@ -60,7 +60,7 @@ public class SymbolNameResolver {
     }
   }
 
-  private QIterable<String> namespacesInScope(VerbaCodePage page, ScopedSymbolTable scope) {
+  private QIterable<String> namespacesInScope(VerbaCodePage page, Scope scope) {
     QList<String> namespaces = new QList<>();
 
     namespaces.add(scope.fqnList());

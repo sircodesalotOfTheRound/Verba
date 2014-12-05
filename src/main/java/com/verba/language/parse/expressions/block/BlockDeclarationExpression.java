@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.block;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
@@ -65,7 +65,7 @@ public class BlockDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) {
+  public void accept(Scope symbolTable) {
     symbolTable.visit(this);
   }
 }

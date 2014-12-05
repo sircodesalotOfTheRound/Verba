@@ -10,7 +10,7 @@ import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameRes
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
@@ -22,7 +22,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   implements BuildEvent.NotifySymbolTableBuildEvent,
   BuildEvent.NotifyCodeGenerationEvent
 {
-  private GlobalSymbolTable symbolTable;
+  private SymbolTable symbolTable;
   private Symbol thisEntry;
   private QIterable<Symbol> traitEntries;
   private Partition<String, Symbol> traitEntriesByName;
@@ -39,7 +39,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) { }
 
   @Override
-  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
     this.thisEntry = symbolTable.getByInstance(this.expression());
     this.traitEntries = determineTraitEntries(symbolTable);
@@ -49,7 +49,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     this.symbolTableEntriesByName = this.allMembers.parition(Symbol::name);
   }
 
-  private QIterable<Symbol> determineTraitEntries(GlobalSymbolTable symbolTable) {
+  private QIterable<Symbol> determineTraitEntries(SymbolTable symbolTable) {
     SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.table());
 
     QList<Symbol> entriesForTraits = new QList<>() ;
@@ -64,7 +64,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   public QIterable<Symbol> traitEntries() { return this.traitEntries; }
 
   @Override
-  public void beforeCodeGeneration(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+  public void beforeCodeGeneration(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
 
   }
 

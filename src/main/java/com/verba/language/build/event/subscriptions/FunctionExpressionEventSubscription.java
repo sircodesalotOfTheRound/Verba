@@ -7,7 +7,7 @@ import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
 import com.verba.language.graph.symbols.resolution.FunctionReturnTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 
@@ -28,17 +28,17 @@ public class FunctionExpressionEventSubscription extends ExpressionBuildEventSub
   }
 
   @Override
-  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.returnType = this.determineReturnType(symbolTable);
   }
 
-  private Symbol determineReturnType(GlobalSymbolTable symbolTable) {
+  private Symbol determineReturnType(SymbolTable symbolTable) {
     FunctionReturnTypeResolver returnTypeResolver = new FunctionReturnTypeResolver(symbolTable, this.expression());
     return returnTypeResolver.resolve();
   }
 
   @Override
-  public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+  public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     FunctionObjectImage image = new FunctionObjectImage(this.expression(), staticSpace, symbolTable);
 
     if (buildAnalysis.isDebugBuild()) {

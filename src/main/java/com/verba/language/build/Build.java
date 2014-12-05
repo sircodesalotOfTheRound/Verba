@@ -7,7 +7,7 @@ import com.verba.language.build.event.BuildEventLauncher;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.verbatim.VerbatimFileWriter;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.codestream.StringBasedCodeStream;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -20,7 +20,7 @@ import com.verba.language.parse.lexing.VerbaMemoizingLexer;
 public class Build {
   private BuildAnalysis buildAnalysis;
   private StaticSpaceExpression staticSpace;
-  private GlobalSymbolTable symbolTable;
+  private SymbolTable symbolTable;
   private ObjectImageSet images;
 
   // TODO: Move build into a method, rather than part of the constructor.
@@ -41,12 +41,12 @@ public class Build {
     return staticSpace;
   }
 
-  private GlobalSymbolTable beforeSymbolTableAssociation(StaticSpaceExpression staticSpace) {
+  private SymbolTable beforeSymbolTableAssociation(StaticSpaceExpression staticSpace) {
     BuildEventLauncher<BuildEvent.NotifySymbolTableBuildEvent> launcher
       = new BuildEventLauncher<>(BuildEvent.NotifySymbolTableBuildEvent.class, this.allExpressions());
 
     launcher.launchEvent(expression -> expression.beforeSymbolTableAssociation(buildAnalysis, this.staticSpace));
-    GlobalSymbolTable symbolTable = new GlobalSymbolTable(staticSpace);
+    SymbolTable symbolTable = new SymbolTable(staticSpace);
     launcher.launchEvent(expression -> expression.afterSymbolTableAssociation(buildAnalysis, this.staticSpace, symbolTable));
 
     return symbolTable;
@@ -69,7 +69,7 @@ public class Build {
     return new ObjectImageSet(images);
   }
 
-  public GlobalSymbolTable symbolTable() { return this.symbolTable; }
+  public SymbolTable symbolTable() { return this.symbolTable; }
   public QIterable<VerbaExpression> allExpressions() { return this.staticSpace.allExpressions(); }
   public Partition<Class, VerbaExpression> expressionsByType() { return this.staticSpace.expressionsByType(); }
 

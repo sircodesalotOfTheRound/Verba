@@ -6,7 +6,7 @@ import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.graph.expressions.functions.FunctionGraph;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 
@@ -20,7 +20,7 @@ public class FunctionObjectImage implements ObjectImage {
 
   public FunctionObjectImage(FunctionDeclarationExpression declaration,
                              StaticSpaceExpression staticSpace,
-                             GlobalSymbolTable symbolTable) {
+                             SymbolTable symbolTable) {
 
     this.functionGraph = new FunctionGraph(declaration, symbolTable, staticSpace);
     this.objectImage = new InMemoryObjectImage(declaration.name(), ImageType.FUNCTION);

@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.statements.declaration;
 
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
@@ -90,7 +90,7 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) {
+  public void accept(Scope symbolTable) {
     symbolTable.visit(this);
   }
 

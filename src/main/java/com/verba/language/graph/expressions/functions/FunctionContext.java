@@ -4,7 +4,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphNode;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -20,12 +20,12 @@ public class FunctionContext {
   private final VirtualVariableStack variableStack;
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
-  private final GlobalSymbolTable symbolTable;
+  private final SymbolTable symbolTable;
   private final NativeTypeSymbols nativeTypeSymbols;
 
   public FunctionContext(FunctionGraph functionGraph,
                          StaticSpaceExpression staticSpaceExpression,
-                         GlobalSymbolTable symbolTable,
+                         SymbolTable symbolTable,
                          VirtualVariableStack variableStack,
                          VariableLifetimeGraph lifetimeGraph,
                          FunctionOpCodeSet opcodes) {
@@ -43,7 +43,7 @@ public class FunctionContext {
   public VirtualVariableStack variableStack() { return this.variableStack; }
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }
-  public GlobalSymbolTable symbolTable() { return this.symbolTable; }
+  public SymbolTable symbolTable() { return this.symbolTable; }
   public NativeTypeSymbols nativeTypeSymbols() { return this.nativeTypeSymbols; }
 
   public void visit(SyntaxGraphNode node) { node.accept(functionGraph); }

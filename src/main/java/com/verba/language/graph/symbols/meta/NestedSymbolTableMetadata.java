@@ -1,19 +1,19 @@
 package com.verba.language.graph.symbols.meta;
 
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 
 /**
  * This is for items in a symbol table that themselves are a symbol table block.
  */
 public class NestedSymbolTableMetadata implements SymbolTableMetadata {
-  private final ScopedSymbolTable nestedTable;
+  private final Scope nestedTable;
 
-  public NestedSymbolTableMetadata(ScopedSymbolTable nestedTable) {
+  public NestedSymbolTableMetadata(Scope nestedTable) {
     this.nestedTable = nestedTable;
   }
 
-  public ScopedSymbolTable symbolTable() {
+  public Scope symbolTable() {
     return this.nestedTable;
   }
 

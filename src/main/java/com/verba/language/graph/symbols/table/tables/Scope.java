@@ -27,25 +27,23 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 
-import java.io.Serializable;
-
 
 /**
  * Created by sircodesalot on 14-3-9.
  */
-public class ScopedSymbolTable implements Serializable {
+public class Scope {
   private final String fqn;
   private final String name;
-  private final ScopedSymbolTable parent;
+  private final Scope parent;
   private final SymbolTableExpression headerExpression; // The block item (function, class, anonymous-block, ...)
   private final SymbolTableEntrySet entrySet;
   private final QList<ValidationViolation> violations = new QList<>();
-  private final QList<ScopedSymbolTable> nestedTables = new QList<>();
+  private final QList<Scope> nestedTables = new QList<>();
   private final QList<String> fqnList;
 
   // Construction
   // Anonymous block
-  public ScopedSymbolTable(SymbolTableExpression region) {
+  public Scope(SymbolTableExpression region) {
     this.entrySet = new SymbolTableEntrySet(this);
     this.name = resolveName(region);
     this.parent = null;
@@ -56,7 +54,7 @@ public class ScopedSymbolTable implements Serializable {
     region.accept(this);
   }
 
-  public ScopedSymbolTable(ScopedSymbolTable parentTable, NamedBlockExpression blockHeader) {
+  public Scope(Scope parentTable, NamedBlockExpression blockHeader) {
     this.entrySet = new SymbolTableEntrySet(this);
     this.name = resolveName(blockHeader);
     this.parent = parentTable;
@@ -165,15 +163,15 @@ public class ScopedSymbolTable implements Serializable {
   }
 
   public void addNested(String name, NamedBlockExpression block) {
-    ScopedSymbolTable nestedTable = new ScopedSymbolTable(this, block);
+    Scope nestedTable = new Scope(this, block);
 
     this.add(name, (VerbaExpression) block, new NestedSymbolTableMetadata(nestedTable));
     this.nestedTables.add(nestedTable);
   }
 
-  private QList<String> buildfqnList(ScopedSymbolTable scope) {
+  private QList<String> buildfqnList(Scope scope) {
     QList<String> fqnList = new QList<>();
-    ScopedSymbolTable currentScope = scope;
+    Scope currentScope = scope;
 
     while (currentScope != null) {
       if (currentScope.fqn != null) {
@@ -201,7 +199,7 @@ public class ScopedSymbolTable implements Serializable {
     return this.parent != null;
   }
 
-  public ScopedSymbolTable parent() {
+  public Scope parent() {
     return this.parent;
   }
 
@@ -241,7 +239,7 @@ public class ScopedSymbolTable implements Serializable {
     return this.entrySet.getIndex(entry);
   }
 
-  public QIterable<ScopedSymbolTable> nestedTables() {
+  public QIterable<Scope> nestedTables() {
     return this.nestedTables;
   }
 

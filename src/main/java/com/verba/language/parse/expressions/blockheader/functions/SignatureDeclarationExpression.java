@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.generic.GenericTypeListExpression;
@@ -82,7 +82,7 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) {
+  public void accept(Scope symbolTable) {
     symbolTable.visit(this);
   }
 }

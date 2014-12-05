@@ -3,7 +3,7 @@ package com.verba.language.graph.symbols.table.entries;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
 
 import java.util.HashMap;
@@ -14,11 +14,11 @@ import java.util.Set;
  * Created by sircodesalot on 14-5-8.
  */
 public class SymbolTableEntrySet {
-  private final ScopedSymbolTable table;
+  private final Scope table;
   private final Map<String, QList<Symbol>> entriesByName = new HashMap<>();
   private final QList<Symbol> entries = new QList<>();
 
-  public SymbolTableEntrySet(ScopedSymbolTable table) {
+  public SymbolTableEntrySet(Scope table) {
     this.table = table;
   }
 

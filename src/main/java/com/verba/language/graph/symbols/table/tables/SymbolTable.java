@@ -15,21 +15,21 @@ import java.util.Map;
 /**
  * Created by sircodesalot on 14-5-16.
  */
-public class GlobalSymbolTable {
+public class SymbolTable {
   private static final QIterable<Symbol> EMPTY_SET = new QList<>();
 
-  private final ScopedSymbolTable rootTable;
+  private final Scope rootTable;
   private final NativeTypeSymbols nativeTypeSymbols;
   private final QList<Symbol> entries = new QList<>();
   private final Map<VerbaExpression, Symbol> entriesByInstance = new HashMap<>();
   private final Map<String, QList<Symbol>> entriesByFriendlyName = new HashMap<>();
   private final Map<String, QList<Symbol>> entriesByFqn = new HashMap<>();
 
-  public GlobalSymbolTable(SymbolTableExpression block) {
-    this(new ScopedSymbolTable(block));
+  public SymbolTable(SymbolTableExpression block) {
+    this(new Scope(block));
   }
 
-  public GlobalSymbolTable(ScopedSymbolTable table) {
+  public SymbolTable(Scope table) {
     this.rootTable = table;
     this.nativeTypeSymbols = this.addNativeTypes();
     this.scanTableHierarchy(table);
@@ -46,12 +46,12 @@ public class GlobalSymbolTable {
     return new NativeTypeSymbols(this);
   }
 
-  private void scanTableHierarchy(ScopedSymbolTable table) {
+  private void scanTableHierarchy(Scope table) {
     for (Symbol entry : table.entries()) {
       this.putEntry(entry);
     }
 
-    for (ScopedSymbolTable subTable : table.nestedTables()) {
+    for (Scope subTable : table.nestedTables()) {
       scanTableHierarchy(subTable);
     }
   }
@@ -68,7 +68,7 @@ public class GlobalSymbolTable {
     this.getEntryListByFqn(fqn).add(entry);
   }
 
-  public QList<Symbol> getEntryListByFriendlyName(String friendlyName) {
+  private QList<Symbol> getEntryListByFriendlyName(String friendlyName) {
     // If there is already a list associated with this name,
     // then just return that.
     if (this.entriesByFriendlyName.containsKey(friendlyName)) {
@@ -82,8 +82,7 @@ public class GlobalSymbolTable {
     return entryList;
   }
 
-  // TODO: What is this for?
-  public QList<Symbol> getEntryListByFqn(String fqn) {
+  private QList<Symbol> getEntryListByFqn(String fqn) {
     // If there is already a list associated with this name,
     // then just return that.
     if (this.entriesByFqn.containsKey(fqn)) {
@@ -132,7 +131,7 @@ public class GlobalSymbolTable {
     return this.entriesByInstance.get(instance);
   }
 
-  public ScopedSymbolTable rootTable() {
+  public Scope rootTable() {
     return this.rootTable;
   }
 }

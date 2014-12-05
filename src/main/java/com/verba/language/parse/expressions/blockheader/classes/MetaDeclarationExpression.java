@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.blockheader.classes;
 
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
@@ -64,7 +64,7 @@ public class MetaDeclarationExpression extends VerbaExpression implements NamedB
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) {
+  public void accept(Scope symbolTable) {
 
   }
 }

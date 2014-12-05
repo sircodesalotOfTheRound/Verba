@@ -6,8 +6,8 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.subscriptions.FunctionExpressionEventSubscription;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
-import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -63,7 +63,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   // Events
   @Override
-  public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+  public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     return this.buildEvents.onGenerateObjectImage(buildAnalysis, staticSpace, symbolTable);
   }
 
@@ -73,7 +73,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, GlobalSymbolTable symbolTable) {
+  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     buildEvents.afterSymbolTableAssociation(buildAnalysis, staticSpace, symbolTable);
   }
 
@@ -130,7 +130,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public void accept(ScopedSymbolTable symbolTable) {
+  public void accept(Scope symbolTable) {
     symbolTable.visit(this);
   }
 
