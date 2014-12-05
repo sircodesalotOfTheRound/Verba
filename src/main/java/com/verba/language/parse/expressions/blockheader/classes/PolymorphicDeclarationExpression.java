@@ -120,6 +120,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
   public QIterable<Symbol> allMembers() { return this.buildProfile.allMembers(); }
 
+  // Membership
   public QIterable<Symbol> immediateMembers() { return this.buildProfile.immediateMembers(); }
 
   public boolean isDerivedFrom(String name) { return buildProfile.isDerivedFrom(name); }
