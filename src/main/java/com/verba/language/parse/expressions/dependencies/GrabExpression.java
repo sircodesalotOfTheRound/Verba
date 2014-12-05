@@ -7,6 +7,7 @@ import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.literals.QuoteToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-5-20.
@@ -18,8 +19,9 @@ public class GrabExpression extends VerbaExpression {
   public GrabExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "grab");
-    this.resourceName = this.readResourceName(lexer);
+    throw new NotImplementedException();
+    //lexer.readCurrentAndAdvance(KeywordToken.class, "grab");
+    //this.resourceName = this.readResourceName(lexer);
   }
 
   private VerbaExpression readResourceName(Lexer lexer) {

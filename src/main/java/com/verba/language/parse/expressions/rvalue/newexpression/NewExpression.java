@@ -20,7 +20,7 @@ public class NewExpression extends VerbaExpression implements RValueExpression, 
   public NewExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "new");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.NEW);
     this.expression = this.parseExpression(lexer);
 
     if (lexer.currentIs(EnclosureToken.class, "(")) {

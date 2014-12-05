@@ -19,7 +19,7 @@ public class NamespaceDeclarationExpression extends VerbaExpression implements N
   public NamespaceDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "namespace");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.NAMESPACE);
 
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
     this.block = BlockDeclarationExpression.read(this, lexer);

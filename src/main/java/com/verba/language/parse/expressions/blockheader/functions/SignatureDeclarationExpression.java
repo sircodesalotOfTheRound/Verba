@@ -25,7 +25,7 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   public SignatureDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "signature");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.SIGNATURE);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
     if (lexer.currentIs(OperatorToken.class, ":")) {

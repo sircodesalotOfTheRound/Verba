@@ -41,12 +41,12 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
 
   private VerbaExpression readType(Lexer lexer) {
     // @[ ... : new AspectFQN ]
-    if (lexer.currentIs(KeywordToken.class, "new")) {
+    if (lexer.currentIs(KeywordToken.class, KeywordToken.NEW)) {
       return NewExpression.read(this, lexer);
     }
 
     // @ [ ... : inject AspectFQN ]
-    else if (lexer.currentIs(KeywordToken.class, "inject")) {
+    else if (lexer.currentIs(KeywordToken.class, KeywordToken.INJECT)) {
       throw new NotImplementedException();
     }
 

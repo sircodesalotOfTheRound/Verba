@@ -13,7 +13,7 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 public class ForStatementBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return restOfLine.startsWith(KeywordToken.class, "for");
+    return restOfLine.startsWith(KeywordToken.class, KeywordToken.FOR);
   }
 
   @Override

@@ -21,7 +21,6 @@ public class FunctionContext {
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
   private final SymbolTable symbolTable;
-  private final NativeTypeSymbols nativeTypeSymbols;
 
   public FunctionContext(FunctionGraph functionGraph,
                          StaticSpaceExpression staticSpaceExpression,
@@ -32,7 +31,6 @@ public class FunctionContext {
 
     this.functionGraph = functionGraph;
     this.symbolTable = symbolTable;
-    this.nativeTypeSymbols= this.symbolTable.nativeTypeSymbols();
     this.staticSpaceExpression = staticSpaceExpression;
     this.variableStack = variableStack;
     this.lifetimeGraph = lifetimeGraph;
@@ -44,7 +42,6 @@ public class FunctionContext {
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }
   public SymbolTable symbolTable() { return this.symbolTable; }
-  public NativeTypeSymbols nativeTypeSymbols() { return this.nativeTypeSymbols; }
 
   public void visit(SyntaxGraphNode node) { node.accept(functionGraph); }
   public VirtualVariable visitWithNewStackFrame(SyntaxGraphNode node) {

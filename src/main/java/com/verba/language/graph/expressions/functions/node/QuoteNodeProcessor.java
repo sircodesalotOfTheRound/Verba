@@ -3,8 +3,9 @@ package com.verba.language.graph.expressions.functions.node;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.FunctionContext;
-import com.verba.language.graph.expressions.functions.NativeTypeSymbols;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
 
 /**
  * Created by sircodesalot on 14/10/3.
@@ -12,22 +13,23 @@ import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 public class QuoteNodeProcessor {
   private final FunctionContext context;
   private final VirtualVariableStack variableStack;
-  private final NativeTypeSymbols nativeTypes;
+
+  private final Symbol UTF;
 
   public QuoteNodeProcessor(FunctionContext context) {
     this.context = context;
     this.variableStack = context.variableStack();
-    this.nativeTypes = context.nativeTypeSymbols();
+    this.UTF = context.symbolTable().findSymbolForType(KeywordToken.UTF);
   }
 
   public void process(QuoteExpression expression) {
     String variableName = expression.representation();
 
     VirtualVariable variable;
-    if (variableStack.containsVariableMatching(variableName, nativeTypes.UTF8)) {
+    if (variableStack.containsVariableMatching(variableName, UTF)) {
       variable = variableStack.variableByName(variableName);
     } else {
-      variable = variableStack.addToFrame(variableName, nativeTypes.UTF8);
+      variable = variableStack.addToFrame(variableName, UTF);
     }
 
     variableStack.setFrameReturnValue(variable);

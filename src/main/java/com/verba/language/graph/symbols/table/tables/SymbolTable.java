@@ -36,7 +36,7 @@ public class SymbolTable {
   }
 
   private NativeTypeSymbols addNativeTypes() {
-    QIterable<Symbol> nativeTypeSymbolTableEntries = KeywordToken.nativeTypeKeywords()
+    QIterable<Symbol> nativeTypeSymbolTableEntries = KeywordToken.vmTypeKeywords()
       .map(primitive -> new Symbol(primitive, rootTable, null));
 
     for (Symbol entry : nativeTypeSymbolTableEntries) {
@@ -96,7 +96,6 @@ public class SymbolTable {
     return entryList;
   }
 
-  public NativeTypeSymbols nativeTypeSymbols() { return this.nativeTypeSymbols; }
   public QIterable<Symbol> entries() {
     return this.entries;
   }

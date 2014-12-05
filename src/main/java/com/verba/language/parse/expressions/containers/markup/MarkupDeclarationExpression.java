@@ -24,7 +24,7 @@ public class MarkupDeclarationExpression extends VerbaExpression
   private MarkupDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "markup");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.MARKUP);
     this.name = FullyQualifiedNameExpression.read(this, lexer);
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, "{");

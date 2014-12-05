@@ -21,7 +21,7 @@ public class InjectedDeclarationExpression extends VerbaExpression implements Na
   public InjectedDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "injected");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.INJECT);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
     this.genericParameters = GenericTypeListExpression.read(this, lexer);
 

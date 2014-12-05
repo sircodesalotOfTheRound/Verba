@@ -18,7 +18,7 @@ public class IfStatementExpression extends VerbaExpression {
   public IfStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "if");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.IF);
     lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
     this.testExpression = RValueExpression.read(this, lexer);
     lexer.readCurrentAndAdvance(EnclosureToken.class, ")");

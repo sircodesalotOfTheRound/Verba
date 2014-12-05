@@ -18,7 +18,7 @@ public class WhileStatementExpression extends VerbaExpression {
   public WhileStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "while");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.WHILE);
     lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
     this.testCondition = RValueExpression.read(this, lexer);
     lexer.readCurrentAndAdvance(EnclosureToken.class, ")");

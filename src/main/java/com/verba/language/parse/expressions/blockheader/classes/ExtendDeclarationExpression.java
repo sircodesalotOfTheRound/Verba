@@ -21,7 +21,7 @@ public class ExtendDeclarationExpression extends VerbaExpression implements Name
   public ExtendDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "extend");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.EXTEND);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
     this.genericTypeList = GenericTypeListExpression.read(this, lexer);
 

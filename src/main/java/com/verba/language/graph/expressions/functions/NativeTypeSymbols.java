@@ -2,6 +2,7 @@ package com.verba.language.graph.expressions.functions;
 
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,21 +13,19 @@ import java.util.Map;
 public class NativeTypeSymbols {
   public final Symbol UNIT;
   public final Symbol ASCII;
-  public final Symbol UTF8;
-  public final Symbol UTF16;
-  public final Symbol UTF32;
+  public final Symbol UTF;
+  public final Symbol INT;
 
   private final SymbolTable symbolTable;
   private final Map<String, Symbol> entriesByName = new HashMap<>();
 
   public NativeTypeSymbols(SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
-    this.UNIT = captureEntryByKey("unit");
+    this.UNIT = captureEntryByKey(KeywordToken.UNIT);
 
-    this.ASCII = captureEntryByKey("ascii");
-    this.UTF8 = captureEntryByKey("utf8");
-    this.UTF16 = captureEntryByKey("utf16");
-    this.UTF32 = captureEntryByKey("utf32");
+    this.ASCII = captureEntryByKey(KeywordToken.ASCII);
+    this.UTF = captureEntryByKey(KeywordToken.UTF);
+    this.INT = captureEntryByKey(KeywordToken.UTF);
   }
 
   private Symbol captureEntryByKey(String key) {

@@ -15,7 +15,7 @@ public class WithNsExpression extends VerbaExpression {
   public WithNsExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "withns");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.WITHNS);
     this.namespace = FullyQualifiedNameExpression.read(this, lexer);
   }
 

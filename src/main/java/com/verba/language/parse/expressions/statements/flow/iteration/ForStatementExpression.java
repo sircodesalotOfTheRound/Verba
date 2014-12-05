@@ -26,7 +26,7 @@ public class ForStatementExpression extends VerbaExpression {
   }
 
   private void readContent(Lexer lexer) {
-    lexer.readCurrentAndAdvance(KeywordToken.class, "for");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.FOR);
     lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
 
     this.variable = TypeDeclarationExpression.read(this, lexer);

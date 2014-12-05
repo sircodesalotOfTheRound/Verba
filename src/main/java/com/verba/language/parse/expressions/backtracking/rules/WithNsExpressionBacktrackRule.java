@@ -13,7 +13,7 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 public class WithNsExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return lexer.currentIs(KeywordToken.class, "withns");
+    return lexer.currentIs(KeywordToken.class, KeywordToken.WITHNS);
   }
 
   @Override

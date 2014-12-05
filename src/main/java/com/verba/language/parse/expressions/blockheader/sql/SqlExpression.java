@@ -15,7 +15,7 @@ public class SqlExpression extends VerbaExpression {
   private SqlExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readNext(KeywordToken.class, "sql");
+    lexer.readNext(KeywordToken.class, KeywordToken.SQL);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
     this.closeLexingRegion();

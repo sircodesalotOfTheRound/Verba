@@ -14,7 +14,7 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class MarkupDeclarationExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return lexer.currentIs(KeywordToken.class, "markup");
+    return lexer.currentIs(KeywordToken.class, KeywordToken.MARKUP);
   }
 
   @Override

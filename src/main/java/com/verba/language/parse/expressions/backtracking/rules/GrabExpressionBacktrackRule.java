@@ -6,6 +6,7 @@ import com.verba.language.parse.expressions.dependencies.GrabExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-5-20.
@@ -14,7 +15,7 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 public class GrabExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return lexer.currentIs(KeywordToken.class, "grab");
+    throw new NotImplementedException();
   }
 
   @Override

@@ -10,10 +10,17 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 /**
  * Created by sircodesalot on 14-2-23.
  */
+
+// This class doesn't make sense since the new declaration should be:
+//    inject class MyClass
+// not:
+//    injected class MyClass
+//
+@Deprecated
 public class InjectedClassDeclarationBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return restOfLine.startsWith(KeywordToken.class, "injected");
+    return restOfLine.startsWith(KeywordToken.class, KeywordToken.INJECT);
   }
 
   @Override

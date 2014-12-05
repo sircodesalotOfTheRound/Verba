@@ -26,7 +26,7 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   private void readExpression(Lexer lexer) {
-    lexer.readCurrentAndAdvance(KeywordToken.class, "val");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.VAL);
 
     this.isMutable = determineMutability(lexer);
     this.identifier = NamedValueExpression.read(this, lexer);
@@ -38,8 +38,8 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   private boolean determineMutability(Lexer lexer) {
-    if (lexer.currentIs(KeywordToken.class, "mut")) {
-      lexer.readCurrentAndAdvance(KeywordToken.class, "mut");
+    if (lexer.currentIs(KeywordToken.class, KeywordToken.MUT)) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.MUT);
       return true;
     } else {
       return false;

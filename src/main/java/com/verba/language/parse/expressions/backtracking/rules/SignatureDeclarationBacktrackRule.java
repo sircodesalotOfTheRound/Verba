@@ -13,7 +13,7 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 public class SignatureDeclarationBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return restOfLine.startsWith(KeywordToken.class, "signature");
+    return restOfLine.startsWith(KeywordToken.class, KeywordToken.SIGNATURE);
   }
 
   @Override

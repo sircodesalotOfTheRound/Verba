@@ -14,7 +14,7 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 public class NamespaceDeclarationBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return restOfLine.startsWith(KeywordToken.class, "namespace");
+    return restOfLine.startsWith(KeywordToken.class, KeywordToken.NAMESPACE);
   }
 
   @Override

@@ -17,7 +17,7 @@ public class ReturnStatementExpression extends VerbaExpression {
     super(parent, lexer);
 
     int currentLine = lexer.current().line();
-    lexer.readCurrentAndAdvance(KeywordToken.class, "return");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.RETURN);
 
     if (lexer.current().line() == currentLine) {
       this.value = RValueExpression.read(this, lexer);

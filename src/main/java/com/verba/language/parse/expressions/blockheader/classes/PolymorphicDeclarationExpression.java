@@ -44,8 +44,10 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   private PolymorphicDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    if (lexer.currentIs(KeywordToken.class, "class") || lexer.currentIs(KeywordToken.class, "trait")) {
-      lexer.readCurrentAndAdvance(KeywordToken.class, "class");
+    if (lexer.currentIs(KeywordToken.class, KeywordToken.CLASS)) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.CLASS);
+    } else if (lexer.currentIs(KeywordToken.class, KeywordToken.TRAIT)) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.TRAIT);
     }
 
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);

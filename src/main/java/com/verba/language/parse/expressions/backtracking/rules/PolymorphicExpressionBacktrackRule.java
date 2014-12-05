@@ -13,7 +13,8 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 public class PolymorphicExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return restOfLine.startsWith(KeywordToken.class, "class") || restOfLine.startsWith(KeywordToken.class, "trait");
+    return restOfLine.startsWith(KeywordToken.class, KeywordToken.CLASS)
+      || restOfLine.startsWith(KeywordToken.class, KeywordToken.TRAIT);
   }
 
   @Override

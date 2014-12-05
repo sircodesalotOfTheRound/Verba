@@ -24,7 +24,7 @@ public class MetaDeclarationExpression extends VerbaExpression implements NamedB
   public MetaDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, "meta");
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.META);
 
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
     this.genericTypeList = GenericTypeListExpression.read(this, lexer);
