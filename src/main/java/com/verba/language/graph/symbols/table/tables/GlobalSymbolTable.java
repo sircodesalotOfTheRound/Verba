@@ -9,14 +9,13 @@ import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDecla
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by sircodesalot on 14-5-16.
  */
-public class GlobalSymbolTable implements Serializable {
+public class GlobalSymbolTable {
   private static final QIterable<SymbolTableEntry> EMPTY_SET = new QList<>();
 
   private final ScopedSymbolTable rootTable;

@@ -10,6 +10,7 @@ import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.codestream.CodeStream;
 import com.verba.language.parse.codestream.FileBasedCodeStream;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
@@ -20,7 +21,9 @@ import java.io.InputStream;
 /**
  * A Codepage is a page of Verba Code.
  */
-public class VerbaCodePage extends VerbaExpression implements SymbolTableExpression {
+public class VerbaCodePage extends VerbaExpression
+  implements SymbolTableExpression, ExpressionSource
+{
   private VerbaCodePageBuildEventSubscription buildProfile = new VerbaCodePageBuildEventSubscription(this);
   private QList<VerbaExpression> childExpressions;
   private QIterable<VerbaExpression> allExpressions;
