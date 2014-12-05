@@ -6,6 +6,7 @@ import com.verba.language.graph.symbols.table.entries.SymbolTableEntry;
 import com.verba.language.graph.symbols.table.tables.GlobalSymbolTable;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
 /**
@@ -46,7 +47,7 @@ public class SymbolNameResolver {
 
   private VerbaCodePage discoverPage(ScopedSymbolTable scope) {
     if (scope.entries().any()) {
-      return scope.entries().first().page();
+      return (VerbaCodePage) scope.entries().first().source();
     } else {
       return discoverPage((VerbaCodePage)scope.header());
     }

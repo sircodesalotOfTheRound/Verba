@@ -5,6 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.tables.ScopedSymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class SymbolTableEntry implements Serializable {
   private final String name;
   private final ScopedSymbolTable table;
   private final VerbaExpression object;
-  private final VerbaCodePage page;
+  private final ExpressionSource source;
   private final String fqn;
   private final QList<SymbolTableMetadata> metadata = new QList<>();
 
@@ -24,7 +25,7 @@ public class SymbolTableEntry implements Serializable {
     this.name = name;
     this.table = table;
     this.object = object;
-    this.page = discoverPage(object);
+    this.source = discoverSource(object);
     this.fqn = determineFqn();
 
     for (SymbolTableMetadata item : metadata) {
@@ -58,17 +59,17 @@ public class SymbolTableEntry implements Serializable {
 
   public QIterable<SymbolTableMetadata> metadata() { return this.metadata; }
 
-  public VerbaCodePage page() { return this.page; }
+  public ExpressionSource source() { return this.source; }
 
-  private VerbaCodePage discoverPage(VerbaExpression object) {
+  private ExpressionSource discoverSource(VerbaExpression object) {
     if (object == null) {
       return null;
     }
 
-    if (object.is(VerbaCodePage.class)) {
-      return (VerbaCodePage)object;
+    if (object.is(ExpressionSource.class)) {
+      return (ExpressionSource)object;
     } else {
-      return discoverPage(object.parent());
+      return discoverSource(object.parent());
     }
   }
 
