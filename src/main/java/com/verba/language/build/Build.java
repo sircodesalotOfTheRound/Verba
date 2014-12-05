@@ -6,7 +6,7 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventLauncher;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.emit.verbatim.persist.VerbatimFileWriter;
+import com.verba.language.emit.verbatim.persist.VerbatimFileGenerator;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.codestream.StringBasedCodeStream;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
@@ -76,7 +76,7 @@ public class Build {
   public ObjectImageSet images() { return this.images; }
 
   public boolean save(String path) {
-    VerbatimFileWriter writer = new VerbatimFileWriter(this.images);
+    VerbatimFileGenerator writer = new VerbatimFileGenerator(this.images);
     return writer.save(path);
   }
 

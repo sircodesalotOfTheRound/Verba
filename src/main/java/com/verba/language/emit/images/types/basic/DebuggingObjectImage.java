@@ -23,28 +23,33 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
   }
 
   @Override
-  public void writeInt8(String label, int value) {
+  public ObjectImageOutputStream writeInt8(String label, int value) {
     printFormatted("\t[%s] \t%s", label, asHex(value));
+    return this;
   }
 
   @Override
-  public void writeInt16(String label, int value) {
+  public ObjectImageOutputStream writeInt16(String label, int value) {
     printFormatted("\t[%s] \t%s", label, asHex(value));
+    return this;
   }
 
   @Override
-  public void writeInt32(String label, int value) {
+  public ObjectImageOutputStream writeInt32(String label, int value) {
     printFormatted("\t[%s] \t%s", label, asHex(value));
+    return this;
   }
 
   @Override
-  public void writeInt64(String label, long value) {
+  public ObjectImageOutputStream writeInt64(String label, long value) {
     printFormatted("\t[%s] \t%s", label, asHex(value));
+    return this;
   }
 
   @Override
-  public void writeString(String label, String value) {
+  public ObjectImageOutputStream writeString(String label, String value) {
     printFormatted("\t[length:%s] \t%s%s", label, asHex(value.length()), value);
+    return this;
   }
 
   private void printFormatted(String format, Object ... args) {

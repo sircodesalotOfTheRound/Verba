@@ -2,6 +2,7 @@ package com.verba.language.emit.images.types.basic;
 
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
+import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -22,7 +23,9 @@ public class InMemoryObjectImage implements AppendableObjectImage {
     this.type = type;
   }
 
-  public int size() { return this.data.size(); }
+  public long size() {
+    return this.data.size();
+  }
 
 
   public byte[] data() {
@@ -44,30 +47,33 @@ public class InMemoryObjectImage implements AppendableObjectImage {
   }
 
   @Override
-  public void writeInt8(String label, int value) {
+  public ObjectImageOutputStream writeInt8(String label, int value) {
     if (isFrozen) {
       throw new NotImplementedException();
     }
 
     data.add((byte)value);
+    return this;
   }
 
   @Override
-  public void writeInt16(String label, int value) {
+  public ObjectImageOutputStream writeInt16(String label, int value) {
     writeInt8(null, (byte)(value & 0xFF));
     writeInt8(null, (byte)((value >> 8) & 0xFF));
+    return this;
   }
 
   @Override
-  public void writeInt32(String label, int value) {
+  public ObjectImageOutputStream writeInt32(String label, int value) {
     writeInt8(null, (byte)(value & 0xFF));
     writeInt8(null, (byte)((value >> 8) & 0xFF));
     writeInt8(null, (byte)((value >> 16) & 0xFF));
     writeInt8(null, (byte)((value >> 24) & 0xFF));
+    return this;
   }
 
   @Override
-  public void writeInt64(String label, long value) {
+  public ObjectImageOutputStream writeInt64(String label, long value) {
     writeInt8(null, (byte)(value & 0xFF));
     writeInt8(null, (byte)((value >> 8) & 0xFF));
     writeInt8(null, (byte)((value >> 16) & 0xFF));
@@ -76,15 +82,19 @@ public class InMemoryObjectImage implements AppendableObjectImage {
     writeInt8(null, (byte)((value >> 40) & 0xFF));
     writeInt8(null, (byte)((value >> 48) & 0xFF));
     writeInt8(null, (byte)((value >> 56) & 0xFF));
+
+    return this;
   }
 
   @Override
-  public void writeString(String label, String value) {
-      writeInt32(null, value.length());
+  public ObjectImageOutputStream writeString(String label, String value) {
+    writeInt32(null, value.length());
 
-      for (byte letter : value.getBytes()) {
-        writeInt8(null, letter);
-      }
+    for (byte letter : value.getBytes()) {
+      writeInt8(null, letter);
+    }
+
+    return this;
   }
 
   @Override

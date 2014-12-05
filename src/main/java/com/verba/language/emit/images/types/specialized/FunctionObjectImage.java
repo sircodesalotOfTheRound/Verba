@@ -58,7 +58,7 @@ public class FunctionObjectImage implements ObjectImage {
   public ImageType imageType() { return objectImage.imageType(); }
 
   @Override
-  public int size() { return objectImage.size(); }
+  public long size() { return objectImage.size(); }
 
   @Override
   public byte[] data() {

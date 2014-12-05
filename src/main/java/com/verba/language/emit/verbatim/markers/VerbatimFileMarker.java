@@ -1,4 +1,4 @@
-package com.verba.language.emit.verbatim.persist;
+package com.verba.language.emit.verbatim.markers;
 
 /**
  * File markers are used to set waypoints within a file so that they can be used again later.

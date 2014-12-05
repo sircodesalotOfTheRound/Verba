@@ -1,4 +1,4 @@
-package com.verba.language.emit.verbatim.symbols;
+package com.verba.language.emit.verbatim.images;
 
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
@@ -6,7 +6,7 @@ import com.verba.language.emit.images.interfaces.ObjectImage;
 /**
  * Created by sircodesalot on 14/12/5.
  */
-public class VerbatimSymbolTable implements ObjectImage {
+public class VerbatimSymbolTableImage implements ObjectImage {
   @Override
   public String name() { return null; }
 
@@ -14,7 +14,7 @@ public class VerbatimSymbolTable implements ObjectImage {
   public ImageType imageType() { return null; }
 
   @Override
-  public int size() { return 0; }
+  public long size() { return 0; }
 
   @Override
   public byte[] data() { return new byte[0]; }

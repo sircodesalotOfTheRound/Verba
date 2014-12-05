@@ -8,6 +8,6 @@ public interface ObjectImage {
   String name();
   ImageType imageType();
 
-  int size();
+  long size();
   byte[] data();
 }
