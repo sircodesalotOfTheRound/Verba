@@ -1,6 +1,8 @@
-package com.verba.language.emit.verbatim;
+package com.verba.language.emit.verbatim.persist;
 
 import com.verba.language.emit.images.ObjectImageSet;
+import com.verba.language.emit.images.interfaces.ImageType;
+import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
 
 import java.io.FileOutputStream;
@@ -27,7 +29,7 @@ public class VerbatimFileWriter {
   }
 
   private void emitFunctions(FileOutputStream stream) {
-    for (FunctionObjectImage image : this.images.ofType(FunctionObjectImage.class)) {
+    for (ObjectImage image : this.images.ofType(ImageType.FUNCTION)) {
       try { stream.write(image.data()); }
       catch (IOException ex) { }
     }
