@@ -1,6 +1,9 @@
 package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.build.BuildProfile;
+import com.verba.language.emit.header.StringTable;
+import com.verba.language.emit.header.StringTableEntry;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
@@ -43,6 +46,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private final VariableLifetimeGraph lifetimeGraph;
   private final StaticSpaceExpression staticSpaceExpression;
   private final SymbolTable symbolTable;
+  private final StringTable stringTable;
 
   private final FunctionContext context;
   private final FunctionOpCodeSet opcodes;
@@ -51,14 +55,15 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   private final ValNodeStatementProcessor valStatementProcessor;
   private final QuoteNodeProcessor quoteNodeProcessor;
 
-  public FunctionGraph(FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
+  public FunctionGraph(BuildProfile buildProfile, FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
     this.variableSet = new VirtualVariableStack(20);
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);
     this.staticSpaceExpression = staticSpaceExpression;
     this.symbolTable = symbolTable;
+    this.stringTable = buildProfile.stringTable();
     this.opcodes = new FunctionOpCodeSet();
-    this.context = new FunctionContext(this, staticSpaceExpression, symbolTable, variableSet, lifetimeGraph, opcodes);
+    this.context = new FunctionContext(this, buildProfile, staticSpaceExpression, symbolTable, variableSet, lifetimeGraph, opcodes);
 
     // Statement processors.
     this.valStatementProcessor = new ValNodeStatementProcessor(context);
@@ -125,24 +130,25 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   }
 
   private void visitMethodCall(FunctionCallFacade call) {
-      QIterable<SyntaxGraphNode> parametersAsFunctionElements
-        = call.primaryParameters().cast(SyntaxGraphNode.class);
+    QIterable<SyntaxGraphNode> parametersAsFunctionElements
+      = call.primaryParameters().cast(SyntaxGraphNode.class);
 
-      for (SyntaxGraphNode declaration : parametersAsFunctionElements) {
-        declaration.accept(this);
+    for (SyntaxGraphNode declaration : parametersAsFunctionElements) {
+      declaration.accept(this);
+    }
+
+    for (VerbaExpression expression : call.primaryParameters()) {
+      VirtualVariable variable = this.variableSet.variableByName(expression.text());
+      opcodes.stageArg(variable);
+
+      if (this.lifetimeGraph.isLastOccurance(expression)) {
+        // TODO: This is broken.
+        //this.variableSet.expireVariable(variable);
       }
+    }
 
-      for (VerbaExpression expression : call.primaryParameters()) {
-        VirtualVariable variable = this.variableSet.variableByName(expression.text());
-        opcodes.stageArg(variable);
-
-        if (this.lifetimeGraph.isLastOccurance(expression)) {
-          // TODO: This is broken.
-          //this.variableSet.expireVariable(variable);
-        }
-      }
-
-      opcodes.call(call.functionName());
+    StringTableEntry calledFunctionName = this.stringTable.add(call.functionName());
+    opcodes.call(calledFunctionName);
   }
 
   public void visit(AssignmentStatementExpression assignmentStatementExpression) {

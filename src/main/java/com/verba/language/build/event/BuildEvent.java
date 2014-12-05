@@ -1,6 +1,6 @@
 package com.verba.language.build.event;
 
-import com.verba.language.build.BuildAnalysis;
+import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
@@ -11,12 +11,12 @@ import com.verba.language.parse.expressions.StaticSpaceExpression;
 public interface BuildEvent {
 
   public interface NotifyParsingBuildEvent extends BuildEvent {
-    void afterParse(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis);
+    void afterParse(BuildProfile analysis, StaticSpaceExpression buildAnalysis);
   }
 
   public interface NotifySymbolTableBuildEvent extends BuildEvent {
-    void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis);
-    void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis);
+    void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyCodeOptimizationEvent extends BuildEvent {
@@ -24,11 +24,11 @@ public interface BuildEvent {
   }
 
   public interface NotifyCodeGenerationEvent extends BuildEvent {
-    void beforeCodeGeneration(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void beforeCodeGeneration(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyObjectEmitEvent extends BuildEvent {
-    ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis,
+    ObjectImage onGenerateObjectImage(BuildProfile buildProfile,
                               StaticSpaceExpression staticSpace,
                               SymbolTable symbolTable);
   }

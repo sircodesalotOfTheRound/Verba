@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.BuildAnalysis;
+import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.subscriptions.PolymorphicExpressionBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
@@ -88,13 +88,13 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
   // Build Events
   @Override
-  public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
+  public void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
     this.buildProfile.beforeSymbolTableAssociation(analysis, buildAnalysis);
   }
 
   @Override
-  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    this.buildProfile.afterSymbolTableAssociation(buildAnalysis, staticSpace, symbolTable);
+  public void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    this.buildProfile.afterSymbolTableAssociation(buildProfile, staticSpace, symbolTable);
   }
 
   // Accessors

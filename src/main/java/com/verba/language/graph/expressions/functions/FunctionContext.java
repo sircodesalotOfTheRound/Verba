@@ -1,5 +1,7 @@
 package com.verba.language.graph.expressions.functions;
 
+import com.verba.language.build.BuildProfile;
+import com.verba.language.emit.header.StringTable;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
@@ -21,14 +23,17 @@ public class FunctionContext {
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
   private final SymbolTable symbolTable;
+  private final StringTable stringTable;
 
   public FunctionContext(FunctionGraph functionGraph,
+                         BuildProfile buildProfile,
                          StaticSpaceExpression staticSpaceExpression,
                          SymbolTable symbolTable,
                          VirtualVariableStack variableStack,
                          VariableLifetimeGraph lifetimeGraph,
                          FunctionOpCodeSet opcodes) {
 
+    this.stringTable = buildProfile.stringTable();
     this.functionGraph = functionGraph;
     this.symbolTable = symbolTable;
     this.staticSpaceExpression = staticSpaceExpression;
@@ -42,6 +47,7 @@ public class FunctionContext {
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }
   public SymbolTable symbolTable() { return this.symbolTable; }
+  public StringTable stringTable() { return this.stringTable; }
 
   public void visit(SyntaxGraphNode node) { node.accept(functionGraph); }
   public VirtualVariable visitWithNewStackFrame(SyntaxGraphNode node) {

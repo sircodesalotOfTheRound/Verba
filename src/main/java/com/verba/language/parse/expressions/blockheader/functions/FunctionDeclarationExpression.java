@@ -1,7 +1,7 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.BuildAnalysis;
+import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.subscriptions.FunctionExpressionEventSubscription;
 import com.verba.language.emit.images.interfaces.ObjectImage;
@@ -63,18 +63,18 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   // Events
   @Override
-  public ObjectImage onGenerateObjectImage(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    return this.buildEvents.onGenerateObjectImage(buildAnalysis, staticSpace, symbolTable);
+  public ObjectImage onGenerateObjectImage(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    return this.buildEvents.onGenerateObjectImage(buildProfile, staticSpace, symbolTable);
   }
 
   @Override
-  public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) {
+  public void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
     buildEvents.beforeSymbolTableAssociation(analysis, buildAnalysis);
   }
 
   @Override
-  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    buildEvents.afterSymbolTableAssociation(buildAnalysis, staticSpace, symbolTable);
+  public void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    buildEvents.afterSymbolTableAssociation(buildProfile, staticSpace, symbolTable);
   }
 
   // Accessors

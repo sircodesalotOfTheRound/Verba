@@ -3,7 +3,7 @@ package com.verba.language.build.event.subscriptions;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
-import com.verba.language.build.BuildAnalysis;
+import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.ExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameResolver;
@@ -36,10 +36,10 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   }
 
   @Override
-  public void beforeSymbolTableAssociation(BuildAnalysis analysis, StaticSpaceExpression buildAnalysis) { }
+  public void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis) { }
 
   @Override
-  public void afterSymbolTableAssociation(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
     this.thisEntry = symbolTable.getByInstance(this.expression());
     this.traitEntries = determineTraitEntries(symbolTable);
@@ -64,7 +64,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   public QIterable<Symbol> traitEntries() { return this.traitEntries; }
 
   @Override
-  public void beforeCodeGeneration(BuildAnalysis buildAnalysis, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void beforeCodeGeneration(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
 
   }
 

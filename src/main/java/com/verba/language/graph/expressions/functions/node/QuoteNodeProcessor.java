@@ -1,5 +1,7 @@
 package com.verba.language.graph.expressions.functions.node;
 
+import com.verba.language.emit.header.StringTable;
+import com.verba.language.emit.header.StringTableEntry;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.FunctionContext;
@@ -13,12 +15,14 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
 public class QuoteNodeProcessor {
   private final FunctionContext context;
   private final VirtualVariableStack variableStack;
+  private final StringTable stringTable;
 
   private final Symbol UTF;
 
   public QuoteNodeProcessor(FunctionContext context) {
     this.context = context;
     this.variableStack = context.variableStack();
+    this.stringTable = context.stringTable();
     this.UTF = context.symbolTable().findSymbolForType(KeywordToken.UTF);
   }
 
@@ -33,6 +37,8 @@ public class QuoteNodeProcessor {
     }
 
     variableStack.setFrameReturnValue(variable);
-    context.opcodes().loadString(variable, expression.innerText());
+
+    StringTableEntry innerText = stringTable.add(expression.innerText());
+    context.opcodes().loadString(variable, innerText);
   }
 }

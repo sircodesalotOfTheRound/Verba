@@ -7,6 +7,7 @@ import com.verba.language.emit.images.interfaces.ObjectImage;
  * Created by sircodesalot on 14/12/5.
  */
 public class VerbatimSymbolTableImage implements ObjectImage {
+
   @Override
   public String name() { return null; }
 
@@ -18,4 +19,5 @@ public class VerbatimSymbolTableImage implements ObjectImage {
 
   @Override
   public byte[] data() { return new byte[0]; }
+
 }

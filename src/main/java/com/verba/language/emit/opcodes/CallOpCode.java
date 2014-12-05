@@ -1,6 +1,7 @@
 package com.verba.language.emit.opcodes;
 
 import com.javalinq.implementations.QList;
+import com.verba.language.emit.header.StringTableEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
 
@@ -11,17 +12,17 @@ public class CallOpCode extends VerbatimOpCodeBase {
   private static final int opNumber = 0x43;
   private static final String opName = "Call";
 
-  public String function;
+  public StringTableEntry function;
   public Iterable<VirtualVariable> variables;
 
-  public CallOpCode(String function, Iterable<VirtualVariable> variables) {
+  public CallOpCode(StringTableEntry function, Iterable<VirtualVariable> variables) {
     super(opNumber, opName);
 
     this.function = function;
     this.variables = variables;
   }
 
-  public CallOpCode(String function) {
+  public CallOpCode(StringTableEntry function) {
     this(function, new QList<>());
   }
 
@@ -30,7 +31,5 @@ public class CallOpCode extends VerbatimOpCodeBase {
     renderer.writeString("function_name", function);
   }
 
-  public String function() {
-    return this.function;
-  }
+  public StringTableEntry function() { return this.function; }
 }

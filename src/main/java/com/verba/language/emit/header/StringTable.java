@@ -10,24 +10,16 @@ import java.util.Map;
  */
 public class StringTable {
   private int index;
-  private final Map<String, Integer> stringTable = new HashMap<>();
+  private final Map<String, StringTableEntry> stringTable = new HashMap<>();
 
-  public void add(String string) {
+  public StringTableEntry add(String string) {
     if (!this.stringTable.containsKey(string)) {
-      this.stringTable.put(string, index++);
-    }
-  }
-
-  public boolean containsString(String string) {
-    return stringTable.containsKey(string);
-  }
-
-  public int getIndex(String string) {
-    if (!stringTable.containsKey(string)) {
-      stringTable.put(string, index++);
+      StringTableEntry newEntry = new StringTableEntry(string, index++);
+      this.stringTable.put(string, newEntry);
+      return new StringTableEntry(string, index - 1);
     }
 
-    return stringTable.get(string);
+    return this.stringTable.get(string);
   }
 
   public ObjectImage image() {

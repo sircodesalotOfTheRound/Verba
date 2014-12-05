@@ -18,14 +18,14 @@ import com.verba.language.parse.lexing.VerbaMemoizingLexer;
  * Created by sircodesalot on 14/11/20.
  */
 public class Build {
-  private BuildAnalysis buildAnalysis;
+  private BuildProfile buildProfile;
   private StaticSpaceExpression staticSpace;
   private SymbolTable symbolTable;
   private ObjectImageSet images;
 
   // TODO: Move build into a method, rather than part of the constructor.
   private Build(boolean isDebugBuild, VerbaCodePage page) {
-    this.buildAnalysis = new BuildAnalysis(isDebugBuild);
+    this.buildProfile = new BuildProfile(isDebugBuild);
     this.staticSpace = this.afterParse(page);
     this.symbolTable = this.beforeSymbolTableAssociation(staticSpace);
     this.beforeCodeGeneration();
@@ -37,7 +37,7 @@ public class Build {
     BuildEventLauncher<BuildEvent.NotifyParsingBuildEvent> launcher
       = new BuildEventLauncher<>(BuildEvent.NotifyParsingBuildEvent.class, staticSpace.allExpressions());
 
-    launcher.launchEvent(expression -> expression.afterParse(buildAnalysis, this.staticSpace));
+    launcher.launchEvent(expression -> expression.afterParse(buildProfile, this.staticSpace));
     return staticSpace;
   }
 
@@ -45,9 +45,9 @@ public class Build {
     BuildEventLauncher<BuildEvent.NotifySymbolTableBuildEvent> launcher
       = new BuildEventLauncher<>(BuildEvent.NotifySymbolTableBuildEvent.class, this.allExpressions());
 
-    launcher.launchEvent(expression -> expression.beforeSymbolTableAssociation(buildAnalysis, this.staticSpace));
+    launcher.launchEvent(expression -> expression.beforeSymbolTableAssociation(buildProfile, this.staticSpace));
     SymbolTable symbolTable = new SymbolTable(staticSpace);
-    launcher.launchEvent(expression -> expression.afterSymbolTableAssociation(buildAnalysis, this.staticSpace, symbolTable));
+    launcher.launchEvent(expression -> expression.afterSymbolTableAssociation(buildProfile, this.staticSpace, symbolTable));
 
     return symbolTable;
   }
@@ -56,7 +56,7 @@ public class Build {
     BuildEventLauncher<BuildEvent.NotifyCodeGenerationEvent> launcher
       = new BuildEventLauncher<>(BuildEvent.NotifyCodeGenerationEvent.class, this.allExpressions());
 
-    launcher.launchEvent(expression -> expression.beforeCodeGeneration(buildAnalysis, staticSpace, symbolTable));
+    launcher.launchEvent(expression -> expression.beforeCodeGeneration(buildProfile, staticSpace, symbolTable));
   }
 
   private ObjectImageSet generateObjectImages() {
@@ -64,7 +64,7 @@ public class Build {
       = new BuildEventLauncher<>(BuildEvent.NotifyObjectEmitEvent.class, this.allExpressions());
 
     QIterable<ObjectImage> images = launcher.launchEventWithResultValue(expression ->
-      expression.onGenerateObjectImage(buildAnalysis, staticSpace, symbolTable));
+      expression.onGenerateObjectImage(buildProfile, staticSpace, symbolTable));
 
     return new ObjectImageSet(images);
   }
@@ -75,9 +75,9 @@ public class Build {
 
   public ObjectImageSet images() { return this.images; }
 
-  public boolean save(String path) {
-    VerbatimFileGenerator writer = new VerbatimFileGenerator(this.images);
-    return writer.save(path);
+  public boolean saveAssembly(String path) {
+    VerbatimFileGenerator generator = new VerbatimFileGenerator(this.images);
+    return generator.save(path);
   }
 
   public static Build fromString(boolean isDebugBuild, String code) {

@@ -1,5 +1,6 @@
 package com.verba.language.emit.opcodes;
 
+import com.verba.language.emit.header.StringTableEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
 
@@ -11,21 +12,22 @@ public class LdStrOpCode extends VerbatimOpCodeBase {
   private static final String opName = "LdStr";
 
   private final VirtualVariable variable;
-  private final String text;
+  private final StringTableEntry string;
 
-  public LdStrOpCode(VirtualVariable variable, String text) {
+  public LdStrOpCode(VirtualVariable variable, StringTableEntry string) {
     super(opNumber, opName);
 
     this.variable = variable;
-    this.text = text;
+    this.string = string;
   }
 
   @Override
   public void render(ObjectImageOutputStream renderer) {
     renderer.writeInt8("varnum", variable.variableNumber());
-    renderer.writeString("text", text);
+    renderer.writeString("text", string);
   }
 
-  public String text() { return this.text; }
+  public String text() { return this.string.text(); }
+  public int index() { return this.string.index(); }
   public VirtualVariable variable() { return this.variable; }
 }

@@ -2,6 +2,7 @@ package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.emit.header.StringTableEntry;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 
@@ -32,11 +33,11 @@ public class FunctionOpCodeSet implements QIterable<VerbatimOpCodeBase> {
     add(VerbatimOpCodeBase.box(source, destination));
   }
 
-  public void call(String functionName) {
+  public void call(StringTableEntry functionName) {
     this.add(VerbatimOpCodeBase.call(functionName));
   }
 
-  public void call(String functionName, Iterable<VirtualVariable> variables) {
+  public void call(StringTableEntry functionName, Iterable<VirtualVariable> variables) {
     this.add(VerbatimOpCodeBase.call(functionName, variables));
   }
 
@@ -48,7 +49,7 @@ public class FunctionOpCodeSet implements QIterable<VerbatimOpCodeBase> {
     this.add(VerbatimOpCodeBase.ret());
   }
 
-  public void loadString(VirtualVariable variable, String text) {
+  public void loadString(VirtualVariable variable, StringTableEntry text) {
     this.add(VerbatimOpCodeBase.loadString(variable, text));
   }
 

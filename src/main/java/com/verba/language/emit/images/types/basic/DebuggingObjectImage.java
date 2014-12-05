@@ -1,5 +1,6 @@
 package com.verba.language.emit.images.types.basic;
 
+import com.verba.language.emit.header.StringTableEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 
@@ -47,8 +48,8 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
   }
 
   @Override
-  public ObjectImageOutputStream writeString(String label, String value) {
-    printFormatted("\t[length:%s] \t%s%s", label, asHex(value.length()), value);
+  public ObjectImageOutputStream writeString(String label, StringTableEntry value) {
+    printFormatted("\t[%s: %s] \t[index: %s]", label, value.text(), value.index());
     return this;
   }
 
