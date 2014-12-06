@@ -21,8 +21,7 @@ public class Sandbox {
     StringTableFqnEntry stringTableFqnEntry = stringTable.addFqn("first.second.third");
 
     QIterable<String> fqnUnits = stringTableFqnEntry.entries()
-      .map(StringTableStringEntry::index)
-      .map(Object::toString);
+      .map(entry -> String.format("[%s : %s]", entry.index(), stringTable.findByIndex(entry.index()).text()));
 
     String joinedFqn = String.join(".", fqnUnits);
 
