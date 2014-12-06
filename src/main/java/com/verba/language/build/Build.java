@@ -1,5 +1,6 @@
 package com.verba.language.build;
 
+import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.event.BuildEvent;
@@ -22,15 +23,34 @@ public class Build {
   private StaticSpaceExpression staticSpace;
   private SymbolTable symbolTable;
   private ObjectImageSet images;
+  private QIterable<BuildEvent> eventSubscribers;
 
   // TODO: Move build into a method, rather than part of the constructor.
   private Build(boolean isDebugBuild, VerbaCodePage page) {
     this.buildProfile = new BuildProfile(isDebugBuild);
     this.staticSpace = this.afterParse(page);
+    this.eventSubscribers = this.determineEventSubscribers();
     this.symbolTable = this.associateSymbols(staticSpace);
     this.validateBuild();
     this.beforeCodeGeneration();
     this.images = this.generateObjectImages();
+  }
+
+  private QIterable<BuildEvent> determineEventSubscribers() {
+    QIterable<BuildEvent> expressionsSubscribingToEvents =
+      this.staticSpace.allExpressions()
+        .ofType(BuildEvent.class);
+
+    QIterable<BuildEvent> expressionsWithDelegatingSubscriptionObject =
+      this.staticSpace.allExpressions()
+        .ofType(BuildEvent.ContainsEventSubscriptionObject.class)
+        .map(BuildEvent.ContainsEventSubscriptionObject::buildEventObject);
+
+    QSet<BuildEvent> allSubscribingObjects = new QSet<>();
+    allSubscribingObjects.add(expressionsSubscribingToEvents);
+    allSubscribingObjects.add(expressionsWithDelegatingSubscriptionObject);
+
+    return allSubscribingObjects;
   }
 
   private StaticSpaceExpression afterParse(VerbaCodePage page) {

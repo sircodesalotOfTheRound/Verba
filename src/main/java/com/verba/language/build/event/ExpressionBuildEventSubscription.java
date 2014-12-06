@@ -10,7 +10,7 @@ import com.verba.language.parse.expressions.VerbaExpression;
 /**
  * Created by sircodesalot on 14/11/22.
  */
-public abstract class ExpressionBuildEventSubscription<T> {
+public abstract class ExpressionBuildEventSubscription<T> implements BuildEventSubscriptionBase {
   private final ValidationViolationList violations = new ValidationViolationList();
   private final T expression;
 

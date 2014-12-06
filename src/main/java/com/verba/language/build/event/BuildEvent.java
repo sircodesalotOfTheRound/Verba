@@ -10,6 +10,12 @@ import com.verba.language.parse.expressions.StaticSpaceExpression;
  */
 public interface BuildEvent {
 
+  // This interface means that the object delegates event subscriptions
+  // to a separate handler object.
+  public interface ContainsEventSubscriptionObject {
+    BuildEventSubscriptionBase buildEventObject();
+  }
+
   public interface NotifyParsingBuildEvent extends BuildEvent {
     void afterParse(BuildProfile analysis, StaticSpaceExpression buildAnalysis);
   }
