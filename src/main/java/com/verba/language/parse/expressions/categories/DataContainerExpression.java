@@ -12,7 +12,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Represents some sort of non-polymorphic container object (Array, Tuple, Json, Set).
  */
-public interface DataContainerExpression {
+public interface DataContainerExpression extends ExpressionCategory {
 
   public QIterable<VerbaExpression> items();
 

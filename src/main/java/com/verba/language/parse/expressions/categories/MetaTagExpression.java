@@ -9,7 +9,7 @@ import com.verba.language.parse.lexing.Lexer;
 /**
  * Created by sircodesalot on 14-4-15.
  */
-public interface MetaTagExpression {
+public interface MetaTagExpression extends ExpressionCategory {
   public static BacktrackRuleSet<MetaTagExpression> metatags
     = new BacktrackRuleSet<MetaTagExpression>()
     .addRule(new HashtagDeclarationBacktrackRule())

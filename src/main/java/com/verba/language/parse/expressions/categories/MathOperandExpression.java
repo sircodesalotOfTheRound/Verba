@@ -8,7 +8,7 @@ import com.verba.language.parse.lexing.Lexer;
 /**
  * Created by sircodesalot on 14/9/18.
  */
-public interface MathOperandExpression {
+public interface MathOperandExpression extends ExpressionCategory {
   public static BacktrackRuleSet<MathOperandExpression> ruleset = new BacktrackRuleSet<>(RValueExpression.ruleset
     .where(rule -> !(rule instanceof MathExpressionBacktrackRule)));
 

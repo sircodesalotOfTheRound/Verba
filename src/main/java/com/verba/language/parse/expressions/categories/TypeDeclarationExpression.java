@@ -4,13 +4,12 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokenization.Token;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14-2-25.
  */
-public interface TypeDeclarationExpression extends Token {
+public interface TypeDeclarationExpression extends ExpressionCategory {
   public static TypeDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
       return FullyQualifiedNameExpression.read(parent, lexer);

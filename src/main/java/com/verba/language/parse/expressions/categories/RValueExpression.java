@@ -4,12 +4,11 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokenization.Token;
 
 /**
  * Created by sircodesalot on 14-2-19.
  */
-public interface RValueExpression extends TupleItemExpression, Token {
+public interface RValueExpression extends TupleItemExpression, ExpressionCategory {
   // LambdaExpression must come before CastedRValueExpression
   // CastedRValueExpression must come before ContainerExpression!
   public final static BacktrackRuleSet<RValueExpression> ruleset

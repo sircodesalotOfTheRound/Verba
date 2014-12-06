@@ -6,7 +6,7 @@ import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExp
 /**
  * Created by sircodesalot on 14/11/22.
  */
-public interface ParameterizedExpression {
+public interface ParameterizedExpression extends ExpressionCategory {
   boolean hasParameters();
   QIterable<TupleDeclarationExpression> parameterSets();
 }

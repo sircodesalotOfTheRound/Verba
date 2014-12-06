@@ -8,7 +8,7 @@ import com.verba.language.parse.lexing.Lexer;
 /**
  * Created by sircodesalot on 14-4-26.
  */
-public interface TupleItemExpression {
+public interface TupleItemExpression extends ExpressionCategory {
   static BacktrackRuleSet<TupleItemExpression> rules = new BacktrackRuleSet<TupleItemExpression>()
     .addRule(new RValueExpressionBacktrackRule());
 

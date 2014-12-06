@@ -9,7 +9,7 @@ import com.verba.language.parse.lexing.Lexer;
 /**
  * Created by sircodesalot on 14-5-21.
  */
-public interface MarkupRvalueExpression {
+public interface MarkupRvalueExpression extends ExpressionCategory {
   static final BacktrackRuleSet<MarkupRvalueExpression> rules
     = new BacktrackRuleSet<MarkupRvalueExpression>()
     .addRule(new LiteralExpressionRule())
