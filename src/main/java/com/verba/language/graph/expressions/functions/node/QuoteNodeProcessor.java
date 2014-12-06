@@ -1,7 +1,7 @@
 package com.verba.language.graph.expressions.functions.node;
 
 import com.verba.language.emit.header.StringTable;
-import com.verba.language.emit.header.StringTableEntry;
+import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.FunctionContext;
@@ -38,7 +38,7 @@ public class QuoteNodeProcessor {
 
     variableStack.setFrameReturnValue(variable);
 
-    StringTableEntry innerText = stringTable.add(expression.innerText());
+    StringTableStringEntry innerText = stringTable.addString(expression.innerText());
     context.opcodes().loadString(variable, innerText);
   }
 }

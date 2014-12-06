@@ -1,7 +1,7 @@
 package com.verba.language.emit.images.types.basic;
 
-import com.verba.language.emit.header.StringTable;
-import com.verba.language.emit.header.StringTableEntry;
+import com.verba.language.emit.header.StringTableFqnEntry;
+import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
@@ -89,8 +89,19 @@ public class InMemoryObjectImage implements AppendableObjectImage {
   }
 
   @Override
-  public ObjectImageOutputStream writeString(String label, StringTableEntry value) {
+  public ObjectImageOutputStream writeString(String label, StringTableStringEntry value) {
     writeInt32(null, value.index());
+    return this;
+  }
+
+  @Override
+  public ObjectImageOutputStream writeFqn(String label, StringTableFqnEntry value) {
+    writeInt8(label, value.length());
+
+    for (StringTableStringEntry entry : value.entries()) {
+      writeString(label, entry);
+    }
+
     return this;
   }
 

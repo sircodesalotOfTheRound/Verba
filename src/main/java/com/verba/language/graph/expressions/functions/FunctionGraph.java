@@ -3,7 +3,7 @@ package com.verba.language.graph.expressions.functions;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.header.StringTable;
-import com.verba.language.emit.header.StringTableEntry;
+import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
@@ -147,7 +147,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
       }
     }
 
-    StringTableEntry calledFunctionName = this.stringTable.add(call.functionName());
+    StringTableStringEntry calledFunctionName = this.stringTable.addString(call.functionName());
     opcodes.call(calledFunctionName);
   }
 

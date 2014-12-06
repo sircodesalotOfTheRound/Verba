@@ -1,5 +1,7 @@
 package com.verba.language.emit.header;
 
+import com.javalinq.implementations.QList;
+import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 
 import java.util.HashMap;
@@ -10,16 +12,23 @@ import java.util.Map;
  */
 public class StringTable {
   private int index;
-  private final Map<String, StringTableEntry> stringTable = new HashMap<>();
+  private final Map<String, StringTableStringEntry> stringTable = new HashMap<>();
 
-  public StringTableEntry add(String string) {
+  public StringTableStringEntry addString(String string) {
     if (!this.stringTable.containsKey(string)) {
-      StringTableEntry newEntry = new StringTableEntry(string, index++);
+      StringTableStringEntry newEntry = new StringTableStringEntry(string, index++);
       this.stringTable.put(string, newEntry);
-      return new StringTableEntry(string, index - 1);
+      return new StringTableStringEntry(string, index - 1);
     }
 
     return this.stringTable.get(string);
+  }
+
+  public StringTableFqnEntry addFqn(String fqn) {
+    QIterable<StringTableStringEntry> fqnList = new QList<>(fqn.split("\\."))
+      .map(this::addString);
+
+    return new StringTableFqnEntry(fqn, fqnList);
   }
 
   public ObjectImage image() {

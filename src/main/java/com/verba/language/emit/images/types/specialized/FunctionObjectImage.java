@@ -2,7 +2,7 @@ package com.verba.language.emit.images.types.specialized;
 
 import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.header.StringTable;
-import com.verba.language.emit.header.StringTableEntry;
+import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
@@ -19,7 +19,7 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
 public class FunctionObjectImage implements ObjectImage {
   private final FunctionGraph functionGraph;
   private final AppendableObjectImage objectImage;
-  private final StringTableEntry imageName;
+  private final StringTableStringEntry imageName;
   private final StringTable stringTable;
   private boolean isFrozen = false;
 
@@ -31,7 +31,7 @@ public class FunctionObjectImage implements ObjectImage {
 
     this.functionGraph = new FunctionGraph(buildProfile, declaration, symbolTable, staticSpace);
     this.stringTable = buildProfile.stringTable();
-    this.imageName = stringTable.add(declaration.name());
+    this.imageName = stringTable.addString(declaration.name());
     this.objectImage = new InMemoryObjectImage(declaration.name(), ImageType.FUNCTION);
   }
 
