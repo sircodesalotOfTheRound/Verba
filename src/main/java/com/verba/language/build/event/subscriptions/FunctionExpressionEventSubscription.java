@@ -23,12 +23,12 @@ public class FunctionExpressionEventSubscription extends ExpressionBuildEventSub
   }
 
   @Override
-  public void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
+  public void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
 
   }
 
   @Override
-  public void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.returnType = this.determineReturnType(symbolTable);
   }
 

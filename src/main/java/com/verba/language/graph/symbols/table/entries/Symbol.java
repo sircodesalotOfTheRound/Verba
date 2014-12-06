@@ -40,11 +40,11 @@ public class Symbol implements Serializable {
     return this.table;
   }
 
-  public VerbaExpression instance() {
+  public VerbaExpression expression() {
     return this.object;
   }
 
-  public <T> T instanceAs(Class<T> type) {
+  public <T> T expressionAs(Class<T> type) {
     return (T) this.object;
   }
 

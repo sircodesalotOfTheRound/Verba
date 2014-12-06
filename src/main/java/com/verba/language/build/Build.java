@@ -45,9 +45,9 @@ public class Build {
     BuildEventLauncher<BuildEvent.NotifySymbolTableBuildEvent> launcher
       = new BuildEventLauncher<>(BuildEvent.NotifySymbolTableBuildEvent.class, this.allExpressions());
 
-    launcher.launchEvent(expression -> expression.beforeSymbolTableAssociation(buildProfile, this.staticSpace));
+    launcher.launchEvent(expression -> expression.beforeSymbolsGenerated(buildProfile, this.staticSpace));
     SymbolTable symbolTable = new SymbolTable(staticSpace);
-    launcher.launchEvent(expression -> expression.afterSymbolTableAssociation(buildProfile, this.staticSpace, symbolTable));
+    launcher.launchEvent(expression -> expression.afterSymbolsGenerated(buildProfile, this.staticSpace, symbolTable));
 
     return symbolTable;
   }

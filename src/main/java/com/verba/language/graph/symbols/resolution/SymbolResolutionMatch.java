@@ -12,5 +12,5 @@ public class SymbolResolutionMatch {
     this.entry = entry;
   }
 
-  public Symbol entry() { return this.entry; }
+  public Symbol symbol() { return this.entry; }
 }

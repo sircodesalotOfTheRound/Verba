@@ -68,13 +68,13 @@ public class FunctionDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
-    buildEvents.beforeSymbolTableAssociation(analysis, buildAnalysis);
+  public void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
+    buildEvents.beforeSymbolsGenerated(analysis, buildAnalysis);
   }
 
   @Override
-  public void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    buildEvents.afterSymbolTableAssociation(buildProfile, staticSpace, symbolTable);
+  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    buildEvents.afterSymbolsGenerated(buildProfile, staticSpace, symbolTable);
   }
 
   // Accessors

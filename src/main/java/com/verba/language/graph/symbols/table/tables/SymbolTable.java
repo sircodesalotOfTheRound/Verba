@@ -59,7 +59,7 @@ public class SymbolTable {
   private void putEntry(Symbol entry) {
     String friendlyName = entry.name();
     String fqn = entry.fqn();
-    VerbaExpression instance = entry.instance();
+    VerbaExpression instance = entry.expression();
 
     // Add to all entry lists
     this.entries.add(entry);

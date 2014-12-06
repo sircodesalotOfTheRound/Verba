@@ -15,8 +15,8 @@ public interface BuildEvent {
   }
 
   public interface NotifySymbolTableBuildEvent extends BuildEvent {
-    void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis);
-    void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis);
+    void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyCodeOptimizationEvent extends BuildEvent {

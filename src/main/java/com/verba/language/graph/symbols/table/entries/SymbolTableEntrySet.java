@@ -24,7 +24,7 @@ public class SymbolTableEntrySet {
 
   public void add(Symbol entry) {
     String name = entry.name();
-    VerbaExpression instance = entry.instance();
+    VerbaExpression instance = entry.expression();
 
     // Add Entry List
     this.getEntryListByName(name).add(entry);

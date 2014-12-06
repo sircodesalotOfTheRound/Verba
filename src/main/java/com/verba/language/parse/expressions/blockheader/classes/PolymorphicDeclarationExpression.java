@@ -88,13 +88,13 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
   // Build Events
   @Override
-  public void beforeSymbolTableAssociation(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
-    this.buildProfile.beforeSymbolTableAssociation(analysis, buildAnalysis);
+  public void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
+    this.buildProfile.beforeSymbolsGenerated(analysis, buildAnalysis);
   }
 
   @Override
-  public void afterSymbolTableAssociation(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    this.buildProfile.afterSymbolTableAssociation(buildProfile, staticSpace, symbolTable);
+  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    this.buildProfile.afterSymbolsGenerated(buildProfile, staticSpace, symbolTable);
   }
 
   // Accessors

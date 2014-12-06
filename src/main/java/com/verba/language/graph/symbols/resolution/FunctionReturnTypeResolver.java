@@ -6,6 +6,7 @@ import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -26,21 +27,32 @@ public class FunctionReturnTypeResolver {
   public Symbol resolve() {
     SymbolNameResolver resolver = new SymbolNameResolver(symbolTable, scope);
 
+    // TODO: This is really not very thorough
+    // If there is a specific type constraint, return that.
     if (this.declaration.hasTypeConstraint()) {
-
-      // TODO: Native types should be added to symbol table.
-      /*if (isNativeType(this.declaration.typeConstraint())) {
-        return
-      }*/
-
-      QIterable<SymbolResolutionMatch> matches = resolver
-        .findSymbolsInScope(this.declaration.typeConstraint().representation());
+      QIterable<SymbolResolutionMatch> symbolsInScope =
+        resolver.findSymbolsInScope(this.declaration.typeConstraint().representation());
 
       this.hasConsistentReturnType = true;
-      return matches.single().entry();
+      return symbolsInScope.single().symbol();
     }
 
+    // If there isn't, check the return statements.
+    // If there are none, then return unit.
+    QIterable<ReturnStatementExpression> returnStatements = scanForReturnStatements();
+    if (!returnStatements.any()) {
+      return symbolTable.findSymbolForType("unit");
+    }
+
+    // Otherwise return the first entry:
     throw new NotImplementedException();
+  }
+
+  // Not very thorough, but it will work for now.
+  public QIterable<ReturnStatementExpression> scanForReturnStatements() {
+    return this.declaration.block()
+      .expressions()
+      .ofType(ReturnStatementExpression.class);
   }
 
   private boolean isNativeType(VerbaExpression constraint) {
