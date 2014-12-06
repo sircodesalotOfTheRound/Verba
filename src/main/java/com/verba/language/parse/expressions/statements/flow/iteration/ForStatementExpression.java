@@ -3,6 +3,7 @@ package com.verba.language.parse.expressions.statements.flow.iteration;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
+import com.verba.language.parse.expressions.categories.BranchExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
 import com.verba.language.parse.lexing.Lexer;
@@ -13,7 +14,9 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 /**
  * Created by sircodesalot on 14-2-25.
  */
-public class ForStatementExpression extends VerbaExpression {
+public class ForStatementExpression extends VerbaExpression
+  implements BranchExpression
+{
   private TypeDeclarationExpression variable;
   private RValueExpression spanExpression;
   private BlockDeclarationExpression block;
