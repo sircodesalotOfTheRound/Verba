@@ -7,6 +7,7 @@ import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -41,11 +42,11 @@ public class FunctionReturnTypeResolver {
     // If there are none, then return unit.
     QIterable<ReturnStatementExpression> returnStatements = scanForReturnStatements();
     if (!returnStatements.any()) {
-      return symbolTable.findSymbolForType("unit");
+      return symbolTable.findSymbolForType(KeywordToken.UNIT);
     }
 
     // Otherwise return the first entry:
-    throw new NotImplementedException();
+    return returnStatements.single().returnType();
   }
 
   // Not very thorough, but it will work for now.

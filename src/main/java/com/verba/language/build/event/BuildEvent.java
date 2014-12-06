@@ -15,8 +15,13 @@ public interface BuildEvent {
   }
 
   public interface NotifySymbolTableBuildEvent extends BuildEvent {
-    void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis);
-    void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void beforeSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace);
+    void afterSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+  }
+
+  public interface NotifyReadyToCompileEvent extends BuildEvent {
+    void validateReadyToCompile(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyCodeOptimizationEvent extends BuildEvent {
@@ -24,11 +29,11 @@ public interface BuildEvent {
   }
 
   public interface NotifyCodeGenerationEvent extends BuildEvent {
-    void beforeCodeGeneration(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void beforeCodeGeneration(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyObjectEmitEvent extends BuildEvent {
-    ObjectImage onGenerateObjectImage(BuildProfile buildProfile,
+    ObjectImage onGenerateObjectImage(BuildProfile profile,
                               StaticSpaceExpression staticSpace,
                               SymbolTable symbolTable);
   }

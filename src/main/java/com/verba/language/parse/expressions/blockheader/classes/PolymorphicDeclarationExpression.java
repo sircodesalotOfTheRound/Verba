@@ -97,6 +97,11 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     this.buildProfile.afterSymbolsGenerated(buildProfile, staticSpace, symbolTable);
   }
 
+  @Override
+  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    buildProfile.onResolveSymbols(profile, staticSpace, symbolTable);
+  }
+
   // Accessors
   public FullyQualifiedNameExpression declaration() {
     return this.identifier;

@@ -15,7 +15,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class GrabExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    throw new NotImplementedException();
+    return false;
   }
 
   @Override

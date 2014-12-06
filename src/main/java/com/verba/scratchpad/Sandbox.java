@@ -9,13 +9,13 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "fn my_function { val item = \"something\" val another = \"another\"}");
+    Build build = Build.fromString(true, "fn my_function { return }");
 
     FunctionDeclarationExpression my_function = build.symbolTable()
       .findAllMatchingFqn("my_function")
       .single()
       .expressionAs(FunctionDeclarationExpression.class);
 
-    System.out.println(my_function.returnType().fqn());
+    System.out.println("This function returns: " + my_function.returnType().fqn());
   }
 }

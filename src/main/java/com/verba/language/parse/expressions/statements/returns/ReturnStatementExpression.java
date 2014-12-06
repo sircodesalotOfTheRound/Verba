@@ -1,6 +1,12 @@
 package com.verba.language.parse.expressions.statements.returns;
 
+import com.verba.language.build.BuildProfile;
+import com.verba.language.build.event.BuildEvent;
+import com.verba.language.build.event.subscriptions.ReturnStatementEventSubscription;
+import com.verba.language.graph.symbols.table.entries.Symbol;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.lexing.Lexer;
@@ -10,8 +16,11 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
  * Created by sircodesalot on 14-2-22.
  */
 
-public class ReturnStatementExpression extends VerbaExpression {
+public class ReturnStatementExpression extends VerbaExpression
+  implements BuildEvent.NotifySymbolTableBuildEvent {
   private RValueExpression value;
+
+  public ReturnStatementEventSubscription eventSubscription = new ReturnStatementEventSubscription(this);
 
   public ReturnStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -43,4 +52,22 @@ public class ReturnStatementExpression extends VerbaExpression {
     visitor.visit(this);
   }
 
+  public Symbol returnType() {
+    return eventSubscription.returnType();
+  }
+
+  @Override
+  public void beforeSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace) {
+    eventSubscription.beforeSymbolsGenerated(profile, staticSpace);
+  }
+
+  @Override
+  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    eventSubscription.afterSymbolsGenerated(buildProfile, staticSpace, symbolTable);
+  }
+
+  @Override
+  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    eventSubscription.onResolveSymbols(profile, staticSpace, symbolTable);
+  }
 }

@@ -49,6 +49,11 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     this.symbolTableEntriesByName = this.allMembers.parition(Symbol::name);
   }
 
+  @Override
+  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+
+  }
+
   private QIterable<Symbol> determineTraitEntries(SymbolTable symbolTable) {
     SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.table());
 

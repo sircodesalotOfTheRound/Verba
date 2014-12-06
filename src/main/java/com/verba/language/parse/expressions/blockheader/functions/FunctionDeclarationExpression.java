@@ -77,6 +77,11 @@ public class FunctionDeclarationExpression extends VerbaExpression
     buildEvents.afterSymbolsGenerated(buildProfile, staticSpace, symbolTable);
   }
 
+  @Override
+  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+    buildEvents.onResolveSymbols(profile, staticSpace, symbolTable);
+  }
+
   // Accessors
   public boolean hasGenericParameters() {
     return this.primaryIdentifier().hasGenericParameters();
@@ -134,7 +139,5 @@ public class FunctionDeclarationExpression extends VerbaExpression
     symbolTable.visit(this);
   }
 
-  public Symbol returnType() {
-    return this.buildEvents.returnType();
-  }
+  public Symbol returnType() { return this.buildEvents.returnType(); }
 }

@@ -29,6 +29,10 @@ public class FunctionExpressionEventSubscription extends ExpressionBuildEventSub
 
   @Override
   public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  }
+
+  @Override
+  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.returnType = this.determineReturnType(symbolTable);
   }
 

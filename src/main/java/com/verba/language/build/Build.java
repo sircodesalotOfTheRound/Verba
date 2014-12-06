@@ -27,7 +27,8 @@ public class Build {
   private Build(boolean isDebugBuild, VerbaCodePage page) {
     this.buildProfile = new BuildProfile(isDebugBuild);
     this.staticSpace = this.afterParse(page);
-    this.symbolTable = this.beforeSymbolTableAssociation(staticSpace);
+    this.symbolTable = this.associateSymbols(staticSpace);
+    this.validateBuild();
     this.beforeCodeGeneration();
     this.images = this.generateObjectImages();
   }
@@ -41,15 +42,23 @@ public class Build {
     return staticSpace;
   }
 
-  private SymbolTable beforeSymbolTableAssociation(StaticSpaceExpression staticSpace) {
+  private SymbolTable associateSymbols(StaticSpaceExpression staticSpace) {
     BuildEventLauncher<BuildEvent.NotifySymbolTableBuildEvent> launcher
       = new BuildEventLauncher<>(BuildEvent.NotifySymbolTableBuildEvent.class, this.allExpressions());
 
     launcher.launchEvent(expression -> expression.beforeSymbolsGenerated(buildProfile, this.staticSpace));
     SymbolTable symbolTable = new SymbolTable(staticSpace);
     launcher.launchEvent(expression -> expression.afterSymbolsGenerated(buildProfile, this.staticSpace, symbolTable));
+    launcher.launchEvent(expression -> expression.onResolveSymbols(buildProfile, this.staticSpace, symbolTable));
 
     return symbolTable;
+  }
+
+  private void validateBuild() {
+    BuildEventLauncher<BuildEvent.NotifyReadyToCompileEvent> launcher
+      = new BuildEventLauncher<>(BuildEvent.NotifyReadyToCompileEvent.class, this.allExpressions());
+
+    launcher.launchEvent(expression -> expression.validateReadyToCompile(buildProfile, staticSpace, symbolTable));
   }
 
   private void beforeCodeGeneration() {
