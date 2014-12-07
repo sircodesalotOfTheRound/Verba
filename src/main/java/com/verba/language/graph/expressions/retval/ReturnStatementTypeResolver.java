@@ -1,13 +1,12 @@
 package com.verba.language.graph.expressions.retval;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.symbols.meta.ParameterSymbol;
+import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.NamedExpression;
@@ -69,7 +68,7 @@ public class ReturnStatementTypeResolver {
   private Symbol determineTypeForMatchingName(Symbol symbol) {
     // TODO: Since this is using a SymbolTableMatch upstream, should really use
     // TODO: SymbolTableMatch.isParameter()
-    if (symbol.metadata().ofType(ParameterSymbol.class).any()) {
+    if (symbol.metadata().ofType(ParameterSymbolMetadata.class).any()) {
       NamedValueExpression parameter = symbol.expressionAs(NamedValueExpression.class);
 
       // TODO: Make this work.
