@@ -8,23 +8,27 @@ import com.javalinq.interfaces.QIterable;
  */
 public class SymbolTableQuery {
   public String fqn;
-  public QList<String> genericParameterFqns;
-  public QList<String> parameterFqns;
+  public QList<String> genericParameterTypes;
+  public QList<String> parameterTypes;
 
   public SymbolTableQuery(String fqn) {
     this.fqn = fqn;
-    this.genericParameterFqns = new QList<>();
-    this.parameterFqns = new QList<>();
+    this.genericParameterTypes = new QList<>();
+    this.parameterTypes = new QList<>();
   }
 
-  public QIterable<String> genericParameterFqns() { return this.genericParameterFqns; }
-  public QIterable<String> parameterFqns() { return this.parameterFqns; }
+  public QIterable<String> genericParameterFqns() { return this.genericParameterTypes; }
+  public QIterable<String> parameterFqns() { return this.parameterTypes; }
 
-  public void addGenericParameterFqn(String fqn) {
-    this.genericParameterFqns.add(fqn);
+  public SymbolTableQuery addGenericParameterFqn(String type) {
+    this.genericParameterTypes.add(type);
+
+    return this;
   }
 
-  public void addParamterFqn(String fqn) {
-    this.parameterFqns.add(fqn);
+  public SymbolTableQuery addParamterFqn(String type) {
+    this.parameterTypes.add(type);
+
+    return this;
   }
 }
