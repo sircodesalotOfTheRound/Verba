@@ -41,7 +41,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class FunctionGraph implements SyntaxGraphVisitor {
+public class FunctionGraphVisitor implements SyntaxGraphVisitor {
   private final VirtualVariableStack variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
@@ -55,7 +55,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
 
   // Node processors
 
-  public FunctionGraph(BuildProfile buildProfile, FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
+  public FunctionGraphVisitor(BuildProfile buildProfile, FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
     this.variableSet = new VirtualVariableStack(20);
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);

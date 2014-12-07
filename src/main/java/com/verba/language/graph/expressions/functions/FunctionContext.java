@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.statements.declaration.ValDeclaratio
  * Created by sircodesalot on 14/10/3.
  */
 public class FunctionContext {
-  private final FunctionGraph functionGraph;
+  private final FunctionGraphVisitor functionGraphVisitor;
   private final StaticSpaceExpression staticSpaceExpression;
   private final VirtualVariableStack variableStack;
   private final VariableLifetimeGraph lifetimeGraph;
@@ -25,7 +25,7 @@ public class FunctionContext {
   private final SymbolTable symbolTable;
   private final StringTable stringTable;
 
-  public FunctionContext(FunctionGraph functionGraph,
+  public FunctionContext(FunctionGraphVisitor functionGraphVisitor,
                          BuildProfile buildProfile,
                          StaticSpaceExpression staticSpaceExpression,
                          SymbolTable symbolTable,
@@ -34,7 +34,7 @@ public class FunctionContext {
                          FunctionOpCodeSet opcodes) {
 
     this.stringTable = buildProfile.stringTable();
-    this.functionGraph = functionGraph;
+    this.functionGraphVisitor = functionGraphVisitor;
     this.symbolTable = symbolTable;
     this.staticSpaceExpression = staticSpaceExpression;
     this.variableStack = variableStack;
@@ -49,10 +49,10 @@ public class FunctionContext {
   public SymbolTable symbolTable() { return this.symbolTable; }
   public StringTable stringTable() { return this.stringTable; }
 
-  public void visit(SyntaxGraphNode node) { node.accept(functionGraph); }
+  public void visit(SyntaxGraphNode node) { node.accept(functionGraphVisitor); }
   public VirtualVariable visitWithNewStackFrame(SyntaxGraphNode node) {
     return variableStack.withNewStackFrame(x -> {
-      node.accept(functionGraph);
+      node.accept(functionGraphVisitor);
     });
   }
 

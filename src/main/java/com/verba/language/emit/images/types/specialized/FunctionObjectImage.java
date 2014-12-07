@@ -8,7 +8,7 @@ import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
-import com.verba.language.graph.expressions.functions.FunctionGraph;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
  * This facade makes it easier to write an object image.
  */
 public class FunctionObjectImage implements ObjectImage {
-  private final FunctionGraph functionGraph;
+  private final FunctionGraphVisitor functionGraphVisitor;
   private final AppendableObjectImage objectImage;
   private final StringTableStringEntry imageName;
   private final StringTable stringTable;
@@ -29,7 +29,7 @@ public class FunctionObjectImage implements ObjectImage {
                              SymbolTable symbolTable,
                              StringTable stringTable) {
 
-    this.functionGraph = new FunctionGraph(buildProfile, declaration, symbolTable, staticSpace);
+    this.functionGraphVisitor = new FunctionGraphVisitor(buildProfile, declaration, symbolTable, staticSpace);
     this.stringTable = buildProfile.stringTable();
     this.imageName = stringTable.addString(declaration.name());
     this.objectImage = new InMemoryObjectImage(declaration.name(), ImageType.FUNCTION);
@@ -38,7 +38,7 @@ public class FunctionObjectImage implements ObjectImage {
   private void generateOpCodeList() {
     objectImage.writeString("name", this.imageName);
 
-    for (VerbatimOpCodeBase opCode : functionGraph.opcodes()) {
+    for (VerbatimOpCodeBase opCode : functionGraphVisitor.opcodes()) {
       objectImage.writeInt8(null, opCode.opcodeNumber());
       opCode.render(objectImage);
     }
