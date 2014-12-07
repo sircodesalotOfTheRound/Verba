@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.backtracking.rules;
 
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.backtracking.BacktrackRule;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.expressions.rvalue.lambda.LambdaExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
@@ -20,7 +20,7 @@ public class LambdaExpressionBacktrackRule extends BacktrackRule {
     lexer.setUndoPoint();
 
     if (lexer.notEOF() && (lexer.currentIs(EnclosureToken.class, "(") || lexer.currentIs(IdentifierToken.class))) {
-        TypeDeclarationExpression.read(parent, lexer);
+        TypeConstraintExpression.read(parent, lexer);
     }
 
     if (lexer.notEOF() && (lexer.currentIs(LambdaToken.class))) {

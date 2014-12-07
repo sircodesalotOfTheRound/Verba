@@ -6,5 +6,5 @@ package com.verba.language.parse.expressions.categories;
 public interface TypedExpression extends ExpressionCategory {
   boolean hasTypeConstraint();
 
-  TypeDeclarationExpression typeConstraint();
+  TypeConstraintExpression typeConstraint();
 }

@@ -41,7 +41,7 @@ public class SymbolNameResolver {
       }
     }
 
-    return matchingEntries;
+    return matchingEntries.distinct(SymbolResolutionMatch::symbol);
   }
 
   private VerbaCodePage discoverPage(Scope scope) {

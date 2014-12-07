@@ -5,7 +5,7 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.categories.BranchExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
@@ -17,7 +17,7 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class ForStatementExpression extends VerbaExpression
   implements BranchExpression
 {
-  private TypeDeclarationExpression variable;
+  private TypeConstraintExpression variable;
   private RValueExpression spanExpression;
   private BlockDeclarationExpression block;
 
@@ -32,7 +32,7 @@ public class ForStatementExpression extends VerbaExpression
     lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.FOR);
     lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
 
-    this.variable = TypeDeclarationExpression.read(this, lexer);
+    this.variable = TypeConstraintExpression.read(this, lexer);
 
     lexer.readCurrentAndAdvance(OperatorToken.class, ":");
     this.spanExpression = RValueExpression.read(this, lexer);
@@ -46,7 +46,7 @@ public class ForStatementExpression extends VerbaExpression
     return new ForStatementExpression(parent, lexer);
   }
 
-  public TypeDeclarationExpression variable() {
+  public TypeConstraintExpression variable() {
     return this.variable;
   }
 

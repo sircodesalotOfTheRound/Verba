@@ -4,7 +4,7 @@ import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.MathOperandExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.IdentifierToken;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
@@ -15,7 +15,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by sircodesalot on 14-2-24.
  */
 public class NewExpression extends VerbaExpression implements RValueExpression, MathOperandExpression {
-  private TypeDeclarationExpression expression;
+  private TypeConstraintExpression expression;
 
   public NewExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -31,8 +31,8 @@ public class NewExpression extends VerbaExpression implements RValueExpression, 
     this.closeLexingRegion();
   }
 
-  private TypeDeclarationExpression parseExpression(Lexer lexer) {
-    if (lexer.currentIs(IdentifierToken.class)) return TypeDeclarationExpression.read(this, lexer);
+  private TypeConstraintExpression parseExpression(Lexer lexer) {
+    if (lexer.currentIs(IdentifierToken.class)) return TypeConstraintExpression.read(this, lexer);
     else throw new NotImplementedException();
   }
 
@@ -40,7 +40,7 @@ public class NewExpression extends VerbaExpression implements RValueExpression, 
     return new NewExpression(parent, lexer);
   }
 
-  public TypeDeclarationExpression expression() {
+  public TypeConstraintExpression expression() {
     return this.expression;
   }
 

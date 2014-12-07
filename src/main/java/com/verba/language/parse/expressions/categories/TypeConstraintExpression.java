@@ -9,8 +9,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14-2-25.
  */
-public interface TypeDeclarationExpression extends ExpressionCategory {
-  public static TypeDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
+public interface TypeConstraintExpression extends ExpressionCategory {
+  public static TypeConstraintExpression read(VerbaExpression parent, Lexer lexer) {
     if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
       return FullyQualifiedNameExpression.read(parent, lexer);
     } else if (TupleDeclarationExpression.isTupleTypeDeclaration(lexer)) {

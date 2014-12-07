@@ -40,7 +40,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   private final FunctionExpressionEventSubscription buildEvents = new FunctionExpressionEventSubscription(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
-  private TypeDeclarationExpression explicitReturnType;
+  private TypeConstraintExpression explicitReturnType;
 
   public FunctionDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -49,7 +49,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
     if (lexer.currentIs(OperatorToken.class, ":")) {
       lexer.readCurrentAndAdvance(OperatorToken.class, ":");
-      this.explicitReturnType = TypeDeclarationExpression.read(this, lexer);
+      this.explicitReturnType = TypeConstraintExpression.read(this, lexer);
     }
 
     this.block = BlockDeclarationExpression.read(this, lexer);
@@ -125,7 +125,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public TypeDeclarationExpression typeConstraint() {
+  public TypeConstraintExpression typeConstraint() {
     return this.explicitReturnType;
   }
 

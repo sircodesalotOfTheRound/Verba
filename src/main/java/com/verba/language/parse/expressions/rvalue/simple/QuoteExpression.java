@@ -5,7 +5,7 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.MathOperandExpression;
 import com.verba.language.parse.expressions.categories.NativeTypeExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.literals.QuoteToken;
@@ -48,7 +48,7 @@ public class QuoteExpression extends VerbaExpression
   }
 
   @Override
-  public TypeDeclarationExpression nativeTypeDeclaration() {
+  public TypeConstraintExpression nativeTypeDeclaration() {
     return VirtualMachineNativeTypes.UTF8;
   }
 

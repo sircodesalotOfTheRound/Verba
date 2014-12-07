@@ -46,7 +46,7 @@ public class NumericExpression extends VerbaExpression
   }
 
   @Override
-  public TypeDeclarationExpression nativeTypeDeclaration() {
+  public TypeConstraintExpression nativeTypeDeclaration() {
     return VirtualMachineNativeTypes.INT32_LITERAL;
   }
 

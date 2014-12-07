@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.IdentifierToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
@@ -15,7 +15,7 @@ import java.util.Iterator;
  * Created by sircodesalot on 14-2-24.
  */
 public class FullyQualifiedNameExpression extends VerbaExpression
-  implements TypeDeclarationExpression, QIterable<MemberExpression> {
+  implements TypeConstraintExpression, QIterable<MemberExpression> {
 
   QList<MemberExpression> fullyQualifiedName = new QList<MemberExpression>();
 

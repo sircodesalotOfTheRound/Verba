@@ -10,7 +10,7 @@ import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.SyntaxGraphNode;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 
 /**
@@ -57,7 +57,7 @@ public class FunctionContext {
   }
 
   // Todo: make this take more than just val declaration statements.
-  public TypeDeclarationExpression getObjectType(ValDeclarationStatement instance) { return null; }
+  public TypeConstraintExpression getObjectType(ValDeclarationStatement instance) { return null; }
 
   public VariableLifetime getVariableLifetime(VerbaExpression expression) { return lifetimeGraph.getVariableLifetime(expression); }
 }

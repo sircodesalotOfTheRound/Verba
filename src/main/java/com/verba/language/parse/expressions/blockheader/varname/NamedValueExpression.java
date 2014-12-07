@@ -17,7 +17,7 @@ public class NamedValueExpression extends VerbaExpression
     NamedAndTypedExpression, MathOperandExpression
 {
   private final FullyQualifiedNameExpression identifier;
-  private TypeDeclarationExpression type;
+  private TypeConstraintExpression type;
 
   public NamedValueExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -26,7 +26,7 @@ public class NamedValueExpression extends VerbaExpression
 
     if (lexer.currentIs(OperatorToken.class, ":")) {
       lexer.readCurrentAndAdvance(OperatorToken.class, ":");
-      this.type = TypeDeclarationExpression.read(this, lexer);
+      this.type = TypeConstraintExpression.read(this, lexer);
     }
 
     this.closeLexingRegion();
@@ -52,7 +52,7 @@ public class NamedValueExpression extends VerbaExpression
   }
 
   @Override
-  public TypeDeclarationExpression typeConstraint() {
+  public TypeConstraintExpression typeConstraint() {
     return this.type;
   }
 

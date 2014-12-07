@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.blockheader.generic.GenericTypeListE
 import com.verba.language.parse.expressions.categories.GenericallyParameterizedExpression;
 import com.verba.language.parse.expressions.categories.ParameterizedExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.expressions.members.MemberExpression;
@@ -39,7 +39,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
 
-  private QIterable<TypeDeclarationExpression> traits;
+  private QIterable<TypeConstraintExpression> traits;
 
   private PolymorphicDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -57,8 +57,8 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
-  private QIterable<TypeDeclarationExpression> readBaseTypes(Lexer lexer) {
-    QList<TypeDeclarationExpression> baseTypes = new QList<>();
+  private QIterable<TypeConstraintExpression> readBaseTypes(Lexer lexer) {
+    QList<TypeConstraintExpression> baseTypes = new QList<>();
 
     if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ":")) {
       lexer.readCurrentAndAdvance(OperatorToken.class, ":");
@@ -67,7 +67,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     }
 
     do {
-      baseTypes.add(TypeDeclarationExpression.read(this, lexer));
+      baseTypes.add(TypeConstraintExpression.read(this, lexer));
 
       // Read a comma if that's the next item, else break.
       if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ",")) {
@@ -121,7 +121,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
   public QIterable<Symbol> traitSymbolTableEntries() { return this.buildProfile.traitEntries(); }
 
-  public QIterable<TypeDeclarationExpression> traits() {
+  public QIterable<TypeConstraintExpression> traits() {
     return this.traits;
   }
 

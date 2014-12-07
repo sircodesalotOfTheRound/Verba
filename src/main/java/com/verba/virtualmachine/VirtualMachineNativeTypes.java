@@ -3,7 +3,7 @@ package com.verba.virtualmachine;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.NativeTypeExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -12,28 +12,28 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public final class VirtualMachineNativeTypes {
   // TODO: These items should be declared on the symbol table.
   // String Literal type.
-  public static final TypeDeclarationExpression UTF8 = new TypeDeclarationExpression() {
+  public static final TypeConstraintExpression UTF8 = new TypeConstraintExpression() {
     @Override
     public String representation() {
       return "utf8";
     }
   };
 
-  public static final TypeDeclarationExpression INT32_LITERAL = new TypeDeclarationExpression() {
+  public static final TypeConstraintExpression INT32_LITERAL = new TypeConstraintExpression() {
     @Override
     public String representation() {
       return "uint32";
     }
   };
 
-  public static final TypeDeclarationExpression UNIT_EXPRESSION = new TypeDeclarationExpression() {
+  public static final TypeConstraintExpression UNIT_EXPRESSION = new TypeConstraintExpression() {
     @Override
     public String representation() {
       return "unit";
     }
   };
 
-  public static final TypeDeclarationExpression BOX_UINT64 = new TypeDeclarationExpression() {
+  public static final TypeConstraintExpression BOX_UINT64 = new TypeConstraintExpression() {
     @Override
     public String representation() {
       return "box<uint64>";
@@ -46,7 +46,7 @@ public final class VirtualMachineNativeTypes {
     return false;
   }
 
-  public static TypeDeclarationExpression getTypeFromInstance(VerbaExpression expression) {
+  public static TypeConstraintExpression getTypeFromInstance(VerbaExpression expression) {
     if (!(expression instanceof NativeTypeExpression)) {
       throw new NotImplementedException();
     }

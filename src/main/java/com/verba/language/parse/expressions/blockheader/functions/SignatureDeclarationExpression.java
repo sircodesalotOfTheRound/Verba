@@ -20,7 +20,7 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   TypedExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 
   private final FullyQualifiedNameExpression identifier;
-  private TypeDeclarationExpression returnType;
+  private TypeConstraintExpression returnType;
 
   public SignatureDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -30,7 +30,7 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
 
     if (lexer.currentIs(OperatorToken.class, ":")) {
       lexer.readCurrentAndAdvance(OperatorToken.class, ":");
-      this.returnType = TypeDeclarationExpression.read(this, lexer);
+      this.returnType = TypeConstraintExpression.read(this, lexer);
     }
 
     this.closeLexingRegion();
@@ -72,7 +72,7 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   }
 
   @Override
-  public TypeDeclarationExpression typeConstraint() {
+  public TypeConstraintExpression typeConstraint() {
     return this.returnType;
   }
 

@@ -3,7 +3,7 @@ package com.verba.language.parse.expressions.statements.assignment;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.assignment.AssignmentToken;
@@ -14,14 +14,14 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-27.
  */
 public class AssignmentStatementExpression extends VerbaExpression {
-  TypeDeclarationExpression lvalue;
+  TypeConstraintExpression lvalue;
   LexInfo operation;
   RValueExpression rvalue;
 
   public AssignmentStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.lvalue = TypeDeclarationExpression.read(this, lexer);
+    this.lvalue = TypeConstraintExpression.read(this, lexer);
 
     if (lexer.currentIs(OperatorToken.class, "=")
       || lexer.currentIs(CompositeAssignmentToken.class)) {
@@ -37,7 +37,7 @@ public class AssignmentStatementExpression extends VerbaExpression {
     return new AssignmentStatementExpression(parent, lexer);
   }
 
-  public TypeDeclarationExpression lvalue() {
+  public TypeConstraintExpression lvalue() {
     return this.lvalue;
   }
 

@@ -6,7 +6,7 @@ import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.DataContainerExpression;
 import com.verba.language.parse.expressions.categories.TupleItemExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
@@ -15,7 +15,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14-2-24.
  */
-public class TupleDeclarationExpression extends VerbaExpression implements TypeDeclarationExpression,
+public class TupleDeclarationExpression extends VerbaExpression implements TypeConstraintExpression,
   DataContainerExpression {
 
   QList<VerbaExpression> tokens = new QList<>();

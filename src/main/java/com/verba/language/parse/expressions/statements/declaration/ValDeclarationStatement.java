@@ -65,7 +65,7 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   @Override
-  public TypeDeclarationExpression typeConstraint() {
+  public TypeConstraintExpression typeConstraint() {
     return this.identifier.typeConstraint();
   }
 

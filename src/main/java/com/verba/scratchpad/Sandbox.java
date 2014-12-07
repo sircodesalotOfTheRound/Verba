@@ -9,10 +9,10 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "fn second_function { } fn my_function { fn another_function() { return \"something\" } return 5 }");
+    Build build = Build.fromString(true, "fn second_function { val item : utf = \"something\" return item }");
 
     FunctionDeclarationExpression my_function = build.symbolTable()
-      .findAllMatchingFqn("my_function")
+      .findAllMatchingFqn("second_function")
       .single()
       .expressionAs(FunctionDeclarationExpression.class);
 

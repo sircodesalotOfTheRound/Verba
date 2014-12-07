@@ -13,7 +13,7 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 
 /**
  * Created by sircodesalot on 14/11/24.
@@ -58,7 +58,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
     SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.scope());
 
     QList<Symbol> entriesForTraits = new QList<>() ;
-    for (TypeDeclarationExpression expression : this.expression().traits()) {
+    for (TypeConstraintExpression expression : this.expression().traits()) {
       SymbolResolutionMatch match = nameResolver.findSymbolsInScope(expression.representation()).first();
       entriesForTraits.add(match.symbol());
     }

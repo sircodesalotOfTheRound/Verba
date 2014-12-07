@@ -3,7 +3,7 @@ package com.verba.language.parse.expressions.rvalue.lambda;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
-import com.verba.language.parse.expressions.categories.TypeDeclarationExpression;
+import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.lambda.LambdaToken;
@@ -12,13 +12,13 @@ import com.verba.language.parse.tokens.lambda.LambdaToken;
  * Created by sircodesalot on 14-2-28.
  */
 public class LambdaExpression extends VerbaExpression implements RValueExpression {
-  private TypeDeclarationExpression lvalue;
+  private TypeConstraintExpression lvalue;
   private RValueExpression rvalue;
 
   public LambdaExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.lvalue = TypeDeclarationExpression.read(this, lexer);
+    this.lvalue = TypeConstraintExpression.read(this, lexer);
 
     lexer.readCurrentAndAdvance(LambdaToken.class);
 
@@ -35,7 +35,7 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
     return new LambdaExpression(parent, lexer);
   }
 
-  public TypeDeclarationExpression lvalue() {
+  public TypeConstraintExpression lvalue() {
     return this.lvalue;
   }
 
