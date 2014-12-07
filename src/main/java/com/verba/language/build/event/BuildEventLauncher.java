@@ -12,7 +12,7 @@ import java.util.function.Function;
 public class BuildEventLauncher<T extends BuildEvent> {
   private final QIterable<T> expressions;
 
-  public BuildEventLauncher(Class<T> eventType, QIterable<VerbaExpression> expressions) {
+  public BuildEventLauncher(Class<T> eventType, QIterable<BuildEvent> expressions) {
     this.expressions = expressions.ofType(eventType);
   }
 

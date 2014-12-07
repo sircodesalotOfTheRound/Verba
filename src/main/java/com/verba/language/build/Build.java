@@ -28,8 +28,9 @@ public class Build {
   // TODO: Move build into a method, rather than part of the constructor.
   private Build(boolean isDebugBuild, VerbaCodePage page) {
     this.buildProfile = new BuildProfile(isDebugBuild);
-    this.staticSpace = this.afterParse(page);
+    this.staticSpace = new StaticSpaceExpression(page);
     this.eventSubscribers = this.determineEventSubscribers();
+    this.afterParse();
     this.symbolTable = this.associateSymbols(staticSpace);
     this.validateBuild();
     this.beforeCodeGeneration();
@@ -53,18 +54,16 @@ public class Build {
     return allSubscribingObjects;
   }
 
-  private StaticSpaceExpression afterParse(VerbaCodePage page) {
-    StaticSpaceExpression staticSpace = new StaticSpaceExpression(page);
+  private void afterParse() {
     BuildEventLauncher<BuildEvent.NotifyParsingBuildEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyParsingBuildEvent.class, staticSpace.allExpressions());
+      = new BuildEventLauncher<>(BuildEvent.NotifyParsingBuildEvent.class, eventSubscribers);
 
     launcher.launchEvent(expression -> expression.afterParse(buildProfile, this.staticSpace));
-    return staticSpace;
   }
 
   private SymbolTable associateSymbols(StaticSpaceExpression staticSpace) {
     BuildEventLauncher<BuildEvent.NotifySymbolTableBuildEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifySymbolTableBuildEvent.class, this.allExpressions());
+      = new BuildEventLauncher<>(BuildEvent.NotifySymbolTableBuildEvent.class, eventSubscribers);
 
     launcher.launchEvent(expression -> expression.beforeSymbolsGenerated(buildProfile, this.staticSpace));
     SymbolTable symbolTable = new SymbolTable(staticSpace);
@@ -76,21 +75,21 @@ public class Build {
 
   private void validateBuild() {
     BuildEventLauncher<BuildEvent.NotifyReadyToCompileEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyReadyToCompileEvent.class, this.allExpressions());
+      = new BuildEventLauncher<>(BuildEvent.NotifyReadyToCompileEvent.class, eventSubscribers);
 
     launcher.launchEvent(expression -> expression.validateReadyToCompile(buildProfile, staticSpace, symbolTable));
   }
 
   private void beforeCodeGeneration() {
     BuildEventLauncher<BuildEvent.NotifyCodeGenerationEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyCodeGenerationEvent.class, this.allExpressions());
+      = new BuildEventLauncher<>(BuildEvent.NotifyCodeGenerationEvent.class, eventSubscribers);
 
     launcher.launchEvent(expression -> expression.beforeCodeGeneration(buildProfile, staticSpace, symbolTable));
   }
 
   private ObjectImageSet generateObjectImages() {
     BuildEventLauncher<BuildEvent.NotifyObjectEmitEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyObjectEmitEvent.class, this.allExpressions());
+      = new BuildEventLauncher<>(BuildEvent.NotifyObjectEmitEvent.class, eventSubscribers);
 
     QIterable<ObjectImage> images = launcher.launchEventWithResultValue(expression ->
       expression.onGenerateObjectImage(buildProfile, staticSpace, symbolTable));
