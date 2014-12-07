@@ -2,19 +2,17 @@ package com.verba.language.build.event.subscriptions;
 
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.ExpressionBuildEventSubscription;
+import com.verba.language.build.event.BuildEventSubscription;
 import com.verba.language.graph.expressions.retval.ReturnStatementTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
-import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14/12/6.
  */
-public class ReturnStatementEventSubscription extends ExpressionBuildEventSubscription<ReturnStatementExpression>
+public class ReturnStatementEventSubscription extends BuildEventSubscription<ReturnStatementExpression>
   implements BuildEvent.NotifySymbolTableBuildEvent
 {
   private SymbolTable symbolTable;

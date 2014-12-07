@@ -74,6 +74,7 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
   public void visit(FunctionDeclarationExpression function) {
     add(function);
 
+    this.visitAll(function.parameterSets().flatten(TupleDeclarationExpression::items));
     this.visitAll(function.block());
   }
 

@@ -139,11 +139,11 @@ public class SymbolTable {
     return resolveScope(expression.parent());
   }
 
-  public Symbol getByIndex(int index) {
+  public Symbol findByIndex(int index) {
     return this.entries.get(index);
   }
 
-  public Symbol getByInstance(VerbaExpression instance) {
+  public Symbol findByInstance(VerbaExpression instance) {
     return this.entriesByInstance.get(instance);
   }
 

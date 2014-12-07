@@ -5,7 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.ExpressionBuildEventSubscription;
+import com.verba.language.build.event.BuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
@@ -18,7 +18,7 @@ import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 /**
  * Created by sircodesalot on 14/11/24.
  */
-public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEventSubscription<PolymorphicDeclarationExpression>
+public class PolymorphicBuildEventHandler extends BuildEventSubscription<PolymorphicDeclarationExpression>
   implements BuildEvent.NotifySymbolTableBuildEvent,
   BuildEvent.NotifyCodeGenerationEvent
 {
@@ -30,7 +30,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   private QIterable<Symbol> allMembers;
   private Partition<String, Symbol> symbolTableEntriesByName;
 
-  public PolymorphicExpressionBuildEventHandler(PolymorphicDeclarationExpression expression) {
+  public PolymorphicBuildEventHandler(PolymorphicDeclarationExpression expression) {
     super(expression);
 
   }
@@ -41,7 +41,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   @Override
   public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
-    this.thisEntry = symbolTable.getByInstance(this.expression());
+    this.thisEntry = symbolTable.findByInstance(this.expression());
     this.traitEntries = determineTraitEntries(symbolTable);
     this.traitEntriesByName = this.traitEntries.parition(Symbol::fqn);
     this.immediateMembers = determineImmediateMembers(this.expression());

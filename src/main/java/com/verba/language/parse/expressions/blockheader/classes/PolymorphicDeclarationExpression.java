@@ -2,15 +2,12 @@ package com.verba.language.parse.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscriptionBase;
-import com.verba.language.build.event.subscriptions.PolymorphicExpressionBuildEventHandler;
+import com.verba.language.build.event.subscriptions.PolymorphicBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.NamedBlockExpression;
@@ -36,7 +33,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   SymbolTableExpression,
   BuildEvent.ContainsEventSubscriptionObject
 {
-  private final PolymorphicExpressionBuildEventHandler eventSubscription = new PolymorphicExpressionBuildEventHandler(this);
+  private final PolymorphicBuildEventHandler eventSubscription = new PolymorphicBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
 

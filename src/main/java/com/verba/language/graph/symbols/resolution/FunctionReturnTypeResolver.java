@@ -21,7 +21,7 @@ public class FunctionReturnTypeResolver {
   public FunctionReturnTypeResolver(SymbolTable symbolTable, FunctionDeclarationExpression declaration) {
     this.symbolTable = symbolTable;
     this.declaration = declaration;
-    this.scope = symbolTable.getByInstance(declaration).scope();
+    this.scope = symbolTable.findByInstance(declaration).scope();
   }
 
   public Symbol resolve() {

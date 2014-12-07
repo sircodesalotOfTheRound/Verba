@@ -1,16 +1,12 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscriptionBase;
-import com.verba.language.build.event.subscriptions.FunctionExpressionEventSubscription;
-import com.verba.language.emit.images.interfaces.ObjectImage;
+import com.verba.language.build.event.subscriptions.FunctionEventSubscription;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.NamedBlockExpression;
@@ -37,7 +33,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
     BuildEvent.ContainsEventSubscriptionObject
 {
 
-  private final FunctionExpressionEventSubscription eventSubscription = new FunctionExpressionEventSubscription(this);
+  private final FunctionEventSubscription eventSubscription = new FunctionEventSubscription(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
   private TypeConstraintExpression explicitReturnType;

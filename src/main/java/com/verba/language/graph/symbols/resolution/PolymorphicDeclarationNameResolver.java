@@ -24,7 +24,7 @@ public class PolymorphicDeclarationNameResolver {
   public QIterable<Symbol> determineNamesInScope(PolymorphicDeclarationExpression declaration) {
     return declaration.block().expressions()
       .ofType(NamedExpression.class)
-      .map(expression -> this.symbolTable.getByInstance((VerbaExpression) expression));
+      .map(expression -> this.symbolTable.findByInstance((VerbaExpression) expression));
   }
 
   public PolymorphicDeclarationExpression declaration() { return declaration; }

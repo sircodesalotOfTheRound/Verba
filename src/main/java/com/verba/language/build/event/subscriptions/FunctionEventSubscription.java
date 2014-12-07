@@ -2,7 +2,7 @@ package com.verba.language.build.event.subscriptions;
 
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.ExpressionBuildEventSubscription;
+import com.verba.language.build.event.BuildEventSubscription;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
 import com.verba.language.graph.symbols.resolution.FunctionReturnTypeResolver;
@@ -14,11 +14,11 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
 /**
  * Created by sircodesalot on 14/11/23.
  */
-public class FunctionExpressionEventSubscription extends ExpressionBuildEventSubscription<FunctionDeclarationExpression>
+public class FunctionEventSubscription extends BuildEventSubscription<FunctionDeclarationExpression>
   implements BuildEvent.NotifySymbolTableBuildEvent, BuildEvent.NotifyObjectEmitEvent
 {
   private Symbol returnType;
-  public FunctionExpressionEventSubscription(FunctionDeclarationExpression expression) {
+  public FunctionEventSubscription(FunctionDeclarationExpression expression) {
     super(expression);
   }
 

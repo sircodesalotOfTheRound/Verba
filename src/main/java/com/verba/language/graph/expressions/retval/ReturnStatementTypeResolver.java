@@ -8,10 +8,7 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.parse.expressions.categories.LiteralExpression;
-import com.verba.language.parse.expressions.categories.NamedExpression;
-import com.verba.language.parse.expressions.categories.RValueExpression;
-import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
+import com.verba.language.parse.expressions.categories.*;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
@@ -66,17 +63,8 @@ public class ReturnStatementTypeResolver {
   }
 
   private Symbol determineTypeForMatchingName(Symbol symbol) {
-    if (symbol.isParameter()) {
-      NamedValueExpression parameter = symbol.expressionAs(NamedValueExpression.class);
-
-      // TODO: Make this work.
-      //return parameter.resolvedType();
-
-      if (parameter.hasTypeConstraint()) {
-        return symbolTable.findSymbolForType(parameter.typeConstraint().representation());
-      }
-
-      return symbolTable.findSymbolForType(KeywordToken.DYNAMIC);
+    if (symbol.is(TypedExpression.class)) {
+      return symbol.expressionAs(TypedExpression.class).resolvedType();
 
     } else if (symbol.expression() instanceof ValDeclarationStatement) {
       ValDeclarationStatement declaration = symbol.expressionAs(ValDeclarationStatement.class);

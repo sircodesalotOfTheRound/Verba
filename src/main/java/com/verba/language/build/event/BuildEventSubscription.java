@@ -10,16 +10,17 @@ import com.verba.language.parse.expressions.VerbaExpression;
 /**
  * Created by sircodesalot on 14/11/22.
  */
-public abstract class ExpressionBuildEventSubscription<T> implements BuildEventSubscriptionBase {
+public abstract class BuildEventSubscription<T> implements BuildEventSubscriptionBase {
   private final ValidationViolationList violations = new ValidationViolationList();
   private final T expression;
 
-  public ExpressionBuildEventSubscription(T expression) {
+  public BuildEventSubscription(T expression) {
     this.expression = expression;
   }
 
   public T expression() { return this.expression; }
 
+  // TODO: Move these to Build, so that violatins are collected into one location.
   public void addErrorViolation(VerbaExpression expression, String format, Object... args) {
     this.violations.addError(expression, format, args);
   }

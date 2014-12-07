@@ -5,7 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscriptionBase;
-import com.verba.language.build.event.subscriptions.StaticSpaceExpressionBuildEventSubscription;
+import com.verba.language.build.event.subscriptions.StaticSpaceBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
@@ -15,7 +15,7 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
  * Created by sircodesalot on 14-5-14.
  */
 public class StaticSpaceExpression extends VerbaExpression implements SymbolTableExpression, BuildEvent.ContainsEventSubscriptionObject {
-  private final StaticSpaceExpressionBuildEventSubscription buildProfile = new StaticSpaceExpressionBuildEventSubscription(this);
+  private final StaticSpaceBuildEventSubscription buildProfile = new StaticSpaceBuildEventSubscription(this);
   private final QList<VerbaExpression> allExpressions;
   private final Partition<Class, VerbaExpression> expressionsByType;
   private final QList<VerbaCodePage> pages;
