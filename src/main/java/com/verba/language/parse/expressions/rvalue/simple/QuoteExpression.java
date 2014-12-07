@@ -1,13 +1,12 @@
 package com.verba.language.parse.expressions.rvalue.simple;
 
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
-import com.verba.language.parse.expressions.categories.LiteralExpression;
-import com.verba.language.parse.expressions.categories.MathOperandExpression;
-import com.verba.language.parse.expressions.categories.NativeTypeExpression;
-import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
+import com.verba.language.parse.expressions.categories.*;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.literals.QuoteToken;
 import com.verba.virtualmachine.VirtualMachineNativeTypes;
 
@@ -15,7 +14,8 @@ import com.verba.virtualmachine.VirtualMachineNativeTypes;
  * Created by sircodesalot on 14-2-19.
  */
 public class QuoteExpression extends VerbaExpression
-  implements LiteralExpression, NativeTypeExpression, MathOperandExpression {
+  implements LiteralExpression, NativeTypeExpression, MathOperandExpression
+{
 
   private final LexInfo token;
 
@@ -51,5 +51,4 @@ public class QuoteExpression extends VerbaExpression
   public TypeConstraintExpression nativeTypeDeclaration() {
     return VirtualMachineNativeTypes.UTF8;
   }
-
 }

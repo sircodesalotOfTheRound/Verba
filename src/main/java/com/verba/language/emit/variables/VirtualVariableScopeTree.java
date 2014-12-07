@@ -2,7 +2,7 @@ package com.verba.language.emit.variables;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.variables.frame.VirtualVariableFrame;
+import com.verba.language.emit.variables.frame.VirtualVariableScope;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.tools.exceptions.CompilerException;
 
@@ -14,42 +14,42 @@ import java.util.function.Consumer;
 /**
  * Created by sircodesalot on 14/9/20.
  */
-public class VirtualVariableStack {
+public class VirtualVariableScopeTree {
   private static final Object EMPTY_OBJECT = new Object();
 
   private final VirtualVariable[] variableArray;
   private final Map<String, VirtualVariable> variablesByName = new HashMap<>();
   private final QSet<Integer> availableRegisters = new QSet<>();
   private final QSet<VirtualVariable> variableSet = new QSet<>();
-  private final Stack<VirtualVariableFrame> callFrames = new Stack<>();
+  private final Stack<VirtualVariableScope> scopes = new Stack<>();
   private final Map<VirtualVariable, VirtualVariable.VirtualVariableEventSubscription> eventsPerVariable = new HashMap<>();
 
-  public VirtualVariableStack(int size) {
+  public VirtualVariableScopeTree(int size) {
     this.variableArray = new VirtualVariable[size];
 
     for (int index = 0; index < size; index++) {
       this.availableRegisters.add(index);
     }
 
-    this.callFrames.push(new VirtualVariableFrame());
+    this.scopes.push(new VirtualVariableScope());
   }
 
-  public VirtualVariable addToFrame(String key, Symbol type) {
+  public VirtualVariable addtoScope(String key, Symbol type) {
     if (this.containsKey(key)) {
       throw new CompilerException("Key already exists");
     }
 
-    return addToFrame(key, type, nextAvailableIndex());
+    return addToScope(key, type, nextAvailableIndex());
   }
 
-  public VirtualVariable addToFrame(String key, Symbol type, int variableNumber) {
+  public VirtualVariable addToScope(String key, Symbol type, int variableNumber) {
     VirtualVariable variable = new VirtualVariable(key, variableNumber, type);
-    addToFrame(variable);
+    addToScope(variable);
 
     return variable;
   }
 
-  private void addToFrame(VirtualVariable variable) {
+  private void addToScope(VirtualVariable variable) {
     this.variableArray[variable.variableNumber()] = variable;
     this.variableSet.add(variable);
     this.variablesByName.put(variable.key(), variable);
@@ -61,7 +61,7 @@ public class VirtualVariableStack {
     VirtualVariable.VirtualVariableEventSubscription eventsForVariable = new VirtualVariable.VirtualVariableEventSubscription() {
       @Override
       public void onRenameVariable(VirtualVariable variable, String newKey) {
-        VirtualVariableStack.this.onVariableNameChange(variable, newKey);
+        VirtualVariableScopeTree.this.onVariableNameChange(variable, newKey);
       }
     };
 
@@ -88,10 +88,10 @@ public class VirtualVariableStack {
     return this.variableByName(key).type() == entry;
   }
 
-  public VirtualVariable withNewStackFrame(Consumer<Object> callback) {
-    this.pushFrame();
+  public VirtualVariable withNewVariableScope(Consumer<Object> callback) {
+    this.pushScope();
     callback.accept(EMPTY_OBJECT);
-    return this.popFrame();
+    return this.popScope();
   }
 
   public boolean containsKey(String key) {
@@ -99,16 +99,16 @@ public class VirtualVariableStack {
   }
 
 
-  public void pushFrame() {
-    this.callFrames.push(new VirtualVariableFrame());
+  public void pushScope() {
+    this.scopes.push(new VirtualVariableScope());
   }
 
-  public void setFrameReturnValue(VirtualVariable variable) {
-    this.callFrames.peek().setReturnValue(variable);
+  public void setScopeValue(VirtualVariable variable) {
+    this.scopes.peek().setScopeValue(variable);
   }
 
-  public VirtualVariable popFrame() {
-    VirtualVariableFrame frame = this.callFrames.pop();
+  public VirtualVariable popScope() {
+    VirtualVariableScope frame = this.scopes.pop();
 
     // Pop all variables from this frame execpt for the return value.
     QIterable<VirtualVariable> variablesExceptForReturnValue = frame.variables()
@@ -119,8 +119,8 @@ public class VirtualVariableStack {
     }
 
     // Move the return value down to the previous frame.
-    if (frame.hasReturnValue() && !this.callFrames.empty()) {
-      this.callFrames.peek().add(frame.returnValue());
+    if (frame.hasReturnValue() && !this.scopes.empty()) {
+      this.scopes.peek().add(frame.returnValue());
     }
 
     return frame.returnValue();

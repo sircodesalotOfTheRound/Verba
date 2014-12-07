@@ -7,8 +7,8 @@ import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
+import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessorFactory;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -40,7 +40,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by sircodesalot on 14/9/19.
  */
 public class FunctionGraphVisitor implements ExpressionTreeVisitor {
-  private final VirtualVariableStack variableSet;
+  private final VirtualVariableScopeTree variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
   private final StaticSpaceExpression staticSpaceExpression;
@@ -54,7 +54,7 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
   // Node processors
 
   public FunctionGraphVisitor(BuildProfile buildProfile, FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
-    this.variableSet = new VirtualVariableStack(20);
+    this.variableSet = new VirtualVariableScopeTree(20);
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);
     this.staticSpaceExpression = staticSpaceExpression;

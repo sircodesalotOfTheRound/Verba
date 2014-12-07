@@ -8,7 +8,7 @@ import com.verba.tools.exceptions.CompilerException;
 /**
  * Created by sircodesalot on 14/12/4.
  */
-public class VirtualVariableFrame {
+public class VirtualVariableScope {
   private final QList<VirtualVariable> variablesInFrame = new QList<>();
   private VirtualVariable returnValue;
 
@@ -22,7 +22,7 @@ public class VirtualVariableFrame {
 
   public VirtualVariable returnValue() { return this.returnValue; }
 
-  public void setReturnValue(VirtualVariable returnValue) {
+  public void setScopeValue(VirtualVariable returnValue) {
     if (hasReturnValue()) {
       throw new CompilerException("Return value has already been set");
     }
