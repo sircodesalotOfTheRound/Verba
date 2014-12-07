@@ -15,6 +15,7 @@ public class NativeTypeSymbols {
   public final Symbol ASCII;
   public final Symbol UTF;
   public final Symbol INT;
+  public final Symbol DYNAMIC;
 
   private final SymbolTable symbolTable;
   private final Map<String, Symbol> entriesByName = new HashMap<>();
@@ -26,6 +27,7 @@ public class NativeTypeSymbols {
     this.ASCII = captureEntryByKey(KeywordToken.ASCII);
     this.UTF = captureEntryByKey(KeywordToken.UTF);
     this.INT = captureEntryByKey(KeywordToken.INT);
+    this.DYNAMIC = captureEntryByKey(KeywordToken.DYNAMIC);
   }
 
   private Symbol captureEntryByKey(String key) {

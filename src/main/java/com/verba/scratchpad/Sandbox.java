@@ -8,7 +8,7 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "fn second_function { val item : utf = \"something\" return item }");
+    Build build = Build.fromString(true, "fn second_function(parameter) { return parameter }");
 
     FunctionDeclarationExpression my_function = build.symbolTable()
       .findAllMatchingFqn("second_function")

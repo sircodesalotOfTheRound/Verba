@@ -5,7 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.violations.ValidationViolation;
 import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
-import com.verba.language.graph.symbols.meta.ParameterSymbolTableItem;
+import com.verba.language.graph.symbols.meta.ParameterSymbol;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntrySet;
@@ -71,7 +71,7 @@ public class Scope {
         .flatten(TupleDeclarationExpression::items)
         .cast(NamedValueExpression.class);
 
-      this.visit(parameters);
+      this.visitCallParameters(parameters);
     }
 
     this.visitAll(blockHeader.block().expressions());
@@ -137,10 +137,10 @@ public class Scope {
     this.add(statement.name(), statement);
   }
 
-  public void visit(QIterable<NamedValueExpression> parameters) {
+  public void visitCallParameters(QIterable<NamedValueExpression> parameters) {
     // Then add regular parameterSets
     for (NamedValueExpression parameter : parameters) {
-      this.add(parameter.identifier().representation(), parameter, new ParameterSymbolTableItem());
+      this.add(parameter.identifier().representation(), parameter, new ParameterSymbol());
     }
   }
 

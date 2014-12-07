@@ -1,11 +1,13 @@
 package com.verba.language.graph.expressions.retval;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.symbols.meta.ParameterSymbol;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
+import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.NamedExpression;
@@ -48,24 +50,32 @@ public class ReturnStatementTypeResolver {
     }
 
     if (value instanceof NamedExpression) {
-      NamedValueExpression namedExpression = (NamedValueExpression)value;
-      SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, scope);
-      QIterable<SymbolResolutionMatch> symbolsInScope = nameResolver.findSymbolsInScope(namedExpression.name());
-
-      Symbol matchingName = determineMatchingSymbolForName(symbolsInScope);
+      NamedExpression namedExpression = (NamedExpression)value;
+      Symbol matchingName = determineMatchingSymbolForName(namedExpression.name());
       return determineTypeForMatchingName(matchingName);
     }
 
     throw new NotImplementedException();
   }
 
-  private Symbol determineMatchingSymbolForName(QIterable<SymbolResolutionMatch> symbolsInScope) {
+  private Symbol determineMatchingSymbolForName(String name) {
+    SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, scope);
+    QIterable<SymbolResolutionMatch> symbolsInScope = nameResolver.findSymbolsInScope(name);
+
     // TODO: Not by any means correct, but for now this will work.
     return symbolsInScope.first().symbol();
   }
 
   private Symbol determineTypeForMatchingName(Symbol symbol) {
-    if (symbol.expression() instanceof ValDeclarationStatement) {
+    if (symbol.metadata().ofType(ParameterSymbol.class).any()) {
+      NamedValueExpression parameter = symbol.expressionAs(NamedValueExpression.class);
+      if (parameter.hasTypeConstraint()) {
+        return determineMatchingSymbolForName(parameter.typeConstraint().representation());
+      }
+
+      return symbolTable.findSymbolForType(KeywordToken.DYNAMIC);
+
+    } else if (symbol.expression() instanceof ValDeclarationStatement) {
       ValDeclarationStatement declaration = symbol.expressionAs(ValDeclarationStatement.class);
       TypeConstraintExpression typeConstraint = declaration.typeConstraint();
 
