@@ -25,7 +25,7 @@ public class NativeTypeSymbols {
 
     this.ASCII = captureEntryByKey(KeywordToken.ASCII);
     this.UTF = captureEntryByKey(KeywordToken.UTF);
-    this.INT = captureEntryByKey(KeywordToken.UTF);
+    this.INT = captureEntryByKey(KeywordToken.INT);
   }
 
   private Symbol captureEntryByKey(String key) {

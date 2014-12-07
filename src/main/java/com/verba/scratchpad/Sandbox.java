@@ -9,7 +9,7 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "fn my_function { return }");
+    Build build = Build.fromString(true, "fn my_function { return 5 }");
 
     FunctionDeclarationExpression my_function = build.symbolTable()
       .findAllMatchingFqn("my_function")

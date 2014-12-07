@@ -3,6 +3,7 @@ package com.verba.language.build.event.subscriptions;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.ExpressionBuildEventSubscription;
+import com.verba.language.graph.expressions.retval.ReturnStatementTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
@@ -16,8 +17,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class ReturnStatementEventSubscription extends ExpressionBuildEventSubscription<ReturnStatementExpression>
   implements BuildEvent.NotifySymbolTableBuildEvent
 {
-  private Symbol returnType;
   private SymbolTable symbolTable;
+  private ReturnStatementTypeResolver typeResolver;
 
   public ReturnStatementEventSubscription(ReturnStatementExpression statement) {
     super(statement);
@@ -31,27 +32,16 @@ public class ReturnStatementEventSubscription extends ExpressionBuildEventSubscr
   @Override
   public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
+    this.typeResolver = new ReturnStatementTypeResolver(this.expression(), symbolTable);
   }
 
   @Override
   public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    this.returnType = this.determineReturnValue(symbolTable);
-  }
 
-  public Symbol determineReturnValue(SymbolTable symbolTable) {
-    if (!this.expression().hasValue()) {
-      return symbolTable.findSymbolForType(KeywordToken.UNIT);
-    }
-
-    throw new NotImplementedException();
   }
 
   public Symbol returnType() {
-    if (this.returnType == null) {
-      this.returnType = determineReturnValue(symbolTable);
-    }
-
-    return this.returnType;
+    return this.typeResolver.returnType();
   }
 
 }
