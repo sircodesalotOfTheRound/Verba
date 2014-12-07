@@ -1,5 +1,6 @@
 package com.verba.language.graph.symbols.resolution;
 
+import com.verba.language.graph.symbols.meta.ParameterSymbol;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 
 /**
@@ -13,4 +14,5 @@ public class SymbolResolutionMatch {
   }
 
   public Symbol symbol() { return this.entry; }
+  public boolean isParameter() { return this.entry.metadata().ofType(ParameterSymbol.class).any(); }
 }

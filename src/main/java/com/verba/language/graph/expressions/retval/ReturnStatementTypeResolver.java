@@ -67,6 +67,8 @@ public class ReturnStatementTypeResolver {
   }
 
   private Symbol determineTypeForMatchingName(Symbol symbol) {
+    // TODO: Since this is using a SymbolTableMatch upstream, should really use
+    // TODO: SymbolTableMatch.isParameter()
     if (symbol.metadata().ofType(ParameterSymbol.class).any()) {
       NamedValueExpression parameter = symbol.expressionAs(NamedValueExpression.class);
 
