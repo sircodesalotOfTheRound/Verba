@@ -3,6 +3,7 @@ package com.verba.language.graph.expressions.functions;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.header.StringTable;
+import com.verba.language.emit.header.StringTableFqnEntry;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
@@ -142,7 +143,7 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
       }
     }
 
-    StringTableStringEntry calledFunctionName = this.stringTable.addString(call.functionName());
+    StringTableFqnEntry calledFunctionName = this.stringTable.addFqn(call.functionName());
     opcodes.call(calledFunctionName);
   }
 

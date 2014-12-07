@@ -1,5 +1,6 @@
 package com.verba.language.emit.opcodes;
 
+import com.verba.language.emit.header.StringTableFqnEntry;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
@@ -30,11 +31,11 @@ public abstract class VerbatimOpCodeBase {
     return new BoxOpCode(source, destination);
   }
 
-  public static VerbatimOpCodeBase call(StringTableStringEntry functionName) {
+  public static VerbatimOpCodeBase call(StringTableFqnEntry functionName) {
     return new CallOpCode(functionName);
   }
 
-  public static VerbatimOpCodeBase call(StringTableStringEntry functionName, Iterable<VirtualVariable> variables) {
+  public static VerbatimOpCodeBase call(StringTableFqnEntry functionName, Iterable<VirtualVariable> variables) {
     return new CallOpCode(functionName, variables);
   }
 

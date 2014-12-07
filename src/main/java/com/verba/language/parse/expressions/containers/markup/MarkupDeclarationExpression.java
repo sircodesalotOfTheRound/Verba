@@ -26,17 +26,21 @@ public class MarkupDeclarationExpression extends VerbaExpression
     super(parent, lexer);
 
     lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.MARKUP);
-    if (lexer.currentIs(IdentifierToken.class)) {
-      this.name = FullyQualifiedNameExpression.read(this, lexer);
-    } else {
-      this.name = null;
-    }
+    this.name = determineName(lexer);
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, "{");
     this.tags = this.readAllTags(lexer);
     lexer.readCurrentAndAdvance(EnclosureToken.class, "}");
 
     this.closeLexingRegion();
+  }
+
+  private FullyQualifiedNameExpression determineName(Lexer lexer) {
+    if (lexer.currentIs(IdentifierToken.class)) {
+      return FullyQualifiedNameExpression.read(this, lexer);
+    } else {
+      return null;
+    }
   }
 
   private QIterable<VerbaExpression> readAllTags(Lexer lexer) {
