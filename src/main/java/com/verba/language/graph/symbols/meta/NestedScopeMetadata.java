@@ -6,14 +6,14 @@ import com.verba.language.graph.symbols.table.tables.Scope;
 /**
  * This is for items in a symbol table that themselves are a symbol table block.
  */
-public class NestedSymbolTableMetadata implements SymbolTableMetadata {
+public class NestedScopeMetadata implements SymbolTableMetadata {
   private final Scope nestedTable;
 
-  public NestedSymbolTableMetadata(Scope nestedTable) {
+  public NestedScopeMetadata(Scope nestedTable) {
     this.nestedTable = nestedTable;
   }
 
-  public Scope symbolTable() {
+  public Scope nestedScope() {
     return this.nestedTable;
   }
 

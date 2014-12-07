@@ -3,6 +3,7 @@ package com.verba.language.graph.symbols.table.tables;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.expressions.functions.NativeTypeSymbols;
+import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -126,7 +127,13 @@ public class SymbolTable {
     if (expression == null) {
       return null;
     } else if (this.entriesByInstance.containsKey(expression)) {
-      return this.entriesByInstance.get(expression).scope();
+      Symbol symbol = this.entriesByInstance.get(expression);
+
+      return symbol
+        .metadata()
+        .ofType(NestedScopeMetadata.class)
+        .single()
+        .nestedScope();
     }
 
     return resolveScope(expression.parent());

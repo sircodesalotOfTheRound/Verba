@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.violations.ValidationViolation;
 import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
-import com.verba.language.graph.symbols.meta.NestedSymbolTableMetadata;
+import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
 import com.verba.language.graph.symbols.meta.ParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
@@ -165,7 +165,7 @@ public class Scope {
   public void addNested(String name, NamedBlockExpression block) {
     Scope nestedTable = new Scope(this, block);
 
-    this.add(name, (VerbaExpression) block, new NestedSymbolTableMetadata(nestedTable));
+    this.add(name, (VerbaExpression) block, new NestedScopeMetadata(nestedTable));
     this.nestedTables.add(nestedTable);
   }
 
