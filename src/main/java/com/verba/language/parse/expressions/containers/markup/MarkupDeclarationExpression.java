@@ -8,6 +8,7 @@ import com.verba.language.parse.expressions.categories.MarkupTagExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.parse.tokens.identifiers.IdentifierToken;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
@@ -25,7 +26,11 @@ public class MarkupDeclarationExpression extends VerbaExpression
     super(parent, lexer);
 
     lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.MARKUP);
-    this.name = FullyQualifiedNameExpression.read(this, lexer);
+    if (lexer.currentIs(IdentifierToken.class)) {
+      this.name = FullyQualifiedNameExpression.read(this, lexer);
+    } else {
+      this.name = null;
+    }
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, "{");
     this.tags = this.readAllTags(lexer);
