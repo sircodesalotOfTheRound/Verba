@@ -3,6 +3,8 @@ package com.verba.language.parse.expressions.codepage;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
+import com.verba.language.build.event.BuildEvent;
+import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.VerbaCodePageBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.tools.SyntaxTreeFlattener;
@@ -22,7 +24,8 @@ import java.io.InputStream;
  * A Codepage is a page of Verba Code.
  */
 public class VerbaCodePage extends VerbaExpression
-  implements SymbolTableExpression, ExpressionSource
+  implements SymbolTableExpression, ExpressionSource,
+  BuildEvent.ContainsEventSubscriptionObject
 {
   private VerbaCodePageBuildEventSubscription buildProfile = new VerbaCodePageBuildEventSubscription(this);
   private QList<VerbaExpression> childExpressions;
@@ -115,4 +118,7 @@ public class VerbaCodePage extends VerbaExpression
   public void accept(Scope symbolTable) {
     symbolTable.visit(this);
   }
+
+  @Override
+  public BuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 }

@@ -4,6 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
+import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.PolymorphicExpressionBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -33,9 +34,9 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   ParameterizedExpression,
   GenericallyParameterizedExpression,
   SymbolTableExpression,
-  BuildEvent.NotifySymbolTableBuildEvent
+  BuildEvent.ContainsEventSubscriptionObject
 {
-  private final PolymorphicExpressionBuildEventHandler buildProfile = new PolymorphicExpressionBuildEventHandler(this);
+  private final PolymorphicExpressionBuildEventHandler eventSubscription = new PolymorphicExpressionBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
   private BlockDeclarationExpression block;
 
@@ -86,22 +87,6 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     return new PolymorphicDeclarationExpression(parent, lexer);
   }
 
-  // Build Events
-  @Override
-  public void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
-    this.buildProfile.beforeSymbolsGenerated(analysis, buildAnalysis);
-  }
-
-  @Override
-  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    this.buildProfile.afterSymbolsGenerated(buildProfile, staticSpace, symbolTable);
-  }
-
-  @Override
-  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    buildProfile.onResolveSymbols(profile, staticSpace, symbolTable);
-  }
-
   // Accessors
   public FullyQualifiedNameExpression declaration() {
     return this.identifier;
@@ -119,29 +104,29 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     return this.primaryIdentifier().genericParameterList();
   }
 
-  public QIterable<Symbol> traitSymbolTableEntries() { return this.buildProfile.traitEntries(); }
+  public QIterable<Symbol> traitSymbolTableEntries() { return this.eventSubscription.traitEntries(); }
 
   public QIterable<TypeConstraintExpression> traits() {
     return this.traits;
   }
 
-  public QIterable<Symbol> allMembers() { return this.buildProfile.allMembers(); }
+  public QIterable<Symbol> allMembers() { return this.eventSubscription.allMembers(); }
 
   // Membership
-  public QIterable<Symbol> immediateMembers() { return this.buildProfile.immediateMembers(); }
+  public QIterable<Symbol> immediateMembers() { return this.eventSubscription.immediateMembers(); }
 
-  public boolean isDerivedFrom(String name) { return buildProfile.isDerivedFrom(name); }
+  public boolean isDerivedFrom(String name) { return eventSubscription.isDerivedFrom(name); }
 
   public boolean isMember(String name) {
     return false;
   }
 
   public boolean isImmediateMember(String name) {
-    return buildProfile.isImmediateMember(name);
+    return eventSubscription.isImmediateMember(name);
   }
 
   public QIterable<Symbol> findMembersByName(String name) {
-    return buildProfile.findMembersByName(name);
+    return eventSubscription.findMembersByName(name);
   }
 
   @Override
@@ -188,4 +173,6 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   public QIterable<TupleDeclarationExpression> parameterSets() { return this.primaryIdentifier().parameterLists(); }
 
 
+  @Override
+  public BuildEventSubscriptionBase buildEventObject() { return eventSubscription; }
 }

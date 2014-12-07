@@ -2,6 +2,7 @@ package com.verba.language.parse.expressions.statements.returns;
 
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
+import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.ReturnStatementEventSubscription;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -17,7 +18,8 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
  */
 
 public class ReturnStatementExpression extends VerbaExpression
-  implements BuildEvent.NotifySymbolTableBuildEvent {
+  implements BuildEvent.ContainsEventSubscriptionObject
+{
   private RValueExpression value;
 
   public ReturnStatementEventSubscription eventSubscription = new ReturnStatementEventSubscription(this);
@@ -55,19 +57,6 @@ public class ReturnStatementExpression extends VerbaExpression
   public Symbol returnType() {
     return eventSubscription.returnType();
   }
-
   @Override
-  public void beforeSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace) {
-    eventSubscription.beforeSymbolsGenerated(profile, staticSpace);
-  }
-
-  @Override
-  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    eventSubscription.afterSymbolsGenerated(buildProfile, staticSpace, symbolTable);
-  }
-
-  @Override
-  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-    eventSubscription.onResolveSymbols(profile, staticSpace, symbolTable);
-  }
+  public BuildEventSubscriptionBase buildEventObject() { return this.eventSubscription; }
 }
