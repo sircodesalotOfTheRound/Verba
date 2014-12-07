@@ -2,17 +2,16 @@ package com.verba.language.graph.expressions.functions.node;
 
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
+import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.visitors.SyntaxGraphNode;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 
 /**
  * Used to process val declaration statements found during the function graph processing.
  */
-public class ValNodeStatementProcessor {
-  private final FunctionContext context;
-
+public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationStatement> {
   public ValNodeStatementProcessor(FunctionContext context) {
-    this.context = context;
+    super(context);
   }
 
   public void process(ValDeclarationStatement declaration) {

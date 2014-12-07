@@ -11,6 +11,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.node.QuoteNodeProcessor;
 import com.verba.language.graph.expressions.functions.node.ValNodeStatementProcessor;
+import com.verba.language.graph.expressions.functions.tools.NodeProcessorFactory;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -50,10 +51,9 @@ public class FunctionGraph implements SyntaxGraphVisitor {
 
   private final FunctionContext context;
   private final FunctionOpCodeSet opcodes;
+  private final NodeProcessorFactory nodeProcessors;
 
   // Node processors
-  private final ValNodeStatementProcessor valStatementProcessor;
-  private final QuoteNodeProcessor quoteNodeProcessor;
 
   public FunctionGraph(BuildProfile buildProfile, FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
     this.variableSet = new VirtualVariableStack(20);
@@ -64,10 +64,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
     this.stringTable = buildProfile.stringTable();
     this.opcodes = new FunctionOpCodeSet();
     this.context = new FunctionContext(this, buildProfile, staticSpaceExpression, symbolTable, variableSet, lifetimeGraph, opcodes);
-
-    // Statement processors.
-    this.valStatementProcessor = new ValNodeStatementProcessor(context);
-    this.quoteNodeProcessor = new QuoteNodeProcessor(context);
+    this.nodeProcessors = new NodeProcessorFactory(context);
 
     System.out.println(function.text());
     System.out.println();
@@ -156,22 +153,12 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   }
 
   public void visit(NumericExpression expression) {
-    VariableLifetime variableLifetime = lifetimeGraph.getVariableLifetime(expression);
-
-    /*if (variableLifetime.isFirstInstance(expression)) {
-      this.symbolTable.getByFqn()
-
-      VirtualVariable source = variableSet.add(expression, this.staticSpaceExpression);
-      VirtualVariable destination = variableSet.add(expression, VirtualMachineNativeTypes.BOX_UINT64);
-
-      opcodes.add(VerbatimOpCodeBase.loaduint64(source, expression.asLong()));
-      opcodes.add(VerbatimOpCodeBase.box(source, destination));
-    }*/
+    this.nodeProcessors.process(expression);
   }
 
   @Override
   public void visit(ValDeclarationStatement statement) {
-    valStatementProcessor.process(statement);
+    this.nodeProcessors.process(statement);
   }
 
   @Override
@@ -209,7 +196,7 @@ public class FunctionGraph implements SyntaxGraphVisitor {
   }
 
   public void visit(QuoteExpression expression) {
-    quoteNodeProcessor.process(expression);
+    this.nodeProcessors.process(expression);
   }
 
   public Iterable<VerbatimOpCodeBase> opcodes() { return this.opcodes; }
