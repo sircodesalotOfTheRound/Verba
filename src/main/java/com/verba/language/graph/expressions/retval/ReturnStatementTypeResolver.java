@@ -74,7 +74,7 @@ public class ReturnStatementTypeResolver {
       //return parameter.resolvedType();
 
       if (parameter.hasTypeConstraint()) {
-        return determineMatchingSymbolForName(parameter.typeConstraint().representation());
+        return symbolTable.findSymbolForType(parameter.typeConstraint().representation());
       }
 
       return symbolTable.findSymbolForType(KeywordToken.DYNAMIC);
