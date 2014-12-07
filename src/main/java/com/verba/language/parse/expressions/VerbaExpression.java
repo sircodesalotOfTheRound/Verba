@@ -33,6 +33,7 @@ public abstract class VerbaExpression implements SyntaxGraphNode {
     .addRule(new HashtagDeclarationBacktrackRule())
     .addRule(new AspectDeclarationBacktrackRule())
     .addRule(new ReturnStatementRule())
+    .addRule(new DeclarationModifierBacktrackRule())
     .addRule(new CatchAllBacktrackRule());
 
   private VerbaExpression parent;

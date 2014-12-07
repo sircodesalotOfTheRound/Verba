@@ -25,6 +25,7 @@ import com.verba.language.parse.expressions.categories.ParameterizedExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
+import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 
 
@@ -125,6 +126,14 @@ public class Scope {
     // Add generic parameterSets
     for (NamedValueExpression genericParam : genericParameters) {
       this.add(genericParam.identifier().representation(), genericParam, new GenericParameterSymbolTableItem());
+    }
+  }
+
+  public void visit(DeclarationModifierExrpression declarationModifierExrpression) {
+    VerbaExpression expression = declarationModifierExrpression.modifiedExpression();
+
+    if (expression instanceof SymbolTableExpression) {
+      ((SymbolTableExpression)expression).accept(this);
     }
   }
 
@@ -254,4 +263,5 @@ public class Scope {
       expression.accept(this);
     }
   }
+
 }

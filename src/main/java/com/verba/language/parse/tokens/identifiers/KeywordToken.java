@@ -209,16 +209,16 @@ public class KeywordToken extends IdentifierToken {
     return super.representation;
   }
 
-  public static boolean isKeyword(String text) {
-    return KeywordToken.keywords.contains(text);
+  public static boolean isKeyword(String representation) {
+    return KeywordToken.keywords.contains(representation);
   }
 
-  public static boolean isAccessModifierKeyword(String fqn) {
-    return KeywordToken.accessModifiers.contains(fqn);
+  public static boolean isAccessModifierKeyword(String representation) {
+    return KeywordToken.accessModifiers.contains(representation);
   }
 
-  public static boolean isNativeTypeKeyword(String fqn) {
-    return KeywordToken.vmTypes.contains(fqn);
+  public static boolean isNativeTypeKeyword(String representation) {
+    return KeywordToken.vmTypes.contains(representation);
   }
 }
 

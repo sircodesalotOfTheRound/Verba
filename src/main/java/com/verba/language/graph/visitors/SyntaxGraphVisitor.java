@@ -11,6 +11,7 @@ import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExp
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
+import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
@@ -55,4 +56,6 @@ public interface SyntaxGraphVisitor {
   void visit(WithNsExpression withNsExpression);
 
   void visit(MarkupDeclarationExpression markupDeclarationExpression);
+
+  void visit(DeclarationModifierExrpression declarationModifierExrpression);
 }

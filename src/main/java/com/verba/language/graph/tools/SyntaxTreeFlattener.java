@@ -15,6 +15,7 @@ import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExp
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
+import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
@@ -141,6 +142,11 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
   @Override
   public void visit(MarkupDeclarationExpression markupDeclarationExpression) {
     add(markupDeclarationExpression);
+  }
+
+  @Override
+  public void visit(DeclarationModifierExrpression declarationModifierExrpression) {
+    declarationModifierExrpression.modifiedExpression().accept(this);
   }
 
   public <T extends VerbaExpression> void visitAll(Iterable<T> expressions) {

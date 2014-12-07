@@ -30,6 +30,7 @@ import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.facades.FunctionCallFacade;
+import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
@@ -166,6 +167,11 @@ public class FunctionGraphVisitor implements SyntaxGraphVisitor {
 
   @Override
   public void visit(MarkupDeclarationExpression markupDeclarationExpression) {
+
+  }
+
+  @Override
+  public void visit(DeclarationModifierExrpression declarationModifierExrpression) {
 
   }
 
