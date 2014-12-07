@@ -1,4 +1,6 @@
 fn main() {
   val item = "Something"
-  print(item)
+  val second = "OtherThing"
+
+  print(second)
 }
