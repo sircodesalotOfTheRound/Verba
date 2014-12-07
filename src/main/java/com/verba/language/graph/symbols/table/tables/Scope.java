@@ -6,7 +6,7 @@ import com.verba.language.build.violations.ValidationViolation;
 import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
 import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;
-import com.verba.language.graph.symbols.meta.UserDefinedTypeMetadata;
+import com.verba.language.graph.symbols.meta.types.UserDefinedTypeMetadata;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntrySet;

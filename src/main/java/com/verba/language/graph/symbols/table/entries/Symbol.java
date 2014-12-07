@@ -3,8 +3,10 @@ package com.verba.language.graph.symbols.table.entries;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;
-import com.verba.language.graph.symbols.meta.UserDefinedTypeMetadata;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
+import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
+import com.verba.language.graph.symbols.meta.types.TypeDefinitionMetadata;
+import com.verba.language.graph.symbols.meta.types.UserDefinedTypeMetadata;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.ExpressionSource;
@@ -21,9 +23,8 @@ public class Symbol implements Serializable {
   private final ExpressionSource source;
   private final String fqn;
   private final QList<SymbolTableMetadata> metadata = new QList<>();
+  private SymbolInfo info;
 
-  private boolean isParameter;
-  private boolean isUserDefinedType;
 
   public Symbol(String name, Scope table, VerbaExpression object, SymbolTableMetadata... metadata) {
     this.name = name;
@@ -36,12 +37,7 @@ public class Symbol implements Serializable {
       this.metadata.add(item);
     }
 
-    this.determineAttributes();
-  }
-
-  private void determineAttributes() {
-     this.isParameter = this.metadata.ofType(ParameterSymbolMetadata.class).any();
-     this.isUserDefinedType = this.metadata.ofType(UserDefinedTypeMetadata.class).any();
+    this.info = new SymbolInfo(new QList<>(metadata));
   }
 
   public String name() {
@@ -66,16 +62,17 @@ public class Symbol implements Serializable {
 
   public void addMetadata(SymbolTableMetadata metadata) {
     this.metadata.add(metadata);
-
-    this.determineAttributes();
+    this.info = new SymbolInfo(this.metadata);
   }
 
   public QIterable<SymbolTableMetadata> metadata() { return this.metadata; }
 
   public ExpressionSource source() { return this.source; }
 
-  public boolean isParameter() { return this.isParameter; }
-  public boolean isType() { return this.isUserDefinedType; }
+  public boolean isParameter() { return this.info.isParameter(); }
+  public boolean isType() { return this.info.isType(); }
+  public boolean isSystemType() { return this.info.isSystemType(); }
+  public boolean isUserDefinedType() { return this.info.isUserDefinedType(); }
 
   private ExpressionSource discoverSource(VerbaExpression object) {
     if (object == null) {

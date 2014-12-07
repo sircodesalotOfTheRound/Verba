@@ -2,8 +2,10 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.expressions.functions.NativeTypeSymbols;
+import com.verba.language.graph.expressions.functions.SystemTypeSymbols;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
+import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
+import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -20,7 +22,7 @@ public class SymbolTable {
   private static final QIterable<Symbol> EMPTY_SET = new QList<>();
 
   private final Scope rootTable;
-  private final NativeTypeSymbols nativeTypeSymbols;
+  private final SystemTypeSymbols systemTypeSymbols;
   private final QList<Symbol> entries = new QList<>();
   private final Map<VerbaExpression, Symbol> entriesByInstance = new HashMap<>();
   private final Map<String, QList<Symbol>> entriesByFriendlyName = new HashMap<>();
@@ -32,19 +34,19 @@ public class SymbolTable {
 
   public SymbolTable(Scope table) {
     this.rootTable = table;
-    this.nativeTypeSymbols = this.addNativeTypes();
+    this.systemTypeSymbols = this.addSystemTypes();
     this.scanTableHierarchy(table);
   }
 
-  private NativeTypeSymbols addNativeTypes() {
+  private SystemTypeSymbols addSystemTypes() {
     QIterable<Symbol> nativeTypeSymbolTableEntries = KeywordToken.vmTypeKeywords()
-      .map(primitive -> new Symbol(primitive, rootTable, null));
+      .map(primitive -> new Symbol(primitive, rootTable, null, SystemTypeMetadata.INSTANCE));
 
     for (Symbol entry : nativeTypeSymbolTableEntries) {
       this.putEntry(entry);
     }
 
-    return new NativeTypeSymbols(this);
+    return new SystemTypeSymbols(this);
   }
 
   private void scanTableHierarchy(Scope table) {
@@ -116,8 +118,8 @@ public class SymbolTable {
   }
 
   public Symbol findSymbolForType(String fqn) {
-    if (this.nativeTypeSymbols.isNativeTypeSymbol(fqn)) {
-      return this.nativeTypeSymbols.findNativeTypeSymbolByName(fqn);
+    if (this.systemTypeSymbols.isNativeTypeSymbol(fqn)) {
+      return this.systemTypeSymbols.findNativeTypeSymbolByName(fqn);
     }
 
     return this.findAllMatchingFqn(fqn).single(entry -> entry.is(PolymorphicDeclarationExpression.class));
