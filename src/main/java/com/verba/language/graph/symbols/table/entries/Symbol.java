@@ -36,7 +36,7 @@ public class Symbol implements Serializable {
     return this.name;
   }
 
-  public Scope table() {
+  public Scope scope() {
     return this.table;
   }
 

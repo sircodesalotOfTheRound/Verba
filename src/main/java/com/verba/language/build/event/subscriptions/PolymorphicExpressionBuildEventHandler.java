@@ -55,7 +55,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
   }
 
   private QIterable<Symbol> determineTraitEntries(SymbolTable symbolTable) {
-    SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.table());
+    SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.scope());
 
     QList<Symbol> entriesForTraits = new QList<>() ;
     for (TypeDeclarationExpression expression : this.expression().traits()) {
@@ -89,7 +89,7 @@ public class PolymorphicExpressionBuildEventHandler extends ExpressionBuildEvent
 
   public boolean isImmediateMember(String name) {
     if (isMember(name)) {
-      return this.symbolTableEntriesByName.get(name).any(entry -> entry.table() == this.thisEntry.table());
+      return this.symbolTableEntriesByName.get(name).any(entry -> entry.scope() == this.thisEntry.scope());
     }
 
     return false;

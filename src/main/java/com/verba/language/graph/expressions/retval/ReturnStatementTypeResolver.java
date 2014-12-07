@@ -1,6 +1,7 @@
 package com.verba.language.graph.expressions.retval;
 
 import com.verba.language.graph.symbols.table.entries.Symbol;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
@@ -17,10 +18,12 @@ public class ReturnStatementTypeResolver {
   private final ReturnStatementExpression statement;
   private final SymbolTable symbolTable;
   private Symbol returnType;
+  private Scope scope;
 
   public ReturnStatementTypeResolver(ReturnStatementExpression statement, SymbolTable symbolTable) {
     this.statement = statement;
     this.symbolTable = symbolTable;
+    this.scope = symbolTable.resolveScope(statement);
   }
 
   private Symbol determineReturnValue() {

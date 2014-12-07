@@ -8,7 +8,6 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14/12/3.
@@ -22,7 +21,7 @@ public class FunctionReturnTypeResolver {
   public FunctionReturnTypeResolver(SymbolTable symbolTable, FunctionDeclarationExpression declaration) {
     this.symbolTable = symbolTable;
     this.declaration = declaration;
-    this.scope = symbolTable.getByInstance(declaration).table();
+    this.scope = symbolTable.getByInstance(declaration).scope();
   }
 
   public Symbol resolve() {

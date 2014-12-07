@@ -122,6 +122,16 @@ public class SymbolTable {
     return this.findAllMatchingFqn(fqn).single(entry -> entry.is(PolymorphicDeclarationExpression.class));
   }
 
+  public Scope resolveScope(VerbaExpression expression) {
+    if (expression == null) {
+      return null;
+    } else if (this.entriesByInstance.containsKey(expression)) {
+      return this.entriesByInstance.get(expression).scope();
+    }
+
+    return resolveScope(expression.parent());
+  }
+
   public Symbol getByIndex(int index) {
     return this.entries.get(index);
   }
