@@ -9,6 +9,8 @@ public class KeywordToken extends IdentifierToken {
 
   public static final String BYTE = "byte";
   public static final String NUMERIC = "numeric";
+  public static final String POLY = "poly";
+  public static final String MATRIX = "matrix";
   public static final String DYNAMIC = "dynamic";
   public static final String DEFAULT = "default";
   public static final String INT = "int";
@@ -24,6 +26,7 @@ public class KeywordToken extends IdentifierToken {
   public static final String DECIMAL = "decimal";
   public static final String DECIMAL32 = "decimal32";
   public static final String DECIMAL64 = "decimal64";
+  public static final String CURRENCY = "currency";
   public static final String CHAR = "char";
   public static final String ASCII = "ascii";
   public static final String UTF = "utf";
@@ -38,16 +41,18 @@ public class KeywordToken extends IdentifierToken {
   public static final String JSON = "json";
 
   private static final QSet<String> vmTypes = new QSet<String>(
-    BYTE, NUMERIC, DYNAMIC, DEFAULT,
+    BYTE, NUMERIC, POLY, MATRIX, DEFAULT,
     INT, INT8, INT16, INT32, INT64,
     UINT, UINT8, UINT16, UINT32, UINT64,
     DECIMAL, DECIMAL32, DECIMAL64,
+    CURRENCY,
     CHAR,
     ASCII,
     UTF, UTF8, UTF16, UTF32,
     UTF8BE, UTF16BE, UTF32BE,
     UNIT,
     OBJECT,
+    DYNAMIC,
     JSON);
 
   public static final String PUBLIC = "public";
@@ -146,24 +151,24 @@ public class KeywordToken extends IdentifierToken {
     MATCH, CASE, RETURN
   );
 
-  public static final String TRUE = "withns";
-  public static final String FALSE = "withns";
+  public static final String TRUE = "true";
+  public static final String FALSE = "false";
 
   private static final QSet<String> booleans = new QSet<String>(
     TRUE, FALSE
   );
 
-  public static final String THIS = "withns";
-  public static final String BASE = "withns";
+  public static final String THIS = "this";
+  public static final String BASE = "base";
 
   private static final QSet<String> polymorphishm = new QSet<String>(
     THIS, BASE
   );
 
-  public static final String THROW = "withns";
-  public static final String TRY = "withns";
-  public static final String CATCH = "withns";
-  public static final String FINALLY = "withns";
+  public static final String THROW = "throw";
+  public static final String TRY = "try";
+  public static final String CATCH = "catch";
+  public static final String FINALLY = "finally";
 
   private static final QSet<String> exceptions = new QSet<String>(
     THROW, TRY, CATCH, FINALLY
