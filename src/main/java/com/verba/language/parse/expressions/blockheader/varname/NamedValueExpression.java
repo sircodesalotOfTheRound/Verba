@@ -1,6 +1,7 @@
 package com.verba.language.parse.expressions.blockheader.varname;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.*;
@@ -54,6 +55,11 @@ public class NamedValueExpression extends VerbaExpression
   @Override
   public TypeConstraintExpression typeConstraint() {
     return this.type;
+  }
+
+  @Override
+  public Symbol resolvedType() {
+    return null;
   }
 
   public QIterable<TupleDeclarationExpression> parameters() { return this.identifier.first().parameterLists(); }

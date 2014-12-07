@@ -1,5 +1,6 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -74,6 +75,11 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   @Override
   public TypeConstraintExpression typeConstraint() {
     return this.returnType;
+  }
+
+  @Override
+  public Symbol resolvedType() {
+    return null;
   }
 
   @Override

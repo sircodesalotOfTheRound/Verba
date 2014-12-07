@@ -1,5 +1,6 @@
 package com.verba.language.parse.expressions.statements.declaration;
 
+import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -67,6 +68,11 @@ public class ValDeclarationStatement extends VerbaExpression
   @Override
   public TypeConstraintExpression typeConstraint() {
     return this.identifier.typeConstraint();
+  }
+
+  @Override
+  public Symbol resolvedType() {
+    return null;
   }
 
 

@@ -1,7 +1,6 @@
 package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
-import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 
 /**
@@ -16,6 +15,6 @@ public class Sandbox {
       .single()
       .expressionAs(FunctionDeclarationExpression.class);
 
-    System.out.println("This function returns: " + my_function.returnType().fqn());
+    System.out.println("This function returns: " + my_function.resolvedType().fqn());
   }
 }

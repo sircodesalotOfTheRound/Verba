@@ -139,5 +139,5 @@ public class FunctionDeclarationExpression extends VerbaExpression
     symbolTable.visit(this);
   }
 
-  public Symbol returnType() { return this.buildEvents.returnType(); }
+  public Symbol resolvedType() { return this.buildEvents.returnType(); }
 }
