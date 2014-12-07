@@ -7,7 +7,7 @@ import com.verba.language.emit.variables.VirtualVariableStack;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.graph.visitors.SyntaxGraphNode;
+import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
@@ -49,8 +49,8 @@ public class FunctionContext {
   public SymbolTable symbolTable() { return this.symbolTable; }
   public StringTable stringTable() { return this.stringTable; }
 
-  public void visit(SyntaxGraphNode node) { node.accept(functionGraphVisitor); }
-  public VirtualVariable visitWithNewStackFrame(SyntaxGraphNode node) {
+  public void visit(ExpressionTreeNode node) { node.accept(functionGraphVisitor); }
+  public VirtualVariable visitWithNewStackFrame(ExpressionTreeNode node) {
     return variableStack.withNewStackFrame(x -> {
       node.accept(functionGraphVisitor);
     });

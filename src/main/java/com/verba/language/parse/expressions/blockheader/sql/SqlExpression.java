@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.blockheader.sql;
 
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.lexing.Lexer;
@@ -30,7 +30,7 @@ public class SqlExpression extends VerbaExpression {
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }

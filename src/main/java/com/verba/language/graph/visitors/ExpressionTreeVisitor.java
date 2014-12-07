@@ -22,7 +22,7 @@ import com.verba.language.parse.expressions.withns.WithNsExpression;
 /**
  * Created by sircodesalot on 14/9/12.
  */
-public interface SyntaxGraphVisitor {
+public interface ExpressionTreeVisitor {
   void visit(BlockDeclarationExpression verbaExpressions);
 
   void visit(StaticSpaceExpression staticSpaceExpression);

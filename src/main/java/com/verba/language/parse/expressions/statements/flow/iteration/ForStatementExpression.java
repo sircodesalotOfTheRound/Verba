@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.statements.flow.iteration;
 
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.categories.BranchExpression;
@@ -59,7 +59,7 @@ public class ForStatementExpression extends VerbaExpression
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }

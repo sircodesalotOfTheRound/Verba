@@ -7,8 +7,8 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.VerbaCodePageBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
-import com.verba.language.graph.tools.SyntaxTreeFlattener;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.tools.ExpressionTreeFlattener;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.codestream.CodeStream;
 import com.verba.language.parse.codestream.FileBasedCodeStream;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -46,7 +46,7 @@ public class VerbaCodePage extends VerbaExpression
     QList<VerbaExpression> allExpressions = new QList<>();
 
     for (VerbaExpression expression : childExpressions) {
-      allExpressions.add(new SyntaxTreeFlattener(expression).expressions());
+      allExpressions.add(new ExpressionTreeFlattener(expression).expressions());
     }
 
     return allExpressions;
@@ -110,7 +110,7 @@ public class VerbaCodePage extends VerbaExpression
   public QIterable<String> importedNamespaces() { return this.buildProfile.namespaces(); }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 

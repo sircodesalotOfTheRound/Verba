@@ -9,14 +9,11 @@ import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableStack;
-import com.verba.language.graph.expressions.functions.node.QuoteNodeProcessor;
-import com.verba.language.graph.expressions.functions.node.ValNodeStatementProcessor;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessorFactory;
-import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.graph.visitors.SyntaxGraphNode;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
@@ -42,7 +39,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class FunctionGraphVisitor implements SyntaxGraphVisitor {
+public class FunctionGraphVisitor implements ExpressionTreeVisitor {
   private final VirtualVariableStack variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
@@ -78,7 +75,7 @@ public class FunctionGraphVisitor implements SyntaxGraphVisitor {
 
   private void buildImage(FunctionDeclarationExpression function) {
     BlockDeclarationExpression block = function.block();
-    for (SyntaxGraphNode expression : block.expressions().cast(SyntaxGraphNode.class)) {
+    for (ExpressionTreeNode expression : block.expressions().cast(ExpressionTreeNode.class)) {
       expression.accept(this);
     }
 
@@ -128,10 +125,10 @@ public class FunctionGraphVisitor implements SyntaxGraphVisitor {
   }
 
   private void visitMethodCall(FunctionCallFacade call) {
-    QIterable<SyntaxGraphNode> parametersAsFunctionElements
-      = call.primaryParameters().cast(SyntaxGraphNode.class);
+    QIterable<ExpressionTreeNode> parametersAsFunctionElements
+      = call.primaryParameters().cast(ExpressionTreeNode.class);
 
-    for (SyntaxGraphNode declaration : parametersAsFunctionElements) {
+    for (ExpressionTreeNode declaration : parametersAsFunctionElements) {
       declaration.accept(this);
     }
 

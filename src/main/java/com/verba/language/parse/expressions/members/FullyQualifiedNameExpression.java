@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.members;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 import com.verba.language.parse.lexing.Lexer;
@@ -56,7 +56,7 @@ public class FullyQualifiedNameExpression extends VerbaExpression
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }

@@ -2,19 +2,14 @@ package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.tools.files.FileTools;
 
 /**
  * Created by sircodesalot on 14-2-16.
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, "public fn second_function(parameter : int) { val item = 5 return item }");
+    Build build = Build.fromString(true, FileTools.readAllText("SomeCodes.v"));
 
-    FunctionDeclarationExpression my_function = build.symbolTable()
-      .findAllMatchingFqn("second_function")
-      .single()
-      .expressionAs(FunctionDeclarationExpression.class);
-
-    System.out.println("This function returns: " + my_function.resolvedType().fqn());
   }
 }

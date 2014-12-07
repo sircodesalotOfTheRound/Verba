@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.rvalue.cast;
 
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
@@ -38,7 +38,7 @@ public class CastedRValueExpression extends VerbaExpression implements RValueExp
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }

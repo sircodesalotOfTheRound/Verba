@@ -3,7 +3,7 @@ package com.verba.language.parse.expressions.block;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.table.tables.Scope;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.lexing.Lexer;
@@ -60,7 +60,7 @@ public class BlockDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 

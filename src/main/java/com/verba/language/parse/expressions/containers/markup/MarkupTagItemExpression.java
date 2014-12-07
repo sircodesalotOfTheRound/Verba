@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.containers.markup;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.IdentifierToken;
@@ -87,7 +87,7 @@ public class MarkupTagItemExpression extends VerbaExpression {
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }

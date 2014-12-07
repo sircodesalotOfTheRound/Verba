@@ -3,7 +3,7 @@ package com.verba.language.graph.expressions.functions.node;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
-import com.verba.language.graph.visitors.SyntaxGraphNode;
+import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 
 /**
@@ -21,6 +21,6 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
   }
 
   public VirtualVariable calculateRValue(ValDeclarationStatement statement) {
-    return context.visitWithNewStackFrame((SyntaxGraphNode) statement.rvalue());
+    return context.visitWithNewStackFrame((ExpressionTreeNode) statement.rvalue());
   }
 }

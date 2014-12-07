@@ -2,7 +2,7 @@ package com.verba.language.graph.tools;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
@@ -30,10 +30,10 @@ import java.util.Iterator;
 /**
  * Flattens a tree of expressions into a QList.
  */
-public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QIterable<VerbaExpression> {
+public class ExpressionTreeFlattener implements ExpressionTreeVisitor, Serializable, QIterable<VerbaExpression> {
   private final QList<VerbaExpression> expressions = new QList<>();
 
-  public SyntaxTreeFlattener(VerbaExpression root) {
+  public ExpressionTreeFlattener(VerbaExpression root) {
     root.accept(this);
   }
 

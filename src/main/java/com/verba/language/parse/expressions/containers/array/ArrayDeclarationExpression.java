@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.containers.array;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.DataContainerExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
@@ -46,7 +46,7 @@ public class ArrayDeclarationExpression extends VerbaExpression implements RValu
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 }

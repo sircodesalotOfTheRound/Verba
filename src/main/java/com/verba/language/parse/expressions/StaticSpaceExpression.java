@@ -7,7 +7,7 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.StaticSpaceBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
@@ -58,7 +58,7 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
   public Partition<Class, VerbaExpression> expressionsByType() { return this.expressionsByType; }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 

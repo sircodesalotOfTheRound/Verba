@@ -5,7 +5,7 @@ import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.ValDeclarationEventSubscription;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.*;
@@ -97,7 +97,7 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 

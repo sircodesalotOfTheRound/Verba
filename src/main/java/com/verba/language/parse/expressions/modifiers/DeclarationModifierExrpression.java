@@ -1,7 +1,7 @@
 package com.verba.language.parse.expressions.modifiers;
 
 import com.verba.language.graph.symbols.table.tables.Scope;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.info.LexInfo;
@@ -36,7 +36,7 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
   public VerbaExpression modifiedExpression() { return this.modifiedExpression; }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 

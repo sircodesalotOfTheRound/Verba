@@ -1,11 +1,10 @@
 package com.verba.language.parse.expressions.dependencies;
 
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.literals.QuoteToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -45,7 +44,7 @@ public class GrabExpression extends VerbaExpression {
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }

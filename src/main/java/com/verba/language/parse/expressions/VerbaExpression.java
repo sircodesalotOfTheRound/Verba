@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions;
 
-import com.verba.language.graph.visitors.SyntaxGraphNode;
+import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
 import com.verba.language.parse.info.LexInfo;
@@ -9,7 +9,7 @@ import com.verba.language.parse.lexing.Lexer;
 /**
  * Created by sircodesalot on 14-2-19.
  */
-public abstract class VerbaExpression implements SyntaxGraphNode {
+public abstract class VerbaExpression implements ExpressionTreeNode {
   private static BacktrackRuleSet<VerbaExpression> rules
     = new BacktrackRuleSet<VerbaExpression>()
     //.addRule(new MathExpressionBacktrackRule()) Broken for the moment.

@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.generic.GenericTypeListExpression;
 import com.verba.language.parse.expressions.categories.*;
@@ -83,7 +83,7 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 

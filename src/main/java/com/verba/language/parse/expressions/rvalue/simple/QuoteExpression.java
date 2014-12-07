@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.rvalue.simple;
 
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.MathOperandExpression;
@@ -43,7 +43,7 @@ public class QuoteExpression extends VerbaExpression
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
 

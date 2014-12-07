@@ -27,31 +27,31 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
 
   @Override
   public ObjectImageOutputStream writeInt8(String label, int value) {
-    printlnFormatted("\t[%s] \t%s", label, asHex(value));
+    printFormatted("\t[%s] \t%s", label, asHex(value));
     return this;
   }
 
   @Override
   public ObjectImageOutputStream writeInt16(String label, int value) {
-    printlnFormatted("\t[%s] \t%s", label, asHex(value));
+    printFormatted("\t[%s] \t%s", label, asHex(value));
     return this;
   }
 
   @Override
   public ObjectImageOutputStream writeInt32(String label, int value) {
-    printlnFormatted("\t[%s] \t%s", label, asHex(value));
+    printFormatted("\t[%s] \t%s", label, asHex(value));
     return this;
   }
 
   @Override
   public ObjectImageOutputStream writeInt64(String label, long value) {
-    printlnFormatted("\t[%s] \t%s", label, asHex(value));
+    printFormatted("\t[%s] \t%s", label, asHex(value));
     return this;
   }
 
   @Override
   public ObjectImageOutputStream writeString(String label, StringTableStringEntry value) {
-    printlnFormatted("\t[%s: %s] \t[index: %s]", label, value.text(), value.index());
+    printFormatted("\t[%s: %s] \t[string-index: %s]", label, value.text(), value.index());
     return this;
   }
 
@@ -62,17 +62,14 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
       .map(Object::toString);
 
     String joinedFqnString = String.join(".", fqnStringIndexes);
-    printlnFormatted("\t[%s: %s] \t[fqn: %s]", label, value.text(), joinedFqnString);
+    printFormatted("\t[%s: %s] \t[fqn: %s]", label, value.text(), joinedFqnString);
 
     return this;
   }
 
-  private void printFormatted(String format, Object ... args) {
-    System.out.print(String.format(format, args));
-  }
-
-  private void printlnFormatted(String format, Object... args) {
-    printFormatted(format, args);
+  private void printFormatted(String format, Object... args) {
+    String message = String.format(format, args);
+    System.out.print(message);
   }
 
   private String asHex(long value) {

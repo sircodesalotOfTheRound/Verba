@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.members;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.generic.GenericTypeListExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
@@ -73,7 +73,7 @@ public class MemberExpression extends VerbaExpression {
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }

@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.statements.meta;
 
-import com.verba.language.graph.visitors.SyntaxGraphVisitor;
+import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
@@ -30,7 +30,7 @@ public class MetaStatementExpression extends VerbaExpression {
   }
 
   @Override
-  public void accept(SyntaxGraphVisitor visitor) {
+  public void accept(ExpressionTreeVisitor visitor) {
 
   }
 }
