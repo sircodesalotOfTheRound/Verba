@@ -6,6 +6,7 @@ import com.verba.language.build.violations.ValidationViolation;
 import com.verba.language.graph.symbols.meta.GenericParameterSymbolTableItem;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
 import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;
+import com.verba.language.graph.symbols.meta.UserDefinedTypeMetadata;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntrySet;
@@ -111,7 +112,7 @@ public class Scope {
   }
 
   public void visit(NamespaceDeclarationExpression namespace) {
-    this.addNested(namespace.name(), namespace);
+    this.addNestedScope(namespace.name(), namespace);
   }
 
   public void visit(FunctionDeclarationExpression function) {
@@ -139,7 +140,7 @@ public class Scope {
 
   public void visit(BlockDeclarationExpression block) {
     NamedBlockExpression parent = (NamedBlockExpression) block.parent();
-    this.addNested(parent.name(), parent);
+    this.addNestedScope(parent.name(), parent);
   }
 
   public void visit(ValDeclarationStatement statement) {
@@ -171,10 +172,15 @@ public class Scope {
     this.add(entry);
   }
 
-  public void addNested(String name, NamedBlockExpression block) {
+  public void addNestedScope(String name, NamedBlockExpression block) {
     Scope nestedTable = new Scope(this, block);
 
-    this.add(name, (VerbaExpression) block, new NestedScopeMetadata(nestedTable));
+    if (block instanceof PolymorphicDeclarationExpression) {
+      this.add(name, (VerbaExpression) block, new NestedScopeMetadata(nestedTable), UserDefinedTypeMetadata.INSTANCE);
+    } else {
+      this.add(name, (VerbaExpression) block, new NestedScopeMetadata(nestedTable));
+    }
+
     this.nestedTables.add(nestedTable);
   }
 

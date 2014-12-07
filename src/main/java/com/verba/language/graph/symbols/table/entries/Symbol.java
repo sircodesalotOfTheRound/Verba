@@ -3,6 +3,7 @@ package com.verba.language.graph.symbols.table.entries;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;
+import com.verba.language.graph.symbols.meta.UserDefinedTypeMetadata;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -21,6 +22,9 @@ public class Symbol implements Serializable {
   private final String fqn;
   private final QList<SymbolTableMetadata> metadata = new QList<>();
 
+  private boolean isParameter;
+  private boolean isUserDefinedType;
+
   public Symbol(String name, Scope table, VerbaExpression object, SymbolTableMetadata... metadata) {
     this.name = name;
     this.table = table;
@@ -31,6 +35,13 @@ public class Symbol implements Serializable {
     for (SymbolTableMetadata item : metadata) {
       this.metadata.add(item);
     }
+
+    this.determineAttributes();
+  }
+
+  private void determineAttributes() {
+     this.isParameter = this.metadata.ofType(ParameterSymbolMetadata.class).any();
+     this.isUserDefinedType = this.metadata.ofType(UserDefinedTypeMetadata.class).any();
   }
 
   public String name() {
@@ -55,13 +66,16 @@ public class Symbol implements Serializable {
 
   public void addMetadata(SymbolTableMetadata metadata) {
     this.metadata.add(metadata);
+
+    this.determineAttributes();
   }
 
   public QIterable<SymbolTableMetadata> metadata() { return this.metadata; }
 
   public ExpressionSource source() { return this.source; }
 
-  public boolean isParameter() { return this.metadata.ofType(ParameterSymbolMetadata.class).any(); }
+  public boolean isParameter() { return this.isParameter; }
+  public boolean isType() { return this.isUserDefinedType; }
 
   private ExpressionSource discoverSource(VerbaExpression object) {
     if (object == null) {
