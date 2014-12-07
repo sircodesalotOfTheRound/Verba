@@ -14,5 +14,4 @@ public class SymbolResolutionMatch {
   }
 
   public Symbol symbol() { return this.entry; }
-  public boolean isParameter() { return this.entry.metadata().ofType(ParameterSymbolMetadata.class).any(); }
 }

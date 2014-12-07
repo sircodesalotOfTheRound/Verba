@@ -2,6 +2,7 @@ package com.verba.language.graph.symbols.table.entries;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -59,6 +60,8 @@ public class Symbol implements Serializable {
   public QIterable<SymbolTableMetadata> metadata() { return this.metadata; }
 
   public ExpressionSource source() { return this.source; }
+
+  public boolean isParameter() { return this.metadata.ofType(ParameterSymbolMetadata.class).any(); }
 
   private ExpressionSource discoverSource(VerbaExpression object) {
     if (object == null) {
