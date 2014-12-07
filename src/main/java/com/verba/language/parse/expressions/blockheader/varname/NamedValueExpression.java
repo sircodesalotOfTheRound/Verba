@@ -58,10 +58,7 @@ public class NamedValueExpression extends VerbaExpression
   }
 
   @Override
-  public Symbol resolvedType() {
-    return null;
-  }
-
+  public Symbol resolvedType() { return null; }
   public QIterable<TupleDeclarationExpression> parameters() { return this.identifier.first().parameterLists(); }
 
   public FullyQualifiedNameExpression identifier() {

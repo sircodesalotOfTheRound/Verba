@@ -69,6 +69,10 @@ public class ReturnStatementTypeResolver {
   private Symbol determineTypeForMatchingName(Symbol symbol) {
     if (symbol.metadata().ofType(ParameterSymbol.class).any()) {
       NamedValueExpression parameter = symbol.expressionAs(NamedValueExpression.class);
+
+      // TODO: Make this work.
+      //return parameter.resolvedType();
+
       if (parameter.hasTypeConstraint()) {
         return determineMatchingSymbolForName(parameter.typeConstraint().representation());
       }
