@@ -1,4 +1,4 @@
-package com.verba.language.graph.expressions.retval;
+package com.verba.language.graph.symbols.resolution;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;

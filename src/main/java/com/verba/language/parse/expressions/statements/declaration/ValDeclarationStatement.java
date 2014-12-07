@@ -1,5 +1,8 @@
 package com.verba.language.parse.expressions.statements.declaration;
 
+import com.verba.language.build.event.BuildEvent;
+import com.verba.language.build.event.BuildEventSubscriptionBase;
+import com.verba.language.build.event.subscriptions.ValDeclarationEventSubscription;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.SyntaxGraphVisitor;
@@ -14,8 +17,11 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-19.
  */
 public class ValDeclarationStatement extends VerbaExpression
-  implements NamedAndTypedExpression, AssignmentExpression, SymbolTableExpression {
+  implements NamedAndTypedExpression, AssignmentExpression, SymbolTableExpression,
+  BuildEvent.ContainsEventSubscriptionObject
+{
 
+  private ValDeclarationEventSubscription buildProfile = new ValDeclarationEventSubscription(this);
   private NamedValueExpression identifier;
   private RValueExpression rvalue;
   private boolean isMutable;
@@ -72,7 +78,7 @@ public class ValDeclarationStatement extends VerbaExpression
 
   @Override
   public Symbol resolvedType() {
-    return null;
+    return this.buildProfile.resolvedType();
   }
 
 
@@ -100,4 +106,6 @@ public class ValDeclarationStatement extends VerbaExpression
     symbolTable.visit(this);
   }
 
+  @Override
+  public BuildEventSubscriptionBase buildEventObject() { return this.buildProfile; }
 }

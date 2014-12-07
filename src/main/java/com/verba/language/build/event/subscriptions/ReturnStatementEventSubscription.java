@@ -3,7 +3,7 @@ package com.verba.language.build.event.subscriptions;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscription;
-import com.verba.language.graph.expressions.retval.ReturnStatementTypeResolver;
+import com.verba.language.graph.symbols.resolution.ReturnStatementTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;

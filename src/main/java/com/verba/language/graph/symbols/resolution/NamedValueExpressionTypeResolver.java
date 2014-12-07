@@ -1,4 +1,4 @@
-package com.verba.language.graph.expressions.namedvalue;
+package com.verba.language.graph.symbols.resolution;
 
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;

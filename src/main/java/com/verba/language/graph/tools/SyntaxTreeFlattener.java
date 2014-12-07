@@ -130,7 +130,7 @@ public class SyntaxTreeFlattener implements SyntaxGraphVisitor, Serializable, QI
 
   @Override
   public void visit(ValDeclarationStatement valDeclarationStatement) {
-
+    add(valDeclarationStatement);
   }
 
   @Override
