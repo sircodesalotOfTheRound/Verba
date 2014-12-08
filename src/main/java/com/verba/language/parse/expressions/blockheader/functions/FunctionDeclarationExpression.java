@@ -8,6 +8,7 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.backtracking.rules.FunctionDeclarationBacktrackRule;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.NamedBlockExpression;
 import com.verba.language.parse.expressions.blockheader.generic.GenericTypeListExpression;
@@ -18,6 +19,7 @@ import com.verba.language.parse.expressions.members.MemberExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
+import com.verba.tools.exceptions.CompilerException;
 
 /**
  * Created by sircodesalot on 14-2-17.
@@ -36,11 +38,13 @@ public class FunctionDeclarationExpression extends VerbaExpression
   private final FunctionEventSubscription eventSubscription = new FunctionEventSubscription(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
+  private final boolean isConstructor;
   private TypeConstraintExpression explicitReturnType;
 
   public FunctionDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-    lexer.readCurrentAndAdvance(KeywordToken.class, "fn");
+
+    this.isConstructor = determineIsConstructorFunction(parent, lexer);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
     if (lexer.currentIs(OperatorToken.class, ":")) {
@@ -52,11 +56,29 @@ public class FunctionDeclarationExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  private boolean determineIsConstructorFunction(VerbaExpression parent, Lexer lexer) {
+    if (lexer.currentIs(KeywordToken.class, KeywordToken.FN)) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.FN);
+      return false;
+    } else {
+      this.enforceIsConstructorMethod(parent, lexer);
+      return true;
+    }
+  }
+
+  private void enforceIsConstructorMethod(VerbaExpression parent, Lexer lexer) {
+    if (!FunctionDeclarationBacktrackRule.isConstructorSignature(parent, lexer)) {
+      throw new CompilerException("Function declarations must be constructors or start with 'fn'");
+    }
+  }
+
   public static FunctionDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new FunctionDeclarationExpression(parent, lexer);
   }
 
   // Accessors
+  public boolean isConstructor() { return this.isConstructor; }
+
   public boolean hasGenericParameters() {
     return this.primaryIdentifier().hasGenericParameters();
   }
