@@ -12,6 +12,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 public class CallOpCode extends VerbatimOpCodeBase {
   private static final int callWithDiscard = 0x43;
   private static final int callWithRetain = 0x44;
+
   private static final String opName = "Call";
 
   private final StringTableFqnEntry function;
@@ -45,6 +46,11 @@ public class CallOpCode extends VerbatimOpCodeBase {
   @Override
   public void render(ObjectImageOutputStream renderer) {
     renderer.writeFqn("function-name", function);
+
+    if (this.storeLocation != null) {
+      int variableNumber = storeLocation.variableNumber();
+      renderer.writeInt8("store-location", variableNumber);
+    }
   }
 
   public StringTableFqnEntry function() { return this.function; }
