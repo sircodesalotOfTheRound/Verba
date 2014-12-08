@@ -38,8 +38,8 @@ public class FunctionOpCodeSet implements QIterable<VerbatimOpCodeBase> {
     this.add(VerbatimOpCodeBase.call(functionName));
   }
 
-  public void call(StringTableFqnEntry functionName, Iterable<VirtualVariable> variables) {
-    this.add(VerbatimOpCodeBase.call(functionName, variables));
+  public void call(StringTableFqnEntry functionName, VirtualVariable returnValue, Iterable<VirtualVariable> variables) {
+    this.add(VerbatimOpCodeBase.call(functionName, returnValue, variables));
   }
 
   public void endFunction() {

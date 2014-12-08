@@ -1,5 +1,6 @@
 package com.verba.language.graph.expressions.functions.variables;
 
+import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
@@ -130,12 +131,12 @@ public class VariableLifetimeGraph implements ExpressionTreeVisitor {
   }
 
   public void visit(NamedValueExpression namedValueExpression) {
-    if (FunctionCallFacade.isFunctionCall(namedValueExpression)) {
-      FunctionCallFacade call = new FunctionCallFacade(namedValueExpression);
+    /*if (FunctionCallFacade.isFunctionCall(namedValueExpression)) {
+      FunctionCallFacade call = new FunctionCallFacade(this.context, namedValueExpression);
       for (ExpressionTreeNode declaration : call.primaryParameters().cast(ExpressionTreeNode.class)) {
         declaration.accept(this);
       }
-    }
+    }*/
   }
 
   @Override

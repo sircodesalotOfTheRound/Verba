@@ -4,6 +4,7 @@ import com.verba.language.emit.header.StringTableFqnEntry;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14/9/19.
@@ -32,15 +33,18 @@ public abstract class VerbatimOpCodeBase {
   }
 
   public static VerbatimOpCodeBase call(StringTableFqnEntry functionName) {
-    return new CallOpCode(functionName);
+    throw new NotImplementedException();
   }
 
-  public static VerbatimOpCodeBase call(StringTableFqnEntry functionName, Iterable<VirtualVariable> variables) {
+  public static VerbatimOpCodeBase call(StringTableFqnEntry functionName,
+                                        VirtualVariable returnValue,
+                                        Iterable<VirtualVariable> variables) {
+
     for (VirtualVariable variable : variables) {
       VerbatimOpCodeBase.stageArg(variable);
     }
 
-    return new CallOpCode(functionName);
+    return new CallOpCode(functionName, returnValue);
   }
 
   public static VerbatimOpCodeBase endFunction() {

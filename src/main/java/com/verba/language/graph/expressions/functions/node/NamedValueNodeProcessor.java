@@ -21,7 +21,7 @@ public class NamedValueNodeProcessor extends NodeProcessor<NamedValueExpression>
   @Override
   public void process(NamedValueExpression expression) {
     if (FunctionCallFacade.isFunctionCall(expression)) {
-      this.functionCallNodeProcessor.process(new FunctionCallFacade(expression));
+      this.functionCallNodeProcessor.process(new FunctionCallFacade(context, expression));
     } else {
       this.captureValue(expression);
     }
