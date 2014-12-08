@@ -16,31 +16,20 @@ public class CallOpCode extends VerbatimOpCodeBase {
   private static final String opName = "Call";
 
   private final StringTableFqnEntry function;
-  private final Iterable<VirtualVariable> variables;
   private final VirtualVariable storeLocation;
 
-  public CallOpCode(StringTableFqnEntry function, Iterable<VirtualVariable> variables) {
+  public CallOpCode(StringTableFqnEntry function) {
     super(callWithDiscard, opName);
 
     this.function = function;
-    this.variables = variables;
     this.storeLocation = null;
   }
 
-  public CallOpCode(StringTableFqnEntry function, VirtualVariable storeLocation, Iterable<VirtualVariable> variables) {
+  public CallOpCode(StringTableFqnEntry function, VirtualVariable storeLocation) {
     super(callWithRetain, opName);
 
     this.function = function;
-    this.variables = variables;
     this.storeLocation = storeLocation;
-  }
-
-  public CallOpCode(StringTableFqnEntry function) {
-    this(function, new QList<>());
-  }
-
-  public CallOpCode(StringTableFqnEntry function, VirtualVariable storeLocation) {
-    this (function, storeLocation, new QList<>());
   }
 
   @Override

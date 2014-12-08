@@ -36,7 +36,11 @@ public abstract class VerbatimOpCodeBase {
   }
 
   public static VerbatimOpCodeBase call(StringTableFqnEntry functionName, Iterable<VirtualVariable> variables) {
-    return new CallOpCode(functionName, variables);
+    for (VirtualVariable variable : variables) {
+      VerbatimOpCodeBase.stageArg(variable);
+    }
+
+    return new CallOpCode(functionName);
   }
 
   public static VerbatimOpCodeBase endFunction() {
