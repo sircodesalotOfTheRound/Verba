@@ -1,5 +1,6 @@
 package com.verba.language.graph.expressions.functions.node;
 
+import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
@@ -21,7 +22,15 @@ public class NamedValueNodeProcessor extends NodeProcessor<NamedValueExpression>
   public void process(NamedValueExpression expression) {
     if (FunctionCallFacade.isFunctionCall(expression)) {
       this.functionCallNodeProcessor.process(new FunctionCallFacade(expression));
+    } else {
+      this.captureValue(expression);
     }
+  }
+
+  private void captureValue(NamedValueExpression expression) {
+    // Make this variable the scope value.
+    VirtualVariable variable = this.variableScopeTree.variableByName(expression.name());
+    this.variableScopeTree.setScopeValue(variable);
   }
 
 

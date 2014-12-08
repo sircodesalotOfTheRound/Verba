@@ -6,7 +6,6 @@ import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
-import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.facades.FunctionCallFacade;
 
 /**
@@ -19,23 +18,23 @@ public class FunctionCallNodeProcessor extends NodeProcessor<FunctionCallFacade>
 
   @Override
   public void process(FunctionCallFacade call) {
-    QIterable<ExpressionTreeNode> parametersAsFunctionElements
-      = call.primaryParameters().cast(ExpressionTreeNode.class);
+    this.loadArguments(call);
+    this.writeFunctionCall(call);
+  }
 
-    for (ExpressionTreeNode declaration : parametersAsFunctionElements) {
-      this.visit(declaration);
-    }
+  private void loadArguments(FunctionCallFacade call) {
+    QIterable<VirtualVariable> argumentToLocalVariableProjection
+      = call.primaryParameters()
+        .cast(ExpressionTreeNode.class)
+        .map(parameter -> this.visitWithNewVarScope(parameter));
 
-    for (VerbaExpression expression : call.primaryParameters()) {
-      VirtualVariable variable = this.variableScopeTree.variableByName(expression.text());
+    for (VirtualVariable variable : argumentToLocalVariableProjection){
       opcodes.stageArg(variable);
-
-      if (this.lifetimeGraph.isLastOccurance(expression)) {
-        // TODO: This is broken.
-        //this.variableSet.expireVariable(variable);
-      }
     }
 
+  }
+
+  private void writeFunctionCall(FunctionCallFacade call) {
     StringTableFqnEntry calledFunctionName = this.stringTable.addFqn(call.functionName());
     opcodes.call(calledFunctionName);
   }

@@ -68,7 +68,7 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
     System.out.println(function.text());
     System.out.println();
 
-    buildImage(function);
+    this.buildImage(function);
 
     DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
     renderer.display();

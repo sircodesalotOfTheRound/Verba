@@ -32,7 +32,6 @@ public abstract class NodeProcessor<T> {
   }
 
   protected void visit(ExpressionTreeNode node) { context.visit(node); }
-
   protected VirtualVariable visitWithNewVarScope(ExpressionTreeNode node) { return context.visitWithNewVarScope(node); }
   protected Symbol getTypeForSymbol(TypedExpression expression) { return expression.resolvedType(); }
 
