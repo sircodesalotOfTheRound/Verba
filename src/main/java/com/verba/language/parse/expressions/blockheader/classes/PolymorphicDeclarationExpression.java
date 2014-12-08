@@ -22,6 +22,7 @@ import com.verba.language.parse.expressions.members.MemberExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
+import com.verba.tools.exceptions.CompilerException;
 
 /**
  * Created by sircodesalot on 14-2-17.
@@ -35,6 +36,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 {
   private final PolymorphicBuildEventHandler eventSubscription = new PolymorphicBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
+  private final boolean isClass;
   private BlockDeclarationExpression block;
 
   private QIterable<TypeConstraintExpression> traits;
@@ -42,17 +44,24 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   private PolymorphicDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    if (lexer.currentIs(KeywordToken.class, KeywordToken.CLASS)) {
-      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.CLASS);
-    } else if (lexer.currentIs(KeywordToken.class, KeywordToken.TRAIT)) {
-      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.TRAIT);
-    }
-
+    this.isClass = determineIsClass(lexer);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
     this.traits = readBaseTypes(lexer);
     this.block = BlockDeclarationExpression.read(this, lexer);
 
     this.closeLexingRegion();
+  }
+
+  private boolean determineIsClass(Lexer lexer) {
+    if (lexer.currentIs(KeywordToken.class, KeywordToken.CLASS)) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.CLASS);
+      return true;
+    } else if (lexer.currentIs(KeywordToken.class, KeywordToken.TRAIT)) {
+      lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.TRAIT);
+      return false;
+    }
+
+    throw new CompilerException("Polymorphic Expressions must be classes or traits");
   }
 
   private QIterable<TypeConstraintExpression> readBaseTypes(Lexer lexer) {
@@ -111,6 +120,8 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
   // Membership
   public QIterable<Symbol> immediateMembers() { return this.eventSubscription.immediateMembers(); }
+
+  public boolean isClass() { return this.isClass; }
 
   public boolean isDerivedFrom(String name) { return eventSubscription.isDerivedFrom(name); }
 
