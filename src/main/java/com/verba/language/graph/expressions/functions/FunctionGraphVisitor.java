@@ -114,10 +114,8 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
     throw new NotImplementedException();
   }
 
-  public void visit(NamedValueExpression namedValueExpression) {
-    if (FunctionCallFacade.isFunctionCall(namedValueExpression)) {
-      visitMethodCall(new FunctionCallFacade(namedValueExpression));
-    }
+  public void visit(NamedValueExpression expression) {
+    this.nodeProcessors.process(expression);
   }
 
   @Override
@@ -125,27 +123,6 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
     throw new NotImplementedException();
   }
 
-  private void visitMethodCall(FunctionCallFacade call) {
-    QIterable<ExpressionTreeNode> parametersAsFunctionElements
-      = call.primaryParameters().cast(ExpressionTreeNode.class);
-
-    for (ExpressionTreeNode declaration : parametersAsFunctionElements) {
-      declaration.accept(this);
-    }
-
-    for (VerbaExpression expression : call.primaryParameters()) {
-      VirtualVariable variable = this.variableSet.variableByName(expression.text());
-      opcodes.stageArg(variable);
-
-      if (this.lifetimeGraph.isLastOccurance(expression)) {
-        // TODO: This is broken.
-        //this.variableSet.expireVariable(variable);
-      }
-    }
-
-    StringTableFqnEntry calledFunctionName = this.stringTable.addFqn(call.functionName());
-    opcodes.call(calledFunctionName);
-  }
 
   public void visit(AssignmentStatementExpression assignmentStatementExpression) {
 

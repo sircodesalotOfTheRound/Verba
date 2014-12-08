@@ -1,5 +1,4 @@
-class MyClass {
-   MyClass
-
-   fn call_with_return
+fn my_function() {
+  val something = "something else"
+  something_else(something)
 }
