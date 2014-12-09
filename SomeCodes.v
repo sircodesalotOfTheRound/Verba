@@ -3,11 +3,6 @@ fn something_else {
 }
 
 fn my_function() {
-  val something = "something else"
-  val another_thing = "moar stuff"
-  val html = new markup {
-    <Something />
-  }
-  
-  something_else(something)
+  val something = "something"
+  val otherthing = something_else(something)
 }

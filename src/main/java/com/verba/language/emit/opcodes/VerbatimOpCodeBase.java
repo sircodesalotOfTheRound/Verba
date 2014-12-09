@@ -1,5 +1,6 @@
 package com.verba.language.emit.opcodes;
 
+import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.header.StringTableFqnEntry;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
@@ -32,13 +33,17 @@ public abstract class VerbatimOpCodeBase {
     return new BoxOpCode(source, destination);
   }
 
-  public static VerbatimOpCodeBase call(StringTableFqnEntry functionName) {
-    throw new NotImplementedException();
+  public static VerbatimOpCodeBase call(StringTableFqnEntry functionName, QIterable<VirtualVariable> variables) {
+    for (VirtualVariable variable : variables) {
+      VerbatimOpCodeBase.stageArg(variable);
+    }
+
+    return new CallOpCode(functionName);
   }
 
   public static VerbatimOpCodeBase call(StringTableFqnEntry functionName,
-                                        VirtualVariable returnValue,
-                                        Iterable<VirtualVariable> variables) {
+                                        Iterable<VirtualVariable> variables,
+                                        VirtualVariable returnValue) {
 
     for (VirtualVariable variable : variables) {
       VerbatimOpCodeBase.stageArg(variable);

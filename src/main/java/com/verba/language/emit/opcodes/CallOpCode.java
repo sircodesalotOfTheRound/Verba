@@ -13,20 +13,21 @@ public class CallOpCode extends VerbatimOpCodeBase {
   private static final int callWithDiscard = 0x43;
   private static final int callWithRetain = 0x44;
 
-  private static final String opName = "Call";
+  private static final String callWtihDiscardOpName = "Call";
+  private static final String callWithRetainOpName = "CallRt";
 
   private final StringTableFqnEntry function;
   private final VirtualVariable storeLocation;
 
   public CallOpCode(StringTableFqnEntry function) {
-    super(callWithDiscard, opName);
+    super(callWithDiscard, callWtihDiscardOpName);
 
     this.function = function;
     this.storeLocation = null;
   }
 
   public CallOpCode(StringTableFqnEntry function, VirtualVariable storeLocation) {
-    super(callWithRetain, opName);
+    super(callWithRetain, callWithRetainOpName);
 
     this.function = function;
     this.storeLocation = storeLocation;

@@ -5,8 +5,11 @@ import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
+import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 
 /**
  * Created by sircodesalot on 14/9/21.
@@ -55,6 +58,33 @@ public class FunctionCallFacade {
   }
 
   private Symbol determineType() { return null; }
+
+  public boolean shouldCaptureReturnValue() {
+    // If the parent of the call is a function, then the value should be discarded.
+    // If the parent isn't a function (returns empty), then the parent must be some
+    // sort of type that requires a value.
+    // TODO: This will probabaly need to be beefed up later.
+    return (determineIfParentIsFunction(this.expression.parent()) == null);
+  }
+
+  public static FunctionDeclarationExpression determineIfParentIsFunction(VerbaExpression expression) {
+    if (expression == null) {
+      return null;
+    }
+
+    // If the parent is a function declaration, then return that.
+    // If the parent is a modifier (public/private/...) or block, then check one level up.
+    // Otherwise, return null - the parent isn't a function.
+    if (expression.is(FunctionDeclarationExpression.class)) {
+      return (FunctionDeclarationExpression) expression;
+    } else if (expression.is(DeclarationModifierExrpression.class)) {
+      return determineIfParentIsFunction(expression.parent());
+    } else if (expression.is(BlockDeclarationExpression.class)) {
+      return determineIfParentIsFunction(expression.parent());
+    } else {
+      return null;
+    }
+  }
 
   public Symbol resolvedType() { return this.function.resolvedType(); }
 }

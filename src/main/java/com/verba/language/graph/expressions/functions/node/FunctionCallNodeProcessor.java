@@ -7,6 +7,7 @@ import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.parse.expressions.categories.ParameterizedExpression;
 import com.verba.language.parse.expressions.facades.FunctionCallFacade;
 
 /**
@@ -23,8 +24,7 @@ public class FunctionCallNodeProcessor extends NodeProcessor<FunctionCallFacade>
     QIterable<VirtualVariable> arguments = this.loadArguments(call);
     VirtualVariable returnValue = this.createReturnValueStorage(call);
 
-    this.opcodes.call(functionName, returnValue, arguments);
-    this.variableScopeTree.setScopeValue(returnValue);
+    this.performCall(call, functionName, arguments, returnValue);
   }
 
   private QIterable<VirtualVariable> loadArguments(FunctionCallFacade call) {
@@ -36,5 +36,18 @@ public class FunctionCallNodeProcessor extends NodeProcessor<FunctionCallFacade>
   private VirtualVariable createReturnValueStorage(FunctionCallFacade call) {
     Symbol returnType = call.resolvedType();
     return this.variableScopeTree.addtoScope("temporary-return-value", returnType);
+  }
+
+  private void performCall(FunctionCallFacade call,
+                           StringTableFqnEntry functionName,
+                           QIterable<VirtualVariable> arguments,
+                           VirtualVariable returnValue) {
+
+    if (call.shouldCaptureReturnValue()) {
+      this.opcodes.call(functionName, arguments, returnValue);
+      this.variableScopeTree.setScopeValue(returnValue);
+    } else {
+      this.opcodes.call(functionName, arguments);
+    }
   }
 }
