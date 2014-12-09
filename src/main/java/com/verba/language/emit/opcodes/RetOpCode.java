@@ -17,12 +17,10 @@ public class RetOpCode extends VerbatimOpCodeBase {
 
   public RetOpCode() {
     super(returnNoValue, returnNoValueOpName);
-
     this.variable = null;
   }
   public RetOpCode(VirtualVariable variable) {
     super(returnWithValue, returnWithValueOpName);
-
     this.variable = variable;
   }
 
