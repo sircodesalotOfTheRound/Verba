@@ -16,6 +16,7 @@ public class SystemTypeSymbols {
   public final Symbol UTF;
   public final Symbol INT;
   public final Symbol DYNAMIC;
+  public final Symbol BOOLEAN;
 
   private final SymbolTable symbolTable;
   private final Map<String, Symbol> entriesByName = new HashMap<>();
@@ -28,6 +29,8 @@ public class SystemTypeSymbols {
     this.UTF = captureEntryByKey(KeywordToken.UTF);
     this.INT = captureEntryByKey(KeywordToken.INT);
     this.DYNAMIC = captureEntryByKey(KeywordToken.DYNAMIC);
+
+    this.BOOLEAN = captureEntryByKey(KeywordToken.BOOLEAN);
   }
 
   private Symbol captureEntryByKey(String key) {

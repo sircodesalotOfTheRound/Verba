@@ -23,13 +23,13 @@ public class QuoteNodeProcessor extends NodeProcessor<QuoteExpression> {
     String variableName = expression.representation();
 
     VirtualVariable variable;
-    if (variableScopeTree.containsVariableMatching(variableName, UTF)) {
-      variable = variableScopeTree.variableByName(variableName);
+    if (variableScope.containsVariableMatching(variableName, UTF)) {
+      variable = variableScope.variableByName(variableName);
     } else {
-      variable = variableScopeTree.addtoScope(variableName, UTF);
+      variable = variableScope.addtoScope(variableName, UTF);
     }
 
-    variableScopeTree.setScopeValue(variable);
+    variableScope.setScopeValue(variable);
 
     StringTableStringEntry innerText = stringTable.addString(expression.innerText());
     context.opcodes().loadString(variable, innerText);

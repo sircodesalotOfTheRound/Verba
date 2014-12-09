@@ -5,7 +5,6 @@ import com.verba.language.emit.header.StringTableFqnEntry;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 14/9/19.
@@ -74,5 +73,9 @@ public abstract class VerbatimOpCodeBase {
 
   public static VerbatimOpCodeBase loaduint64(VirtualVariable variable, long value) {
     return new LdUint64OpCode(variable, value);
+  }
+
+  public static VerbatimOpCodeBase loadBoolean(VirtualVariable variable, boolean value) {
+    return new LdBoolOpCode(variable, value);
   }
 }

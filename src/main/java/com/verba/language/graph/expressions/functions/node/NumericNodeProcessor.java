@@ -22,10 +22,10 @@ public class NumericNodeProcessor extends NodeProcessor<NumericExpression> {
     VirtualVariable loadedValue = this.loadValue(expression.asLong());
     this.opcodes.loaduint64(loadedValue, expression.asInt());
 
-    this.variableScopeTree.setScopeValue(loadedValue);
+    this.variableScope.setScopeValue(loadedValue);
   }
 
   public VirtualVariable loadValue(Long value) {
-    return this.variableScopeTree.addtoScope(value.toString(), INT);
+    return this.variableScope.addtoScope(value.toString(), INT);
   }
 }

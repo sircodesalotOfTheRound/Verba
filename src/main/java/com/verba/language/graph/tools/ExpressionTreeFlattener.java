@@ -17,6 +17,7 @@ import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationE
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
+import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
@@ -152,6 +153,11 @@ public class ExpressionTreeFlattener implements ExpressionTreeVisitor, Serializa
 
   @Override
   public void visit(NewExpression newExpression) {
+
+  }
+
+  @Override
+  public void visit(BooleanExpression expression) {
 
   }
 

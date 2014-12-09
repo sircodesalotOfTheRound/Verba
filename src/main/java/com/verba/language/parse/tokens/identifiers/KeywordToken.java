@@ -2,11 +2,13 @@ package com.verba.language.parse.tokens.identifiers;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.symbols.table.entries.Symbol;
 
 import java.util.function.Supplier;
 
 public class KeywordToken extends IdentifierToken {
 
+  public static final String BOOLEAN = "boolean";
   public static final String BYTE = "byte";
   public static final String NUMERIC = "numeric";
   public static final String POLY = "poly";
@@ -41,7 +43,7 @@ public class KeywordToken extends IdentifierToken {
   public static final String JSON = "json";
 
   private static final QSet<String> vmTypes = new QSet<String>(
-    BYTE, NUMERIC, POLY, MATRIX, DEFAULT,
+    BOOLEAN, BYTE, NUMERIC, POLY, MATRIX, DEFAULT,
     INT, INT8, INT16, INT32, INT64,
     UINT, UINT8, UINT16, UINT32, UINT64,
     DECIMAL, DECIMAL32, DECIMAL64,

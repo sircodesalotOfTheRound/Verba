@@ -34,7 +34,7 @@ public class FunctionCallNodeProcessor extends NodeProcessor<FunctionCallFacade>
 
   private VirtualVariable createReturnValueStorage(FunctionCallFacade call) {
     Symbol returnType = call.resolvedType();
-    return this.variableScopeTree.addtoScope("temporary-return-value", returnType);
+    return this.variableScope.addtoScope("temporary-return-value", returnType);
   }
 
   private void performCall(FunctionCallFacade call,
@@ -44,7 +44,7 @@ public class FunctionCallNodeProcessor extends NodeProcessor<FunctionCallFacade>
 
     if (call.shouldCaptureReturnValue()) {
       this.opcodes.call(functionName, arguments, returnValue);
-      this.variableScopeTree.setScopeValue(returnValue);
+      this.variableScope.setScopeValue(returnValue);
     } else {
       this.opcodes.call(functionName, arguments);
     }

@@ -16,7 +16,7 @@ import com.verba.language.parse.expressions.categories.TypedExpression;
  */
 public abstract class NodeProcessor<T> {
   protected final FunctionContext context;
-  protected final VirtualVariableScopeTree variableScopeTree;
+  protected final VirtualVariableScopeTree variableScope;
   protected final StringTable stringTable;
   protected final SymbolTable symbolTable;
   protected final FunctionOpCodeSet opcodes;
@@ -25,7 +25,7 @@ public abstract class NodeProcessor<T> {
   public NodeProcessor(FunctionContext context) {
     this.context = context;
     this.symbolTable = context.symbolTable();
-    this.variableScopeTree = context.variableScopeTree();
+    this.variableScope = context.variableScopeTree();
     this.stringTable = context.stringTable();
     this.opcodes = context.opcodes();
     this.lifetimeGraph = context.lifetimeGraph();

@@ -34,6 +34,7 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     .addRule(new AspectDeclarationBacktrackRule())
     .addRule(new ReturnStatementRule())
     .addRule(new DeclarationModifierBacktrackRule())
+    .addRule(new BooleanExpressionBacktrackRule())
     .addRule(new CatchAllBacktrackRule());
 
   private VerbaExpression parent;

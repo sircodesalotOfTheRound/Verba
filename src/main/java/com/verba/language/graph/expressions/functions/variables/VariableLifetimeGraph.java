@@ -18,6 +18,7 @@ import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExp
 import com.verba.language.parse.expressions.facades.FunctionCallFacade;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
+import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
@@ -94,6 +95,11 @@ public class VariableLifetimeGraph implements ExpressionTreeVisitor {
 
   @Override
   public void visit(NewExpression newExpression) {
+
+  }
+
+  @Override
+  public void visit(BooleanExpression expression) {
 
   }
 

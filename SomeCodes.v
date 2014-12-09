@@ -5,4 +5,7 @@ fn something_else {
 fn my_function() {
   val something = "something"
   val otherthing = something_else(something)
+  val value = true
+
+  return otherthing
 }
