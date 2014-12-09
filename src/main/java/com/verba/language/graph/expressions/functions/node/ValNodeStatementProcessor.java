@@ -21,6 +21,6 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
   }
 
   public VirtualVariable calculateRValue(ValDeclarationStatement statement) {
-    return visitWithNewVarScope((ExpressionTreeNode) statement.rvalue());
+    return visitAndCaptureResult((ExpressionTreeNode) statement.rvalue());
   }
 }

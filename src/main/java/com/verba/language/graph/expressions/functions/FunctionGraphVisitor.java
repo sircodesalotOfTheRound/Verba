@@ -3,20 +3,16 @@ package com.verba.language.graph.expressions.functions;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.header.StringTable;
-import com.verba.language.emit.header.StringTableFqnEntry;
-import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
-import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessorFactory;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
-import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -27,7 +23,6 @@ import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExp
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
-import com.verba.language.parse.expressions.facades.FunctionCallFacade;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
@@ -83,10 +78,10 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
       expression.accept(this);
     }
 
-    closeOutFunction();
+    closeFunction();
   }
 
-  private void closeOutFunction() {
+  private void closeFunction() {
     // If function doesn't end with return, put one there.
     if (opcodes.any() && !(opcodes.last() instanceof RetOpCode)) {
       opcodes.ret();
@@ -96,8 +91,8 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
     opcodes.endFunction();
   }
 
-  public void visit(ReturnStatementExpression returnStatementExpression) {
-    opcodes.ret();
+  public void visit(ReturnStatementExpression expression) {
+    this.nodeProcessors.process(expression);
   }
 
   @Override

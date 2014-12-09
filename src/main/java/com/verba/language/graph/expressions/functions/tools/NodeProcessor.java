@@ -32,7 +32,7 @@ public abstract class NodeProcessor<T> {
   }
 
   protected void visit(ExpressionTreeNode node) { context.visit(node); }
-  protected VirtualVariable visitWithNewVarScope(ExpressionTreeNode node) { return context.visitWithNewVarScope(node); }
+  protected VirtualVariable visitAndCaptureResult(ExpressionTreeNode node) { return context.visitWithNewVarScope(node); }
   protected Symbol getTypeForSymbol(TypedExpression expression) { return expression.resolvedType(); }
 
   public abstract void process(T expression);

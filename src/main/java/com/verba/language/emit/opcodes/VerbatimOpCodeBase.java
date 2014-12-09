@@ -60,6 +60,10 @@ public abstract class VerbatimOpCodeBase {
     return returnOpCode;
   }
 
+  public static VerbatimOpCodeBase ret(VirtualVariable variable) {
+    return new RetOpCode(variable);
+  }
+
   public static VerbatimOpCodeBase loadString(VirtualVariable variable, StringTableStringEntry value) {
     return new LdStrOpCode(variable, value);
   }
