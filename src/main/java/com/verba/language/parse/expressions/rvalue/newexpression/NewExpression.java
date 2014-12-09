@@ -14,7 +14,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14-2-24.
  */
-public class NewExpression extends VerbaExpression implements RValueExpression, MathOperandExpression {
+public class NewExpression extends VerbaExpression
+  implements RValueExpression, MathOperandExpression
+{
   private TypeConstraintExpression expression;
 
   public NewExpression(VerbaExpression parent, Lexer lexer) {
@@ -46,6 +48,6 @@ public class NewExpression extends VerbaExpression implements RValueExpression, 
 
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
-
+    visitor.visit(this);
   }
 }

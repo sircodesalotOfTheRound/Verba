@@ -1,11 +1,9 @@
 package com.verba.language.graph.expressions.functions.tools;
 
 import com.verba.language.graph.expressions.functions.FunctionContext;
-import com.verba.language.graph.expressions.functions.node.NamedValueNodeProcessor;
-import com.verba.language.graph.expressions.functions.node.NumericNodeProcessor;
-import com.verba.language.graph.expressions.functions.node.QuoteNodeProcessor;
-import com.verba.language.graph.expressions.functions.node.ValNodeStatementProcessor;
+import com.verba.language.graph.expressions.functions.node.*;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
@@ -18,12 +16,14 @@ public class NodeProcessorFactory {
   private final QuoteNodeProcessor quoteNodeProcessor;
   private final NumericNodeProcessor numericNodeProcessor;
   private final NamedValueNodeProcessor namedValueNodeProcessor;
+  private final NewExpressionNodeProcessor newExpressionNodeProcessor;
 
   public NodeProcessorFactory(FunctionContext context) {
     this.valStatementProcessor = new ValNodeStatementProcessor(context);
     this.quoteNodeProcessor = new QuoteNodeProcessor(context);
     this.numericNodeProcessor = new NumericNodeProcessor(context);
     this.namedValueNodeProcessor = new NamedValueNodeProcessor(context);
+    this.newExpressionNodeProcessor = new NewExpressionNodeProcessor(context);
   }
 
   public void process(ValDeclarationStatement declaration) {
@@ -40,5 +40,9 @@ public class NodeProcessorFactory {
 
   public void process(NamedValueExpression expression) {
     this.namedValueNodeProcessor.process(expression);
+  }
+
+  public void process(NewExpression expression) {
+    this.newExpressionNodeProcessor.process(expression);
   }
 }
