@@ -74,6 +74,8 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
     renderer.display();
   }
 
+  public QIterable<VerbatimOpCodeBase> opcodes() { return this.opcodes; }
+
   private void buildImage(FunctionDeclarationExpression function) {
     BlockDeclarationExpression block = function.block();
     for (ExpressionTreeNode expression : block.expressions().cast(ExpressionTreeNode.class)) {
@@ -92,8 +94,6 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
     // Also close out the function.
     opcodes.endFunction();
   }
-
-  public FunctionDeclarationExpression function() { return this.function; }
 
   public void visit(ReturnStatementExpression returnStatementExpression) {
     opcodes.ret();
@@ -138,7 +138,8 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
   }
 
   @Override
-  public void visit(WithNsExpression withNsExpression) {  }
+  public void visit(WithNsExpression withNsExpression) {
+  }
 
   @Override
   public void visit(MarkupDeclarationExpression markupDeclarationExpression) {
@@ -152,7 +153,7 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
 
   @Override
   public void visit(FunctionDeclarationExpression functionDeclarationExpression) {
-    // Todo: currently no op.
+
   }
 
   @Override
@@ -180,7 +181,4 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
     this.nodeProcessors.process(expression);
   }
 
-  public Iterable<VerbatimOpCodeBase> opcodes() { return this.opcodes; }
-
-  public String name() { return this.function.name(); }
 }
