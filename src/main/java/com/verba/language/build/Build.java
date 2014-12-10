@@ -5,6 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventLauncher;
+import com.verba.language.build.event.BuildEventSet;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.verbatim.persist.VerbatimFileGenerator;
@@ -19,6 +20,7 @@ import com.verba.language.parse.lexing.VerbaMemoizingLexer;
  * Created by sircodesalot on 14/11/20.
  */
 public class Build {
+  private final BuildEventSet buildEventSet;
   private BuildProfile buildProfile;
   private StaticSpaceExpression staticSpace;
   private SymbolTable symbolTable;
@@ -29,62 +31,18 @@ public class Build {
   private Build(boolean isDebugBuild, VerbaCodePage page) {
     this.buildProfile = new BuildProfile(isDebugBuild);
     this.staticSpace = new StaticSpaceExpression(page);
-    this.eventSubscribers = this.determineEventSubscribers();
-    this.afterParse();
-    this.symbolTable = this.associateSymbols(staticSpace);
-    this.validateBuild();
-    this.beforeCodeGeneration();
+    this.buildEventSet = new BuildEventSet(buildProfile, staticSpace);
+    this.buildEventSet.afterParse();
+
+    this.buildEventSet.beforeAssociateSymbols();
+    this.symbolTable = new SymbolTable(this.staticSpace);
+    this.buildEventSet.afterAssociateSymbols(this.symbolTable);
+
+    this.buildEventSet.validateBuild(this.symbolTable);
+
+    this.buildEventSet.beforeCodeGeneration(this.symbolTable);
+
     this.images = this.generateObjectImages();
-  }
-
-  private QIterable<BuildEvent> determineEventSubscribers() {
-    QIterable<BuildEvent> expressionsSubscribingToEvents =
-      this.staticSpace.allExpressions()
-        .ofType(BuildEvent.class);
-
-    QIterable<BuildEvent> expressionsWithDelegatingSubscriptionObject =
-      this.staticSpace.allExpressions()
-        .ofType(BuildEvent.ContainsEventSubscriptionObject.class)
-        .map(BuildEvent.ContainsEventSubscriptionObject::buildEventObject);
-
-    QSet<BuildEvent> allSubscribingObjects = new QSet<>();
-    allSubscribingObjects.add(expressionsSubscribingToEvents);
-    allSubscribingObjects.add(expressionsWithDelegatingSubscriptionObject);
-
-    return allSubscribingObjects;
-  }
-
-  private void afterParse() {
-    BuildEventLauncher<BuildEvent.NotifyParsingBuildEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyParsingBuildEvent.class, eventSubscribers);
-
-    launcher.launchEvent(expression -> expression.afterParse(buildProfile, this.staticSpace));
-  }
-
-  private SymbolTable associateSymbols(StaticSpaceExpression staticSpace) {
-    BuildEventLauncher<BuildEvent.NotifySymbolTableBuildEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifySymbolTableBuildEvent.class, eventSubscribers);
-
-    launcher.launchEvent(expression -> expression.beforeSymbolsGenerated(buildProfile, this.staticSpace));
-    SymbolTable symbolTable = new SymbolTable(staticSpace);
-    launcher.launchEvent(expression -> expression.afterSymbolsGenerated(buildProfile, this.staticSpace, symbolTable));
-    launcher.launchEvent(expression -> expression.onResolveSymbols(buildProfile, this.staticSpace, symbolTable));
-
-    return symbolTable;
-  }
-
-  private void validateBuild() {
-    BuildEventLauncher<BuildEvent.NotifyReadyToCompileEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyReadyToCompileEvent.class, eventSubscribers);
-
-    launcher.launchEvent(expression -> expression.validateReadyToCompile(buildProfile, staticSpace, symbolTable));
-  }
-
-  private void beforeCodeGeneration() {
-    BuildEventLauncher<BuildEvent.NotifyCodeGenerationEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyCodeGenerationEvent.class, eventSubscribers);
-
-    launcher.launchEvent(expression -> expression.beforeCodeGeneration(buildProfile, staticSpace, symbolTable));
   }
 
   private ObjectImageSet generateObjectImages() {
