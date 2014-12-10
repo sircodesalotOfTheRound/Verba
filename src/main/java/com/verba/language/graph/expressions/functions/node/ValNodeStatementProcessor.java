@@ -35,7 +35,7 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
 
   public boolean rvalueIsExistingNamedVariable(ValDeclarationStatement declaration, VirtualVariable rvalue) {
     Scope scope = this.symbolTable.findByInstance(declaration).scope();
-    return scope.containsKey(rvalue.key());
+    return scope.isInScope(rvalue.key());
   }
 
 }

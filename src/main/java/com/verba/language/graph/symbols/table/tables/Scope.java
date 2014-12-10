@@ -242,7 +242,7 @@ public class Scope {
     return new QList<>(this.entrySet.keySet());
   }
 
-  public boolean containsKey(String key) {
+  public boolean isInScope(String key) {
     return this.entrySet.containsKey(key);
   }
 
