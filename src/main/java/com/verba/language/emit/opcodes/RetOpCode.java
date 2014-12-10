@@ -27,7 +27,7 @@ public class RetOpCode extends VerbatimOpCodeBase {
   @Override
   public void render(ObjectImageOutputStream renderer) {
     if (this.variable != null) {
-      renderer.writeInt8("return-index", variable.variableNumber());
+      renderer.writeInt8("varnum", variable.variableNumber());
     }
   }
 

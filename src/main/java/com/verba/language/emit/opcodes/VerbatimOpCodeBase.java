@@ -78,4 +78,8 @@ public abstract class VerbatimOpCodeBase {
   public static VerbatimOpCodeBase loadBoolean(VirtualVariable variable, boolean value) {
     return new LdBoolOpCode(variable, value);
   }
+
+  public static VerbatimOpCodeBase copy(VirtualVariable destination, VirtualVariable source) {
+    return new CopyOpCode(destination, source);
+  }
 }

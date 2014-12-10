@@ -3,9 +3,9 @@ fn something_else {
 }
 
 public fn my_function() {
-  val something = "something"
-  val otherthing = something_else(something)
-  val value = true
+  val first_thing = "something"
+  val second_thing = 5
+  val third_thing = first_thing
 
-  return otherthing
+  return first_thing
 }

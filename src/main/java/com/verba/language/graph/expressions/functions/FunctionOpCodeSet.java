@@ -69,4 +69,8 @@ public class FunctionOpCodeSet implements QIterable<VerbatimOpCodeBase> {
   public void loadBoolean(VirtualVariable variable, boolean value) {
     this.add(VerbatimOpCodeBase.loadBoolean(variable, value));
   }
+
+  public void copy(VirtualVariable destination, VirtualVariable source) {
+    this.add(VerbatimOpCodeBase.copy(destination, source));
+  }
 }

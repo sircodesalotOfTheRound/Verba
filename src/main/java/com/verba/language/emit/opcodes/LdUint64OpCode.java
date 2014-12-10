@@ -23,7 +23,7 @@ public class LdUint64OpCode extends VerbatimOpCodeBase {
 
   @Override
   public void render(ObjectImageOutputStream renderer) {
-    renderer.writeInt8("variableNumber", variable.variableNumber());
+    renderer.writeInt8("varnum", variable.variableNumber());
     renderer.writeInt64("value", value);
   }
 

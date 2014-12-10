@@ -10,8 +10,8 @@ public class LdBoolOpCode extends VerbatimOpCodeBase {
   private static final int ldTrueOpCode = 0x90;
   private static final int ldFalseOpCode = 0x91;
 
-  private static final String boolTrueOpCode = "ldTrue";
-  private static final String boolFalseOpCode = "ldFalse";
+  private static final String boolTrueOpCode = "LdTrue";
+  private static final String boolFalseOpCode = "LdFalse";
   private final VirtualVariable variable;
 
   public LdBoolOpCode(VirtualVariable variable, boolean value) {
