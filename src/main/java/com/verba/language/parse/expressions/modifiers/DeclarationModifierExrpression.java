@@ -20,7 +20,7 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
     super(parent, lexer);
 
     this.modifier = readModifier(lexer);
-    this.modifiedExpression = VerbaExpression.read(parent, lexer);
+    this.modifiedExpression = VerbaExpression.read(this, lexer);
     this.closeLexingRegion();
   }
 

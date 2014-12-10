@@ -4,6 +4,8 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.FunctionEventSubscription;
+import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
+import com.verba.language.graph.expressions.modifiers.FunctionDeclarationExpressionModifierInfo;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
@@ -35,9 +37,10 @@ public class FunctionDeclarationExpression extends VerbaExpression
     BuildEvent.ContainsEventSubscriptionObject
 {
 
-  private final FunctionEventSubscription eventSubscription = new FunctionEventSubscription(this);
+  private final FunctionEventSubscription buildProfile = new FunctionEventSubscription(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
+  private final ExpressionModifierInfo modifierInfo;
   private final boolean isConstructor;
   private TypeConstraintExpression explicitReturnType;
 
@@ -53,6 +56,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
     }
 
     this.block = BlockDeclarationExpression.read(this, lexer);
+    this.modifierInfo = new FunctionDeclarationExpressionModifierInfo(this);
     this.closeLexingRegion();
   }
 
@@ -135,8 +139,10 @@ public class FunctionDeclarationExpression extends VerbaExpression
     symbolTable.visit(this);
   }
 
-  public Symbol resolvedType() { return this.eventSubscription.returnType(); }
+  public Symbol resolvedType() { return this.buildProfile.returnType(); }
 
   @Override
-  public BuildEventSubscriptionBase buildEventObject() { return eventSubscription; }
+  public BuildEventSubscriptionBase buildEventObject() { return buildProfile; }
+
+  public ExpressionModifierInfo modifiers() { return this.modifierInfo; }
 }

@@ -5,6 +5,7 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscription;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
+import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.symbols.resolution.FunctionReturnTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -29,6 +30,7 @@ public class FunctionEventSubscription extends BuildEventSubscription<FunctionDe
 
   @Override
   public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+
   }
 
   @Override
