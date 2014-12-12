@@ -70,6 +70,10 @@ public class Build {
     return new Build(VerbaCodePage.read(null, lexer), configuration);
   }
 
+  public static Build fromSingleFile(String path) {
+    return fromSingleFile(path, new BuildConfiguration());
+  }
+
   public static Build fromSingleFile(String path, BuildConfiguration configuration) {
     String content = FileTools.readAllText(path);
     return Build.fromString(content, configuration);
