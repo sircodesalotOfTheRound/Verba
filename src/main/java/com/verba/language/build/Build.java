@@ -15,6 +15,7 @@ import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
+import com.verba.tools.files.FileTools;
 
 /**
  * Created by sircodesalot on 14/11/20.
@@ -28,17 +29,21 @@ public class Build {
   private QIterable<BuildEvent> eventSubscribers;
 
   // TODO: Move build into a method, rather than part of the constructor.
-  private Build(boolean isDebugBuild, VerbaCodePage page) {
-    this.buildProfile = new BuildProfile(isDebugBuild);
+  private Build(VerbaCodePage page, BuildConfiguration configuration) {
+    this.buildProfile = new BuildProfile(configuration);
     this.staticSpace = new StaticSpaceExpression(page);
     this.buildEventSet = new BuildEventSet(buildProfile, staticSpace);
     this.buildEventSet.afterParse();
+
+    if (!this.buildProfile.shouldCreateSymbolTable()) return;
 
     this.buildEventSet.beforeAssociateSymbols();
     this.symbolTable = new SymbolTable(this.staticSpace);
     this.buildEventSet.afterAssociateSymbols(this.symbolTable);
 
     this.buildEventSet.validateBuild(this.symbolTable);
+
+    if (!this.buildProfile.shouldEmitCode()) return;
 
     this.buildEventSet.beforeCodeGeneration(this.symbolTable);
 
@@ -58,10 +63,15 @@ public class Build {
     return generator.save(path);
   }
 
-  public static Build fromString(boolean isDebugBuild, String code) {
+  public static Build fromString(String code, BuildConfiguration configuration) {
     StringBasedCodeStream codeStream = new StringBasedCodeStream(code);
     VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("MemoryCodefile.v", codeStream);
 
-    return new Build(true, VerbaCodePage.read(null, lexer));
+    return new Build(VerbaCodePage.read(null, lexer), configuration);
+  }
+
+  public static Build fromSingleFile(String path, BuildConfiguration configuration) {
+    String content = FileTools.readAllText("SomeCodes.v");
+    return Build.fromString(content, configuration);
   }
 }

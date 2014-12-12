@@ -38,14 +38,13 @@ The verba language uses a hand-crafted backtracking recursive descent parser. Ha
 flexibility when parsing context-sensitive content. Context-sensitive content allows the language to be more expressive.
 
 ## Basic architecture:
->* The *verba* font-end compiler analyzes and emits verbatim byte code literature.
->* The *verbalize* build system generates, organizes and deploys verbatim byte code lit files.
->* The *verbOS* runtime is used to load and execute verbatim byte code literature.
->* The *verbaj* just-in-time compiler translates byte code literature into architecture specific instructions.
+>* The **verba** font-end compiler analyzes and emits verbatim byte code literature.
+>* The **verbalize** build system generates, organizes and deploys verbatim byte code lit files.
+>* The **verbOS** runtime is used to load and execute verbatim byte code literature.
+>* The **verbaj** just-in-time compiler translates byte code lit into architecture specific instructions.
 
 # Current Status
-
-
+  
 
 # Roadmap
 The following are the primary features that will be implemented by version 1.0.

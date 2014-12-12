@@ -6,16 +6,16 @@ import com.verba.language.emit.header.StringTable;
  * Created by sircodesalot on 14/11/23.
  */
 public class BuildProfile {
-  private final boolean isDebugBuild;
   private final StringTable stringTable;
+  private final BuildConfiguration configuration;
 
-  public BuildProfile() { this(false); }
-
-  public BuildProfile(boolean isDebugBuild) {
-    this.isDebugBuild = isDebugBuild;
+  public BuildProfile(BuildConfiguration configuration) {
+    this.configuration = configuration;
     this.stringTable = new StringTable();
   }
 
-  public boolean isDebugBuild() { return this.isDebugBuild; }
+  public boolean isDebugBuild() { return this.configuration.isDebugBuild(); }
+  public boolean shouldEmitCode() { return this.configuration.emitCode(); }
+  public boolean shouldCreateSymbolTable() { return this.configuration.createSymbolTable(); }
   public StringTable stringTable() { return this.stringTable; }
 }

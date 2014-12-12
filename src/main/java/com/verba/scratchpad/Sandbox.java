@@ -1,6 +1,7 @@
 package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
+import com.verba.language.build.BuildConfiguration;
 import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -11,9 +12,12 @@ import com.verba.tools.files.FileTools;
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = Build.fromString(true, FileTools.readAllText("SomeCodes.v"));
+    BuildConfiguration configuration = new BuildConfiguration()
+      .isDebugBuild(true)
+      .shouldCreateSymbolTable(false)
+      .shouldEmitCode(false);
 
-    FunctionDeclarationExpression expression = build.symbolTable().findAllMatchingFqn("my_function").single()
-      .expressionAs(FunctionDeclarationExpression.class);
+    Build build = Build.fromSingleFile("ParseOnly.v", configuration);
+    System.out.println("parsing only");
   }
 }
