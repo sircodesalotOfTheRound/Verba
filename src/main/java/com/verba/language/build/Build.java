@@ -42,18 +42,10 @@ public class Build {
 
     this.buildEventSet.beforeCodeGeneration(this.symbolTable);
 
-    this.images = this.generateObjectImages();
+    this.images = this.buildEventSet.generateObjectImages(symbolTable);
   }
 
-  private ObjectImageSet generateObjectImages() {
-    BuildEventLauncher<BuildEvent.NotifyObjectEmitEvent> launcher
-      = new BuildEventLauncher<>(BuildEvent.NotifyObjectEmitEvent.class, eventSubscribers);
 
-    QIterable<ObjectImage> images = launcher.launchEventWithResultValue(expression ->
-      expression.onGenerateObjectImage(buildProfile, staticSpace, symbolTable));
-
-    return new ObjectImageSet(images);
-  }
 
   public SymbolTable symbolTable() { return this.symbolTable; }
   public QIterable<VerbaExpression> allExpressions() { return this.staticSpace.allExpressions(); }

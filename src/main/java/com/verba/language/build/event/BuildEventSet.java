@@ -3,6 +3,8 @@ package com.verba.language.build.event;
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildProfile;
+import com.verba.language.emit.images.ObjectImageSet;
+import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
@@ -72,5 +74,15 @@ public class BuildEventSet {
       = new BuildEventLauncher<>(BuildEvent.NotifyCodeGenerationEvent.class, eventSubscribers);
 
     launcher.launchEvent(expression -> expression.beforeCodeGeneration(buildProfile, staticSpace, symbolTable));
+  }
+
+  public ObjectImageSet generateObjectImages(SymbolTable symbolTable) {
+    BuildEventLauncher<BuildEvent.NotifyObjectEmitEvent> launcher
+      = new BuildEventLauncher<>(BuildEvent.NotifyObjectEmitEvent.class, eventSubscribers);
+
+    QIterable<ObjectImage> images = launcher.launchEventWithResultValue(expression ->
+      expression.onGenerateObjectImage(buildProfile, staticSpace, symbolTable));
+
+    return new ObjectImageSet(images);
   }
 }

@@ -15,6 +15,5 @@ public class Sandbox {
 
     FunctionDeclarationExpression expression = build.symbolTable().findAllMatchingFqn("my_function").single()
       .expressionAs(FunctionDeclarationExpression.class);
-
   }
 }

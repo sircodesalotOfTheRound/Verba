@@ -1,3 +1,7 @@
+fn add() {
+  return 5 + 5
+}
+
 fn something_else {
   return "something"
 }
