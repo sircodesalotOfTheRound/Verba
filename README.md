@@ -1,7 +1,7 @@
 Verba
 =====
 
-The verba language compiler.
+The verbatim byte literature compiler for the verba language. To see what you can use now, check out the **<a href="https://github.com/sircodesalotOfTheRound/Verba/wiki">wiki</a>**!
 
 Compiling
 ---------
