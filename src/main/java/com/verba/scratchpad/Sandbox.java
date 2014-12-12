@@ -4,6 +4,7 @@ import com.verba.language.build.Build;
 import com.verba.language.build.BuildConfiguration;
 import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.symbols.table.entries.Symbol;
+import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.tools.files.FileTools;
 
@@ -18,6 +19,9 @@ public class Sandbox {
       .shouldEmitCode(false);
 
     Build build = Build.fromSingleFile("ParseOnly.v", configuration);
-    System.out.println("parsing only");
+
+    for (VerbaExpression expression : build.allExpressions()) {
+      System.out.println(expression);
+    }
   }
 }

@@ -2,6 +2,7 @@ package com.verba.language.parse.expressions.tags.aspect;
 
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.blockheader.classes.InjectedDeclarationExpression;
 import com.verba.language.parse.expressions.categories.MetaTagExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
@@ -47,12 +48,12 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
 
     // @ [ ... : inject AspectFQN ]
     else if (lexer.currentIs(KeywordToken.class, KeywordToken.INJECT)) {
-      throw new NotImplementedException();
+      return InjectedDeclarationExpression.read(this, lexer);
     }
 
     // @ [ ... : AspectFQN ] (is the same as new aspectFQN)
     else if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
-      throw new NotImplementedException();
+      return FullyQualifiedNameExpression.read(this, lexer);
     }
 
     throw new NotImplementedException();

@@ -14,6 +14,8 @@ import java.util.function.Predicate;
  * Created by sircodesalot on 14/8/31.
  */
 public class FileTools {
+  private static final String NEWLINE_CHARACTER = "\n";
+
   public class FileException extends RuntimeException {
     public FileException(String message, Object... format) {
       this(null, message, format);
@@ -85,6 +87,7 @@ public class FileTools {
       String input = null;
       while ((input = bufferedReader.readLine()) != null) {
         textResult.append(input);
+        textResult.append(NEWLINE_CHARACTER);
       }
 
       inputStream.close();

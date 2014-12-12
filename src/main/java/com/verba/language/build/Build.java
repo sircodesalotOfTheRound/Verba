@@ -65,13 +65,13 @@ public class Build {
 
   public static Build fromString(String code, BuildConfiguration configuration) {
     StringBasedCodeStream codeStream = new StringBasedCodeStream(code);
-    VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("MemoryCodefile.v", codeStream);
+    VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("MemoryCodefile.v", codeStream, false, false);
 
     return new Build(VerbaCodePage.read(null, lexer), configuration);
   }
 
   public static Build fromSingleFile(String path, BuildConfiguration configuration) {
-    String content = FileTools.readAllText("SomeCodes.v");
+    String content = FileTools.readAllText(path);
     return Build.fromString(content, configuration);
   }
 }

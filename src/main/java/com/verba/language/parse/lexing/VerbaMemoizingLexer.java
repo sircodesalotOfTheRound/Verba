@@ -1,5 +1,6 @@
 package com.verba.language.parse.lexing;
 
+import com.verba.language.build.event.BuildEvent;
 import com.verba.language.parse.codestream.CodeStream;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.info.LexList;
@@ -28,7 +29,7 @@ public class VerbaMemoizingLexer implements Lexer, Serializable {
     this.filename = filename;
     this.tokens = buildList(stream, false, false);
     this.fileLength = stream.getFileLength();
-    this.undopoints = new Stack<Integer>();
+    this.undopoints = new Stack<>();
   }
 
   public VerbaMemoizingLexer(String filename, CodeStream stream, boolean includeWhitespaces, boolean includeComments) {
@@ -36,7 +37,7 @@ public class VerbaMemoizingLexer implements Lexer, Serializable {
     this.filename = filename;
     this.tokens = buildList(stream, includeWhitespaces, includeComments);
     this.fileLength = stream.getFileLength();
-    this.undopoints = new Stack<Integer>();
+    this.undopoints = new Stack<>();
   }
 
   private List<LexInfo> buildList(CodeStream stream, boolean includeWhitespaces, boolean includeComments) {
@@ -50,7 +51,9 @@ public class VerbaMemoizingLexer implements Lexer, Serializable {
         tokens.add(token);
       } else if (isComment && includeComments) {
         tokens.add(token);
-      } else if (!isComment && !isWhitespace) tokens.add(token);
+      } else if (!isComment && !isWhitespace) {
+        tokens.add(token);
+      }
     }
     return tokens;
   }

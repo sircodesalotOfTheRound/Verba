@@ -38,9 +38,11 @@ public class ValDeclarationStatement extends VerbaExpression
     this.isMutable = determineMutability(lexer);
     this.identifier = NamedValueExpression.read(this, lexer);
 
-    lexer.readCurrentAndAdvance(OperatorToken.class, "=");
+    if (lexer.currentIs(OperatorToken.class, "=")) {
+      lexer.readCurrentAndAdvance(OperatorToken.class, "=");
+      this.rvalue = RValueExpression.read(this, lexer);
+    }
 
-    this.rvalue = RValueExpression.read(this, lexer);
     this.closeLexingRegion();
   }
 
