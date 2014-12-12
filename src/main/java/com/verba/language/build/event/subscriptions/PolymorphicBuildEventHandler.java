@@ -10,6 +10,7 @@ import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameRes
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.StaticSpaceExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -41,22 +42,21 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
   @Override
   public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
-    this.thisEntry = symbolTable.findByInstance(this.expression());
-    this.traitEntries = determineTraitEntries(symbolTable);
-    this.traitEntriesByName = this.traitEntries.parition(Symbol::fqn);
-    this.immediateMembers = determineImmediateMembers(this.expression());
-    this.allMembers = determineAllMembers(this.expression(), new QList<>());
-    this.symbolTableEntriesByName = this.allMembers.parition(Symbol::name);
   }
 
   @Override
   public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
-
+    this.thisEntry = symbolTable.findByInstance(this.expression());
+    this.immediateMembers = determineImmediateMembers(this.expression());
+    this.allMembers = determineAllMembers(this.expression(), new QList<>());
+    this.symbolTableEntriesByName = this.allMembers.parition(Symbol::name);
+    this.traitEntriesByName = this.traitEntriesByName();
   }
 
   private QIterable<Symbol> determineTraitEntries(SymbolTable symbolTable) {
-    SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, this.thisEntry.scope());
+    Scope scope = symbolTable.resolveScope(this.expression());
 
+    SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, scope);
     QList<Symbol> entriesForTraits = new QList<>() ;
     for (TypeConstraintExpression expression : this.expression().traits()) {
       SymbolResolutionMatch match = nameResolver.findSymbolsInScope(expression.representation()).first();
@@ -66,7 +66,13 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
     return entriesForTraits;
   }
 
-  public QIterable<Symbol> traitEntries() { return this.traitEntries; }
+  public QIterable<Symbol> traitEntries() {
+    if (this.traitEntries == null) {
+      this.traitEntries = determineTraitEntries(symbolTable);
+    }
+
+    return this.traitEntries;
+  }
 
   @Override
   public void beforeCodeGeneration(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
@@ -81,6 +87,14 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
     }
 
     return new QList<>();
+  }
+
+  private Partition<String, Symbol> traitEntriesByName() {
+    if (this.traitEntriesByName == null) {
+      this.traitEntriesByName = this.traitEntries().parition(Symbol::fqn);
+    }
+
+    return this.traitEntriesByName;
   }
 
   public boolean isMember(String name) {
@@ -102,7 +116,8 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
 
   private QIterable<Symbol> determineAllMembers(PolymorphicDeclarationExpression expression, QList<Symbol> names) {
     QIterable<PolymorphicDeclarationExpression> traits = expression.traitSymbolTableEntries()
-      .map(entry -> entry.expressionAs(PolymorphicDeclarationExpression.class));
+      .map(Symbol::expression)
+      .cast(PolymorphicDeclarationExpression.class);
 
     PolymorphicDeclarationNameResolver members = new PolymorphicDeclarationNameResolver(this.symbolTable, expression);
     names.add(members.immediateMembers());
@@ -115,6 +130,6 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
   }
 
   public boolean isDerivedFrom(String name) {
-    return this.traitEntriesByName.containsKey(name);
+    return this.traitEntriesByName().containsKey(name);
   }
 }

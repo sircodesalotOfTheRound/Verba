@@ -196,6 +196,7 @@ public class Scope {
       currentScope = currentScope.parent;
     }
 
+    fqnList.add("");
     return fqnList;
   }
 

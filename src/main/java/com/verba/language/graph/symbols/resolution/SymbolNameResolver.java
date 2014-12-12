@@ -20,15 +20,16 @@ public class SymbolNameResolver {
   public SymbolNameResolver(SymbolTable symbolTable, Scope scope) {
     this.symbolTable = symbolTable;
     this.scope = scope;
-    this.page = discoverPage(scope);
+    this.page = discoverSource(scope);
     this.namespacesInScope = namespacesInScope(page, scope);
   }
 
   public QIterable<SymbolResolutionMatch> findSymbolsInScope(String name) {
     QList<SymbolResolutionMatch> matchingEntries = new QList<>();
 
-    String fqn;
     for (String namespace : namespacesInScope) {
+
+      String fqn;
       if (!namespace.isEmpty()) {
         fqn = String.format("%s.%s", namespace, name);
       } else {
@@ -44,11 +45,11 @@ public class SymbolNameResolver {
     return matchingEntries.distinct(SymbolResolutionMatch::symbol);
   }
 
-  private VerbaCodePage discoverPage(Scope scope) {
+  private VerbaCodePage discoverSource(Scope scope) {
     if (scope.entries().any()) {
       return (VerbaCodePage) scope.entries().first().source();
     } else {
-      return discoverPage((VerbaCodePage)scope.header());
+      return discoverPage((VerbaExpression)scope.header());
     }
   }
 

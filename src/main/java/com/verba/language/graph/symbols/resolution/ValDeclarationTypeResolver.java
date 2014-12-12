@@ -1,13 +1,17 @@
 package com.verba.language.graph.symbols.resolution;
 
+import com.verba.language.build.event.subscriptions.ValDeclarationEventSubscription;
 import com.verba.language.graph.symbols.table.entries.Symbol;
+import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
+import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 /**
  * Created by sircodesalot on 14/12/7.
@@ -41,7 +45,11 @@ public class ValDeclarationTypeResolver {
   private Symbol determineTypeFromRhs() {
     if (this.declaration.hasRValue()) {
       RValueExpression rvalue = this.declaration.rvalue();
-      if (rvalue instanceof LiteralExpression) return determineTypeFromLiteral(rvalue);
+      if (rvalue instanceof LiteralExpression) {
+        return determineTypeFromLiteral(rvalue);
+      } else if (rvalue instanceof NamedValueExpression) {
+        return resolveByName(((NamedValueExpression) rvalue).name());
+      }
     }
 
     // TODO: No resolution. There should be a 'No-Type' symbol.
@@ -53,5 +61,20 @@ public class ValDeclarationTypeResolver {
     if (rvalue instanceof NumericExpression) return symbolTable.findSymbolForType(KeywordToken.INT);
 
     return null;
+  }
+
+  private Symbol resolveByName(String name) {
+    Scope scope = this.symbolTable.resolveScope(this.declaration);
+    SymbolNameResolver resolver = new SymbolNameResolver(symbolTable, scope);
+    SymbolResolutionMatch match = resolver.findSymbolsInScope(name).single();
+
+    if (match.symbol().is(ValDeclarationStatement.class)) {
+      return match
+        .symbol()
+        .expressionAs(ValDeclarationStatement.class)
+        .resolvedType();
+    }
+
+    return match.symbol();
   }
 }
