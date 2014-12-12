@@ -34,27 +34,31 @@ cd Verbalize; mvn clean install; cd ..
 
 
 # Compiler Overview
-The verba language uses a custom hand-crafted backtracking recursive descent parser. Hand crafted parsers allow for greater
+The verba language uses a hand-crafted backtracking recursive descent parser. Hand crafted parsers allow for greater
 flexibility when parsing context-sensitive content. Context-sensitive content allows the language to be more expressive.
 
-> Basic architecture:
-> The *verba* font-end compiler analyzes and emits verbatim byte code literature.
-> The *verbalize* build system generates, organizes and deploys verbatim byte code lit files.
-> The *verbOS* runtime is used to load and execute verbatim byte code literature.
-> The *verbaj* just-in-time compiler translates byte code literature into architecture specific instructions.
+## Basic architecture:
+>* The *verba* font-end compiler analyzes and emits verbatim byte code literature.
+>* The *verbalize* build system generates, organizes and deploys verbatim byte code lit files.
+>* The *verbOS* runtime is used to load and execute verbatim byte code literature.
+>* The *verbaj* just-in-time compiler translates byte code literature into architecture specific instructions.
 
 # Current Status
 
 
 
 # Roadmap
+The following are the primary features that will be implemented by version 1.0.
 
 ## Functions
+Unlike Java or C#, functions don't need to be methods. Instead, functions can belong to namespaces directly
+
 ```
 # Verba Code:
 fn empty_function
 fn
 ```
+
 
 ### Async
 The `async` keywords changes a function from syncrhonous to asynchronous:
@@ -69,6 +73,9 @@ fn starter {
 ```
 
 This works similar to the `async`/`await` pattern in C#. The key value add is that functions don't need to be pre-declared as asynchronous functions, because verba functions never return void, and thus always return *something* (even if it's just `unit`). For example:
+
+## Namespaces
+The verba language will use C++/C# style name spacing.
 
 ## Static Evaluation, Dynamic Evaluation
 ```
