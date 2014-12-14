@@ -257,6 +257,8 @@ class Transaction {
 }
 ```
 
+As you can see, `Aspects` define three virtual functions, `on_enter` (called before the function executed), `on_exit` (called before the function exits), and `on_exception` (called when an exception is thrown). These functions can be used to provide a reusable execution context container for a given function.
+
 ### Templates:
 Templates are modifiable text blocks inspired by Asp.net MVC Razor. Whereas razor only works on dedicated razor HTML markup files, templates can be used anywhere:
 
@@ -287,15 +289,7 @@ template WelcomeMessage(message) {
 
 Notice that templates can be `Hashtagged` with format information so that IDEs can provide code completion assistence. In the example above, `#Template.Format` is generic of type `Template.Formats.HTML`. Using this, an IDE could determine that the encased text is HTML, and provide the developer code assistence.
 
-```
-fn a_template {
-  template {
-
-  }
-}
-```
-
-### The `Sql` Type:
+### The Sql Type:
 Everybody uses sql. Unfortunately, most languages treat sql as plain strings. The verba language uses a special sql type that effectively converts ansi compatible sql into an expression tree that can be interpreted by a database connector.
 
 ```
