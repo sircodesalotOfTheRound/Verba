@@ -43,9 +43,6 @@ flexibility when parsing context-sensitive content. Context-sensitive content al
 >* The **verbOS** runtime is used to load and execute verbatim byte code literature.
 >* The **verbaj** just-in-time compiler translates byte code lit into architecture specific instructions.
 
-# Current Status
-  
-
 # Roadmap
 The following are the primary features that will be implemented by version 1.0.
 
