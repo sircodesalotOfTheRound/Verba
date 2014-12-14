@@ -51,10 +51,20 @@ Unlike Java or C#, functions don't need to be methods. Instead, functions can be
 
 ```
 # Verba Code:
-fn empty_function
-fn
+class AClass {
+  fn member_method() { }
+}
+
+fn non_class_function() {
+
+}
+
+fn function_with_explicit_return_type : AClass { ... }
+fn generic_function<T> { }
+
 ```
 
+Also, Functions in verba always return a value. Functions that return "no" value return `unit`. This simplifies asynchronous and functional programming.
 
 ### Async
 The `async` keywords changes a function from syncrhonous to asynchronous:
