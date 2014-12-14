@@ -157,13 +157,33 @@ Compare this with trying to work with `json` ingested from say, MongoDB or some 
 * `a !isa b` (`a` does not derive from `b`)
 
 ### Meta Programming:
+The verba compiler can emit meta code during compilation. Think of this as a more beefed up version of C++ templates:
+
 ```
-meta MyMeta<T, U, V> {
-  fn my_function(name : utf) {
-    print("This will print out a ${@name}")
+meta MyMeta (os : OperatingSystem) {
+  fn execute_based_on_OS(os : OperatingSystem) {
+    @if (os == OperatingSystem.Mac) {
+      print("this is running on a mac")
+    } @else if (os == OperatingSystem.PC) {
+      print("this is running on a PC")
+    }
   }
 }
+
+val incrementer = resolve MyMeta(OperatingSystem.Mac)
 ```
+
+The `meta` keyword allows the developer to emit any single `class`, `function` or other verba type that is then templated at runtime using the `resolve` keyword (just as a C++ function is templated at compile time). Using the `@` meta key, allows the developer to access values from outside of the meta scope. In the example above, we use a meta `@if` statement to determine what type of operating system is currently running. This `@if` statement runs *once*, and then emits compiled code accordingly. Another example:
+
+```
+fn prime_calculator(nth_prime : int) { ... }
+
+meta PrimeNumber(nth_prime : int) {
+  return @prime_calculator(nth_prime)
+}
+```
+
+Here, when the `meta` function `PrimeNumber` is instantiated, it calls the `prime_calculator` function and then bakes in the resulting value. Once the instantiated function is used, it will always immediately return the value associated with the prime. Meta programming can be used to easily create new classes and functions that correspond to the immediate runtime environment.
 
 ### Markup:
 Markup is used a a simple interface for building tree structures:
@@ -273,7 +293,7 @@ fn a_template {
 }
 ```
 
-### Inline Sql:
+### The `Sql` Type:
 Everybody uses sql. Unfortunately, most languages treat sql as plain strings. The verba language uses a special sql type that effectively converts ansi compatible sql into an expression tree that can be interpreted by a database connector.
 
 ```
