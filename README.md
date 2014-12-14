@@ -76,7 +76,8 @@ This works similar to the `async`/`await` pattern in C#. The key value add is th
 ## Namespaces
 The verba language will use C++/C# style name spacing.
 
-## Static Evaluation, Dynamic Evaluation
+## Collections and Data transforms
+
 ```
 val array_from_literals = [1, 2, 3, 4]
 val array_from_range = [ 1 to 100 ]
@@ -87,12 +88,45 @@ val array_from_span = [
 ]
 ```
 
+## Class extensions
+Using the `extend` keyword, a class can be re-opened for method modification. For example:
+
+```
+extend Iterable<T> {
+  fn distinct_by_property<U>(on_property : T -> U) { ... }
+}
+
+val people_with_distinct_names = new List<Person>()
+  .distinct_by_property(person -> person.name)
+  
+```
+
+Here, the `Iterable<T>` class is re-opened for extension, adding the method `distinct_by_property`, which allows collections to be filtered for distinct items based on some projection.
+
+## Static Evaluation, Dynamic Evaluation
+By default, verba is a statically typed language. This allows for better performance, and application scalability. However, there are certain scenarios when dynamic execution is neccesary. Verba supports dynamic execution in two ways.
+
+### Dynamically Typed Objects and Parameters
+A dynamically typed parameter is one of two things:
+
+> * (1) A value declared with `val` that has an explicit `dynamic` type:
+> ```
+>  val a_dynamic_string = "The quick brown fox"
+> ```
+> * (2) A parameter without an explicit type:
+> ```
+> fn function(int_parameter : utf, dynamic_parameter) { ... }
+> ```
+
+Dynamic parameters in and of themselves don't change the **behavior** of the underlying type. A `utf` string is still a string, and an `int` is still and int -- making them dynamic will not change that. What dynamic typing does, is tell the underlying execution environment that every operation performed on that type/reference should be done dynamically. This has important implications for the `json` object type:
+
 ```
 fn my_function {
   # The 'd' is silent
   val djson = {
-    value : "First",
-
+    first: 1,
+    second: "two",
+    third: { inner: new Set<String>() }
   }
 
   # Append a new property to the json object.
@@ -100,10 +134,14 @@ fn my_function {
 
   # Use the 'hasa' operator to test for membership.
   if (djson hasa property) {
-
+    ...
   }
 }
 ```
+
+The `json` type is a dynamic, heterogenous collection. In other words, `json` types can be modified at run-time, adding and changing the properties and values associated with it. The beauty of this is that when you need a dynamic object, it's there for you, and you can use dynamic typing to allow verba to switch execution to dynamically determine what options can be performed on the object. 
+
+Compare this with trying to work with `json` ingested from say, MongoDB or some rest service, and having to modify it using a `Map<Key, Value>` (Java)/ Dictionary<Key, Value>(C#). Here, you have type safety for building things out with compiler enforced determinism, but dynamic execution for those moments you really do need it.
 
 ### Polymorphic Reflection
 * `is` tests object references, similar to java (`==`).
@@ -242,7 +280,7 @@ val some_sql = sql {
   select first_name, last_name
 }
 
-sql AQuery(name : utf) {
+public sql AQuery(name : utf) {
   from people
   join purchase on people.id = purchase.id
   select first_name, last_name, age
@@ -251,7 +289,7 @@ sql AQuery(name : utf) {
 
 val database_connector = new DbConnector
 val query = new AQuery("Peter")
-val query_results = database_connector.query(new a_query("Peter"))
+val query_results = database_connector.query(query)
 
 for (val result : query_results) {
    ... some sort of code here
