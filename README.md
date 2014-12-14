@@ -1,7 +1,7 @@
 Verba
 =====
 
-The verbatim byte literature compiler for the verba language. To see what you can use now, check out the **<a href="https://github.com/sircodesalotOfTheRound/Verba/wiki">wiki</a>**!
+The verbatim byte literature compiler for the verba language. To see what you can use now, check out the **<a href="https://github.com/sircodesalotOfTheRound/Verba/wiki">verba language currently implemented features</a>**!
 
 Compiling
 ---------
@@ -129,7 +129,7 @@ meta MyMeta<T, U, V> {
 Markup is used a a simple interface for building tree structures:
 
 ### Hashtags and Aspects
-A hashtag is similar to Java `Annotations` or C# `Attributes`. A hashtag effectively provides meta information about a particular function.
+A hashtag is similar to Java `Annotations` or C# `Attributes`. A hashtag effectively provides meta information about a code object (such as a function, class, or trait).
 
 ```
   #: This is a hashtag.
@@ -138,7 +138,7 @@ A hashtag is similar to Java `Annotations` or C# `Attributes`. A hashtag effecti
 
 ```
 
-Like C# Hashtags are clases which derive from `Hashtag`, which means they can contain methods as well as be otherwise polymorphic (like any other type).
+Like C# `Hashtags` are clases that derive from the `Hashtag` base class, which means they can contain methods as well as be otherwise polymorphic (like any other type).
 
 ```
 class MyHashtag : Hashtag {
@@ -151,13 +151,13 @@ class MyHashtag : Hashtag {
 Imrpoving on C#, however, `Hashtags` can be generic. They can also contain lambdas (but not closures).
 
 ```
-class AFunction {
-  #[MyHashtag()]
-  fn my_function() { }
+class SomeClass {
+  #[ValueProcessor(value -> value.length())]
+  val some_value : utf
 }
 ```
 
-An aspect is a segment of code that is executed before and after a function:
+An `Aspect` tag is a segment of code that is executed before and after a function begins and exits. Think of it as a simple function execution contextualizer/container:
 ```
 #: Notice that transactions can capture parameters from the function signature
 #: As well as from class members.
@@ -176,7 +176,7 @@ class PersonInserter {
 }
 ```
 
-Where the transaction
+Where the transaction is defined as:
 ```
 class Transaction {
   val transaction = new DatabaseTransaction
@@ -194,18 +194,6 @@ class Transaction {
   }
 }
 ```
-
-
-
-## Program Flow
-
-```
-val ternary_ish =
-  if (one): true
-  otherwise: none
-```
-
-### Options:
 
 ### Templates:
 Templates are modifiable text blocks inspired by Asp.net MVC Razor. Whereas razor only works on dedicated razor HTML markup files, templates can be used anywhere:
@@ -235,7 +223,7 @@ template WelcomeMessage(message) {
 }
 ```
 
-Notice that templates can be `Hashtagged` with format information so that IDEs can provide code completion assistence.
+Notice that templates can be `Hashtagged` with format information so that IDEs can provide code completion assistence. In the example above, `#Template.Format` is generic of type `Template.Formats.HTML`. Using this, an IDE could determine that the encased text is HTML, and provide the developer code assistence.
 
 ```
 fn a_template {
@@ -245,22 +233,29 @@ fn a_template {
 }
 ```
 
-### Operator overloading:
-
-Verba will support operator overloads, including C++ style functors.
-
 ### Inline Sql:
-Everybody uses sql. Unfortunately, most languages treat sql as plain strings. The verba language uses a special sql type that allows
+Everybody uses sql. Unfortunately, most languages treat sql as plain strings. The verba language uses a special sql type that effectively converts ansi compatible sql into an expression tree that can be interpreted by a database connector.
+
 ```
 val some_sql = sql {
   from my_table
   select first_name, last_name
 }
 
-sql a_query(name : utf) {
+sql AQuery(name : utf) {
   from people
-  inner join purchases where people.name =
-  select
+  join purchase on people.id = purchase.id
+  select first_name, last_name, age
   where name = @name
 }
+
+val database_connector = new DbConnector
+val query = new AQuery("Peter")
+val query_results = database_connector.query(new a_query("Peter"))
+
+for (val result : query_results) {
+   ... some sort of code here
+}
 ```
+
+Notice that the meta character `@` is used with the value `@name` here to express that it's value should be captured externally (either by closing over the value from a surrounding function/class or by capturing it from the parameter list as shown here). Since the entire `sql` expression is emitted into the assembly package as an expression tree, the receiving database connector could choose to parameterize `@name` preventing sql injection attacks.
