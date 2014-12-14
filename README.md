@@ -117,7 +117,7 @@ A dynamically typed parameter is one of two things:
 > * (2) A parameter without an explicit type:
 > ```
 > # A paramter which is dynamic because its type is left unspecified.
-> fn function(int_parameter : utf, dynamic_parameter) { ... }
+> fn function(int_parameter : int, dynamic_parameter) { ... }
 > ```
 
 Dynamic parameters in and of themselves don't change the **behavior** of the underlying type. A `utf` string is still a string, and an `int` is still and int -- making them dynamic will not change that. What dynamic typing does, is tell the underlying execution environment that every operation performed on that type/reference should be done dynamically. This has important implications for the `json` object type:
