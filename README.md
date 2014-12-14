@@ -88,15 +88,42 @@ Verba is build designed from the ground up to implement reified generics. Finall
 
 ## Collections and Data transforms
 
+Verba natively supports the `Array<T>` data type:
+
 ```
 val array_from_literals = [1, 2, 3, 4]
 val array_from_range = [ 1 to 100 ]
+```
+
+Arrays, and all collections derive from the `Span<T>` base trait. A `Span<T>` is similar to the idea of an `Iterable<T>`. However, when a user imports the `vm.data` namespace, they will import a set of class extensions that allow for chained data transforms such as `where`, `map`, `distinct`, etc. To get a sense for what types of functions will be supported, see my <a href="https://github.com/sircodesalotOfTheRound/javaLinq">javaLinq set transforms api</a>:
+
+```
+withns vm.data
+
+#: Take items from an existing array,
+#: filter out only those names that have even length,
+#: then map those names into a named tuple.
 val array_from_span = [
   ["Tom", "Dick", "Harry", "Robert"]
-    .where(number -> number % 2 == 0)
-    .map(number -> number * 2)
+    .where(name -> name.length() % 2 == 0)
+    .map(name -> (name: name, length: name.length()))
 ]
 ```
+
+## Named Tuples
+
+Tuples are excellent for those situations where you want to return two values at once. However, tuples are more useful when the values can be retrieved by *name* rather than by *index*:
+
+```
+fn polar_to_cartesian(distance : int, angle : decimal) : (x: decimal, y: decimal) {
+  val x = ...
+  val y = ...
+  
+  return (x, y)
+}
+```
+
+Verba uses named tuples to allow easy collation of values into a data structure.
 
 ## Class extensions
 Using the `extend` keyword, a class can be re-opened for method modification. For example:
@@ -153,9 +180,9 @@ fn my_function {
 
 ## The Json type
 
-The `json` type is a dynamic, heterogenous collection. Think of it as an advanced, first-class ExpandoObject (C#). In other words, `json` types can be modified at run-time, adding and changing the properties and values associated with it. The beauty of this is that when you need a dynamic object, it's there for you, and you can use dynamic typing to allow verba to switch execution to dynamically determine what options can be performed on the object. 
+The `json` type is a dynamic, heterogenous collection. Think of it as an advanced, first-class `ExpandoObject` (C#). In other words, `json` types can be modified at run-time, adding and changing the properties and values associated with it. The beauty of this is that when you need a dynamic object, it's there for you, and you can use dynamic typing to allow verba to switch execution to dynamically determine what options can be performed on the object. 
 
-Compare this with trying to work with `json` ingested from say, MongoDB or some rest service, and having to modify it using a `Map<Key, Value>` (Java)/ Dictionary<Key, Value>(C#). Here, you have type safety for building things out with compiler enforced determinism, but dynamic execution for those moments you really do need it.
+Compare this with trying to work with `json` ingested from say, MongoDB or some rest service, and having to modify it using a `Map<Key, Value>` (Java)/ `Dictionary<Key, Value>` (C#). Here, you have type safety for building things out with compiler enforced determinism, but dynamic execution for those moments you really do need it.
 
 ### Polymorphic Reflection
 * `is` tests object references, similar to java (`==`).
