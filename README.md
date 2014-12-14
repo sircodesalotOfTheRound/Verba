@@ -179,7 +179,9 @@ The `meta` keyword allows the developer to emit any single `class`, `function` o
 fn prime_calculator(nth_prime : int) { ... }
 
 meta PrimeNumber(nth_prime : int) {
-  return @prime_calculator(nth_prime)
+  fn prime_function_for_@{nth_prime}() {
+    return @prime_calculator(nth_prime)
+  }
 }
 ```
 
