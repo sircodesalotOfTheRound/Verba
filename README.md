@@ -111,10 +111,12 @@ A dynamically typed parameter is one of two things:
 
 > * (1) A value declared with `val` that has an explicit `dynamic` type:
 > ```
->  val a_dynamic_string = "The quick brown fox"
+>  # An explicity dynamic reference.
+>  val a_dynamic_string : dynamic = "The quick brown fox"
 > ```
 > * (2) A parameter without an explicit type:
 > ```
+> # A paramter which is dynamic because its type is left unspecified.
 > fn function(int_parameter : utf, dynamic_parameter) { ... }
 > ```
 
