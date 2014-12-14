@@ -178,7 +178,7 @@ fn my_function {
 }
 ```
 
-## The Json type
+### The Json type
 
 The `json` type is a dynamic, heterogenous collection. Think of it as an advanced, first-class `ExpandoObject` (C#). In other words, `json` types can be modified at run-time, adding and changing the properties and values associated with it. The beauty of this is that when you need a dynamic object, it's there for you, and you can use dynamic typing to allow verba to switch execution to dynamically determine what options can be performed on the object. 
 
@@ -228,6 +228,33 @@ Here, when the `meta` function `PrimeNumber` is instantiated, it calls the `prim
 
 ## Markup:
 Markup is used a a simple interface for building tree structures:
+
+```
+markup MyWindowDefinition {
+  <Window>
+    <Frame>
+      <Label text="This is the text I want to show" />
+    </Frame>
+  </Window>
+}
+```
+
+Markup is not standard XML, however, as it allows for naming elements, as well as usign the `@` meta character to evaluate values before they are applied to an attribute:
+
+```
+markup MyWindowDefinition(button_click_message: utf) {
+  # Name the window "window".
+  <window: Window>
+    
+    # Use the meta character (@) to apply a function callback to the button tag.
+    # When the button is clicked, the title is set to the value of the 'button_click_message'.
+    <Button on_click=@fn { 
+      window.title = button_click_message
+    }/>
+    
+  </Window>
+}
+```
 
 ## Hashtags and Aspects
 A hashtag is similar to Java `Annotations` or C# `Attributes`. A hashtag effectively provides meta information about a code object (such as a function, class, or trait).
