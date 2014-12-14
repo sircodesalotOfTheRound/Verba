@@ -151,7 +151,9 @@ fn my_function {
 }
 ```
 
-The `json` type is a dynamic, heterogenous collection. In other words, `json` types can be modified at run-time, adding and changing the properties and values associated with it. The beauty of this is that when you need a dynamic object, it's there for you, and you can use dynamic typing to allow verba to switch execution to dynamically determine what options can be performed on the object. 
+## The Json type
+
+The `json` type is a dynamic, heterogenous collection. Think of it as an advanced, first-class ExpandoObject (C#). In other words, `json` types can be modified at run-time, adding and changing the properties and values associated with it. The beauty of this is that when you need a dynamic object, it's there for you, and you can use dynamic typing to allow verba to switch execution to dynamically determine what options can be performed on the object. 
 
 Compare this with trying to work with `json` ingested from say, MongoDB or some rest service, and having to modify it using a `Map<Key, Value>` (Java)/ Dictionary<Key, Value>(C#). Here, you have type safety for building things out with compiler enforced determinism, but dynamic execution for those moments you really do need it.
 
@@ -160,13 +162,13 @@ Compare this with trying to work with `json` ingested from say, MongoDB or some 
 * `isa` tests whether one object derivation.
 * `hasa` tests membership (useful for dynamic json).
 
-### Extended Operators:
+## Extended Operators:
 
 * `a !< b` (`a` is not less than `b`)
 * `a !is b` (`a` is not the same object as `b`)
 * `a !isa b` (`a` does not derive from `b`)
 
-### Meta Programming:
+## Meta Programming:
 The verba compiler can emit meta code during compilation. Think of this as a more beefed up version of C++ templates:
 
 ```
@@ -197,10 +199,10 @@ meta PrimeNumber(nth_prime : int) {
 
 Here, when the `meta` function `PrimeNumber` is instantiated, it calls the `prime_calculator` function and then bakes in the resulting value. Once the instantiated function is used, it will always immediately return the value associated with the prime. Meta programming can be used to easily create new classes and functions that correspond to the immediate runtime environment.
 
-### Markup:
+## Markup:
 Markup is used a a simple interface for building tree structures:
 
-### Hashtags and Aspects
+## Hashtags and Aspects
 A hashtag is similar to Java `Annotations` or C# `Attributes`. A hashtag effectively provides meta information about a code object (such as a function, class, or trait).
 
 ```
@@ -269,7 +271,7 @@ class Transaction {
 
 As you can see, `Aspects` define three virtual functions, `on_enter` (called before the function executed), `on_exit` (called before the function exits), and `on_exception` (called when an exception is thrown). These functions can be used to provide a reusable execution context container for a given function.
 
-### Templates:
+## Templates:
 Templates are modifiable text blocks inspired by Asp.net MVC Razor. Whereas razor only works on dedicated razor HTML markup files, templates can be used anywhere:
 
 ```
@@ -299,7 +301,7 @@ template WelcomeMessage(message) {
 
 Notice that templates can be `Hashtagged` with format information so that IDEs can provide code completion assistence. In the example above, `#Template.Format` is generic of type `Template.Formats.HTML`. Using this, an IDE could determine that the encased text is HTML, and provide the developer code assistence.
 
-### The Sql Type:
+## The Sql Type:
 Everybody uses sql. Unfortunately, most languages treat sql as plain strings. The verba language uses a special sql type that effectively converts ansi compatible sql into an expression tree that can be interpreted by a database connector.
 
 ```
