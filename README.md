@@ -89,7 +89,7 @@ val array_from_span = [
 Using the `extend` keyword, a class can be re-opened for method modification. For example:
 
 ```
-extend Iterable<T> {
+extend List<T> {
   fn distinct_by_property<U>(on_property : T -> U) { ... }
 }
 
@@ -98,7 +98,7 @@ val people_with_distinct_names = new List<Person>()
   
 ```
 
-Here, the `Iterable<T>` class is re-opened for extension, adding the method `distinct_by_property`, which allows collections to be filtered for distinct items based on some projection.
+Here, the `List<T>` class is re-opened for extension, adding the method `distinct_by_property`, which allows collections to be filtered for distinct items based on some projection.
 
 ## Static Evaluation, Dynamic Evaluation
 By default, verba is a statically typed language. This allows for better performance, and application scalability. However, there are certain scenarios when dynamic execution is neccesary. Verba supports dynamic execution in two ways.
