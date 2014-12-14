@@ -66,7 +66,7 @@ fn generic_function<T> { }
 
 Also, Functions in verba always return a value. Functions that return "no" value return `unit`. This simplifies asynchronous and functional programming.
 
-### Async
+## Async
 The `async` keywords changes a function from syncrhonous to asynchronous:
 ```
 fn lengthy_io_process {
@@ -82,6 +82,9 @@ This works similar to the `async`/`await` pattern in C#. The key value add is th
 
 ## Namespaces
 The verba language will use C++/C# style name spacing.
+
+## Generics
+Verba is build designed from the ground up to implement reified generics. Finally, a fully open source language with true generic capabilities.
 
 ## Collections and Data transforms
 
