@@ -1,9 +1,9 @@
 Verba
 =====
 
-The verbatim byte literature compiler for the verba language. To see what you can use now, check out the **<a href="https://github.com/sircodesalotOfTheRound/Verba/wiki">verba language currently implemented features</a>**!
+The verbatim byte literature compiler for the verba language. To see what you can use now, check out the **<a href="https://github.com/sircodesalotOfTheRound/Verba/wiki">samples of verba language currently implemented features</a>**!
 
-Compiling
+Building
 ---------
 To build the Verba language compiler, simply copy and paste the following commands:
 
