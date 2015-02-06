@@ -1,6 +1,5 @@
 package com.verba.language.graph.symbols.resolution;
 
-import com.verba.language.build.event.subscriptions.ValDeclarationEventSubscription;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -11,7 +10,6 @@ import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 /**
  * Created by sircodesalot on 14/12/7.
