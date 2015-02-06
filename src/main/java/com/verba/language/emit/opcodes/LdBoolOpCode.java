@@ -4,7 +4,7 @@ import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.variables.VirtualVariable;
 
 /**
- * Created by sircodesalot on 14/12/9.
+ *
  */
 public class LdBoolOpCode extends VerbatimOpCodeBase {
   private static final int ldTrueOpCode = 0x90;
