@@ -23,6 +23,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.7</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.verba.language</groupId>
             <artifactId>javaLinq</artifactId>
             <version>1.0-SNAPSHOT</version>

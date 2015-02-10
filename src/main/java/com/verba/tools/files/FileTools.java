@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 public class FileTools {
   private static final String NEWLINE_CHARACTER = "\n";
 
-  public class FileException extends RuntimeException {
+  public static class FileException extends RuntimeException {
     public FileException(String message, Object... format) {
       this(null, message, format);
 
@@ -45,11 +45,11 @@ public class FileTools {
         return fileAttributes.lastModifiedTime();
 
       } catch (Exception ex) {
-        throw new FileTools().new FileException(ex, "Unable to check last modify time");
+        throw new FileException(ex, "Unable to check last modify time");
       }
     }
 
-    throw new FileTools().new FileException("Unable to check last modify time, file does not exist");
+    throw new FileException("Unable to check last modify time, file does not exist");
   }
 
   public static void createFile(String path) {
@@ -58,7 +58,7 @@ public class FileTools {
       directory.createNewFile();
 
     } catch (Exception ex) {
-      throw new FileTools().new FileException(ex, "Unable to create new file");
+      throw new FileException(ex, "Unable to create new file");
     }
   }
 
@@ -71,7 +71,7 @@ public class FileTools {
       outputStream.close();
 
     } catch (Exception ex) {
-      throw new FileTools().new FileException(ex, "Unable to write text to file");
+      throw new FileException(ex, "Unable to write text to file");
     }
   }
 
@@ -94,7 +94,7 @@ public class FileTools {
       return textResult.toString();
 
     } catch (Exception ex) {
-      throw new FileTools().new FileException(ex, "Unable to write text to file");
+      throw new FileException(ex, "Unable to read file form tests");
     }
   }
 
@@ -111,7 +111,7 @@ public class FileTools {
 
     } catch (Exception ex) {
       ex.printStackTrace();
-      throw new FileTools().new FileException(ex, "Unable to serialize object.");
+      throw new FileException(ex, "Unable to serialize object.");
     }
   }
 
@@ -127,7 +127,7 @@ public class FileTools {
       return object;
 
     } catch (Exception ex) {
-      throw new FileTools().new FileException(ex, "Unable to write text to file");
+      throw new FileException(ex, "Unable to write text to file");
     }
   }
 

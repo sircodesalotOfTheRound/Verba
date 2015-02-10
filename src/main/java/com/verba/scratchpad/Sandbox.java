@@ -2,6 +2,7 @@ package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
 import com.verba.language.build.BuildConfiguration;
+import com.verba.language.build.source.SourceUnit;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 
@@ -28,5 +29,10 @@ public class Sandbox {
       System.out.println("Derived class has member: " + expression.fqn() + " of type " +
         expression.expression().getClass().getSimpleName());
     }
+
+    SourceUnit source = SourceUnit.fromFile("GraphingTests.v");
+    System.out.println(source.path());
+    System.out.println(source.content());
+    System.out.println(source.hash());
   }
 }
