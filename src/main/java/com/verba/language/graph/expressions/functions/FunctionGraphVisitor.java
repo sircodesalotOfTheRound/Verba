@@ -37,7 +37,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class FunctionGraphVisitor implements ExpressionTreeVisitor {
+public class FunctionGraphVisitor extends ExpressionTreeVisitor {
   private final VirtualVariableScopeTree variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;

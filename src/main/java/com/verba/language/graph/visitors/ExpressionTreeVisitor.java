@@ -24,44 +24,44 @@ import com.verba.language.parse.expressions.withns.WithNsExpression;
 /**
  * Created by sircodesalot on 14/9/12.
  */
-public interface ExpressionTreeVisitor {
-  void visit(BlockDeclarationExpression verbaExpressions);
+public abstract class ExpressionTreeVisitor {
+  public abstract void visit(BlockDeclarationExpression verbaExpressions);
 
-  void visit(LitFileRootExpression litFileRoot);
+  public abstract void visit(LitFileRootExpression litFileRoot);
 
-  void visit(NamedValueExpression namedObjectDeclarationExpression);
+  public abstract void visit(NamedValueExpression namedObjectDeclarationExpression);
 
-  void visit(PolymorphicDeclarationExpression classDeclarationExpression);
+  public abstract void visit(PolymorphicDeclarationExpression classDeclarationExpression);
 
-  void visit(FunctionDeclarationExpression functionDeclarationExpression);
+  public abstract void visit(FunctionDeclarationExpression functionDeclarationExpression);
 
-  void visit(ArrayDeclarationExpression arrayDeclarationExpression);
+  public abstract void visit(ArrayDeclarationExpression arrayDeclarationExpression);
 
-  void visit(JsonExpression jsonExpression);
+  public abstract void visit(JsonExpression jsonExpression);
 
-  void visit(TupleDeclarationExpression tupleDeclarationExpression);
+  public abstract void visit(TupleDeclarationExpression tupleDeclarationExpression);
 
-  void visit(VerbaCodePage verbaCodePage);
+  public abstract void visit(VerbaCodePage verbaCodePage);
 
-  void visit(ReturnStatementExpression returnStatementExpression);
+  public abstract void visit(ReturnStatementExpression returnStatementExpression);
 
-  void visit(SignatureDeclarationExpression signatureDeclarationExpression);
+  public abstract void visit(SignatureDeclarationExpression signatureDeclarationExpression);
 
-  void visit(QuoteExpression quoteExpression);
+  public abstract void visit(QuoteExpression quoteExpression);
 
-  void visit(AssignmentStatementExpression assignmentStatementExpression);
+  public abstract void visit(AssignmentStatementExpression assignmentStatementExpression);
 
-  void visit(NumericExpression expression);
+  public abstract void visit(NumericExpression expression);
 
-  void visit(ValDeclarationStatement valDeclarationStatement);
+  public abstract void visit(ValDeclarationStatement valDeclarationStatement);
 
-  void visit(WithNsExpression withNsExpression);
+  public abstract void visit(WithNsExpression withNsExpression);
 
-  void visit(MarkupDeclarationExpression markupDeclarationExpression);
+  public abstract void visit(MarkupDeclarationExpression markupDeclarationExpression);
 
-  void visit(DeclarationModifierExrpression declarationModifierExrpression);
+  public abstract void visit(DeclarationModifierExrpression declarationModifierExrpression);
 
-  void visit(NewExpression newExpression);
+  public abstract void visit(NewExpression newExpression);
 
-  void visit(BooleanExpression expression);
+  public abstract void visit(BooleanExpression expression);
 }

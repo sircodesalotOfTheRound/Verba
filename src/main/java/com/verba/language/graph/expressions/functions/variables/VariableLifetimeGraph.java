@@ -28,7 +28,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14/9/21.
  */
-public class VariableLifetimeGraph implements ExpressionTreeVisitor {
+public class VariableLifetimeGraph extends ExpressionTreeVisitor {
   private final VariableLifetimeMap lifetimes = new VariableLifetimeMap();
   private final FunctionDeclarationExpression function;
 

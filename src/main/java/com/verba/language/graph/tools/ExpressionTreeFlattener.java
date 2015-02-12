@@ -32,7 +32,7 @@ import java.util.Iterator;
 /**
  * Flattens a tree of expressions into a QList.
  */
-public class ExpressionTreeFlattener implements ExpressionTreeVisitor, Serializable, QIterable<VerbaExpression> {
+public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Serializable, QIterable<VerbaExpression> {
   private final QList<VerbaExpression> expressions = new QList<>();
 
   public ExpressionTreeFlattener(VerbaExpression root) {
