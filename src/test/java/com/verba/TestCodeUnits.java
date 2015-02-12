@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Created by sircodesalot on 15/2/10.
  */
-public class SourceUnitTests {
+public class TestCodeUnits {
   @Test
   public void testLoadSourceUnit() {
     CodeUnit graphingTests = CodeUnit.fromFile("TestSources/SourceUnitTests/GraphingTests.v");
