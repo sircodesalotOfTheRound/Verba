@@ -10,6 +10,7 @@ import org.junit.Test;
 public class TestChildRemoval {
   public static class MyVerbaExpression extends VerbaExpression {
     boolean childWasRemoved = false;
+    private VerbaExpression removedChild;
 
     public MyVerbaExpression() {
       super(null, null);
@@ -19,12 +20,12 @@ public class TestChildRemoval {
       super(parent, null);
     }
 
-    public boolean childRemoved() {
-      return childWasRemoved;
-    }
+    public boolean childRemoved() { return childWasRemoved; }
+    public VerbaExpression removedChild() { return this.removedChild; }
 
     @Override
     protected void onChildRemoved(VerbaExpression child) {
+      this.removedChild = child;
       this.childWasRemoved = true;
     }
 
@@ -41,5 +42,6 @@ public class TestChildRemoval {
 
     child.setParent(null);
     assert(parent.childRemoved());
+    assert(parent.removedChild() == child);
   }
 }
