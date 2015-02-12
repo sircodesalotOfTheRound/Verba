@@ -50,12 +50,16 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
   }
 
   // Parent
-  public VerbaExpression parent() {
-    return this.parent;
-  }
-
+  public VerbaExpression parent() { return this.parent; }
+  protected abstract void onChildRemoved(VerbaExpression child);
   public void setParent(VerbaExpression parent) {
+    VerbaExpression previousParent = this.parent;
     this.parent = parent;
+
+    // Notify parent when child is removed.
+    if (previousParent != null) {
+      previousParent.onChildRemoved(this);
+    }
   }
 
   public boolean hasParent() {
@@ -108,6 +112,7 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
   public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {
     return rules.resolve(parent, lexer);
   }
+
 
   @Override
   public boolean equals(Object obj) {
