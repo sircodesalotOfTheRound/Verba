@@ -5,11 +5,10 @@ import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscription;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
-import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.symbols.resolution.FunctionReturnTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 
 /**
@@ -24,17 +23,17 @@ public class FunctionEventSubscription extends BuildEventSubscription<FunctionDe
   }
 
   @Override
-  public void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
+  public void beforeSymbolsGenerated(BuildProfile analysis, LitFileRootExpression buildAnalysis) {
 
   }
 
   @Override
-  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void afterSymbolsGenerated(BuildProfile buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
 
   }
 
   @Override
-  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void onResolveSymbols(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.returnType = this.determineReturnType(symbolTable);
   }
 
@@ -44,7 +43,7 @@ public class FunctionEventSubscription extends BuildEventSubscription<FunctionDe
   }
 
   @Override
-  public ObjectImage onGenerateObjectImage(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public ObjectImage onGenerateObjectImage(BuildProfile buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     FunctionObjectImage image = new FunctionObjectImage(this.expression(),
       buildProfile, staticSpace, symbolTable, buildProfile.stringTable());
 

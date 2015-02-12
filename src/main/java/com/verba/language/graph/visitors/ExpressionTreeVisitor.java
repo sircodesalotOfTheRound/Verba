@@ -1,6 +1,6 @@
 package com.verba.language.graph.visitors;
 
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -27,7 +27,7 @@ import com.verba.language.parse.expressions.withns.WithNsExpression;
 public interface ExpressionTreeVisitor {
   void visit(BlockDeclarationExpression verbaExpressions);
 
-  void visit(StaticSpaceExpression staticSpaceExpression);
+  void visit(LitFileRootExpression litFileRoot);
 
   void visit(NamedValueExpression namedObjectDeclarationExpression);
 

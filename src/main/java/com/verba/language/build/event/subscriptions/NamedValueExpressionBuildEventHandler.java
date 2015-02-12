@@ -6,7 +6,7 @@ import com.verba.language.build.event.BuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.NamedValueExpressionTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 
 /**
@@ -23,18 +23,18 @@ public class NamedValueExpressionBuildEventHandler extends BuildEventSubscriptio
   }
 
   @Override
-  public void beforeSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace) {
+  public void beforeSymbolsGenerated(BuildProfile profile, LitFileRootExpression staticSpace) {
 
   }
 
   @Override
-  public void afterSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void afterSymbolsGenerated(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
     this.typeResolver = new NamedValueExpressionTypeResolver(this.expression(), symbolTable);
   }
 
   @Override
-  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void onResolveSymbols(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
 
   }
 

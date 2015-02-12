@@ -12,7 +12,7 @@ import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 
@@ -37,15 +37,15 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
   }
 
   @Override
-  public void beforeSymbolsGenerated(BuildProfile analysis, StaticSpaceExpression buildAnalysis) { }
+  public void beforeSymbolsGenerated(BuildProfile analysis, LitFileRootExpression buildAnalysis) { }
 
   @Override
-  public void afterSymbolsGenerated(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void afterSymbolsGenerated(BuildProfile buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
   }
 
   @Override
-  public void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void onResolveSymbols(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.thisEntry = symbolTable.findByInstance(this.expression());
     this.immediateMembers = determineImmediateMembers(this.expression());
     this.allMembers = determineAllMembers(this.expression(), new QList<>());
@@ -75,7 +75,7 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
   }
 
   @Override
-  public void beforeCodeGeneration(BuildProfile buildProfile, StaticSpaceExpression staticSpace, SymbolTable symbolTable) {
+  public void beforeCodeGeneration(BuildProfile buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
 
   }
 

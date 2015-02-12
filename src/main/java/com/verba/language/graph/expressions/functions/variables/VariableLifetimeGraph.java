@@ -1,9 +1,8 @@
 package com.verba.language.graph.expressions.functions.variables;
 
-import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -15,7 +14,6 @@ import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExp
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
-import com.verba.language.parse.expressions.facades.FunctionCallFacade;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
@@ -138,7 +136,7 @@ public class VariableLifetimeGraph implements ExpressionTreeVisitor {
   }
 
   @Override
-  public void visit(StaticSpaceExpression staticSpaceExpression) {
+  public void visit(LitFileRootExpression litFileRoot) {
     throw new NotImplementedException();
   }
 

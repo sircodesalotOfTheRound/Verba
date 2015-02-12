@@ -5,9 +5,8 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 
 /**
@@ -16,9 +15,9 @@ import com.verba.language.parse.expressions.VerbaExpression;
 public class BuildEventSet {
   private final QIterable<BuildEvent> eventSubscribers;
   private final BuildProfile buildProfile;
-  private final StaticSpaceExpression staticSpace;
+  private final LitFileRootExpression staticSpace;
 
-  public BuildEventSet(BuildProfile buildProfile, StaticSpaceExpression staticSpace) {
+  public BuildEventSet(BuildProfile buildProfile, LitFileRootExpression staticSpace) {
     this.buildProfile = buildProfile;
     this.staticSpace = staticSpace;
     this.eventSubscribers = this.determineEventSubscribers(staticSpace.allExpressions());

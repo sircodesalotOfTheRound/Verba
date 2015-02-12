@@ -10,7 +10,7 @@ import com.verba.language.graph.symbols.meta.types.UserDefinedTypeMetadata;
 import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.entries.SymbolTableEntrySet;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.NamedBlockExpression;
@@ -99,7 +99,7 @@ public class Scope {
     }
   }
 
-  public void visit(StaticSpaceExpression staticSpace) {
+  public void visit(LitFileRootExpression staticSpace) {
     this.visitAll(staticSpace.pages().cast(VerbaExpression.class));
   }
 

@@ -12,7 +12,7 @@ import com.verba.language.graph.expressions.functions.variables.VariableLifetime
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -41,7 +41,7 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
   private final VirtualVariableScopeTree variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
-  private final StaticSpaceExpression staticSpaceExpression;
+  private final LitFileRootExpression litFileRoot;
   private final SymbolTable symbolTable;
   private final StringTable stringTable;
 
@@ -51,15 +51,15 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
 
   // Node processors
 
-  public FunctionGraphVisitor(BuildProfile buildProfile, FunctionDeclarationExpression function, SymbolTable symbolTable, StaticSpaceExpression staticSpaceExpression) {
+  public FunctionGraphVisitor(BuildProfile buildProfile, FunctionDeclarationExpression function, SymbolTable symbolTable, LitFileRootExpression litFileRoot) {
     this.variableSet = new VirtualVariableScopeTree(20);
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);
-    this.staticSpaceExpression = staticSpaceExpression;
+    this.litFileRoot = litFileRoot;
     this.symbolTable = symbolTable;
     this.stringTable = buildProfile.stringTable();
     this.opcodes = new FunctionOpCodeSet();
-    this.context = new FunctionContext(this, buildProfile, staticSpaceExpression, symbolTable, variableSet, lifetimeGraph, opcodes);
+    this.context = new FunctionContext(this, buildProfile, litFileRoot, symbolTable, variableSet, lifetimeGraph, opcodes);
     this.nodeProcessors = new NodeProcessorFactory(context);
 
     System.out.println(function.text());
@@ -107,7 +107,7 @@ public class FunctionGraphVisitor implements ExpressionTreeVisitor {
   }
 
   @Override
-  public void visit(StaticSpaceExpression staticSpaceExpression) {
+  public void visit(LitFileRootExpression litFileRoot) {
     throw new NotImplementedException();
   }
 

@@ -3,7 +3,7 @@ package com.verba.language.graph.tools;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -52,7 +52,7 @@ public class ExpressionTreeFlattener implements ExpressionTreeVisitor, Serializa
     this.expressions.add(expression);
   }
 
-  public void visit(StaticSpaceExpression node) {
+  public void visit(LitFileRootExpression node) {
     add(node);
     this.visitAll(node.pages());
   }

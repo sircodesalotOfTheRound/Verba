@@ -15,17 +15,17 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 /**
  * Created by sircodesalot on 14-5-14.
  */
-public class StaticSpaceExpression extends VerbaExpression implements SymbolTableExpression, BuildEvent.ContainsEventSubscriptionObject {
+public class LitFileRootExpression extends VerbaExpression implements SymbolTableExpression, BuildEvent.ContainsEventSubscriptionObject {
   private StaticSpaceBuildEventSubscription buildProfile = new StaticSpaceBuildEventSubscription(this);
   private QList<VerbaExpression> allExpressions = new QList<>();
   private Partition<Class, VerbaExpression> expressionsByType;
   private QList<VerbaCodePage> pages;
 
-  public StaticSpaceExpression() {
+  public LitFileRootExpression() {
     super(null, null);
   }
 
-  public StaticSpaceExpression(Iterable<VerbaCodePage> pages) {
+  public LitFileRootExpression(Iterable<VerbaCodePage> pages) {
     super(null, null);
 
     this.pages = new QList<>(pages);
@@ -33,7 +33,7 @@ public class StaticSpaceExpression extends VerbaExpression implements SymbolTabl
     this.expressionsByType = partitionExpressions(allExpressions);
   }
 
-  public StaticSpaceExpression(VerbaCodePage ... pages) {
+  public LitFileRootExpression(VerbaCodePage... pages) {
     super(null, null);
 
     this.pages = new QList<>(pages);

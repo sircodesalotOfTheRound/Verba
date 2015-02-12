@@ -4,12 +4,10 @@ import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.header.StringTable;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.graph.expressions.functions.variables.VariableLifetime;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
-import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 
 import java.util.function.Consumer;
 
@@ -18,7 +16,7 @@ import java.util.function.Consumer;
  */
 public class FunctionContext {
   private final FunctionGraphVisitor functionGraphVisitor;
-  private final StaticSpaceExpression staticSpaceExpression;
+  private final LitFileRootExpression litFileRoot;
   private final VirtualVariableScopeTree variableScopeTree;
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
@@ -27,7 +25,7 @@ public class FunctionContext {
 
   public FunctionContext(FunctionGraphVisitor functionGraphVisitor,
                          BuildProfile buildProfile,
-                         StaticSpaceExpression staticSpaceExpression,
+                         LitFileRootExpression litFileRoot,
                          SymbolTable symbolTable,
                          VirtualVariableScopeTree variableScopeTree,
                          VariableLifetimeGraph lifetimeGraph,
@@ -36,13 +34,13 @@ public class FunctionContext {
     this.stringTable = buildProfile.stringTable();
     this.functionGraphVisitor = functionGraphVisitor;
     this.symbolTable = symbolTable;
-    this.staticSpaceExpression = staticSpaceExpression;
+    this.litFileRoot = litFileRoot;
     this.variableScopeTree = variableScopeTree;
     this.lifetimeGraph = lifetimeGraph;
     this.opcodes = opcodes;
   }
 
-  public StaticSpaceExpression staticSpaceExpression() { return this.staticSpaceExpression; }
+  public LitFileRootExpression staticSpaceExpression() { return this.litFileRoot; }
   public VirtualVariableScopeTree variableScopeTree() { return this.variableScopeTree; }
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }

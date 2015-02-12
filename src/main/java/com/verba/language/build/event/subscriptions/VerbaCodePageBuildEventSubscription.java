@@ -5,7 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscription;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.withns.WithNsExpression;
 
@@ -22,7 +22,7 @@ public class VerbaCodePageBuildEventSubscription extends BuildEventSubscription<
   }
 
   @Override
-  public void afterParse(BuildProfile analysis, StaticSpaceExpression buildAnalysis) {
+  public void afterParse(BuildProfile analysis, LitFileRootExpression buildAnalysis) {
     QIterable<String> namespaceRepresentations = this.expression()
       .expressionsByType(WithNsExpression.class)
       .map(ns -> ns.namespace().representation());

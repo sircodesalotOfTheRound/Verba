@@ -10,7 +10,7 @@ import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 
 /**
@@ -25,7 +25,7 @@ public class FunctionObjectImage implements ObjectImage {
 
   public FunctionObjectImage(FunctionDeclarationExpression declaration,
                              BuildProfile buildProfile,
-                             StaticSpaceExpression staticSpace,
+                             LitFileRootExpression staticSpace,
                              SymbolTable symbolTable,
                              StringTable stringTable) {
 

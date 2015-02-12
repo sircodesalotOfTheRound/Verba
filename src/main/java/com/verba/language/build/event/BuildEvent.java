@@ -3,7 +3,7 @@ package com.verba.language.build.event;
 import com.verba.language.build.BuildProfile;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.StaticSpaceExpression;
+import com.verba.language.parse.expressions.LitFileRootExpression;
 
 /**
  * Created by sircodesalot on 14/12/3.
@@ -17,17 +17,17 @@ public interface BuildEvent {
   }
 
   public interface NotifyParsingBuildEvent extends BuildEvent {
-    void afterParse(BuildProfile analysis, StaticSpaceExpression buildAnalysis);
+    void afterParse(BuildProfile analysis, LitFileRootExpression buildAnalysis);
   }
 
   public interface NotifySymbolTableBuildEvent extends BuildEvent {
-    void beforeSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace);
-    void afterSymbolsGenerated(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
-    void onResolveSymbols(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void beforeSymbolsGenerated(BuildProfile profile, LitFileRootExpression staticSpace);
+    void afterSymbolsGenerated(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable);
+    void onResolveSymbols(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyReadyToCompileEvent extends BuildEvent {
-    void validateReadyToCompile(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void validateReadyToCompile(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyCodeOptimizationEvent extends BuildEvent {
@@ -35,12 +35,12 @@ public interface BuildEvent {
   }
 
   public interface NotifyCodeGenerationEvent extends BuildEvent {
-    void beforeCodeGeneration(BuildProfile profile, StaticSpaceExpression staticSpace, SymbolTable symbolTable);
+    void beforeCodeGeneration(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable);
   }
 
   public interface NotifyObjectEmitEvent extends BuildEvent {
     ObjectImage onGenerateObjectImage(BuildProfile profile,
-                              StaticSpaceExpression staticSpace,
+                              LitFileRootExpression staticSpace,
                               SymbolTable symbolTable);
   }
 }
