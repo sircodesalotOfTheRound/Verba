@@ -3,6 +3,7 @@ package com.verba.language.parse.expressions;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSubscriptionBase;
 import com.verba.language.build.event.subscriptions.StaticSpaceBuildEventSubscription;
@@ -15,10 +16,14 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
  * Created by sircodesalot on 14-5-14.
  */
 public class StaticSpaceExpression extends VerbaExpression implements SymbolTableExpression, BuildEvent.ContainsEventSubscriptionObject {
-  private final StaticSpaceBuildEventSubscription buildProfile = new StaticSpaceBuildEventSubscription(this);
-  private final QList<VerbaExpression> allExpressions;
-  private final Partition<Class, VerbaExpression> expressionsByType;
-  private final QList<VerbaCodePage> pages;
+  private StaticSpaceBuildEventSubscription buildProfile = new StaticSpaceBuildEventSubscription(this);
+  private QList<VerbaExpression> allExpressions = new QList<>();
+  private Partition<Class, VerbaExpression> expressionsByType;
+  private QList<VerbaCodePage> pages;
+
+  public StaticSpaceExpression() {
+    super(null, null);
+  }
 
   public StaticSpaceExpression(Iterable<VerbaCodePage> pages) {
     super(null, null);
