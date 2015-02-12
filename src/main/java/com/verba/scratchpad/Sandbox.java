@@ -11,12 +11,13 @@ import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDecla
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    BuildConfiguration configuration = new BuildConfiguration()
+    Build build = new BuildConfiguration()
+      .addTranslationUnit("GraphingTests.v")
       .isDebugBuild(true)
       .shouldCreateSymbolTable(true)
-      .shouldEmitCode(false);
+      .shouldEmitCode(false)
+      .build();
 
-    Build build = Build.fromSingleFile("GraphingTests.v", configuration);
     PolymorphicDeclarationExpression derivedClass = build.symbolTable().findSymbolForType("Derived")
       .expressionAs(PolymorphicDeclarationExpression.class);
 
