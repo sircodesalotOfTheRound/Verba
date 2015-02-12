@@ -31,6 +31,11 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static LambdaExpression read(VerbaExpression parent, Lexer lexer) {
     return new LambdaExpression(parent, lexer);
   }

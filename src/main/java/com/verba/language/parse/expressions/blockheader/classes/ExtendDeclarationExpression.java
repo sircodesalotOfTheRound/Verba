@@ -29,6 +29,11 @@ public class ExtendDeclarationExpression extends VerbaExpression implements Name
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static ExtendDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new ExtendDeclarationExpression(parent, lexer);
   }

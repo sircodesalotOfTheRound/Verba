@@ -32,6 +32,11 @@ public class ArrayDeclarationExpression extends VerbaExpression implements RValu
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private LexInfo readContents(Lexer lexer) {
     return lexer.readCurrentAndAdvance(NumericToken.class);
   }

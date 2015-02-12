@@ -32,6 +32,11 @@ public class FullyQualifiedNameExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   // TODO: Move this into FullyQualifiedNameBacktrackRule if such a thing exists.
   public static boolean isFullyQualifiedName(Lexer lexer) {
     return lexer.currentIs(IdentifierToken.class);

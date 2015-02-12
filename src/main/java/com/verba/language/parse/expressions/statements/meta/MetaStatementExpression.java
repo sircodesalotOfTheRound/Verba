@@ -21,6 +21,11 @@ public class MetaStatementExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static MetaStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaStatementExpression(parent, lexer);
   }

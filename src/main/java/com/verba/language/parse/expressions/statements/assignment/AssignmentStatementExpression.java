@@ -33,6 +33,11 @@ public class AssignmentStatementExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static AssignmentStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new AssignmentStatementExpression(parent, lexer);
   }

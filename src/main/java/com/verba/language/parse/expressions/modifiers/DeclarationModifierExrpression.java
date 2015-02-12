@@ -24,6 +24,11 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private LexInfo readModifier(Lexer lexer) {
     if (!KeywordToken.isAccessModifierKeyword(lexer.current().representation())) {
       throw new CompilerException("DeclarationModifierExpressions must read modifier");

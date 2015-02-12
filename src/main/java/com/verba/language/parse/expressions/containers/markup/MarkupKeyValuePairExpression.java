@@ -22,6 +22,11 @@ public class MarkupKeyValuePairExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static MarkupKeyValuePairExpression read(VerbaExpression parent, Lexer lexer) {
     return new MarkupKeyValuePairExpression(parent, lexer);
   }

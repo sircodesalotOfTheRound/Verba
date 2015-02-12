@@ -30,6 +30,11 @@ public class IfStatementExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static IfStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new IfStatementExpression(parent, lexer);
   }

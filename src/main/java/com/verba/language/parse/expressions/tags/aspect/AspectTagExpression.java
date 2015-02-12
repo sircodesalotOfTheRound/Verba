@@ -40,6 +40,11 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private VerbaExpression readType(Lexer lexer) {
     // @[ ... : new AspectFQN ]
     if (lexer.currentIs(KeywordToken.class, KeywordToken.NEW)) {

@@ -71,4 +71,9 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
 
   @Override
   public BuildEventSubscriptionBase buildEventObject() { return buildProfile; }
+
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
 }

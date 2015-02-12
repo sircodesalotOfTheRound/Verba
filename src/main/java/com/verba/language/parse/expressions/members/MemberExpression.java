@@ -34,6 +34,11 @@ public class MemberExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static MemberExpression read(VerbaExpression parent, Lexer lexer) {
     return new MemberExpression(parent, lexer);
   }

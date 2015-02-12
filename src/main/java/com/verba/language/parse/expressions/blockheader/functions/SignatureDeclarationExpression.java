@@ -37,6 +37,11 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static SignatureDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new SignatureDeclarationExpression(parent, lexer);
   }

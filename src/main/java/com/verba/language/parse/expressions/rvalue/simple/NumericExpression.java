@@ -41,6 +41,11 @@ public class NumericExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static NumericExpression read(VerbaExpression parent, Lexer lexer) {
     return new NumericExpression(parent, lexer);
   }

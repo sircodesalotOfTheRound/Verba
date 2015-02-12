@@ -29,6 +29,11 @@ public class InjectedDeclarationExpression extends VerbaExpression implements Na
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static InjectedDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new InjectedDeclarationExpression(parent, lexer);
   }

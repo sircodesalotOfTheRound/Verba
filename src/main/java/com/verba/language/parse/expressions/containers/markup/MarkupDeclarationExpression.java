@@ -35,6 +35,11 @@ public class MarkupDeclarationExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private FullyQualifiedNameExpression determineName(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) {
       return FullyQualifiedNameExpression.read(this, lexer);

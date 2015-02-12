@@ -20,6 +20,11 @@ public class RpnExpression extends VerbaExpression implements RValueExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private boolean isNextMathToken(Lexer lexer) {
     boolean isIt = false;
 

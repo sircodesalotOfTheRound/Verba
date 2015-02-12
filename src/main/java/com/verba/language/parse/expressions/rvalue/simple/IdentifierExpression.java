@@ -20,6 +20,11 @@ public class IdentifierExpression extends VerbaExpression implements RValueExpre
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static IdentifierExpression read(VerbaExpression parent, Lexer lexer) {
     return new IdentifierExpression(parent, lexer);
   }

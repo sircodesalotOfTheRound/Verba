@@ -52,6 +52,11 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private boolean determineIsClass(Lexer lexer) {
     if (lexer.currentIs(KeywordToken.class, KeywordToken.CLASS)) {
       lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.CLASS);

@@ -20,6 +20,11 @@ public class MathOpExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public LexInfo operator() {
     return this.operationToken;
   }

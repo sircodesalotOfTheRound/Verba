@@ -27,6 +27,11 @@ public class GenericTypeListExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private void readExpressions(Lexer lexer) {
     lexer.readCurrentAndAdvance(OperatorToken.class, "<");
 

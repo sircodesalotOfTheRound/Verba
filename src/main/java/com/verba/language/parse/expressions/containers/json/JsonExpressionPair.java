@@ -27,6 +27,11 @@ public class JsonExpressionPair extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private VerbaExpression readLhsItem(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) return IdentifierExpression.read(this, lexer);
     else if (lexer.currentIs(QuoteToken.class)) return QuoteExpression.read(this, lexer);

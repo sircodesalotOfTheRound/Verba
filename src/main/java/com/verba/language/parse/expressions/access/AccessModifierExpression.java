@@ -42,6 +42,11 @@ public class AccessModifierExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static AccessModifierExpression read(VerbaExpression expression, Lexer lexer) {
     return new AccessModifierExpression(expression, lexer);
   }

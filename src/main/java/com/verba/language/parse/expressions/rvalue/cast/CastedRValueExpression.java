@@ -25,6 +25,11 @@ public class CastedRValueExpression extends VerbaExpression implements RValueExp
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static CastedRValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new CastedRValueExpression(parent, lexer);
   }

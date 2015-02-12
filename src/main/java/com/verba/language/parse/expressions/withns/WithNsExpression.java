@@ -19,6 +19,11 @@ public class WithNsExpression extends VerbaExpression {
     this.namespace = FullyQualifiedNameExpression.read(this, lexer);
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public FullyQualifiedNameExpression namespace() { return this.namespace; }
 
   @Override

@@ -19,6 +19,11 @@ public class CatchAllBacktrackRule extends BacktrackRule {
       this.lexInfo = lexer.readCurrentAndAdvance();
     }
 
+    @Override
+    protected void onChildRemoved(VerbaExpression child) {
+
+    }
+
     public LexInfo lexInfo() { return this.lexInfo; }
 
     @Override

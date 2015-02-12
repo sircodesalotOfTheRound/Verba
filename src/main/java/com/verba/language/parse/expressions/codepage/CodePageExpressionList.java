@@ -23,6 +23,11 @@ public class CodePageExpressionList extends VerbaExpression
     this.processPage(lexer);
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static CodePageExpressionList read(VerbaExpression parent, Lexer lexer) {
     return new CodePageExpressionList(parent, lexer);
   }

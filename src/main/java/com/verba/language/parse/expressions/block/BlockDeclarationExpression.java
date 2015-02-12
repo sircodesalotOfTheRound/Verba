@@ -42,6 +42,11 @@ public class BlockDeclarationExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public boolean hasItems() {
     return this.expressions.any();
   }

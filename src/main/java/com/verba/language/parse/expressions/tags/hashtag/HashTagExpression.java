@@ -23,6 +23,11 @@ public class HashTagExpression extends VerbaExpression implements MetaTagExpress
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static HashTagExpression read(VerbaExpression parent, Lexer lexer) {
     return new HashTagExpression(parent, lexer);
   }

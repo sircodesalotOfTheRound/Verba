@@ -33,6 +33,11 @@ public class MetaDeclarationExpression extends VerbaExpression implements NamedB
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static MetaDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaDeclarationExpression(parent, lexer);
   }

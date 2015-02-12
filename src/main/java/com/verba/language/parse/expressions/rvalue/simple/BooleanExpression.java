@@ -20,6 +20,11 @@ public class BooleanExpression extends VerbaExpression implements LiteralExpress
     this.value = determineValue(lexer);
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private boolean determineValue(Lexer lexer) {
     if (lexer.currentIs(KeywordToken.class, KeywordToken.TRUE)) {
       lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.TRUE);

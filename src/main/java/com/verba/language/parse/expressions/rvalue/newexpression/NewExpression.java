@@ -33,6 +33,11 @@ public class NewExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private TypeConstraintExpression parseExpression(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) return TypeConstraintExpression.read(this, lexer);
     else throw new NotImplementedException();

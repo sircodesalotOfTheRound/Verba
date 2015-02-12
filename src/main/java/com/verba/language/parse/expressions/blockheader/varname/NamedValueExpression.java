@@ -38,6 +38,11 @@ public class NamedValueExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static NamedValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamedValueExpression(parent, lexer);
   }

@@ -42,6 +42,11 @@ public class VerbaCodePage extends VerbaExpression
     this.expressionsByType = this.allExpressions.parition(Object::getClass);
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private QIterable<VerbaExpression> captureAllExpressions(QList<VerbaExpression> childExpressions) {
     QList<VerbaExpression> allExpressions = new QList<>();
 

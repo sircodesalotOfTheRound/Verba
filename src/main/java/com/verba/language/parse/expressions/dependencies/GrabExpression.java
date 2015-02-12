@@ -23,6 +23,11 @@ public class GrabExpression extends VerbaExpression {
     //this.resourceName = this.readResourceName(lexer);
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private VerbaExpression readResourceName(Lexer lexer) {
     if (lexer.currentIs(QuoteToken.class)) {
       return QuoteExpression.read(this, lexer);

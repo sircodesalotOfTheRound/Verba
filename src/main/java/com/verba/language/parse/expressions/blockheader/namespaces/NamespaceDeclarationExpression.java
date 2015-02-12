@@ -26,6 +26,11 @@ public class NamespaceDeclarationExpression extends VerbaExpression implements N
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static NamespaceDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamespaceDeclarationExpression(parent, lexer);
   }

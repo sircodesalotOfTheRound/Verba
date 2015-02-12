@@ -21,6 +21,11 @@ public class SqlExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {
     return new SqlExpression(parent, lexer);
   }

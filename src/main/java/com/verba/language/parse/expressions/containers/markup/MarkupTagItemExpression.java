@@ -29,6 +29,11 @@ public class MarkupTagItemExpression extends VerbaExpression {
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private void readOpening(Lexer lexer) {
     if (lexer.currentIs(OperatorToken.class, "<")) {
       lexer.readCurrentAndAdvance(OperatorToken.class, "<");

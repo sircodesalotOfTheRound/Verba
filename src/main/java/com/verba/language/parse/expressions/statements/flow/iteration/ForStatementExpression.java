@@ -28,6 +28,11 @@ public class ForStatementExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private void readContent(Lexer lexer) {
     lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.FOR);
     lexer.readCurrentAndAdvance(EnclosureToken.class, "(");

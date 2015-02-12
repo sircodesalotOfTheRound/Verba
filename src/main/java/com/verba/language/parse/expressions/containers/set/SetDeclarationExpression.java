@@ -37,6 +37,11 @@ public class SetDeclarationExpression extends VerbaExpression
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   public QIterable<VerbaExpression> items() {
     return this.items;
   }

@@ -26,6 +26,11 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeC
     this.closeLexingRegion();
   }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
   private QList<VerbaExpression> readContents(Lexer lexer) {
     QList<VerbaExpression> contents = new QList<>();
 
