@@ -6,9 +6,11 @@ import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
+import com.verba.language.parse.expressions.categories.TupleItemExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
+import com.verba.language.parse.expressions.containers.json.JsonExpressionPair;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
@@ -66,13 +68,19 @@ public abstract class ExpressionTreeVisitor {
   }
 
   public void visit(JsonExpression json) {
-    // TODO: JsonExpression pair needs to be fixed before this can
-    // TODO: be implemented.
+    for (JsonExpressionPair pair : json.items()) {
+      VerbaExpression lhs = pair.lhs();
+      VerbaExpression rhs = (VerbaExpression)pair.rhs();
+
+      lhs.accept(this);
+      rhs.accept(this);
+    }
   }
 
   public void visit(TupleDeclarationExpression expression) {
-    for (VerbaExpression item : expression.items()) {
-      item.accept(this);
+    for (TupleItemExpression item : expression.items()) {
+      VerbaExpression verbaExpression = (VerbaExpression)item;
+      verbaExpression.accept(this);
     }
   }
 
