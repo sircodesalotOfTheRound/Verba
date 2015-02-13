@@ -1,10 +1,10 @@
 package com.verba.language.graph.visitors;
 
 import com.verba.language.parse.expressions.LitFileRootExpression;
+import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.parse.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;
@@ -25,43 +25,120 @@ import com.verba.language.parse.expressions.withns.WithNsExpression;
  * Created by sircodesalot on 14/9/12.
  */
 public abstract class ExpressionTreeVisitor {
-  public abstract void visit(BlockDeclarationExpression verbaExpressions);
+  public void onNodeVisited(VerbaExpression expression) { }
 
-  public abstract void visit(LitFileRootExpression litFileRoot);
+  public void visit(BlockDeclarationExpression block) {
+    for (VerbaExpression expression : block.expressions()) {
+      expression.accept(this);
+    }
+  }
 
-  public abstract void visit(NamedValueExpression namedObjectDeclarationExpression);
+  public void visit(LitFileRootExpression litFileRoot) {
+    for (VerbaCodePage page : litFileRoot.pages()) {
+      page.accept(this);
+    }
+  }
 
-  public abstract void visit(PolymorphicDeclarationExpression classDeclarationExpression);
+  public void visit(NamedValueExpression namedExpression) {
+    namedExpression.identifier().accept(this);
 
-  public abstract void visit(FunctionDeclarationExpression functionDeclarationExpression);
+    if (namedExpression.hasTypeConstraint()) {
+      VerbaExpression typeConstraintExpression = (VerbaExpression) namedExpression.typeConstraint();
+      typeConstraintExpression.accept(this);
+    }
+  }
 
-  public abstract void visit(ArrayDeclarationExpression arrayDeclarationExpression);
+  public void visit(PolymorphicDeclarationExpression declaration) {
+    declaration.declaration().accept(this);
+    declaration.block().accept(this);
+  }
 
-  public abstract void visit(JsonExpression jsonExpression);
+  public void visit(FunctionDeclarationExpression function) {
+    function.declaration().accept(this);
+    function.block().accept(this);
+  }
 
-  public abstract void visit(TupleDeclarationExpression tupleDeclarationExpression);
 
-  public abstract void visit(VerbaCodePage verbaCodePage);
+  public void visit(ArrayDeclarationExpression array) {
+    for (VerbaExpression expression : array.items()) {
+      expression.accept(this);
+    }
+  }
 
-  public abstract void visit(ReturnStatementExpression returnStatementExpression);
+  public void visit(JsonExpression json) {
+    // TODO: JsonExpression pair needs to be fixed before this can
+    // TODO: be implemented.
+  }
 
-  public abstract void visit(SignatureDeclarationExpression signatureDeclarationExpression);
+  public void visit(TupleDeclarationExpression expression) {
+    for (VerbaExpression item : expression.items()) {
+      item.accept(this);
+    }
+  }
 
-  public abstract void visit(QuoteExpression quoteExpression);
+  public void visit(VerbaCodePage page) {
+    for (VerbaExpression expression : page.childExpressions()) {
+      expression.accept(this);
+    }
+  }
 
-  public abstract void visit(AssignmentStatementExpression assignmentStatementExpression);
+  public void visit(ReturnStatementExpression statement) {
+    if (statement.hasValue()) {
+      VerbaExpression expression = (VerbaExpression) statement.value();
+      expression.accept(this);
+    }
+  }
 
-  public abstract void visit(NumericExpression expression);
+  public void visit(QuoteExpression quotation) {
+    // TODO: This should allow for parsing information out of the quotes.
+  }
 
-  public abstract void visit(ValDeclarationStatement valDeclarationStatement);
+  public void visit(AssignmentStatementExpression assignment) {
+    VerbaExpression lhs = (VerbaExpression)assignment.lvalue();
+    VerbaExpression rhs = (VerbaExpression)assignment.rvalue();
 
-  public abstract void visit(WithNsExpression withNsExpression);
+    lhs.accept(this);
+    rhs.accept(this);
+  }
 
-  public abstract void visit(MarkupDeclarationExpression markupDeclarationExpression);
+  public void visit(NumericExpression expression) {
 
-  public abstract void visit(DeclarationModifierExrpression declarationModifierExrpression);
+  }
 
-  public abstract void visit(NewExpression newExpression);
+  public void visit(ValDeclarationStatement statement) {
+    statement.identifier().accept(this);
 
-  public abstract void visit(BooleanExpression expression);
+    if (statement.hasTypeConstraint()) {
+      VerbaExpression typeConstraint = (VerbaExpression) statement.typeConstraint();
+      typeConstraint.accept(this);
+    }
+
+    if (statement.hasRValue()) {
+      VerbaExpression rvalue = (VerbaExpression) statement.rvalue();
+      rvalue.accept(this);
+    }
+  }
+
+  public void visit(WithNsExpression expression) {
+    expression.namespace().accept(this);
+  }
+
+  public void visit(MarkupDeclarationExpression markup) {
+    for (VerbaExpression expression : markup.items()) {
+      expression.accept(this);
+    }
+  }
+
+  public void visit(DeclarationModifierExrpression modifier) {
+    modifier.modifiedExpression().accept(this);
+  }
+
+  public void visit(NewExpression expression) {
+    VerbaExpression verbaExpression = (VerbaExpression)expression.expression();
+    verbaExpression.accept(this);
+  }
+
+  public void visit(BooleanExpression expression) {
+
+  }
 }
