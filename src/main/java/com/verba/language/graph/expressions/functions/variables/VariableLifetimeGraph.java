@@ -54,11 +54,6 @@ public class VariableLifetimeGraph extends ExpressionTreeVisitor {
   }
 
   @Override
-  public void visit(SignatureDeclarationExpression signatureDeclarationExpression) {
-    throw new NotImplementedException();
-  }
-
-  @Override
   public void visit(AssignmentStatementExpression assignmentStatementExpression) {
     throw new NotImplementedException();
   }

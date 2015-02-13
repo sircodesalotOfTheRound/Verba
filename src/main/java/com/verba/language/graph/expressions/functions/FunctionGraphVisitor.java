@@ -97,11 +97,6 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
   }
 
   @Override
-  public void visit(SignatureDeclarationExpression signatureDeclarationExpression) {
-    throw new NotImplementedException();
-  }
-
-  @Override
   public void visit(BlockDeclarationExpression verbaExpressions) {
     throw new NotImplementedException();
   }

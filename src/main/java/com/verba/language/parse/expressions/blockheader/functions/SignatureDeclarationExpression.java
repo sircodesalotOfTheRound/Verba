@@ -89,7 +89,7 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
 
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
-    visitor.visit(this);
+
   }
 
   @Override

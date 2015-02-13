@@ -112,11 +112,6 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
   }
 
   @Override
-  public void visit(SignatureDeclarationExpression signature) {
-    add(signature);
-  }
-
-  @Override
   public void visit(QuoteExpression quoteExpression) {
    throw new NotImplementedException();
   }
