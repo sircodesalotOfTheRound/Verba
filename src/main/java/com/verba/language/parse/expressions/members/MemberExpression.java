@@ -39,6 +39,11 @@ public class MemberExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static MemberExpression read(VerbaExpression parent, Lexer lexer) {
     return new MemberExpression(parent, lexer);
   }

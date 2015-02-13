@@ -25,6 +25,11 @@ public class IdentifierExpression extends VerbaExpression implements RValueExpre
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static IdentifierExpression read(VerbaExpression parent, Lexer lexer) {
     return new IdentifierExpression(parent, lexer);
   }

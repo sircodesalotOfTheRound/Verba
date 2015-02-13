@@ -25,6 +25,11 @@ public class RpnExpression extends VerbaExpression implements RValueExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private boolean isNextMathToken(Lexer lexer) {
     boolean isIt = false;
 

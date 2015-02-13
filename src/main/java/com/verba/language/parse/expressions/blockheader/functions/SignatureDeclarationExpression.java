@@ -42,6 +42,11 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static SignatureDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new SignatureDeclarationExpression(parent, lexer);
   }

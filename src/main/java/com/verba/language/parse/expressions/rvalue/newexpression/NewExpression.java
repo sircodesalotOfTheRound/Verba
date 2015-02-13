@@ -38,6 +38,11 @@ public class NewExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private TypeConstraintExpression parseExpression(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) return TypeConstraintExpression.read(this, lexer);
     else throw new NotImplementedException();

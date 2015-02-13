@@ -30,6 +30,11 @@ public class QuoteExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static QuoteExpression read(VerbaExpression parent, Lexer lexer) {
     return new QuoteExpression(parent, lexer);
   }

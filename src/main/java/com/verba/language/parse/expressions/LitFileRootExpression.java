@@ -10,6 +10,7 @@ import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.lexing.Lexer;
 
 /**
  * Created by sircodesalot on 14-5-14.
@@ -74,6 +75,11 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
 
   @Override
   protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
 
   }
 }

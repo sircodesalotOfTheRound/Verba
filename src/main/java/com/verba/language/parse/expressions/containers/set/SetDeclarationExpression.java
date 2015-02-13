@@ -42,6 +42,11 @@ public class SetDeclarationExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public QIterable<VerbaExpression> items() {
     return this.items;
   }

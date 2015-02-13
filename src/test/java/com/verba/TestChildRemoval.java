@@ -2,6 +2,7 @@ package com.verba;
 
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.lexing.Lexer;
 import org.junit.Test;
 
 /**
@@ -27,6 +28,11 @@ public class TestChildRemoval {
     protected void onChildRemoved(VerbaExpression child) {
       this.removedChild = child;
       this.childWasRemoved = true;
+    }
+
+    @Override
+    public void parse(VerbaExpression parent, Lexer lexer) {
+
     }
 
     @Override

@@ -24,6 +24,11 @@ public class CatchAllBacktrackRule extends BacktrackRule {
 
     }
 
+    @Override
+    public void parse(VerbaExpression parent, Lexer lexer) {
+
+    }
+
     public LexInfo lexInfo() { return this.lexInfo; }
 
     @Override

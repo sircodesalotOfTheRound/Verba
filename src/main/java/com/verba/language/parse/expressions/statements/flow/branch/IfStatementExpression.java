@@ -35,6 +35,11 @@ public class IfStatementExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static IfStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new IfStatementExpression(parent, lexer);
   }

@@ -27,6 +27,11 @@ public class MarkupKeyValuePairExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static MarkupKeyValuePairExpression read(VerbaExpression parent, Lexer lexer) {
     return new MarkupKeyValuePairExpression(parent, lexer);
   }

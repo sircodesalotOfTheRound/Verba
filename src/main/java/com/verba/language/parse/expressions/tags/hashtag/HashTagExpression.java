@@ -28,6 +28,11 @@ public class HashTagExpression extends VerbaExpression implements MetaTagExpress
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static HashTagExpression read(VerbaExpression parent, Lexer lexer) {
     return new HashTagExpression(parent, lexer);
   }

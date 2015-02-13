@@ -26,6 +26,11 @@ public class MetaStatementExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static MetaStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaStatementExpression(parent, lexer);
   }

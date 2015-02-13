@@ -29,6 +29,11 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private LexInfo readModifier(Lexer lexer) {
     if (!KeywordToken.isAccessModifierKeyword(lexer.current().representation())) {
       throw new CompilerException("DeclarationModifierExpressions must read modifier");

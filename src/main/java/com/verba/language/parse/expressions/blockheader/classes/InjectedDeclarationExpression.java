@@ -34,6 +34,11 @@ public class InjectedDeclarationExpression extends VerbaExpression implements Na
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static InjectedDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new InjectedDeclarationExpression(parent, lexer);
   }

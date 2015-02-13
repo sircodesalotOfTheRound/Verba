@@ -25,6 +25,11 @@ public class MathOpExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public LexInfo operator() {
     return this.operationToken;
   }

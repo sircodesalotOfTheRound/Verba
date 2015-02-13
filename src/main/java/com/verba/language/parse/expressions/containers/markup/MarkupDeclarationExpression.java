@@ -40,6 +40,11 @@ public class MarkupDeclarationExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private FullyQualifiedNameExpression determineName(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) {
       return FullyQualifiedNameExpression.read(this, lexer);

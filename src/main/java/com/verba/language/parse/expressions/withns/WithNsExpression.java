@@ -24,6 +24,11 @@ public class WithNsExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public FullyQualifiedNameExpression namespace() { return this.namespace; }
 
   @Override

@@ -43,6 +43,11 @@ public class NamedValueExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static NamedValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamedValueExpression(parent, lexer);
   }

@@ -34,6 +34,11 @@ public class ExtendDeclarationExpression extends VerbaExpression implements Name
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static ExtendDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new ExtendDeclarationExpression(parent, lexer);
   }

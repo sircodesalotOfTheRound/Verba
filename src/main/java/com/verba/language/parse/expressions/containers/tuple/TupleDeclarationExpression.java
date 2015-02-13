@@ -31,6 +31,11 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeC
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private QList<TupleItemExpression> readContents(Lexer lexer) {
     QList<TupleItemExpression> contents = new QList<>();
 

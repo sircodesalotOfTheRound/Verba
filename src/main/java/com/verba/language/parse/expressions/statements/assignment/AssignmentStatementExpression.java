@@ -38,6 +38,11 @@ public class AssignmentStatementExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static AssignmentStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new AssignmentStatementExpression(parent, lexer);
   }

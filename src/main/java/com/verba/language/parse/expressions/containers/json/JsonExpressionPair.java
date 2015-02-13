@@ -32,6 +32,11 @@ public class JsonExpressionPair extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private VerbaExpression readLhsItem(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) return IdentifierExpression.read(this, lexer);
     else if (lexer.currentIs(QuoteToken.class)) return QuoteExpression.read(this, lexer);

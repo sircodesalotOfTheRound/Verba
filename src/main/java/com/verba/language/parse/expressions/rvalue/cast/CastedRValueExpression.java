@@ -30,6 +30,11 @@ public class CastedRValueExpression extends VerbaExpression implements RValueExp
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static CastedRValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new CastedRValueExpression(parent, lexer);
   }

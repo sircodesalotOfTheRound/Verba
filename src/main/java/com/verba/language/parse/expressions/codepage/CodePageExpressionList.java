@@ -28,6 +28,11 @@ public class CodePageExpressionList extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static CodePageExpressionList read(VerbaExpression parent, Lexer lexer) {
     return new CodePageExpressionList(parent, lexer);
   }

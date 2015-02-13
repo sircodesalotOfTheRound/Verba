@@ -34,6 +34,11 @@ public class MarkupTagItemExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private void readOpening(Lexer lexer) {
     if (lexer.currentIs(OperatorToken.class, "<")) {
       lexer.readCurrentAndAdvance(OperatorToken.class, "<");

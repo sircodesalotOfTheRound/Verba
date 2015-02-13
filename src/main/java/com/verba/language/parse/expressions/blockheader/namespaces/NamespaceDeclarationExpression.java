@@ -31,6 +31,11 @@ public class NamespaceDeclarationExpression extends VerbaExpression implements N
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static NamespaceDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamespaceDeclarationExpression(parent, lexer);
   }

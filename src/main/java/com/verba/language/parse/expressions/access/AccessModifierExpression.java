@@ -47,6 +47,11 @@ public class AccessModifierExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static AccessModifierExpression read(VerbaExpression expression, Lexer lexer) {
     return new AccessModifierExpression(expression, lexer);
   }

@@ -35,6 +35,11 @@ public class WhileStatementExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static WhileStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new WhileStatementExpression(parent, lexer);
   }

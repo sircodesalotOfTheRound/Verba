@@ -65,6 +65,11 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private boolean determineIsConstructorFunction(VerbaExpression parent, Lexer lexer) {
     if (lexer.currentIs(KeywordToken.class, KeywordToken.FN)) {
       lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.FN);

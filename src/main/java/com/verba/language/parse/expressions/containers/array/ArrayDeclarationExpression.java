@@ -37,6 +37,11 @@ public class ArrayDeclarationExpression extends VerbaExpression implements RValu
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private LexInfo readContents(Lexer lexer) {
     return lexer.readCurrentAndAdvance(NumericToken.class);
   }

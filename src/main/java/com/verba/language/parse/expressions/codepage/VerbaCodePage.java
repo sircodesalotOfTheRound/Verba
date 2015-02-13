@@ -47,6 +47,11 @@ public class VerbaCodePage extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private QIterable<VerbaExpression> captureAllExpressions(QList<VerbaExpression> childExpressions) {
     QList<VerbaExpression> allExpressions = new QList<>();
 

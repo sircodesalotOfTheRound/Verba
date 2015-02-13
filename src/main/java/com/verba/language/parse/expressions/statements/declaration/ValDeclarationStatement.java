@@ -37,6 +37,11 @@ public class ValDeclarationStatement extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private void readExpression(Lexer lexer) {
     lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.VAL);
 

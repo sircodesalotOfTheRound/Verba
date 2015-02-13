@@ -32,6 +32,11 @@ public class GenericTypeListExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   private void readExpressions(Lexer lexer) {
     lexer.readCurrentAndAdvance(OperatorToken.class, "<");
 

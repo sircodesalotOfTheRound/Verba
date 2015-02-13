@@ -62,6 +62,8 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     }
   }
 
+  public abstract void parse(VerbaExpression parent, Lexer lexer);
+
   public boolean hasParent() {
     return this.parent != null;
   }

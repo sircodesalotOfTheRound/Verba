@@ -36,6 +36,11 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static LambdaExpression read(VerbaExpression parent, Lexer lexer) {
     return new LambdaExpression(parent, lexer);
   }

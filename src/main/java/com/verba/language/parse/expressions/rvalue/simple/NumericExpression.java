@@ -46,6 +46,11 @@ public class NumericExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static NumericExpression read(VerbaExpression parent, Lexer lexer) {
     return new NumericExpression(parent, lexer);
   }

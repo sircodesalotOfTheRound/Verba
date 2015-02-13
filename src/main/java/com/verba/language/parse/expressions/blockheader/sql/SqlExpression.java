@@ -26,6 +26,11 @@ public class SqlExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void parse(VerbaExpression parent, Lexer lexer) {
+
+  }
+
   public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {
     return new SqlExpression(parent, lexer);
   }
