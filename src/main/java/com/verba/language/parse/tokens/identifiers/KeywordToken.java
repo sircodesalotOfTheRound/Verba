@@ -87,6 +87,7 @@ public class KeywordToken extends IdentifierToken {
     SIGNATURE, SEGMENT, OPTIONS, OPTION
   );
 
+  public static final String INLINE = "inline";
   public static final String ABSTRACT = "abstract";
   public static final String MUT = "mut";
   public static final String NATIVE = "native";
@@ -95,7 +96,7 @@ public class KeywordToken extends IdentifierToken {
   public static final String INJECT = "inject";
 
   private static final QSet<String> declarationModifiers = new QSet<String>(
-    ABSTRACT, MUT, NATIVE, SENSITIVE, EXTEND, INJECT
+    ABSTRACT, MUT, NATIVE, SENSITIVE, EXTEND, INJECT, INLINE
   );
 
   public static final String SYNC = "sync";
