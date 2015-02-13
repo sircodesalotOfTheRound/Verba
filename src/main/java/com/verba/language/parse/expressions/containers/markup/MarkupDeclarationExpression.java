@@ -19,7 +19,7 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class MarkupDeclarationExpression extends VerbaExpression
   implements MarkupTagExpression, RValueExpression {
 
-  private final QIterable<VerbaExpression> tags;
+  private final QIterable<MarkupTagItemExpression> tags;
   private final FullyQualifiedNameExpression name;
 
   private MarkupDeclarationExpression(VerbaExpression parent, Lexer lexer) {
@@ -48,8 +48,8 @@ public class MarkupDeclarationExpression extends VerbaExpression
     }
   }
 
-  private QIterable<VerbaExpression> readAllTags(Lexer lexer) {
-    QList<VerbaExpression> tags = new QList<>();
+  private QIterable<MarkupTagItemExpression> readAllTags(Lexer lexer) {
+    QList<MarkupTagItemExpression> tags = new QList<>();
 
     while (lexer.notEOF() && lexer.currentIs(OperatorToken.class, "<")) {
       MarkupTagItemExpression tag = MarkupTagItemExpression.read(this, lexer);
@@ -60,7 +60,7 @@ public class MarkupDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public QIterable<VerbaExpression> items() {
+  public QIterable<MarkupTagItemExpression> items() {
     return this.tags;
   }
 

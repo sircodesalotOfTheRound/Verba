@@ -12,9 +12,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Represents some sort of non-polymorphic container object (Array, Tuple, Json, Set).
  */
-public interface DataContainerExpression extends ExpressionCategory {
-
-  public QIterable<VerbaExpression> items();
+public interface DataContainerExpression<T> extends ExpressionCategory {
+  public QIterable<T> items();
 
   public static DataContainerExpression read(VerbaExpression parent, Lexer lexer) {
     if (lexer.currentIs(EnclosureToken.class, "[")) return ArrayDeclarationExpression.read(parent, lexer);

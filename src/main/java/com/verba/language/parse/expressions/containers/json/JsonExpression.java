@@ -14,9 +14,9 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-24.
  */
 public class JsonExpression extends VerbaExpression implements RValueExpression,
-  DataContainerExpression {
+  DataContainerExpression<JsonExpressionPair> {
 
-  QList<VerbaExpression> jsonPairs = new QList<>();
+  QList<JsonExpressionPair> jsonPairs = new QList<>();
 
   private JsonExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -43,7 +43,7 @@ public class JsonExpression extends VerbaExpression implements RValueExpression,
   }
 
   @Override
-  public QIterable<VerbaExpression> items() {
+  public QIterable<JsonExpressionPair> items() {
     return this.jsonPairs;
   }
 

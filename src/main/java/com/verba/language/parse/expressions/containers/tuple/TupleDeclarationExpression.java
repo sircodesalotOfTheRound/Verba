@@ -16,9 +16,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by sircodesalot on 14-2-24.
  */
 public class TupleDeclarationExpression extends VerbaExpression implements TypeConstraintExpression,
-  DataContainerExpression {
+  DataContainerExpression<TupleItemExpression> {
 
-  QList<VerbaExpression> tokens = new QList<>();
+  QList<TupleItemExpression> tokens = new QList<>();
 
   public TupleDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -31,12 +31,12 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeC
 
   }
 
-  private QList<VerbaExpression> readContents(Lexer lexer) {
-    QList<VerbaExpression> contents = new QList<>();
+  private QList<TupleItemExpression> readContents(Lexer lexer) {
+    QList<TupleItemExpression> contents = new QList<>();
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
     while (lexer.notEOF() && !lexer.currentIs(EnclosureToken.class, ")")) {
-      contents.add((VerbaExpression) TupleItemExpression.read(this, lexer));
+      contents.add(TupleItemExpression.read(this, lexer));
 
       // If a comma is seen, consume it.
       if (lexer.currentIs(OperatorToken.class, ",")) lexer.readCurrentAndAdvance();
@@ -66,11 +66,11 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeC
     return this.tokens.count();
   }
 
-  public VerbaExpression get(int index) {
+  public TupleItemExpression get(int index) {
     return this.tokens.get(index);
   }
 
-  public QIterable<VerbaExpression> items() {
+  public QIterable<TupleItemExpression> items() {
     return this.tokens;
   }
 

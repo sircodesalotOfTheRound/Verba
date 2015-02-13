@@ -14,7 +14,7 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-5-21.
  */
 public class SetDeclarationExpression extends VerbaExpression
-  implements DataContainerExpression, RValueExpression {
+  implements DataContainerExpression<VerbaExpression>, RValueExpression {
   private final QList<VerbaExpression> items = new QList<>();
 
   private SetDeclarationExpression(VerbaExpression parent, Lexer lexer) {

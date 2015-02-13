@@ -16,7 +16,7 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-24.
  */
 public class ArrayDeclarationExpression extends VerbaExpression implements RValueExpression,
-  DataContainerExpression {
+  DataContainerExpression<VerbaExpression> {
 
   QList<VerbaExpression> items = new QList<>();
 
