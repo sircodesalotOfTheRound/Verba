@@ -50,7 +50,13 @@ public class FunctionCallFacade {
   public String functionName() { return expression.name(); }
 
   public QIterable<VerbaExpression> primaryParameters() {
-    return expression.identifier().members().first().parameterLists().first().items();
+    return expression.identifier()
+      .members()
+      .first()
+      .parameterLists()
+      .first()
+      .items()
+      .cast(VerbaExpression.class);
   }
 
   public static boolean isFunctionCall(NamedValueExpression expression) {

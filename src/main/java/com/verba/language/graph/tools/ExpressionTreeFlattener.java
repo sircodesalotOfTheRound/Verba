@@ -77,7 +77,9 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
   public void visit(FunctionDeclarationExpression function) {
     add(function);
 
-    this.visitAll(function.parameterSets().flatten(TupleDeclarationExpression::items));
+    this.visitAll(function.parameterSets()
+      .flatten(TupleDeclarationExpression::items)
+      .cast(VerbaExpression.class));
     this.visitAll(function.block());
   }
 
@@ -93,7 +95,7 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
 
   public void visit(TupleDeclarationExpression tuple) {
     add(tuple);
-    this.visitAll(tuple.items());
+    this.visitAll(tuple.items().cast(VerbaExpression.class));
   }
 
   public void visit(BlockDeclarationExpression block) {

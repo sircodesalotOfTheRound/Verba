@@ -30,7 +30,7 @@ public class FunctionDeclarationValidator extends ExpressionValidator {
 //  }
 
   private void validateParameterTuple(TupleDeclarationExpression tuple) {
-    for (VerbaExpression expression : tuple.items()) {
+    for (VerbaExpression expression : tuple.items().cast(VerbaExpression.class)) {
       if (expression instanceof NamedValueExpression) {
         NamedValueExpression varName = (NamedValueExpression) expression;
 
