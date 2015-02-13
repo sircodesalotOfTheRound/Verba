@@ -22,8 +22,6 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeC
 
   public TupleDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-    this.tokens = this.readContents(lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -32,8 +30,8 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeC
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.tokens = this.readContents(lexer);
   }
 
   private QList<TupleItemExpression> readContents(Lexer lexer) {

@@ -62,7 +62,12 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     }
   }
 
-  public abstract void parse(VerbaExpression parent, Lexer lexer);
+  protected abstract void onParse(VerbaExpression parent, Lexer lexer);
+
+  public void parse(VerbaExpression parent, Lexer lexer) {
+    onParse(parent, lexer);
+    this.closeLexingRegion();
+  }
 
   public boolean hasParent() {
     return this.parent != null;
@@ -73,7 +78,7 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     return this.startingLexPoint;
   }
 
-  protected void closeLexingRegion() {
+  private void closeLexingRegion() {
     this.endingLexPoint = this.lexer.peekPrevious();
   }
 

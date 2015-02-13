@@ -37,8 +37,6 @@ public class NumericExpression extends VerbaExpression
   private NumericExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.token = lexer.readCurrentAndAdvance(NumericToken.class);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -47,8 +45,8 @@ public class NumericExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.token = lexer.readCurrentAndAdvance(NumericToken.class);
   }
 
   public static NumericExpression read(VerbaExpression parent, Lexer lexer) {

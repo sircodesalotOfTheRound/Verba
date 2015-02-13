@@ -20,14 +20,6 @@ public class WhileStatementExpression extends VerbaExpression
 
   public WhileStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.WHILE);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
-    this.testCondition = RValueExpression.read(this, lexer);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
-
-    this.block = BlockDeclarationExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -36,8 +28,13 @@ public class WhileStatementExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.WHILE);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
+    this.testCondition = RValueExpression.read(this, lexer);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
 
+    this.block = BlockDeclarationExpression.read(this, lexer);
   }
 
   public static WhileStatementExpression read(VerbaExpression parent, Lexer lexer) {

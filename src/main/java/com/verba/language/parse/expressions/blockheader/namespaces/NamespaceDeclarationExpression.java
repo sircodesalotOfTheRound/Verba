@@ -13,17 +13,11 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
  * Created by sircodesalot on 14-2-17.
  */
 public class NamespaceDeclarationExpression extends VerbaExpression implements NamedBlockExpression {
-  private final FullyQualifiedNameExpression identifier;
-  private final BlockDeclarationExpression block;
+  private FullyQualifiedNameExpression identifier;
+  private BlockDeclarationExpression block;
 
   public NamespaceDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.NAMESPACE);
-
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-    this.block = BlockDeclarationExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -32,8 +26,11 @@ public class NamespaceDeclarationExpression extends VerbaExpression implements N
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.NAMESPACE);
 
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
+    this.block = BlockDeclarationExpression.read(this, lexer);
   }
 
   public static NamespaceDeclarationExpression read(VerbaExpression parent, Lexer lexer) {

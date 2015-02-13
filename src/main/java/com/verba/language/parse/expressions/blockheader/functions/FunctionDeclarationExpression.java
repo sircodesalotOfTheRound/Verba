@@ -38,15 +38,24 @@ public class FunctionDeclarationExpression extends VerbaExpression
 {
 
   private final FunctionEventSubscription buildProfile = new FunctionEventSubscription(this);
-  private final FullyQualifiedNameExpression identifier;
-  private final BlockDeclarationExpression block;
-  private final ExpressionModifierInfo modifierInfo;
-  private final boolean isConstructor;
+  private FullyQualifiedNameExpression identifier;
+  private BlockDeclarationExpression block;
+  private ExpressionModifierInfo modifierInfo;
+  private boolean isConstructor;
   private TypeConstraintExpression explicitReturnType;
 
   public FunctionDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+  }
+
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void onParse(VerbaExpression parent, Lexer lexer) {
     this.isConstructor = determineIsConstructorFunction(parent, lexer);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
@@ -57,17 +66,6 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
     this.block = BlockDeclarationExpression.read(this, lexer);
     this.modifierInfo = new FunctionDeclarationExpressionModifierInfo(this);
-    this.closeLexingRegion();
-  }
-
-  @Override
-  protected void onChildRemoved(VerbaExpression child) {
-
-  }
-
-  @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
   }
 
   private boolean determineIsConstructorFunction(VerbaExpression parent, Lexer lexer) {

@@ -21,7 +21,6 @@ public class JsonExpression extends VerbaExpression implements RValueExpression,
   private JsonExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.readItems(lexer);
   }
 
   @Override
@@ -30,8 +29,8 @@ public class JsonExpression extends VerbaExpression implements RValueExpression,
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.readItems(lexer);
   }
 
   private void readItems(Lexer lexer) {
@@ -44,7 +43,6 @@ public class JsonExpression extends VerbaExpression implements RValueExpression,
     }
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, "}");
-    this.closeLexingRegion();
   }
 
   @Override

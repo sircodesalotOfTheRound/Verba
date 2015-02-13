@@ -29,8 +29,6 @@ public class NewExpression extends VerbaExpression
       lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
       lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
     }
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -39,7 +37,7 @@ public class NewExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
 
   }
 

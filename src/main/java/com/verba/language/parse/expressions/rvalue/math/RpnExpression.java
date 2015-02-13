@@ -11,13 +11,11 @@ import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
  */
 public class RpnExpression extends VerbaExpression implements RValueExpression {
   // Should probabaly be a tree rather than a list.
-  private final RpnMap expressions;
+  private RpnMap expressions;
 
   private RpnExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.expressions = new RpnMap(parent, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -26,8 +24,8 @@ public class RpnExpression extends VerbaExpression implements RValueExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.expressions = new RpnMap(parent, lexer);
   }
 
   private boolean isNextMathToken(Lexer lexer) {

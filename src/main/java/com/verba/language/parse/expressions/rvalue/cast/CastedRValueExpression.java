@@ -17,12 +17,6 @@ public class CastedRValueExpression extends VerbaExpression implements RValueExp
   private CastedRValueExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
-    this.toType = TypeConstraintExpression.read(this, lexer);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
-
-    this.rvalue = RValueExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -31,8 +25,12 @@ public class CastedRValueExpression extends VerbaExpression implements RValueExp
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
+    this.toType = TypeConstraintExpression.read(this, lexer);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
 
+    this.rvalue = RValueExpression.read(this, lexer);
   }
 
   public static CastedRValueExpression read(VerbaExpression parent, Lexer lexer) {

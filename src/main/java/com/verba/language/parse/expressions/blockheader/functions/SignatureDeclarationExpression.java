@@ -20,21 +20,13 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class SignatureDeclarationExpression extends VerbaExpression implements NamedExpression,
   TypedExpression, GenericallyParameterizedExpression, SymbolTableExpression {
 
-  private final FullyQualifiedNameExpression identifier;
+  private FullyQualifiedNameExpression identifier;
   private TypeConstraintExpression returnType;
 
   public SignatureDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.SIGNATURE);
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
-    if (lexer.currentIs(OperatorToken.class, ":")) {
-      lexer.readCurrentAndAdvance(OperatorToken.class, ":");
-      this.returnType = TypeConstraintExpression.read(this, lexer);
-    }
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -43,8 +35,14 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.SIGNATURE);
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
+    if (lexer.currentIs(OperatorToken.class, ":")) {
+      lexer.readCurrentAndAdvance(OperatorToken.class, ":");
+      this.returnType = TypeConstraintExpression.read(this, lexer);
+    }
   }
 
   public static SignatureDeclarationExpression read(VerbaExpression parent, Lexer lexer) {

@@ -24,7 +24,6 @@ public class JsonExpressionPair extends VerbaExpression {
     this.lhs = this.readLhsItem(lexer);
     lexer.readCurrentAndAdvance(OperatorToken.class, ":");
     this.rhs = RValueExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -33,7 +32,7 @@ public class JsonExpressionPair extends VerbaExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
 
   }
 

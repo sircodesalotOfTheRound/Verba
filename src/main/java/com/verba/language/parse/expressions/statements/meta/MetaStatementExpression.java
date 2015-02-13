@@ -10,15 +10,11 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-28.
  */
 public class MetaStatementExpression extends VerbaExpression {
-  private final VerbaExpression statement;
+  private VerbaExpression statement;
 
   public MetaStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(OperatorToken.class, "@");
-    this.statement = VerbaExpression.read(this, lexer);
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -27,8 +23,9 @@ public class MetaStatementExpression extends VerbaExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(OperatorToken.class, "@");
+    this.statement = VerbaExpression.read(this, lexer);
   }
 
   public static MetaStatementExpression read(VerbaExpression parent, Lexer lexer) {

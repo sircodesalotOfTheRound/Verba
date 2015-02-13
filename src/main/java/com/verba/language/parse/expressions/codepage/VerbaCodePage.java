@@ -36,10 +36,7 @@ public class VerbaCodePage extends VerbaExpression
   private VerbaCodePage(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.path = lexer.filename();
-    this.childExpressions = this.readChildExpressions(lexer);
-    this.allExpressions = captureAllExpressions(this.childExpressions);
-    this.expressionsByType = this.allExpressions.parition(Object::getClass);
+
   }
 
   @Override
@@ -48,8 +45,11 @@ public class VerbaCodePage extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.path = lexer.filename();
+    this.childExpressions = this.readChildExpressions(lexer);
+    this.allExpressions = captureAllExpressions(this.childExpressions);
+    this.expressionsByType = this.allExpressions.parition(Object::getClass);
   }
 
   private QIterable<VerbaExpression> captureAllExpressions(QList<VerbaExpression> childExpressions) {
@@ -98,7 +98,11 @@ public class VerbaCodePage extends VerbaExpression
     CodeStream codeStream = new FileBasedCodeStream(path);
     Lexer lexer = new VerbaMemoizingLexer(path, codeStream);
 
-    return new VerbaCodePage(parent, lexer);
+    // TODO: Deal with the special parse call. Shouldn't have to do this manually.
+    VerbaCodePage page = new VerbaCodePage(parent, lexer);
+    page.parse(parent, lexer);
+
+    return page;
   }
 
   // Build from an item in a package.

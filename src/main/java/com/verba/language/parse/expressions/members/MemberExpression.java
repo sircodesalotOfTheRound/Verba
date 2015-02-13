@@ -14,13 +14,23 @@ import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
  * Created by sircodesalot on 14-2-25.
  */
 public class MemberExpression extends VerbaExpression {
-  private final IdentifierExpression identifier;
-  private final GenericTypeListExpression genericParameters;
   private final QList<TupleDeclarationExpression> parameterLists = new QList<>();
+
+  private IdentifierExpression identifier;
+  private GenericTypeListExpression genericParameters;
 
   public MemberExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+  }
+
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void onParse(VerbaExpression parent, Lexer lexer) {
     this.identifier = IdentifierExpression.read(this, lexer);
     this.genericParameters = GenericTypeListExpression.read(this, lexer);
 
@@ -30,18 +40,6 @@ public class MemberExpression extends VerbaExpression {
         parameterLists.add(TupleDeclarationExpression.read(this, lexer));
       }
     } while (lexer.notEOF() && lexer.currentIs(EnclosureToken.class, "("));
-
-    this.closeLexingRegion();
-  }
-
-  @Override
-  protected void onChildRemoved(VerbaExpression child) {
-
-  }
-
-  @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
   }
 
   public static MemberExpression read(VerbaExpression parent, Lexer lexer) {

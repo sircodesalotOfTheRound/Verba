@@ -23,9 +23,6 @@ public class ForStatementExpression extends VerbaExpression
 
   private ForStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-
-    this.readContent(lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -34,8 +31,8 @@ public class ForStatementExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.readContent(lexer);
   }
 
   private void readContent(Lexer lexer) {

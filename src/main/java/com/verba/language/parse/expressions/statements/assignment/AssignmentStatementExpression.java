@@ -21,6 +21,15 @@ public class AssignmentStatementExpression extends VerbaExpression {
   public AssignmentStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+  }
+
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void onParse(VerbaExpression parent, Lexer lexer) {
     this.lvalue = TypeConstraintExpression.read(this, lexer);
 
     if (lexer.currentIs(OperatorToken.class, "=")
@@ -30,17 +39,6 @@ public class AssignmentStatementExpression extends VerbaExpression {
     }
 
     this.rvalue = RValueExpression.read(this, lexer);
-    this.closeLexingRegion();
-  }
-
-  @Override
-  protected void onChildRemoved(VerbaExpression child) {
-
-  }
-
-  @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
   }
 
   public static AssignmentStatementExpression read(VerbaExpression parent, Lexer lexer) {

@@ -23,13 +23,6 @@ public class ArrayDeclarationExpression extends VerbaExpression implements RValu
   public ArrayDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "[");
-    while (lexer.notEOF() && !lexer.currentIs(EnclosureToken.class, "]")) {
-      items.add(VerbaExpression.read(parent, lexer));
-      if (lexer.currentIs(OperatorToken.class, ",")) lexer.readCurrentAndAdvance();
-    }
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "]");
-    this.closeLexingRegion();
   }
 
   @Override
@@ -38,8 +31,13 @@ public class ArrayDeclarationExpression extends VerbaExpression implements RValu
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "[");
+    while (lexer.notEOF() && !lexer.currentIs(EnclosureToken.class, "]")) {
+      items.add(VerbaExpression.read(parent, lexer));
+      if (lexer.currentIs(OperatorToken.class, ",")) lexer.readCurrentAndAdvance();
+    }
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "]");
   }
 
   private LexInfo readContents(Lexer lexer) {

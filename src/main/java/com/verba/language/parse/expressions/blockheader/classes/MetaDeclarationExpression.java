@@ -16,21 +16,14 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by sircodesalot on 14-2-17.
  */
 public class MetaDeclarationExpression extends VerbaExpression implements NamedBlockExpression {
-  private final FullyQualifiedNameExpression identifier;
-  private final TupleDeclarationExpression parameterList;
-  private final BlockDeclarationExpression block;
-  private final GenericTypeListExpression genericTypeList;
+  private FullyQualifiedNameExpression identifier;
+  private TupleDeclarationExpression parameterList;
+  private BlockDeclarationExpression block;
+  private GenericTypeListExpression genericTypeList;
 
   public MetaDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.META);
-
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-    this.genericTypeList = GenericTypeListExpression.read(this, lexer);
-    this.parameterList = TupleDeclarationExpression.read(this, lexer);
-    this.block = BlockDeclarationExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -39,8 +32,13 @@ public class MetaDeclarationExpression extends VerbaExpression implements NamedB
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.META);
 
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
+    this.genericTypeList = GenericTypeListExpression.read(this, lexer);
+    this.parameterList = TupleDeclarationExpression.read(this, lexer);
+    this.block = BlockDeclarationExpression.read(this, lexer);
   }
 
   public static MetaDeclarationExpression read(VerbaExpression parent, Lexer lexer) {

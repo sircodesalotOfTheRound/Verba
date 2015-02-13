@@ -10,15 +10,10 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
  * Created by sircodesalot on 14-2-17.
  */
 public class SqlExpression extends VerbaExpression {
-  private final FullyQualifiedNameExpression identifier;
+  private FullyQualifiedNameExpression identifier;
 
   private SqlExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-
-    lexer.readNext(KeywordToken.class, KeywordToken.SQL);
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -27,8 +22,9 @@ public class SqlExpression extends VerbaExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readNext(KeywordToken.class, KeywordToken.SQL);
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
   }
 
   public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {

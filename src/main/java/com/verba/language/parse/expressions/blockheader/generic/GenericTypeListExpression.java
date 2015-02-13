@@ -20,11 +20,6 @@ public class GenericTypeListExpression extends VerbaExpression
   public GenericTypeListExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, "<")) {
-      this.readExpressions(lexer);
-    }
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -33,8 +28,10 @@ public class GenericTypeListExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    if (lexer.notEOF() && lexer.currentIs(OperatorToken.class, "<")) {
+      this.readExpressions(lexer);
+    }
   }
 
   private void readExpressions(Lexer lexer) {

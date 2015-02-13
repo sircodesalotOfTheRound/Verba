@@ -14,12 +14,6 @@ public class AccessModifierSetExpression extends VerbaExpression {
   public AccessModifierSetExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    while (lexer.notEOF() && AccessModifierExpression.ACCESS_MODIFIERS.contains(lexer.current().representation())) {
-      AccessModifierExpression accessModifier = AccessModifierExpression.read(this, lexer);
-      this.expressions.add(accessModifier);
-    }
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -28,8 +22,11 @@ public class AccessModifierSetExpression extends VerbaExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    while (lexer.notEOF() && AccessModifierExpression.ACCESS_MODIFIERS.contains(lexer.current().representation())) {
+      AccessModifierExpression accessModifier = AccessModifierExpression.read(this, lexer);
+      this.expressions.add(accessModifier);
+    }
   }
 
   public static AccessModifierSetExpression read(VerbaExpression parent, Lexer lexer) {

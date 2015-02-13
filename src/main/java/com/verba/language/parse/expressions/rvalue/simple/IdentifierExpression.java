@@ -16,8 +16,6 @@ public class IdentifierExpression extends VerbaExpression implements RValueExpre
   public IdentifierExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.identifier = lexer.readCurrentAndAdvance(IdentifierToken.class);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -26,8 +24,8 @@ public class IdentifierExpression extends VerbaExpression implements RValueExpre
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.identifier = lexer.readCurrentAndAdvance(IdentifierToken.class);
   }
 
   public static IdentifierExpression read(VerbaExpression parent, Lexer lexer) {

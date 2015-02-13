@@ -24,14 +24,6 @@ public class ReturnStatementExpression extends VerbaExpression
   public ReturnStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    int currentLine = lexer.current().line();
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.RETURN);
-
-    if (lexer.current().line() == currentLine) {
-      this.value = RValueExpression.read(this, lexer);
-    }
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -40,8 +32,14 @@ public class ReturnStatementExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    int currentLine = lexer.current().line();
 
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.RETURN);
+
+    if (lexer.current().line() == currentLine) {
+      this.value = RValueExpression.read(this, lexer);
+    }
   }
 
   public static ReturnStatementExpression read(VerbaExpression expression, Lexer lexer) {

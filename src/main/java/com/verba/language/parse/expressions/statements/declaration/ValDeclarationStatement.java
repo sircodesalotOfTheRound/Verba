@@ -29,7 +29,6 @@ public class ValDeclarationStatement extends VerbaExpression
   private ValDeclarationStatement(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.readExpression(lexer);
   }
 
   @Override
@@ -38,8 +37,8 @@ public class ValDeclarationStatement extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.readExpression(lexer);
   }
 
   private void readExpression(Lexer lexer) {
@@ -52,8 +51,6 @@ public class ValDeclarationStatement extends VerbaExpression
       lexer.readCurrentAndAdvance(OperatorToken.class, "=");
       this.rvalue = RValueExpression.read(this, lexer);
     }
-
-    this.closeLexingRegion();
   }
 
   private boolean determineMutability(Lexer lexer) {

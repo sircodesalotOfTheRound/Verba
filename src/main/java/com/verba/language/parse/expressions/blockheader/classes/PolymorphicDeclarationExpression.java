@@ -35,8 +35,8 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   BuildEvent.ContainsEventSubscriptionObject
 {
   private final PolymorphicBuildEventHandler eventSubscription = new PolymorphicBuildEventHandler(this);
-  private final FullyQualifiedNameExpression identifier;
-  private final boolean isClass;
+  private FullyQualifiedNameExpression identifier;
+  private boolean isClass;
   private BlockDeclarationExpression block;
 
   private QIterable<TypeConstraintExpression> traits;
@@ -44,12 +44,6 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   private PolymorphicDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.isClass = determineIsClass(lexer);
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-    this.traits = readBaseTypes(lexer);
-    this.block = BlockDeclarationExpression.read(this, lexer);
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -58,8 +52,11 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.isClass = determineIsClass(lexer);
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
+    this.traits = readBaseTypes(lexer);
+    this.block = BlockDeclarationExpression.read(this, lexer);
   }
 
   private boolean determineIsClass(Lexer lexer) {

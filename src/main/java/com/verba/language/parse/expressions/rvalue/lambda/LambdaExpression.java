@@ -18,6 +18,16 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
   public LambdaExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+
+  }
+
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void onParse(VerbaExpression parent, Lexer lexer) {
     this.lvalue = TypeConstraintExpression.read(this, lexer);
 
     lexer.readCurrentAndAdvance(LambdaToken.class);
@@ -27,18 +37,6 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
     if (this.rvalue == null) {
       FullyQualifiedNameExpression.read(this, lexer);
     }
-
-    this.closeLexingRegion();
-  }
-
-  @Override
-  protected void onChildRemoved(VerbaExpression child) {
-
-  }
-
-  @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
   }
 
   public static LambdaExpression read(VerbaExpression parent, Lexer lexer) {

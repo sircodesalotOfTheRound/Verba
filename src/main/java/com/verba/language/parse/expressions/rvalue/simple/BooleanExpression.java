@@ -26,7 +26,7 @@ public class BooleanExpression extends VerbaExpression implements LiteralExpress
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
 
   }
 

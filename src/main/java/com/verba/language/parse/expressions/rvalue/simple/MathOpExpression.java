@@ -16,8 +16,6 @@ public class MathOpExpression extends VerbaExpression {
   public MathOpExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.operationToken = lexer.readCurrentAndAdvance(MathOpToken.class);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -26,8 +24,8 @@ public class MathOpExpression extends VerbaExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.operationToken = lexer.readCurrentAndAdvance(MathOpToken.class);
   }
 
   public LexInfo operator() {

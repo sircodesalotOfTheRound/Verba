@@ -23,6 +23,15 @@ public class BlockDeclarationExpression extends VerbaExpression
   private BlockDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+  }
+
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void onParse(VerbaExpression parent, Lexer lexer) {
     // If the first token isn't an open brace, then just return empty
     if (!lexer.currentIs(EnclosureToken.class, EnclosureToken.OPEN_BRACE)) {
       return;
@@ -38,18 +47,6 @@ public class BlockDeclarationExpression extends VerbaExpression
     }
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, EnclosureToken.CLOSE_BRACE);
-
-    this.closeLexingRegion();
-  }
-
-  @Override
-  protected void onChildRemoved(VerbaExpression child) {
-
-  }
-
-  @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
   }
 
   public boolean hasItems() {

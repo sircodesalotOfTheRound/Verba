@@ -22,14 +22,6 @@ public class FullyQualifiedNameExpression extends VerbaExpression
   private FullyQualifiedNameExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    fullyQualifiedName.add(MemberExpression.read(this, lexer));
-
-    while (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ".")) {
-      lexer.readCurrentAndAdvance(OperatorToken.class, ".");
-      fullyQualifiedName.add(MemberExpression.read(this, lexer));
-    }
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -38,8 +30,13 @@ public class FullyQualifiedNameExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    fullyQualifiedName.add(MemberExpression.read(this, lexer));
 
+    while (lexer.notEOF() && lexer.currentIs(OperatorToken.class, ".")) {
+      lexer.readCurrentAndAdvance(OperatorToken.class, ".");
+      fullyQualifiedName.add(MemberExpression.read(this, lexer));
+    }
   }
 
   // TODO: Move this into FullyQualifiedNameBacktrackRule if such a thing exists.

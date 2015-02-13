@@ -21,13 +21,6 @@ public class IfStatementExpression extends VerbaExpression
   public IfStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.IF);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
-    this.testExpression = RValueExpression.read(this, lexer);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
-
-    this.block = BlockDeclarationExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -36,8 +29,13 @@ public class IfStatementExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.IF);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
+    this.testExpression = RValueExpression.read(this, lexer);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
 
+    this.block = BlockDeclarationExpression.read(this, lexer);
   }
 
   public static IfStatementExpression read(VerbaExpression parent, Lexer lexer) {

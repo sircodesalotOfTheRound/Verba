@@ -14,19 +14,13 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
  * Created by sircodesalot on 14-2-17.
  */
 public class ExtendDeclarationExpression extends VerbaExpression implements NamedBlockExpression {
-  private final FullyQualifiedNameExpression identifier;
-  private final BlockDeclarationExpression block;
-  private final GenericTypeListExpression genericTypeList;
+  private FullyQualifiedNameExpression identifier;
+  private BlockDeclarationExpression block;
+  private GenericTypeListExpression genericTypeList;
 
   public ExtendDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.EXTEND);
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-    this.genericTypeList = GenericTypeListExpression.read(this, lexer);
-
-    this.block = BlockDeclarationExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -35,8 +29,12 @@ public class ExtendDeclarationExpression extends VerbaExpression implements Name
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.EXTEND);
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
+    this.genericTypeList = GenericTypeListExpression.read(this, lexer);
 
+    this.block = BlockDeclarationExpression.read(this, lexer);
   }
 
   public static ExtendDeclarationExpression read(VerbaExpression parent, Lexer lexer) {

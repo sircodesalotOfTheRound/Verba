@@ -14,19 +14,13 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class MarkupTagItemExpression extends VerbaExpression {
 
   private VerbaExpression identifier;
-  private final QIterable<MarkupKeyValuePairExpression> items;
+  private QIterable<MarkupKeyValuePairExpression> items;
   private boolean isClosingTag = false;
   private boolean isSelfClosing = false;
 
   private MarkupTagItemExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.readOpening(lexer);
-    this.identifier = this.readIdentifier(lexer);
-    this.items = this.readItems(lexer);
-    this.readClosing(lexer);
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -35,8 +29,11 @@ public class MarkupTagItemExpression extends VerbaExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.readOpening(lexer);
+    this.identifier = this.readIdentifier(lexer);
+    this.items = this.readItems(lexer);
+    this.readClosing(lexer);
   }
 
   private void readOpening(Lexer lexer) {

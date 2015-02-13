@@ -23,6 +23,15 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
   private AspectTagExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+  }
+
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void onParse(VerbaExpression parent, Lexer lexer) {
     lexer.readCurrentAndAdvance(AspectTagToken.class);
 
     // Check if this is a named aspect expression.
@@ -37,17 +46,6 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
 
     // Read the closing ']'
     lexer.readCurrentAndAdvance(EnclosureToken.class, "]");
-    this.closeLexingRegion();
-  }
-
-  @Override
-  protected void onChildRemoved(VerbaExpression child) {
-
-  }
-
-  @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
   }
 
   private VerbaExpression readType(Lexer lexer) {

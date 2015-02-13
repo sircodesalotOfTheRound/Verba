@@ -29,17 +29,12 @@ public class AccessModifierExpression extends VerbaExpression {
     }
   }.get();
 
-  private final LexInfo accessModifier;
+  private LexInfo accessModifier;
 
   public AccessModifierExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    // Validate that it was in fact a
-    if (!ACCESS_MODIFIERS.contains(lexer.current().representation()))
-      throw new NotImplementedException();
 
-    this.accessModifier = lexer.readCurrentAndAdvance(KeywordToken.class);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -48,8 +43,12 @@ public class AccessModifierExpression extends VerbaExpression {
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    // Validate that it was in fact a
+    if (!ACCESS_MODIFIERS.contains(lexer.current().representation()))
+      throw new NotImplementedException();
 
+    this.accessModifier = lexer.readCurrentAndAdvance(KeywordToken.class);
   }
 
   public static AccessModifierExpression read(VerbaExpression expression, Lexer lexer) {

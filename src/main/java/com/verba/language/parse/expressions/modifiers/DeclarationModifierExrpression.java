@@ -13,15 +13,11 @@ import com.verba.tools.exceptions.CompilerException;
  * Created by sircodesalot on 14/12/7.
  */
 public class DeclarationModifierExrpression extends VerbaExpression implements SymbolTableExpression {
-  private final LexInfo modifier;
-  private final VerbaExpression modifiedExpression;
+  private LexInfo modifier;
+  private VerbaExpression modifiedExpression;
 
   public DeclarationModifierExrpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-
-    this.modifier = readModifier(lexer);
-    this.modifiedExpression = VerbaExpression.read(this, lexer);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -30,8 +26,9 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.modifier = readModifier(lexer);
+    this.modifiedExpression = VerbaExpression.read(this, lexer);
   }
 
   private LexInfo readModifier(Lexer lexer) {

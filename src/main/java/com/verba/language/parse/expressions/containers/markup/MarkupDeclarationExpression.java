@@ -19,20 +19,12 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class MarkupDeclarationExpression extends VerbaExpression
   implements MarkupTagExpression, RValueExpression {
 
-  private final QIterable<MarkupTagItemExpression> tags;
-  private final FullyQualifiedNameExpression name;
+  private QIterable<MarkupTagItemExpression> tags;
+  private FullyQualifiedNameExpression name;
 
   private MarkupDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.MARKUP);
-    this.name = determineName(lexer);
-
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "{");
-    this.tags = this.readAllTags(lexer);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "}");
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -41,8 +33,13 @@ public class MarkupDeclarationExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.MARKUP);
+    this.name = determineName(lexer);
 
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "{");
+    this.tags = this.readAllTags(lexer);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "}");
   }
 
   private FullyQualifiedNameExpression determineName(Lexer lexer) {

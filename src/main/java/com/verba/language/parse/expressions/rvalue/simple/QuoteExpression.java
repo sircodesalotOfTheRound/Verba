@@ -16,13 +16,10 @@ import com.verba.virtualmachine.VirtualMachineNativeTypes;
 public class QuoteExpression extends VerbaExpression
   implements LiteralExpression, NativeTypeExpression, MathOperandExpression
 {
-
-  private final LexInfo token;
+  private LexInfo token;
 
   public QuoteExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-    this.token = lexer.readCurrentAndAdvance(QuoteToken.class);
-    this.closeLexingRegion();
   }
 
   @Override
@@ -31,8 +28,8 @@ public class QuoteExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.token = lexer.readCurrentAndAdvance(QuoteToken.class);
   }
 
   public static QuoteExpression read(VerbaExpression parent, Lexer lexer) {

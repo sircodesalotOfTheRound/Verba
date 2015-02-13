@@ -22,20 +22,12 @@ public class NamedValueExpression extends VerbaExpression
     BuildEvent.ContainsEventSubscriptionObject
 {
   private final NamedValueExpressionBuildEventHandler buildProfile = new NamedValueExpressionBuildEventHandler(this);
-  private final FullyQualifiedNameExpression identifier;
+  private FullyQualifiedNameExpression identifier;
   private TypeConstraintExpression type;
 
   public NamedValueExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-
-    if (lexer.currentIs(OperatorToken.class, ":")) {
-      lexer.readCurrentAndAdvance(OperatorToken.class, ":");
-      this.type = TypeConstraintExpression.read(this, lexer);
-    }
-
-    this.closeLexingRegion();
   }
 
   @Override
@@ -44,8 +36,13 @@ public class NamedValueExpression extends VerbaExpression
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
+    if (lexer.currentIs(OperatorToken.class, ":")) {
+      lexer.readCurrentAndAdvance(OperatorToken.class, ":");
+      this.type = TypeConstraintExpression.read(this, lexer);
+    }
   }
 
   public static NamedValueExpression read(VerbaExpression parent, Lexer lexer) {

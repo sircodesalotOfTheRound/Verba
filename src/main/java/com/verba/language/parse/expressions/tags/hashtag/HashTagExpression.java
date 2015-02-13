@@ -17,10 +17,6 @@ public class HashTagExpression extends VerbaExpression implements MetaTagExpress
   private HashTagExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    lexer.readCurrentAndAdvance(HashTagToken.class);
-    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "]");
-    this.closeLexingRegion();
   }
 
   @Override
@@ -29,8 +25,10 @@ public class HashTagExpression extends VerbaExpression implements MetaTagExpress
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
+  public void onParse(VerbaExpression parent, Lexer lexer) {
+    lexer.readCurrentAndAdvance(HashTagToken.class);
+    this.identifier = FullyQualifiedNameExpression.read(this, lexer);
+    lexer.readCurrentAndAdvance(EnclosureToken.class, "]");
   }
 
   public static HashTagExpression read(VerbaExpression parent, Lexer lexer) {

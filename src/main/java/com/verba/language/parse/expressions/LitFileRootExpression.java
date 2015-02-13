@@ -79,7 +79,7 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
   }
 
   @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
+  public void onParse(VerbaExpression parent, Lexer lexer) {
 
   }
 }

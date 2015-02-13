@@ -19,7 +19,15 @@ public class SetDeclarationExpression extends VerbaExpression
 
   private SetDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
+  }
 
+  @Override
+  protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void onParse(VerbaExpression parent, Lexer lexer) {
     lexer.readCurrentAndAdvance(EnclosureToken.class, "{");
 
     while (lexer.notEOF()
@@ -34,17 +42,6 @@ public class SetDeclarationExpression extends VerbaExpression
     }
 
     lexer.readCurrentAndAdvance(EnclosureToken.class, "}");
-    this.closeLexingRegion();
-  }
-
-  @Override
-  protected void onChildRemoved(VerbaExpression child) {
-
-  }
-
-  @Override
-  public void parse(VerbaExpression parent, Lexer lexer) {
-
   }
 
   public QIterable<VerbaExpression> items() {
