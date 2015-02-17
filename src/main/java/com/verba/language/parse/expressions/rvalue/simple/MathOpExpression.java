@@ -11,7 +11,7 @@ import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
  */
 
 public class MathOpExpression extends VerbaExpression {
-  LexInfo operationToken;
+  private final LexInfo operationToken;
 
   public MathOpExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);

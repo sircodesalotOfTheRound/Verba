@@ -9,6 +9,7 @@ import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
 /**
  * Created by sircodesalot on 14-2-27.
  */
+@Deprecated
 public class RpnExpression extends VerbaExpression implements RValueExpression {
   // Should probabaly be a tree rather than a list.
   private final RpnMap expressions;

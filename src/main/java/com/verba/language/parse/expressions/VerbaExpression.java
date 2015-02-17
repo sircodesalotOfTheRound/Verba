@@ -12,7 +12,7 @@ import com.verba.language.parse.lexing.Lexer;
 public abstract class VerbaExpression implements ExpressionTreeNode {
   private static BacktrackRuleSet<VerbaExpression> rules
     = new BacktrackRuleSet<VerbaExpression>()
-    //.addRule(new MathExpressionBacktrackRule()) Broken for the moment.
+    .addRule(new MathExpressionBacktrackRule())
     .addRule(new LiteralExpressionRule())
     .addRule(new FunctionDeclarationBacktrackRule())
     .addRule(new NamespaceDeclarationBacktrackRule())

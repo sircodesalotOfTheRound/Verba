@@ -4,8 +4,10 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.backtracking.BacktrackRule;
 import com.verba.language.parse.expressions.categories.MathOperandExpression;
 import com.verba.language.parse.expressions.rvalue.math.RpnExpression;
+import com.verba.language.parse.expressions.rvalue.simple.MathOpExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
 
 /**
@@ -14,19 +16,11 @@ import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
 public class MathExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    boolean followingIsMathExpression = false;
-    lexer.setUndoPoint();
-    if (lexer.notEOF()) {
-      MathOperandExpression.read(null, lexer);
-      followingIsMathExpression = lexer.currentIs(MathOpToken.class);
-    }
-    lexer.rollbackToUndoPoint();
-
-    return followingIsMathExpression;
+    return lexer.currentIs(MathOpToken.class);
   }
 
   @Override
   public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return RpnExpression.read(parent, lexer);
+    return MathOpExpression.read(parent, lexer);
   }
 }
