@@ -14,7 +14,7 @@ import org.junit.Test;
 public class TestMathExpressions {
   @Test
   public void testMathExpressions() {
-    StringBasedCodeStream codeStream = new StringBasedCodeStream("x + y");
+    StringBasedCodeStream codeStream = new StringBasedCodeStream("x + y + z");
     VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("testfile.v", codeStream);
     MathOpExpression expression = (MathOpExpression) RValueExpression.read(null, lexer);
 
