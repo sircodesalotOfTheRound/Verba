@@ -9,7 +9,7 @@ import com.verba.language.parse.lexing.Lexer;
  * Created by sircodesalot on 14/9/18.
  */
 public interface MathOperandExpression extends ExpressionCategory {
-  public static BacktrackRuleSet<MathOperandExpression> ruleset = new BacktrackRuleSet<>(RValueExpression.ruleset
+  public static BacktrackRuleSet<MathOperandExpression> ruleset = new BacktrackRuleSet<>(RValueExpression.rvalueRuleSet
     .where(rule -> !(rule instanceof MathExpressionBacktrackRule)));
 
   public static MathOperandExpression read(VerbaExpression parent, Lexer lexer) {

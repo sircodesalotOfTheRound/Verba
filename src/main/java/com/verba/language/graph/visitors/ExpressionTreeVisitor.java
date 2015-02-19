@@ -16,6 +16,7 @@ import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExp
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
+import com.verba.language.parse.expressions.rvalue.simple.MathOpExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
@@ -148,5 +149,13 @@ public abstract class ExpressionTreeVisitor {
 
   public void visit(BooleanExpression expression) {
 
+  }
+
+  public void visit(MathOpExpression expression) {
+    if (expression.hasLhs()) {
+      expression.lhs().accept(this);
+    }
+
+    expression.rhs().accept(this);
   }
 }
