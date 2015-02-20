@@ -1,13 +1,13 @@
 package com.verba;
 
-import com.verba.language.parse.codestream.StringBasedCodeStream;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.rvalue.simple.MathExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.parse.lexing.VerbaMemoizingLexer;
+import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.mathop.AddOpToken;
 import com.verba.language.parse.tokens.operators.mathop.SubtractOpToken;
+import com.verba.tools.TestTools;
 import org.junit.Test;
 
 /**
@@ -22,8 +22,7 @@ public class TestMathExpressions {
     //              /      \
     //             4  Class.function()
 
-    StringBasedCodeStream codeStream = new StringBasedCodeStream("variable + 4 - Class.function()");
-    VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("testfile.v", codeStream);
+    Lexer lexer = TestTools.generateLexerFromString("variable + 4 - Class.function()");
     MathExpression expression = (MathExpression) RValueExpression.read(null, lexer);
 
     assert(expression.lhs().is(NamedValueExpression.class));
