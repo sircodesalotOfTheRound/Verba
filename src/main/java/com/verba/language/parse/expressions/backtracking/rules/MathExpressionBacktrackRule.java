@@ -2,12 +2,9 @@ package com.verba.language.parse.expressions.backtracking.rules;
 
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.backtracking.BacktrackRule;
-import com.verba.language.parse.expressions.categories.MathOperandExpression;
-import com.verba.language.parse.expressions.rvalue.math.RpnExpression;
-import com.verba.language.parse.expressions.rvalue.simple.MathOpExpression;
+import com.verba.language.parse.expressions.rvalue.simple.MathExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
 
 /**
@@ -21,6 +18,6 @@ public class MathExpressionBacktrackRule extends BacktrackRule {
 
   @Override
   public VerbaExpression attempt(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return MathOpExpression.read(parent, lexer);
+    return MathExpression.read(parent, lexer);
   }
 }

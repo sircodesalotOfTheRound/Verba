@@ -3,7 +3,7 @@ package com.verba.language.parse.expressions.categories;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
-import com.verba.language.parse.expressions.rvalue.simple.MathOpExpression;
+import com.verba.language.parse.expressions.rvalue.simple.MathExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
 
@@ -25,7 +25,7 @@ public interface RValueExpression extends TupleItemExpression, ExpressionCategor
     .addRule(new CastedRValueExpressionBacktrackRule())
     .addRule(new NamedValueExpressionBacktrackRule());
 
-  public static RValueExpression readNonMathExpression(VerbaExpression parent, Lexer lexer) {
+  public static RValueExpression readIgnoreMathExpressions(VerbaExpression parent, Lexer lexer) {
     return rvalueRuleSet.resolve(parent, lexer);
   }
 
@@ -37,10 +37,11 @@ public interface RValueExpression extends TupleItemExpression, ExpressionCategor
     // wrap it in a MathOpExpression.
     if (lexer.currentIs(MathOpToken.class)) {
       lexer.rollbackToUndoPoint();
-      return (RValueExpression)MathOpExpression.read(parent, lexer);
+      return MathExpression.read(parent, lexer);
+    } else {
+      lexer.clearUndoPoint();
     }
 
-    lexer.clearUndoPoint();
     return expression;
   }
 }
