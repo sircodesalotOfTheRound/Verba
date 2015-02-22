@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.MathOperandExpression;
-import com.verba.language.parse.expressions.rvalue.simple.MathExpression;
+import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
@@ -47,7 +47,7 @@ public class RpnMap {
   }
 
   private void handleMathOpToken(Lexer lexer) {
-    MathExpression mathop = MathExpression.read(parent, lexer);
+    InfixExpression mathop = InfixExpression.read(parent, lexer);
     int currentOpPriorityLevel = getPriorityLevel(mathop);
 
     if (!stack.hasItems()) stack.push(mathop);
@@ -69,7 +69,7 @@ public class RpnMap {
     this.polishNotation.add(operation);
   }
 
-  private int getPriorityLevel(MathExpression mathop) {
+  private int getPriorityLevel(InfixExpression mathop) {
     LexInfo lexInfo = mathop.operator();
     MathOpToken mathOpToken = (MathOpToken) lexInfo.getToken();
     return mathOpToken.getPriorityLevel();

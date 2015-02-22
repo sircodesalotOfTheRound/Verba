@@ -2,7 +2,7 @@ package com.verba;
 
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
-import com.verba.language.parse.expressions.rvalue.simple.MathExpression;
+import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.mathop.AddOpToken;
@@ -23,13 +23,13 @@ public class TestMathExpressions {
     //             4  Class.function()
 
     Lexer lexer = TestTools.generateLexerFromString("variable + 4 - Class.function()");
-    MathExpression expression = (MathExpression) RValueExpression.read(null, lexer);
+    InfixExpression expression = (InfixExpression) RValueExpression.read(null, lexer);
 
     assert(expression.lhs().is(NamedValueExpression.class));
     assert(expression.operator().is(AddOpToken.class));
-    assert(expression.rhs().is(MathExpression.class));
+    assert(expression.rhs().is(InfixExpression.class));
 
-    MathExpression rhs = (MathExpression) expression.rhs();
+    InfixExpression rhs = (InfixExpression) expression.rhs();
     assert(rhs.lhs().is(NumericExpression.class));
     assert(rhs.operator().is(SubtractOpToken.class));
     assert(rhs.rhs().is(NamedValueExpression.class));

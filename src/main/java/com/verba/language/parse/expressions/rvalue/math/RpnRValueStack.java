@@ -1,6 +1,6 @@
 package com.verba.language.parse.expressions.rvalue.math;
 
-import com.verba.language.parse.expressions.rvalue.simple.MathExpression;
+import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 
 import java.util.Stack;
 
@@ -9,17 +9,17 @@ import java.util.Stack;
  */
 
 public class RpnRValueStack {
-  private Stack<MathExpression> stack = new Stack<MathExpression>();
+  private Stack<InfixExpression> stack = new Stack<InfixExpression>();
 
-  public void push(MathExpression item) {
+  public void push(InfixExpression item) {
     this.stack.push(item);
   }
 
-  public MathExpression pop() {
+  public InfixExpression pop() {
     return this.stack.pop();
   }
 
-  public MathExpression peek() {
+  public InfixExpression peek() {
     return this.stack.peek();
   }
 

@@ -7,21 +7,21 @@ import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
 
+
 /**
  * Created by sircodesalot on 14-2-27.
  */
-
-public class MathExpression extends VerbaExpression implements RValueExpression {
+public class InfixExpression extends VerbaExpression implements RValueExpression {
   private VerbaExpression lhs;
   private VerbaExpression rhs;
   private final LexInfo operationToken;
 
-  public MathExpression(VerbaExpression parent, Lexer lexer) {
+  public InfixExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
     // This checks for unary expressions (vs. binary expressions)
     if (!lexer.currentIs(MathOpToken.class)) {
-      this.lhs = (VerbaExpression)RValueExpression.readIgnoreMathExpressions(parent, lexer);
+      this.lhs = (VerbaExpression)RValueExpression.readIgnoreInfixExpressions(parent, lexer);
     }
 
     this.operationToken = lexer.readCurrentAndAdvance(MathOpToken.class);
@@ -40,12 +40,12 @@ public class MathExpression extends VerbaExpression implements RValueExpression 
   public VerbaExpression readRhs(VerbaExpression parent, Lexer lexer) {
     lexer.setUndoPoint();
 
-    RValueExpression expression = RValueExpression.readIgnoreMathExpressions(parent, lexer);
+    RValueExpression expression = RValueExpression.readIgnoreInfixExpressions(parent, lexer);
 
-    // If reading the last expression ended in a math operatr, then
+    // If reading the last expression ended in a math operator, then
     if (lexer.currentIs(MathOpToken.class)) {
       lexer.rollbackToUndoPoint();
-      expression = MathExpression.read(this, lexer);
+      expression = InfixExpression.read(this, lexer);
     } else {
       lexer.clearUndoPoint();
     }
@@ -66,8 +66,8 @@ public class MathExpression extends VerbaExpression implements RValueExpression 
     return this.operationToken;
   }
 
-  public static MathExpression read(VerbaExpression parent, Lexer lexer) {
-    return new MathExpression(parent, lexer);
+  public static InfixExpression read(VerbaExpression parent, Lexer lexer) {
+    return new InfixExpression(parent, lexer);
   }
 
   @Override
