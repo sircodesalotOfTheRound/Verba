@@ -18,7 +18,7 @@ public interface RValueExpression extends TupleItemExpression, ExpressionCategor
     .addRule(new MarkupDeclarationExpressionBacktrackRule())
     .addRule(new BooleanExpressionBacktrackRule())
     .addRule(new LambdaExpressionBacktrackRule())
-    .addRule(new MathExpressionBacktrackRule())
+    .addRule(new InfixExpressionBacktrackRule())
     .addRule(new LiteralExpressionRule())
     .addRule(new SetDeclarationExpressionBacktrackRule())
     .addRule(new NewExpressionBacktrackRule())
