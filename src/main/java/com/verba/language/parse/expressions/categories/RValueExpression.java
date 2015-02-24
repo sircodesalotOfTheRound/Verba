@@ -45,9 +45,8 @@ public interface RValueExpression extends TupleItemExpression, ExpressionCategor
         return InfixExpression.read(parent, lexer);
       } else {
         lexer.clearUndoPoint();
+        return expression;
       }
-
-      return expression;
     }
 
     public RValueExpression expression() { return this.expression; }

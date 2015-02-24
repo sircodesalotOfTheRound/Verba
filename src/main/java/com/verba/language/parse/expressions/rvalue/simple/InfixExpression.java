@@ -3,6 +3,7 @@ package com.verba.language.parse.expressions.rvalue.simple;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
+import com.verba.language.parse.expressions.rvalue.simple.tools.InfixOperatorPrecedenceComparator;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
@@ -45,12 +46,62 @@ public class InfixExpression extends VerbaExpression implements RValueExpression
     // If reading the last expression ended in a math operator, then
     if (lexer.currentIs(MathOpToken.class)) {
       lexer.rollbackToUndoPoint();
-      expression = InfixExpression.read(this, lexer);
+      return InfixExpression.read(this, lexer);
     } else {
       lexer.clearUndoPoint();
+      return (VerbaExpression) expression;
+    }
+  }
+
+  // Re-structure the tree to reflect proper operator precedence.
+  public static InfixExpression updateOperatorPrecedence(InfixExpression expression) {
+    if (expression.lhs() instanceof InfixExpression) {
+      updateOperatorPrecedence((InfixExpression) expression.lhs);
     }
 
-    return (VerbaExpression) expression;
+    if (expression.rhs() instanceof InfixExpression) {
+      updateOperatorPrecedence((InfixExpression) expression.rhs);
+    }
+
+    if (expression.hasHigherPrecedenceThan(expression.lhs)) {
+      expression = rotateLeft(expression);
+    }
+
+    if (expression.hasHigherPrecedenceThan(expression.rhs)) {
+      expression = rotateRight(expression);
+    }
+
+    return expression;
+  }
+
+  // Swap parents on these mathematical nodes.
+  public static InfixExpression rotateLeft(InfixExpression expression) {
+    InfixExpression newParent = (InfixExpression)expression.lhs;
+    expression.lhs = newParent.rhs;
+
+    if (newParent.rhs != null) {
+      newParent.rhs.setParent(expression);
+    }
+
+    newParent.rhs = expression;
+    expression.setParent(newParent);
+
+    return newParent;
+  }
+
+  // Swap parents on these mathematical nodes.
+  public static InfixExpression rotateRight(InfixExpression expression) {
+    InfixExpression newParent = (InfixExpression)expression.rhs;
+    expression.rhs = newParent.lhs;
+
+    if (newParent.lhs != null) {
+      newParent.lhs.setParent(expression);
+    }
+
+    newParent.lhs = expression;
+    expression.setParent(newParent);
+
+    return newParent;
   }
 
   public boolean hasLhs() { return this.lhs == null; }
@@ -62,12 +113,19 @@ public class InfixExpression extends VerbaExpression implements RValueExpression
 
   }
 
-  public LexInfo operator() {
-    return this.operationToken;
+  public boolean hasHigherPrecedenceThan(VerbaExpression rhs) {
+    if (rhs != null && rhs instanceof InfixExpression) {
+      return InfixOperatorPrecedenceComparator.comparePrecedence(this, (InfixExpression)rhs) < 0;
+    } else {
+      return false;
+    }
   }
 
+  public LexInfo operator() { return this.operationToken; }
+
   public static InfixExpression read(VerbaExpression parent, Lexer lexer) {
-    return new InfixExpression(parent, lexer);
+    InfixExpression expression = new InfixExpression(parent, lexer);
+    return updateOperatorPrecedence(expression);
   }
 
   @Override
