@@ -5,7 +5,7 @@ import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
 import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
+import com.verba.language.parse.tokens.operators.mathop.InfixOperatorToken;
 
 /**
  * Created by sircodesalot on 14-2-19.
@@ -40,7 +40,7 @@ public interface RValueExpression extends TupleItemExpression, ExpressionCategor
 
       // If the next item is a mathematical operator, reread the current token, but
       // wrap it in a MathOpExpression.
-      if (lexer.currentIs(MathOpToken.class)) {
+      if (lexer.currentIs(InfixOperatorToken.class)) {
         lexer.rollbackToUndoPoint();
         return InfixExpression.read(parent, lexer);
       } else {

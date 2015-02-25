@@ -5,7 +5,7 @@ import com.verba.language.parse.expressions.backtracking.BacktrackRule;
 import com.verba.language.parse.expressions.rvalue.math.RpnExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
+import com.verba.language.parse.tokens.operators.mathop.InfixOperatorToken;
 
 /**
  * Created by sircodesalot on 14-2-27.
@@ -15,7 +15,7 @@ public class RpnBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
     // This will require shunting if the second item is a math token.
-    return (restOfLine.length() > 2) && (restOfLine.get(1).is(MathOpToken.class));
+    return (restOfLine.length() > 2) && (restOfLine.get(1).is(InfixOperatorToken.class));
   }
 
   @Override

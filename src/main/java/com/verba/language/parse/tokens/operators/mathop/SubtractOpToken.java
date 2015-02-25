@@ -3,7 +3,7 @@ package com.verba.language.parse.tokens.operators.mathop;
 /**
  * Created by sircodesalot on 14-2-27.
  */
-public class SubtractOpToken extends MathOpToken {
+public class SubtractOpToken extends InfixOperatorToken {
 
   public SubtractOpToken() {
     super("-");

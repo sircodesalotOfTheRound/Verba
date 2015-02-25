@@ -57,8 +57,8 @@ public class OperatorToken implements Token {
     else if (CompositeComparisonToken.isCompositeComparisonToken(firstToken, stream))
       return CompositeComparisonToken.read(firstToken, stream);
 
-    else if (MathOpToken.isMathOpToken(firstToken))
-      return MathOpToken.cast(firstToken);
+    else if (InfixOperatorToken.isMathOpToken(firstToken))
+      return InfixOperatorToken.cast(firstToken);
 
 
     else return new OperatorToken(firstToken);

@@ -5,10 +5,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14-2-27.
  */
-public abstract class MathOpToken extends OperatorToken {
+public abstract class InfixOperatorToken extends OperatorToken {
   private String representation;
 
-  public MathOpToken(String representation) {
+  public InfixOperatorToken(String representation) {
     super('m');
 
     this.representation = representation;
@@ -25,7 +25,7 @@ public abstract class MathOpToken extends OperatorToken {
     return (text == '+' || text == '-' || text == '*' || text == '/' || text == '%');
   }
 
-  public static MathOpToken cast(Character text) {
+  public static InfixOperatorToken cast(Character text) {
     if (text == '+') {
       return new AddOpToken();
     } else if (text == '-') {

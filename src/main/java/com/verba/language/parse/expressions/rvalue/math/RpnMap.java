@@ -7,7 +7,7 @@ import com.verba.language.parse.expressions.categories.MathOperandExpression;
 import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
+import com.verba.language.parse.tokens.operators.mathop.InfixOperatorToken;
 
 /**
  * Created by sircodesalot on 14-2-27.
@@ -33,12 +33,12 @@ public class RpnMap {
     while (lexer.notEOF() && lexer.getCurrentLine() == startLine) {
       // If the next item is not a math op, then try to
       // resolve it as an RValue, else break.
-      if (!lexer.currentIs(MathOpToken.class)) {
+      if (!lexer.currentIs(InfixOperatorToken.class)) {
         VerbaExpression expression = (VerbaExpression) MathOperandExpression.read(parent, lexer);
         if (expression == null) break;
         this.polishNotation.add(expression);
 
-      } else if (lexer.currentIs(MathOpToken.class)) {
+      } else if (lexer.currentIs(InfixOperatorToken.class)) {
         this.handleMathOpToken(lexer);
       }
     }
@@ -71,8 +71,8 @@ public class RpnMap {
 
   private int getPriorityLevel(InfixExpression mathop) {
     LexInfo lexInfo = mathop.operator();
-    MathOpToken mathOpToken = (MathOpToken) lexInfo.getToken();
-    return mathOpToken.getPriorityLevel();
+    InfixOperatorToken infixOperatorToken = (InfixOperatorToken) lexInfo.getToken();
+    return infixOperatorToken.getPriorityLevel();
   }
 
   private void unravelStack() {

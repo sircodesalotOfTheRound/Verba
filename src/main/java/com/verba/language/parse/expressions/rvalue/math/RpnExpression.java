@@ -4,7 +4,7 @@ import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
+import com.verba.language.parse.tokens.operators.mathop.InfixOperatorToken;
 
 /**
  * Created by sircodesalot on 14-2-27.
@@ -31,7 +31,7 @@ public class RpnExpression extends VerbaExpression implements RValueExpression {
 
     lexer.setUndoPoint();
     lexer.advance();
-    if (lexer.notEOF() && lexer.currentIs(MathOpToken.class)) {
+    if (lexer.notEOF() && lexer.currentIs(InfixOperatorToken.class)) {
       isIt = true;
     }
     lexer.rollbackToUndoPoint();

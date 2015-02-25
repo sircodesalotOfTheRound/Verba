@@ -6,7 +6,7 @@ import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.rvalue.simple.tools.InfixOperatorPrecedenceComparator;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.operators.mathop.MathOpToken;
+import com.verba.language.parse.tokens.operators.mathop.InfixOperatorToken;
 
 
 /**
@@ -21,11 +21,11 @@ public class InfixExpression extends VerbaExpression implements RValueExpression
     super(parent, lexer);
 
     // This checks for unary expressions (vs. binary expressions)
-    if (!lexer.currentIs(MathOpToken.class)) {
+    if (!lexer.currentIs(InfixOperatorToken.class)) {
       this.lhs = (VerbaExpression)RValueExpression.readIgnoreInfixExpressions(parent, lexer);
     }
 
-    this.operationToken = lexer.readCurrentAndAdvance(MathOpToken.class);
+    this.operationToken = lexer.readCurrentAndAdvance(InfixOperatorToken.class);
     this.rhs = readRhs(parent, lexer);
     this.closeLexingRegion();
   }
@@ -44,7 +44,7 @@ public class InfixExpression extends VerbaExpression implements RValueExpression
     RValueExpression expression = RValueExpression.readIgnoreInfixExpressions(parent, lexer);
 
     // If reading the last expression ended in a math operator, then
-    if (lexer.currentIs(MathOpToken.class)) {
+    if (lexer.currentIs(InfixOperatorToken.class)) {
       lexer.rollbackToUndoPoint();
       return InfixExpression.read(this, lexer);
     } else {
