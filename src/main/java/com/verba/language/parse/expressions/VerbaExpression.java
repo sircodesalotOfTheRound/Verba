@@ -105,6 +105,10 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     return type.isAssignableFrom(this.getClass());
   }
 
+  public <T> T as(Class<T> type) {
+    return (T)this;
+  }
+
   public <T> boolean parentIs(Class<T> type) {
     return this.hasParent() && type.isAssignableFrom(this.parent.getClass());
   }
