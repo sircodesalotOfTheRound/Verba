@@ -15,7 +15,7 @@ public class DeclarationModifierBacktrackRule extends BacktrackRule {
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
     if (lexer.currentIs(KeywordToken.class)) {
       String currentToken = lexer.current().representation();
-      return KeywordToken.isAccessModifierKeyword(currentToken);
+      return DeclarationModifierExrpression.isModifier(currentToken);
     }
 
     return false;

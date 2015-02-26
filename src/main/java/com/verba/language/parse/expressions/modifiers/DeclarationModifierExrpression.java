@@ -30,7 +30,8 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
   }
 
   private LexInfo readModifier(Lexer lexer) {
-    if (!KeywordToken.isAccessModifierKeyword(lexer.current().representation())) {
+    String currentToken = lexer.current().representation();
+    if (!isModifier(currentToken)) {
       throw new CompilerException("DeclarationModifierExpressions must read modifier");
     }
 
@@ -47,6 +48,11 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
 
   public static DeclarationModifierExrpression read(VerbaExpression parent, Lexer lexer) {
     return new DeclarationModifierExrpression(parent, lexer);
+  }
+
+  public static boolean isModifier(String representation) {
+    return KeywordToken.isAccessModifierKeyword(representation) ||
+      KeywordToken.isFunctionModifierExpression(representation);
   }
 
   @Override

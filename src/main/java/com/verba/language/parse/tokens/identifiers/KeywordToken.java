@@ -225,6 +225,10 @@ public class KeywordToken extends IdentifierToken {
     return KeywordToken.accessModifiers.contains(representation);
   }
 
+  public static boolean isFunctionModifierExpression(String representation) {
+    return KeywordToken.functionModifiers.contains(representation);
+  }
+
   public static boolean isNativeTypeKeyword(String representation) {
     return KeywordToken.vmTypes.contains(representation);
   }

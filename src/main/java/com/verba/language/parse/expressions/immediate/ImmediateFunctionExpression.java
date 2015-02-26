@@ -26,9 +26,9 @@ public class ImmediateFunctionExpression extends VerbaExpression {
   }
 
   private FunctionDeclarationExpression readFunctionDeclaration(Lexer lexer) {
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "(");
+    lexer.readCurrentAndAdvance(EnclosureToken.class, EnclosureToken.OPEN_PARENS);
     FunctionDeclarationExpression function = FunctionDeclarationExpression.read(this, lexer);
-    lexer.readCurrentAndAdvance(EnclosureToken.class, ")");
+    lexer.readCurrentAndAdvance(EnclosureToken.class, EnclosureToken.CLOSE_PARENS);
 
     return function;
   }
