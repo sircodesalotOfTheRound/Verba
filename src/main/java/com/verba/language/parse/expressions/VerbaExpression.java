@@ -23,6 +23,7 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     .addRule(new MarkupDeclarationExpressionBacktrackRule())
     .addRule(new NamedValueExpressionBacktrackRule())
     .addRule(new GrabExpressionBacktrackRule())
+    .addRule(new ImmediateFunctionExpressionBacktrackRule())
     .addRule(new ForStatementBacktrackRule())
     .addRule(new WhileStatementBacktrackRule())
     .addRule(new AssignmentStatementBacktrackRule())

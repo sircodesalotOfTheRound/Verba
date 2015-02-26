@@ -6,6 +6,8 @@ import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.IdentifierToken;
+import com.verba.language.parse.tokens.literals.QuoteToken;
+import com.verba.language.parse.tokens.operators.mathop.NumericToken;
 
 /**
  * Created by sircodesalot on 14-4-26.
@@ -14,8 +16,9 @@ public class RValueExpressionBacktrackRule extends BacktrackRule {
 
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    // Todo: This is not very specific.
-    return (lexer.currentIs(IdentifierToken.class));
+    return (lexer.currentIs(IdentifierToken.class)
+      || lexer.currentIs(NumericToken.class)
+      || lexer.currentIs(QuoteToken.class));
   }
 
   @Override

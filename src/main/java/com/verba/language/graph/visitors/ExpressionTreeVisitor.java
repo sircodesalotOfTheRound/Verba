@@ -13,6 +13,7 @@ import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.json.JsonExpressionPair;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
+import com.verba.language.parse.expressions.immediate.ImmediateFunctionExpression;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
@@ -157,5 +158,9 @@ public abstract class ExpressionTreeVisitor {
     }
 
     expression.rhs().accept(this);
+  }
+
+  public void visit(ImmediateFunctionExpression immediateFunctionExpression) {
+
   }
 }
