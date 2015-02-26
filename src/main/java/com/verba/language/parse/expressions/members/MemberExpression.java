@@ -8,6 +8,7 @@ import com.verba.language.parse.expressions.blockheader.generic.GenericTypeListE
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.rvalue.simple.IdentifierExpression;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.parse.tokens.identifiers.IdentifierToken;
 import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
 
 /**
@@ -21,7 +22,7 @@ public class MemberExpression extends VerbaExpression {
   public MemberExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
-    this.identifier = IdentifierExpression.read(this, lexer);
+    this.identifier = readIdentifier(lexer);
     this.genericParameters = GenericTypeListExpression.read(this, lexer);
 
     // Read parameterSets if they exist
@@ -32,6 +33,14 @@ public class MemberExpression extends VerbaExpression {
     } while (lexer.notEOF() && lexer.currentIs(EnclosureToken.class, "("));
 
     this.closeLexingRegion();
+  }
+
+  public IdentifierExpression readIdentifier(Lexer lexer) {
+    if (lexer.currentIs(IdentifierToken.class)) {
+      return IdentifierExpression.read(this, lexer);
+    } else {
+      return null;
+    }
   }
 
   @Override
@@ -46,6 +55,8 @@ public class MemberExpression extends VerbaExpression {
   public String memberName() {
     return this.identifier.representation();
   }
+
+  public boolean isAnonymous() { return this.identifier == null; }
 
   public String representation() {
     if (genericParameters.hasItems()) {

@@ -97,6 +97,10 @@ public class FunctionDeclarationExpression extends VerbaExpression
     return (this.primaryIdentifier().hasParameters());
   }
 
+  public boolean isAnonymous() {
+    return this.primaryIdentifier().isAnonymous();
+  }
+
   public MemberExpression primaryIdentifier() {
     return this.declaration().first();
   }
