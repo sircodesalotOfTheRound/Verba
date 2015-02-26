@@ -31,6 +31,12 @@ import com.verba.language.parse.expressions.withns.WithNsExpression;
 public abstract class ExpressionTreeVisitor {
   public void onNodeVisited(VerbaExpression expression) { }
 
+  public void visitAll(Iterable<VerbaExpression> expressions) {
+    for (VerbaExpression expression : expressions) {
+      expression.accept(this);
+    }
+  }
+
   public void visit(BlockDeclarationExpression block) {
     for (VerbaExpression expression : block.expressions()) {
       expression.accept(this);
@@ -134,9 +140,7 @@ public abstract class ExpressionTreeVisitor {
   }
 
   public void visit(MarkupDeclarationExpression markup) {
-    for (VerbaExpression expression : markup.items()) {
-      expression.accept(this);
-    }
+    this.visitAll(markup.items().cast(VerbaExpression.class));
   }
 
   public void visit(DeclarationModifierExrpression modifier) {
@@ -161,6 +165,7 @@ public abstract class ExpressionTreeVisitor {
   }
 
   public void visit(ImmediateFunctionExpression immediateFunctionExpression) {
-
+    this.visit(immediateFunctionExpression.function());
+    this.visitAll(immediateFunctionExpression.arguments().items().cast(VerbaExpression.class));
   }
 }

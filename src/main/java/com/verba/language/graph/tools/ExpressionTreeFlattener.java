@@ -54,7 +54,7 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
 
   public void visit(LitFileRootExpression node) {
     add(node);
-    this.visitAll(node.pages());
+    this.visitAll(node.pages().cast(VerbaExpression.class));
   }
 
   public void visit(NamedValueExpression node) {
@@ -90,7 +90,7 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
 
   public void visit(JsonExpression jsonExpression) {
     add(jsonExpression);
-    visitAll(jsonExpression.items());
+    visitAll(jsonExpression.items().cast(VerbaExpression.class));
   }
 
   public void visit(TupleDeclarationExpression tuple) {
@@ -156,12 +156,6 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
   @Override
   public void visit(BooleanExpression expression) {
 
-  }
-
-  public <T extends VerbaExpression> void visitAll(Iterable<T> expressions) {
-    for (VerbaExpression expression : expressions) {
-      expression.accept(this);
-    }
   }
 
 }

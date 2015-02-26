@@ -313,6 +313,10 @@ public class LexList implements Iterable<LexInfo> {
     return this.get(0);
   }
 
+  public LexInfo second() {
+    return this.get(1);
+  }
+
   public LexInfo last() {
     return this.get(this.list.size() - 1);
   }

@@ -14,8 +14,8 @@ import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
 public class ImmediateFunctionExpressionBacktrackRule extends BacktrackRule {
   @Override
   public boolean attemptIf(VerbaExpression parent, Lexer lexer, LexList restOfLine) {
-    return restOfLine.get(0).is(EnclosureToken.class, "(")
-      && restOfLine.get(1).is(KeywordToken.class, KeywordToken.FN);
+    return restOfLine.first().is(EnclosureToken.class, "(")
+      && restOfLine.second().is(KeywordToken.class, KeywordToken.FN);
   }
 
   @Override
