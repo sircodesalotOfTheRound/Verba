@@ -8,6 +8,8 @@ import com.verba.language.parse.expressions.immediate.ImmediateFunctionExpressio
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
 import com.verba.tools.TestTools;
 import org.junit.Test;
 
@@ -29,5 +31,18 @@ public class TestImmediateFunction {
     assert (arguments.first() instanceof NumericExpression);
     assert (arguments.ofType(QuoteExpression.class).any());
     assert (arguments.last() instanceof NamedValueExpression);
+  }
+
+  @Test
+  public void asyncImmediateFunction() {
+    VerbaMemoizingLexer lexer = TestTools.generateLexerFromString("(async fn { return 10 })");
+    VerbaExpression expression = VerbaExpression.read(null, lexer);
+
+    assert(expression.is(ImmediateFunctionExpression.class));
+
+    ImmediateFunctionExpression immediateFunction = expression.as(ImmediateFunctionExpression.class);
+    assert (immediateFunction.isModified());
+    assert (immediateFunction.isAsynchronous());
+    assert (immediateFunction.function().isAnonymous());
   }
 }
