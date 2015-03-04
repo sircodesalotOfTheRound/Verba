@@ -3,6 +3,6 @@ package com.verba.language.build.coordination;
 /**
  * Created by sircodesalot on 15/3/3.
  */
-public interface BuildStep {
-  void accept(BuildProcess process);
+public interface BuildStep<T extends BuildProcess> {
+  void accept(T process);
 }

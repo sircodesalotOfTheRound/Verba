@@ -14,6 +14,7 @@ import com.verba.language.parse.expressions.containers.json.JsonExpressionPair;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.immediate.ImmediateFunctionExpression;
+import com.verba.language.parse.expressions.interop.AsmBlockExpression;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
@@ -167,5 +168,9 @@ public abstract class ExpressionTreeVisitor {
   public void visit(ImmediateFunctionExpression immediateFunctionExpression) {
     this.visit(immediateFunctionExpression.function());
     this.visitAll(immediateFunctionExpression.arguments().items().cast(VerbaExpression.class));
+  }
+
+  public void visit(AsmBlockExpression asm) {
+
   }
 }

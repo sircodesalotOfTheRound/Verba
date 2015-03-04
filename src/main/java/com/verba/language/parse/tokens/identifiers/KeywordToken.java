@@ -69,6 +69,7 @@ public class KeywordToken extends IdentifierToken {
 
   public static final String VAL = "val";
   public static final String FN = "fn";
+  public static final String ASM = "asm";
   public static final String CLASS = "class";
   public static final String TRAIT = "trait";
   public static final String SQL = "sql";
@@ -83,7 +84,7 @@ public class KeywordToken extends IdentifierToken {
   public static final String OPTION = "option";
 
   private static final QSet<String> typeDeclaration = new QSet<String>(
-    VAL, FN, CLASS, TRAIT, SQL, NAMESPACE, META, TEMPLATE, MARKUP, PROXY,
+    ASM, VAL, FN, CLASS, TRAIT, SQL, NAMESPACE, META, TEMPLATE, MARKUP, PROXY,
     SIGNATURE, SEGMENT, OPTIONS, OPTION
   );
 
