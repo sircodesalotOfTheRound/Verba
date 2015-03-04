@@ -11,6 +11,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public interface TypeConstraintExpression extends ExpressionCategory {
   public static TypeConstraintExpression read(VerbaExpression parent, Lexer lexer) {
+    // TODO: Determine if this section is still in use.
     if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
       return FullyQualifiedNameExpression.read(parent, lexer);
     } else if (TupleDeclarationExpression.isTupleTypeDeclaration(lexer)) {

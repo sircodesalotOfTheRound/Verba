@@ -148,7 +148,7 @@ public abstract class ExpressionTreeVisitor {
   }
 
   public void visit(NewExpression expression) {
-    VerbaExpression verbaExpression = (VerbaExpression)expression.expression();
+    VerbaExpression verbaExpression = expression.identifier();
     verbaExpression.accept(this);
   }
 
