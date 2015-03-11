@@ -1,4 +1,4 @@
-package com.verba;
+package com.verba.expressions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.parse.expressions.VerbaExpression;

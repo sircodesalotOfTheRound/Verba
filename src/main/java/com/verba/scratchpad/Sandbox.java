@@ -1,7 +1,7 @@
 package com.verba.scratchpad;
 
 import com.verba.language.build.Build;
-import com.verba.language.build.BuildConfiguration;
+import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.source.CodeUnit;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -11,29 +11,6 @@ import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDecla
  */
 public class Sandbox {
   public static void main(String[] args) throws Exception {
-    Build build = new BuildConfiguration()
-      .addTranslationUnit("GraphingTests.v")
-      .isDebugBuild(true)
-      .shouldCreateSymbolTable(true)
-      .shouldEmitCode(false)
-      .build();
 
-    PolymorphicDeclarationExpression derivedClass = build.symbolTable().findSymbolForType("Derived")
-      .expressionAs(PolymorphicDeclarationExpression.class);
-
-    System.out.println("Is this derived from Base? " + derivedClass.isDerivedFrom("Base"));
-    System.out.println("Is this derived from BaseTrait? " + derivedClass.isDerivedFrom("BaseTrait"));
-    System.out.println("Is this derived from NonTrait? " + derivedClass.isDerivedFrom("NonTrait"));
-    System.out.println();
-
-    for (Symbol expression : derivedClass.allMembers()) {
-      System.out.println("Derived class has member: " + expression.fqn() + " of type " +
-        expression.expression().getClass().getSimpleName());
-    }
-
-    CodeUnit source = CodeUnit.fromFile("GraphingTests.v");
-    System.out.println(source.path());
-    System.out.println(source.content());
-    System.out.println(source.hash());
   }
 }

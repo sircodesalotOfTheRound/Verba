@@ -1,4 +1,4 @@
-package com.verba;
+package com.verba.expressions;
 
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;

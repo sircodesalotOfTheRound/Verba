@@ -2,6 +2,7 @@ package com.verba.language.build;
 
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
+import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.event.BuildEvent;
 import com.verba.language.build.event.BuildEventSet;
 import com.verba.language.emit.images.ObjectImageSet;
@@ -14,17 +15,18 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 /**
  * Created by sircodesalot on 14/11/20.
  */
+@Deprecated
 public class Build {
   private BuildEventSet buildEventSet;
-  private BuildProfile buildProfile;
+  private com.verba.language.build.BuildProfile buildProfile;
   private LitFileRootExpression staticSpace;
   private SymbolTable symbolTable;
   private ObjectImageSet images;
   private QIterable<BuildEvent> eventSubscribers;
-  private final BuildConfiguration configuration;
+  private final BuildSpecification configuration;
   private final VerbaCodePage page;
 
-  public Build(BuildConfiguration configuration) {
+  public Build(BuildSpecification configuration) {
     this.configuration = configuration;
     this.page = this.configuration.codeUnits()
       .map(unit -> VerbaCodePage.fromFile(null, unit.path()))
@@ -32,7 +34,7 @@ public class Build {
   }
 
   public void build() {
-    this.buildProfile = new BuildProfile(configuration);
+    this.buildProfile = new com.verba.language.build.BuildProfile(configuration);
     this.staticSpace = new LitFileRootExpression(page);
     this.buildEventSet = new BuildEventSet(buildProfile, staticSpace);
     this.buildEventSet.afterParse();
@@ -62,24 +64,4 @@ public class Build {
     VerbatimFileGenerator generator = new VerbatimFileGenerator(this.images);
     return generator.save(path);
   }
-
-  /*
-  @Deprecated
-  public static Build fromString(String code, BuildConfiguration configuration) {
-    StringBasedCodeStream codeStream = new StringBasedCodeStream(code);
-    VerbaMemoizingLexer lexer = new VerbaMemoizingLexer("MemoryCodefile.v", codeStream, false, false);
-
-    return new Build(VerbaCodePage.read(null, lexer), configuration);
-  }
-
-
-  public static Build fromSingleFile(String path) {
-    return fromSingleFile(path, new BuildConfiguration());
-  }
-
-  public static Build fromSingleFile(String path, BuildConfiguration configuration) {
-    String content = FileTools.readAllText(path);
-    return Build.fromString(content, configuration);
-  }
-  */
 }

@@ -1,4 +1,4 @@
-package com.verba;
+package com.verba.expressions;
 
 import com.verba.language.build.source.CodeUnit;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.verba;
+package com.verba.expressions;
 
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;

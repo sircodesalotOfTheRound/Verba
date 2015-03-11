@@ -1,5 +1,6 @@
 package com.verba.language.build;
 
+import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.emit.header.StringTable;
 
 /**
@@ -7,9 +8,9 @@ import com.verba.language.emit.header.StringTable;
  */
 public class BuildProfile {
   private final StringTable stringTable;
-  private final BuildConfiguration configuration;
+  private final BuildSpecification configuration;
 
-  public BuildProfile(BuildConfiguration configuration) {
+  public BuildProfile(BuildSpecification configuration) {
     this.configuration = configuration;
     this.stringTable = new StringTable();
   }
