@@ -62,9 +62,10 @@ public class KeywordToken extends IdentifierToken {
   public static final String PROTECTED = "protected";
   public static final String INTERNAL = "internal";
   public static final String STATIC = "static";
+  public static final String INTEROP = "interop";
 
-  public static final QSet<String> accessModifiers = new QSet<String>(
-    PUBLIC, PRIVATE, PROTECTED, INTERNAL, STATIC
+  public static final QSet<String> accessModifiers = new QSet<>(
+    PUBLIC, PRIVATE, PROTECTED, INTERNAL, STATIC, INTEROP
   );
 
   public static final String VAL = "val";
