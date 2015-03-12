@@ -1,4 +1,4 @@
-package com.verba.language.build.violations;
+package com.verba.language.parse.violations;
 
 import com.verba.language.parse.expressions.VerbaExpression;
 

@@ -1,4 +1,4 @@
-package com.verba.language.build.violations;
+package com.verba.language.parse.violations;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;

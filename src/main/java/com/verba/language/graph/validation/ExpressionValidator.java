@@ -2,8 +2,8 @@ package com.verba.language.graph.validation;
 
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.violations.ValidationViolation;
-import com.verba.language.build.violations.ValidationViolationList;
+import com.verba.language.parse.violations.ValidationViolation;
+import com.verba.language.parse.violations.ValidationViolationList;
 import com.verba.language.parse.expressions.VerbaExpression;
 
 /**

@@ -1,10 +1,10 @@
 package com.verba.language.build.event;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.violations.ValidationError;
-import com.verba.language.build.violations.ValidationViolation;
-import com.verba.language.build.violations.ValidationViolationList;
-import com.verba.language.build.violations.ValidationWarning;
+import com.verba.language.parse.violations.ValidationError;
+import com.verba.language.parse.violations.ValidationViolation;
+import com.verba.language.parse.violations.ValidationViolationList;
+import com.verba.language.parse.violations.ValidationWarning;
 import com.verba.language.parse.expressions.VerbaExpression;
 
 /**
