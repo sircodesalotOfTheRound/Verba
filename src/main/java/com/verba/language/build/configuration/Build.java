@@ -4,6 +4,8 @@ package com.verba.language.build.configuration;
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.coordination.BuildProcess;
+import com.verba.language.build.info.BuildInfo;
+import com.verba.language.build.info.BuildInfoContainer;
 import com.verba.language.build.processes.BuildExportableAssemblyProcess;
 
 import java.util.HashMap;
@@ -12,14 +14,13 @@ import java.util.Map;
 /**
  * Created by sircodesalot on 15/3/4.
  */
-public class Build {
+public class Build implements BuildInfoContainer {
   private final BuildConfiguration configuration;
-  private final Map<Class, Object> buildInfo = new HashMap<>();
+  private final BuildInfo buildInfo = new BuildInfo();
 
   public Build(BuildSpecification profile) { this(profile.configuration()); }
   public Build(BuildConfiguration configuration) {
     this.configuration = configuration;
-
     this.runBuildProcess(new BuildExportableAssemblyProcess(this));
   }
 
@@ -29,16 +30,23 @@ public class Build {
 
   public BuildConfiguration configuration() { return this.configuration; }
 
+  @Override
   public <T> boolean containsBuildInfoOfType(Class<T> type) {
-    return buildInfo.containsKey(type);
+    return buildInfo.containsBuildInfoOfType(type);
   }
 
-  public QIterable<Class> buildInfoKeys() { return new QSet<>(this.buildInfo.keySet()); }
+  @Override
+  public QIterable<Class> buildInfoKeys() {
+    return buildInfo.buildInfoKeys();
+  }
 
+  @Override
   public void addBuildInfo(Object value) {
-    buildInfo.put(value.getClass(), value);
+    buildInfo.addBuildInfo(value);
   }
 
-  public <T> T getBuildInfo(Class<T> type) { return (T)this.buildInfo.get(type); }
-
+  @Override
+  public <T> T getBuildInfo(Class<T> type) {
+    return buildInfo.getBuildInfo(type);
+  }
 }

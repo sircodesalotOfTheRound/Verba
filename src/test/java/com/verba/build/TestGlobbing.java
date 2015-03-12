@@ -3,6 +3,7 @@ package com.verba.build;
 import com.javalinq.implementations.QSet;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.configuration.BuildSpecification;
+import com.verba.language.build.coordination.BuildManager;
 import com.verba.language.build.steps.CollectSourcesBuildStep;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class TestGlobbing {
     BuildSpecification specification = new BuildSpecification()
       .addSourceFolder("verba_sources/glob_test");
 
-    Build build = specification.build();
+    BuildManager build = specification.generateBuild();
 
     assert(build.containsBuildInfoOfType(CollectSourcesBuildStep.class));
 

@@ -2,6 +2,7 @@ package com.verba.language.build.configuration;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.build.coordination.BuildManager;
 import com.verba.language.build.source.CodeUnit;
 
 /**
@@ -62,7 +63,8 @@ public class BuildSpecification {
     return new BuildConfiguration(this);
   }
 
-  public Build build() {
-    return new Build(this);
+  public BuildManager generateBuild() {
+    Build build = new Build(this);
+    return new BuildManager(build);
   }
 }
