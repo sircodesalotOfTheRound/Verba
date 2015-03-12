@@ -4,6 +4,7 @@ import com.javalinq.implementations.QSet;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.coordination.BuildManager;
+import com.verba.language.build.infoitems.SourcesBuildItem;
 import com.verba.language.build.steps.CollectSourcesBuildStep;
 import org.junit.Test;
 
@@ -20,10 +21,10 @@ public class TestGlobbing {
 
     BuildManager build = specification.generateBuild();
 
-    assert(build.containsBuildInfoOfType(CollectSourcesBuildStep.class));
+    assert(build.containsBuildInfoOfType(SourcesBuildItem.class));
 
     QSet<String> filesAsSet = build
-      .getBuildInfo(CollectSourcesBuildStep.class)
+      .getBuildInfo(SourcesBuildItem.class)
       .files()
       .map(File::toString)
       .toSet();

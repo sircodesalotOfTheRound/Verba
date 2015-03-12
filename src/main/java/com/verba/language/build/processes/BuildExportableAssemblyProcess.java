@@ -2,6 +2,7 @@ package com.verba.language.build.processes;
 
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.coordination.BuildProcess;
+import com.verba.language.build.coordination.BuildStep;
 import com.verba.language.build.steps.CollectSourcesBuildStep;
 
 /**
@@ -9,11 +10,11 @@ import com.verba.language.build.steps.CollectSourcesBuildStep;
  */
 public class BuildExportableAssemblyProcess extends BuildProcess {
   public BuildExportableAssemblyProcess(Build build) {
-    super (build);
+    super(build);
   }
 
-
   public void process() {
-    this.runBuildStep(new CollectSourcesBuildStep(build));
+    BuildStep buildStep = new CollectSourcesBuildStep(build);
+    build.addBuildInfo(buildStep.buildItems());
   }
 }

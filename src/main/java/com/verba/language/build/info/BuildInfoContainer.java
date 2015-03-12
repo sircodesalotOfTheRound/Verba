@@ -10,8 +10,14 @@ import java.util.Map;
  * Created by sircodesalot on 15/3/12.
  */
 public interface BuildInfoContainer {
-  public <T> boolean containsBuildInfoOfType(Class<T> type);
+  public <T extends BuildInfoItem> boolean containsBuildInfoOfType(Class<T> type);
   public QIterable<Class> buildInfoKeys();
-  public void addBuildInfo(Object value);
-  public <T> T getBuildInfo(Class<T> type);
+  public void addBuildInfo(BuildInfoItem value);
+  public <T extends BuildInfoItem> T getBuildInfo(Class<T> type);
+
+  default public void addBuildInfo(QIterable<BuildInfoItem> buildInfoItems) {
+    for (BuildInfoItem item : buildInfoItems) {
+      this.addBuildInfo(item);
+    }
+  }
 }

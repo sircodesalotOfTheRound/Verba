@@ -12,15 +12,15 @@ import java.util.Map;
 public class BuildInfo implements BuildInfoContainer {
   private final Map<Class, Object> buildInfo = new HashMap<>();
 
-  public <T> boolean containsBuildInfoOfType(Class<T> type) {
+  public <T extends BuildInfoItem> boolean containsBuildInfoOfType(Class<T> type) {
     return buildInfo.containsKey(type);
   }
 
   public QIterable<Class> buildInfoKeys() { return new QSet<>(this.buildInfo.keySet()); }
 
-  public void addBuildInfo(Object value) {
+  public void addBuildInfo(BuildInfoItem value) {
     buildInfo.put(value.getClass(), value);
   }
 
-  public <T> T getBuildInfo(Class<T> type) { return (T)this.buildInfo.get(type); }
+  public <T extends BuildInfoItem> T getBuildInfo(Class<T> type) { return (T)this.buildInfo.get(type); }
 }

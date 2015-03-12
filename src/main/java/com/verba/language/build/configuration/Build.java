@@ -1,15 +1,12 @@
 package com.verba.language.build.configuration;
 
 
-import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.coordination.BuildProcess;
 import com.verba.language.build.info.BuildInfo;
 import com.verba.language.build.info.BuildInfoContainer;
+import com.verba.language.build.info.BuildInfoItem;
 import com.verba.language.build.processes.BuildExportableAssemblyProcess;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by sircodesalot on 15/3/4.
@@ -31,7 +28,7 @@ public class Build implements BuildInfoContainer {
   public BuildConfiguration configuration() { return this.configuration; }
 
   @Override
-  public <T> boolean containsBuildInfoOfType(Class<T> type) {
+  public <T extends BuildInfoItem> boolean containsBuildInfoOfType(Class<T> type) {
     return buildInfo.containsBuildInfoOfType(type);
   }
 
@@ -41,12 +38,12 @@ public class Build implements BuildInfoContainer {
   }
 
   @Override
-  public void addBuildInfo(Object value) {
+  public void addBuildInfo(BuildInfoItem value) {
     buildInfo.addBuildInfo(value);
   }
 
   @Override
-  public <T> T getBuildInfo(Class<T> type) {
+  public <T extends BuildInfoItem> T getBuildInfo(Class<T> type) {
     return buildInfo.getBuildInfo(type);
   }
 }

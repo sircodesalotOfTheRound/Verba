@@ -15,9 +15,5 @@ public abstract class BuildProcess {
 
   protected Build build() { return this.build; }
 
-  protected void runBuildStep(BuildStep step) {
-    build.addBuildInfo(step);
-  }
-
   public abstract void process();
 }
