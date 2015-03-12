@@ -2,7 +2,7 @@ package com.verba.language.build.event;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.BuildProfile;
+import com.verba.language.build.configuration.BuildProfile;
 import com.verba.language.emit.images.ObjectImageSet;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;

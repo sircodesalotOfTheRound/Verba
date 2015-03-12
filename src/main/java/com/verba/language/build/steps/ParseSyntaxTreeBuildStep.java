@@ -6,7 +6,7 @@ import com.verba.language.build.processes.BuildAssemblyProcess;
 /**
  * Created by sircodesalot on 15/3/4.
  */
-public class ParseSyntaxTreeBuildStep implements BuildStep<BuildAssemblyProcess> {
+public class ParseSyntaxTreeBuildStep implements BuildStep {
   public ParseSyntaxTreeBuildStep(BuildAssemblyProcess process) {
     
   }

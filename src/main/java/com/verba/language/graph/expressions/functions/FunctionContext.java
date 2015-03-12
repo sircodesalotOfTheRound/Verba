@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions;
 
-import com.verba.language.build.BuildProfile;
+import com.verba.language.build.configuration.BuildProfile;
 import com.verba.language.emit.header.StringTable;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.emit.variables.VirtualVariable;

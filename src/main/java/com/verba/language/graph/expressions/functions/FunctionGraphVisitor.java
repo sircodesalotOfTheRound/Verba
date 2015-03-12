@@ -1,7 +1,7 @@
 package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.BuildProfile;
+import com.verba.language.build.configuration.BuildProfile;
 import com.verba.language.emit.header.StringTable;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
@@ -16,7 +16,6 @@ import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.parse.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;

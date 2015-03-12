@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 /**
  * Created by sircodesalot on 15/3/4.
  */
-public class CollectSourcesBuildStep implements BuildStep<BuildAssemblyProcess> {
+public class CollectSourcesBuildStep implements BuildStep {
   private static final String V_FILE = ".v";
   private static final Predicate<File> IS_V_FILE = new Predicate<File>() {
     @Override

@@ -1,4 +1,4 @@
-package com.verba.language.build;
+package com.verba.language.build.configuration;
 
 import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.emit.header.StringTable;

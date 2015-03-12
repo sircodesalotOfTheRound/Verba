@@ -3,6 +3,7 @@ package com.verba.language.build.configuration;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.build.coordination.BuildProcess;
 import com.verba.language.build.processes.BuildExportableAssemblyProcess;
 
 import java.util.HashMap;
@@ -19,11 +20,11 @@ public class Build {
   public Build(BuildConfiguration configuration) {
     this.configuration = configuration;
 
-    this.collectSources();
+    this.runBuildProcess(new BuildExportableAssemblyProcess(this));
   }
 
-  private void collectSources() {
-    new BuildExportableAssemblyProcess(this);
+  private void runBuildProcess(BuildProcess process) {
+    process.process();
   }
 
   public BuildConfiguration configuration() { return this.configuration; }

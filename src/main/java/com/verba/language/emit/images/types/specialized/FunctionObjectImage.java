@@ -1,6 +1,6 @@
 package com.verba.language.emit.images.types.specialized;
 
-import com.verba.language.build.BuildProfile;
+import com.verba.language.build.configuration.BuildProfile;
 import com.verba.language.emit.header.StringTable;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
