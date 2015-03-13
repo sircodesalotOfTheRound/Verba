@@ -1,12 +1,14 @@
 package com.verba.language.emit.opcodes.binary;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sircodesalot on 15/3/13.
  */
 public enum VerbatimOpCodeBinaryValue {
   CALL_NO_RETAIN("Call", "Call discarding result", 0x43),
   CALL_WITH_RETAIN("CallRt", "Call retaining result", 0x44),
-
 
   BOX("Box", "Box constant value", 0x31),
   COPY("Copy", "Copy variable", 0x33),
@@ -25,10 +27,26 @@ public enum VerbatimOpCodeBinaryValue {
   private final String opcodeName;
   private final String description;
   private final int[] opcodeValues;
-  VerbatimOpCodeBinaryValue(String opcodeName, String description, int... values) {
+  VerbatimOpCodeBinaryValue(String opcodeName, String description, long binaryValue) {
     this.opcodeName = opcodeName;
     this.description = description;
-    this.opcodeValues = values;
+    this.opcodeValues = parseValues(binaryValue);
+  }
+
+  public int[] parseValues(long binaryValue) {
+    List<Integer> valuesList = new ArrayList<>();
+    while (binaryValue > 0) {
+      valuesList.add((int)(binaryValue & 0xFF));
+      binaryValue = binaryValue >> 8;
+    }
+
+    Object[] boxedValues = valuesList.toArray();
+    int[] unboxedValues = new int[boxedValues.length];
+    for (int index = 0; index < boxedValues.length; index++) {
+      unboxedValues[index] = (int)boxedValues[index];
+    }
+
+    return unboxedValues;
   }
 
   public String opcodeName() { return this.opcodeName; }
