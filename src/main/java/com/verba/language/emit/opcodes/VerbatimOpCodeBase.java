@@ -4,22 +4,21 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.header.StringTableFqnEntry;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 import com.verba.language.emit.variables.VirtualVariable;
 
 /**
  * Created by sircodesalot on 14/9/19.
  */
 public abstract class VerbatimOpCodeBase {
-  private final int opcodeNumber;
-  private final String opcodeName;
+  private final VerbatimOpCodeBinaryValue value;
 
-  protected VerbatimOpCodeBase(int opcodeNumber, String opcodeName) {
-    this.opcodeNumber = opcodeNumber;
-    this.opcodeName = opcodeName;
+  protected VerbatimOpCodeBase(VerbatimOpCodeBinaryValue value) {
+    this.value = value;
   }
 
-  public int opcodeNumber() { return opcodeNumber;}
-  public String opcodeName() { return opcodeName; }
+  public int[] opcodeBinaryValues() { return value.opcodeValues();}
+  public String opcodeName() { return value.opcodeName(); }
 
   public abstract void render(ObjectImageOutputStream renderer);
 

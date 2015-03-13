@@ -12,6 +12,7 @@ import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * This facade makes it easier to write an object image.
@@ -36,12 +37,13 @@ public class FunctionObjectImage implements ObjectImage {
   }
 
   private void generateOpCodeList() {
-    objectImage.writeString("name", this.imageName);
+    throw new NotImplementedException();
+    /*objectImage.writeString("name", this.imageName);
 
     for (VerbatimOpCodeBase opCode : functionGraphVisitor.opcodes()) {
       objectImage.writeInt8(null, opCode.opcodeNumber());
       opCode.render(objectImage);
-    }
+    }*/
   }
 
   public void displayCoreDump() {

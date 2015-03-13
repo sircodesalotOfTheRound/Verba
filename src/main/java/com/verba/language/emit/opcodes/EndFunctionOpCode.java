@@ -1,16 +1,16 @@
 package com.verba.language.emit.opcodes;
 
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 
 /**
  * Created by sircodesalot on 14/9/26.
  */
 public class EndFunctionOpCode extends VerbatimOpCodeBase {
-  private static final int opNumber = 0xFF;
-  private static final String opName = "EndFunc";
+  private static final VerbatimOpCodeBinaryValue END_FUNCTION = VerbatimOpCodeBinaryValue.END_FUNCTION;
 
   public EndFunctionOpCode() {
-    super(opNumber, opName);
+    super(END_FUNCTION);
   }
 
   @Override

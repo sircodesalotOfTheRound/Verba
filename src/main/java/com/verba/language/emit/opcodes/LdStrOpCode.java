@@ -2,20 +2,20 @@ package com.verba.language.emit.opcodes;
 
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 import com.verba.language.emit.variables.VirtualVariable;
 
 /**
  * Created by sircodesalot on 14/9/20.
  */
 public class LdStrOpCode extends VerbatimOpCodeBase {
-  private static final int opNumber = 0xD1;
-  private static final String opName = "LdStr";
+  private static final VerbatimOpCodeBinaryValue LD_STR = VerbatimOpCodeBinaryValue.LD_STR;
 
   private final VirtualVariable variable;
   private final StringTableStringEntry string;
 
   public LdStrOpCode(VirtualVariable variable, StringTableStringEntry string) {
-    super(opNumber, opName);
+    super(LD_STR);
 
     this.variable = variable;
     this.string = string;

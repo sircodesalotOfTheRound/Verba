@@ -5,6 +5,7 @@ import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -46,6 +47,18 @@ public class InMemoryObjectImage implements AppendableObjectImage {
     this.isFrozen = true;
 
     return byteData;
+  }
+
+  @Override
+  public ObjectImageOutputStream writeOpCode(VerbatimOpCodeBinaryValue value) {
+    for (int index = 0; index < value.opcodeValues().length; index++) {
+      if (index == 0) {
+        writeInt8(value.opcodeName(), value.opcodeValues()[index]);
+      } else {
+        writeInt8(null, value.opcodeValues()[index]);
+      }
+    }
+    return this;
   }
 
   @Override

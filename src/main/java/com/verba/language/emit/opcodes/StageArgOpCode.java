@@ -1,25 +1,20 @@
 package com.verba.language.emit.opcodes;
 
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 import com.verba.language.emit.variables.VirtualVariable;
 
 /**
  * Created by sircodesalot on 14/9/22.
  */
 public class StageArgOpCode extends VerbatimOpCodeBase {
-  private static final int opNumber = 0x29;
-  private static final String opName = "StgArg";
-
+  private static final VerbatimOpCodeBinaryValue STAGE_ARG = VerbatimOpCodeBinaryValue.STAGE_ARG;
   private int variableNumber;
 
   public StageArgOpCode(VirtualVariable variable) {
-    super(opNumber, opName);
+    super(STAGE_ARG);
 
     this.variableNumber = variable.variableNumber();
-  }
-
-  private StageArgOpCode() {
-    super(opNumber, opName);
   }
 
   @Override

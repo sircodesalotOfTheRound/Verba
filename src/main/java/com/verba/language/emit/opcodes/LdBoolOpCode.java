@@ -1,37 +1,27 @@
 package com.verba.language.emit.opcodes;
 
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 import com.verba.language.emit.variables.VirtualVariable;
 
 /**
  *
  */
 public class LdBoolOpCode extends VerbatimOpCodeBase {
-  private static final int ldTrueOpCode = 0x90;
-  private static final int ldFalseOpCode = 0x91;
-
-  private static final String boolTrueOpCode = "LdTrue";
-  private static final String boolFalseOpCode = "LdFalse";
+  private static final VerbatimOpCodeBinaryValue LD_TRUE = VerbatimOpCodeBinaryValue.LD_TRUE;
+  private static final VerbatimOpCodeBinaryValue LD_FALSE = VerbatimOpCodeBinaryValue.LD_FALSE;
   private final VirtualVariable variable;
 
   public LdBoolOpCode(VirtualVariable variable, boolean value) {
-    super(determineOpCodeNumber(value), determineOpCodeName(value));
+    super(determineOpCode(value));
     this.variable = variable;
   }
 
-  private static int determineOpCodeNumber(boolean value) {
+  private static VerbatimOpCodeBinaryValue determineOpCode(boolean value) {
     if (value) {
-      return ldTrueOpCode;
+      return LD_TRUE;
     } else {
-      return ldFalseOpCode;
-    }
-  }
-
-  private static String determineOpCodeName(boolean value) {
-    if (value) {
-      return boolTrueOpCode;
-    } else {
-      return boolFalseOpCode;
+      return LD_FALSE;
     }
   }
 

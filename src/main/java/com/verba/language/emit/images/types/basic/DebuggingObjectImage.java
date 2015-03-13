@@ -5,6 +5,7 @@ import com.verba.language.emit.header.StringTableFqnEntry;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
+import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 
 /**
  * Created by sircodesalot on 14/9/19.
@@ -18,11 +19,21 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
 
   public void display() {
     for (VerbatimOpCodeBase opcode : opcodes) {
-      String prefix = String.format("(0x%s) %s: ", Integer.toHexString(opcode.opcodeNumber()), opcode.opcodeName());
+      String prefix = String.format("(0x%s) %s: ", concatenateOpCodeBinaryValue(opcode.opcodeBinaryValues()), opcode.opcodeName());
       System.out.print(prefix);
       opcode.render(this);
       System.out.println();
     }
+  }
+
+  @Override
+  public ObjectImageOutputStream writeOpCode(VerbatimOpCodeBinaryValue value) {
+    printFormatted("\t[%s] \t", value.opcodeName());
+    for (int binaryValue : value.opcodeValues()) {
+      printFormatted(String.format("%s ", binaryValue));
+    }
+
+    return this;
   }
 
   @Override
@@ -65,6 +76,19 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
     printFormatted("\t[%s: %s] \t[fqn: %s]", label, value.text(), joinedFqnString);
 
     return this;
+  }
+
+  private String concatenateOpCodeBinaryValue(int[] binaryValues) {
+    StringBuilder builder = new StringBuilder();
+    for (int value : binaryValues) {
+      if (builder.length() > 0) {
+        builder.append(" ");
+      } else {
+        builder.append(Integer.toHexString(value));
+      }
+    }
+
+    return builder.toString();
   }
 
   private void printFormatted(String format, Object... args) {
