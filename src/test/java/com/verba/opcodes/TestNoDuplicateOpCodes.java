@@ -22,10 +22,10 @@ public class TestNoDuplicateOpCodes {
     public String determineRepresentation(VerbatimOpCodeBinaryValue value) {
       StringBuilder builder = new StringBuilder().append("0x");
       for (int binaryValue : value.opcodeValues()) {
-        builder.append(Integer.toHexString(binaryValue)).append(" ");
+        builder.append(Integer.toHexString(binaryValue));
       }
 
-      return builder.toString().trim();
+      return builder.toString();
     }
 
     @Override

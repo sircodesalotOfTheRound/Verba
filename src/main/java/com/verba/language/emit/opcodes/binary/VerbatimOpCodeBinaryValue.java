@@ -8,7 +8,7 @@ import java.util.List;
  */
 public enum VerbatimOpCodeBinaryValue {
   CALL_NO_RETAIN("Call", "Call discarding result", 0x43),
-  CALL_WITH_RETAIN("CallRt", "Call retaining result", 0x44),
+  CALL_WITH_RETAIN("CallRt", "Call retaining result", 0x43),
 
   BOX("Box", "Box constant value", 0x31),
   COPY("Copy", "Copy variable", 0x33),
