@@ -4,28 +4,36 @@ import com.verba.tools.datastructures.iterablemap.IterableMap;
 import com.verba.tools.datastructures.iterablemap.KeyValuePair;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by sircodesalot on 15/3/16.
  */
 public class IterableMapTests {
   @Test
   public void testIterableMap() {
-    IterableMap<Integer, String> items = new IterableMap<>();
-    items.add(1, "first");
-    items.add(2, "second");
-    items.add(3, "third");
-    items.add(4, "fourth");
-    items.add(5, "fifth");
-    items.add(6, "sixth");
-    items.add(7, "seventh");
-    items.add(8, "eigth");
-    items.add(9, "ninth");
-    items.add(10, "tenth");
-    items.add(11, "eleventh");
-    items.add(12, "twelfth");
+    Map<Integer, String> hashMap = new HashMap<>();
+    IterableMap<Integer, String> iterableMap = new IterableMap<>();
+    hashMap.put(1, "first");
+    hashMap.put(2, "second");
+    hashMap.put(3, "third");
+    hashMap.put(4, "fourth");
+    hashMap.put(5, "fifth");
+    hashMap.put(6, "sixth");
+    hashMap.put(7, "seventh");
+    hashMap.put(8, "eighth");
+    hashMap.put(9, "ninth");
+    hashMap.put(10, "tenth");
+    hashMap.put(11, "eleventh");
+    hashMap.put(12, "twelfth");
 
-    for (KeyValuePair<Integer, String> item : items) {
-      System.out.println(item.value());
+    for (Integer key : hashMap.keySet()) {
+      assert(iterableMap.add(key, hashMap.get(key)));
+    }
+
+    for (KeyValuePair<Integer, String> item : iterableMap) {
+      assert (item.value().equals(hashMap.get(item.key())));
     }
   }
 }

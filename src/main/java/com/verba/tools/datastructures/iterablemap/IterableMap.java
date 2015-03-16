@@ -35,6 +35,7 @@ public class IterableMap<T, U> implements QIterable<KeyValuePair<T, U>> {
   private int size = DEFAULT_SIZE;
   private int threshold = (DEFAULT_SIZE * 3) / 4;
   private int count = 0;
+  private int[] lengths = new int[size];
   private Object[] items = new Object[size];
 
   private int hash(T key) { return Math.abs(key.hashCode()) % size; }
@@ -59,11 +60,15 @@ public class IterableMap<T, U> implements QIterable<KeyValuePair<T, U>> {
 
   public boolean add(T key, U value) {
     if (!containsKey(key)) {
-      if (count++ >= threshold) {
+      int hash = hash(key);
+      int length = lengths[hash];
+      if (length >= threshold) {
         expand();
       }
-      int hash = hash(key);
+
       items[hash] = new Link(key, value, (Link)items[hash]);
+      lengths[hash]++;
+      count++;
       return true;
     } else {
       return false;
@@ -83,15 +88,18 @@ public class IterableMap<T, U> implements QIterable<KeyValuePair<T, U>> {
     int newSize = size * 19;
     int newThreshold = threshold * 19;
     Object[] newTable = new Object[newSize];
+    int[] newLengths = new int[newSize];
 
     for (KeyValuePair<T, U> item : this) {
       int hash = hash(item.key());
       newTable[hash] = new Link(item, (Link)newTable[hash]);
+      newLengths[hash]++;
     }
 
     this.size = newSize;
     this.threshold = newThreshold;
     this.items = newTable;
+    this.lengths = newLengths;
   }
 
   @Override
