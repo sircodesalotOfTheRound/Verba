@@ -1,11 +1,11 @@
-package com.verba.language.build.nodeevents.subscriptions;
+package com.verba.language.graph.events;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
-import com.verba.language.build.configuration.BuildProfile;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscription;
+import com.verba.language.build.configuration.Build;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
 import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
@@ -19,9 +19,9 @@ import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 /**
  * Created by sircodesalot on 14/11/24.
  */
-public class PolymorphicBuildEventHandler extends BuildEventSubscription<PolymorphicDeclarationExpression>
-  implements BuildEvent.NotifySymbolTableBuildEvent,
-  BuildEvent.NotifyCodeGenerationEvent
+public class PolymorphicVerbaExpressionBuildEventHandler extends VerbaExpressionBuildEventSubscription<PolymorphicDeclarationExpression>
+  implements VerbaExpressionBuildEvent.NotifySymbolTableVerbaExpressionBuildEvent,
+  VerbaExpressionBuildEvent.NotifyCodeGenerationEventVerbaExpression
 {
   private SymbolTable symbolTable;
   private Symbol thisEntry;
@@ -31,21 +31,23 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
   private QIterable<Symbol> allMembers;
   private Partition<String, Symbol> symbolTableEntriesByName;
 
-  public PolymorphicBuildEventHandler(PolymorphicDeclarationExpression expression) {
+  public PolymorphicVerbaExpressionBuildEventHandler(PolymorphicDeclarationExpression expression) {
     super(expression);
 
   }
 
   @Override
-  public void beforeSymbolsGenerated(BuildProfile analysis, LitFileRootExpression buildAnalysis) { }
+  public void beforeSymbolsGenerated(Build build, LitFileRootExpression staticSpace) {
+
+  }
 
   @Override
-  public void afterSymbolsGenerated(BuildProfile buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
+  public void afterSymbolsGenerated(Build buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
   }
 
   @Override
-  public void onResolveSymbols(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
+  public void onResolveSymbols(Build profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.thisEntry = symbolTable.findByInstance(this.expression());
     this.immediateMembers = determineImmediateMembers(this.expression());
     this.allMembers = determineAllMembers(this.expression(), new QList<>());
@@ -75,7 +77,7 @@ public class PolymorphicBuildEventHandler extends BuildEventSubscription<Polymor
   }
 
   @Override
-  public void beforeCodeGeneration(BuildProfile buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
+  public void beforeCodeGeneration(Build buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
 
   }
 

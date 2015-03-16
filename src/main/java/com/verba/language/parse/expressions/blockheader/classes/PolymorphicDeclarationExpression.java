@@ -2,9 +2,9 @@ package com.verba.language.parse.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
-import com.verba.language.build.nodeevents.subscriptions.PolymorphicBuildEventHandler;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.events.PolymorphicVerbaExpressionBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
@@ -32,9 +32,9 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   ParameterizedExpression,
   GenericallyParameterizedExpression,
   SymbolTableExpression,
-  BuildEvent.ContainsEventSubscriptionObject
+  VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
 {
-  private final PolymorphicBuildEventHandler eventSubscription = new PolymorphicBuildEventHandler(this);
+  private final PolymorphicVerbaExpressionBuildEventHandler eventSubscription = new PolymorphicVerbaExpressionBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
   private final boolean isClass;
   private BlockDeclarationExpression block;
@@ -187,5 +187,5 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
 
   @Override
-  public BuildEventSubscriptionBase buildEventObject() { return eventSubscription; }
+  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return eventSubscription; }
 }

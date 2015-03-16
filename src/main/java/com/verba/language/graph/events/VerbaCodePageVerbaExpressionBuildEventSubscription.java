@@ -1,10 +1,10 @@
-package com.verba.language.build.nodeevents.subscriptions;
+package com.verba.language.graph.events;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.configuration.BuildProfile;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscription;
+import com.verba.language.build.configuration.Build;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.withns.WithNsExpression;
@@ -12,17 +12,17 @@ import com.verba.language.parse.expressions.withns.WithNsExpression;
 /**
  * Created by sircodesalot on 14/11/23.
  */
-public class VerbaCodePageBuildEventSubscription extends BuildEventSubscription<VerbaCodePage>
-  implements BuildEvent.NotifyParsingBuildEvent
+public class VerbaCodePageVerbaExpressionBuildEventSubscription extends VerbaExpressionBuildEventSubscription<VerbaCodePage>
+  implements VerbaExpressionBuildEvent.NotifyParsingVerbaExpressionBuildEvent
 {
   private QList<String> namespaces = new QList<>();
 
-  public VerbaCodePageBuildEventSubscription(VerbaCodePage expression) {
+  public VerbaCodePageVerbaExpressionBuildEventSubscription(VerbaCodePage expression) {
     super(expression);
   }
 
   @Override
-  public void afterParse(BuildProfile analysis, LitFileRootExpression buildAnalysis) {
+  public void afterParse(Build analysis, LitFileRootExpression buildAnalysis) {
     QIterable<String> namespaceRepresentations = this.expression()
       .expressionsByType(WithNsExpression.class)
       .map(ns -> ns.namespace().representation());

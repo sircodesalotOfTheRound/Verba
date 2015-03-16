@@ -3,9 +3,9 @@ package com.verba.language.parse.expressions;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
-import com.verba.language.build.nodeevents.subscriptions.StaticSpaceBuildEventSubscription;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.events.StaticSpaceVerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
@@ -14,8 +14,8 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 /**
  * Created by sircodesalot on 14-5-14.
  */
-public class LitFileRootExpression extends VerbaExpression implements SymbolTableExpression, BuildEvent.ContainsEventSubscriptionObject {
-  private StaticSpaceBuildEventSubscription buildProfile = new StaticSpaceBuildEventSubscription(this);
+public class LitFileRootExpression extends VerbaExpression implements SymbolTableExpression, VerbaExpressionBuildEvent.ContainsEventSubscriptionObject {
+  private StaticSpaceVerbaExpressionBuildEventSubscription buildProfile = new StaticSpaceVerbaExpressionBuildEventSubscription(this);
   private QList<VerbaExpression> allExpressions = new QList<>();
   private Partition<Class, VerbaExpression> expressionsByType;
   private QList<VerbaCodePage> pages;
@@ -70,7 +70,7 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
   public void accept(Scope symbolTable) { symbolTable.visit(this); }
 
   @Override
-  public BuildEventSubscriptionBase buildEventObject() { return buildProfile; }
+  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 
   @Override
   protected void onChildRemoved(VerbaExpression child) {

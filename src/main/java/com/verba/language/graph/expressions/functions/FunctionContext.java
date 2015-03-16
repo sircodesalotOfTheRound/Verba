@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions;
 
-import com.verba.language.build.configuration.BuildProfile;
+import com.verba.language.build.configuration.Build;
 import com.verba.language.emit.header.StringTable;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.emit.variables.VirtualVariable;
@@ -8,6 +8,7 @@ import com.verba.language.graph.expressions.functions.variables.VariableLifetime
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.LitFileRootExpression;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.function.Consumer;
 
@@ -24,20 +25,24 @@ public class FunctionContext {
   private final StringTable stringTable;
 
   public FunctionContext(FunctionGraphVisitor functionGraphVisitor,
-                         BuildProfile buildProfile,
+                         Build build,
                          LitFileRootExpression litFileRoot,
                          SymbolTable symbolTable,
                          VirtualVariableScopeTree variableScopeTree,
                          VariableLifetimeGraph lifetimeGraph,
                          FunctionOpCodeSet opcodes) {
 
-    this.stringTable = buildProfile.stringTable();
+    this.stringTable = captureStringTable(build);
     this.functionGraphVisitor = functionGraphVisitor;
     this.symbolTable = symbolTable;
     this.litFileRoot = litFileRoot;
     this.variableScopeTree = variableScopeTree;
     this.lifetimeGraph = lifetimeGraph;
     this.opcodes = opcodes;
+  }
+
+  private final StringTable captureStringTable(Build build) {
+    throw new NotImplementedException();
   }
 
   public LitFileRootExpression staticSpaceExpression() { return this.litFileRoot; }

@@ -1,9 +1,9 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
-import com.verba.language.build.nodeevents.subscriptions.FunctionEventSubscription;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.events.FunctionEventSubscriptionVerbaExpression;
 import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.expressions.modifiers.FunctionDeclarationExpressionModifierInfo;
 import com.verba.language.graph.symbols.table.entries.Symbol;
@@ -34,10 +34,10 @@ public class FunctionDeclarationExpression extends VerbaExpression
     SymbolTableExpression,
     NamedAndTypedExpression,
 
-    BuildEvent.ContainsEventSubscriptionObject
+    VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
 {
 
-  private final FunctionEventSubscription buildProfile = new FunctionEventSubscription(this);
+  private final FunctionEventSubscriptionVerbaExpression buildProfile = new FunctionEventSubscriptionVerbaExpression(this);
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
   private final ExpressionModifierInfo modifierInfo;
@@ -151,7 +151,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
   public Symbol resolvedType() { return this.buildProfile.returnType(); }
 
   @Override
-  public BuildEventSubscriptionBase buildEventObject() { return buildProfile; }
+  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 
   public ExpressionModifierInfo modifiers() { return this.modifierInfo; }
 }

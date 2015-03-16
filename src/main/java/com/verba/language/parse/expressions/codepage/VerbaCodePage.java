@@ -3,9 +3,9 @@ package com.verba.language.parse.expressions.codepage;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
-import com.verba.language.build.nodeevents.subscriptions.VerbaCodePageBuildEventSubscription;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.events.VerbaCodePageVerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.tools.ExpressionTreeFlattener;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
@@ -25,9 +25,9 @@ import java.io.InputStream;
  */
 public class VerbaCodePage extends VerbaExpression
   implements SymbolTableExpression, ExpressionSource,
-  BuildEvent.ContainsEventSubscriptionObject
+  VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
 {
-  private VerbaCodePageBuildEventSubscription buildProfile = new VerbaCodePageBuildEventSubscription(this);
+  private VerbaCodePageVerbaExpressionBuildEventSubscription buildProfile = new VerbaCodePageVerbaExpressionBuildEventSubscription(this);
   private QList<VerbaExpression> childExpressions;
   private QIterable<VerbaExpression> allExpressions;
   private Partition<Class, VerbaExpression> expressionsByType;
@@ -125,5 +125,5 @@ public class VerbaCodePage extends VerbaExpression
   }
 
   @Override
-  public BuildEventSubscriptionBase buildEventObject() { return buildProfile; }
+  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 }

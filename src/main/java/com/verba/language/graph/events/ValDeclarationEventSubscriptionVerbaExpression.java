@@ -1,8 +1,8 @@
-package com.verba.language.build.nodeevents.subscriptions;
+package com.verba.language.graph.events;
 
-import com.verba.language.build.configuration.BuildProfile;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscription;
+import com.verba.language.build.configuration.Build;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.ValDeclarationTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -12,15 +12,15 @@ import com.verba.language.parse.expressions.statements.declaration.ValDeclaratio
 /**
  * Created by sircodesalot on 14/12/7.
  */
-public class ValDeclarationEventSubscription extends BuildEventSubscription<ValDeclarationStatement>
-  implements BuildEvent.NotifySymbolTableBuildEvent
+public class ValDeclarationEventSubscriptionVerbaExpression extends VerbaExpressionBuildEventSubscription<ValDeclarationStatement>
+  implements VerbaExpressionBuildEvent.NotifySymbolTableVerbaExpressionBuildEvent
 {
   private ValDeclarationTypeResolver typeResolver;
 
-  public ValDeclarationEventSubscription(ValDeclarationStatement expression) {
+  public ValDeclarationEventSubscriptionVerbaExpression(ValDeclarationStatement expression) {
     super(expression);
   }
-
+/*
   @Override
   public void beforeSymbolsGenerated(BuildProfile profile, LitFileRootExpression staticSpace) {
 
@@ -35,6 +35,21 @@ public class ValDeclarationEventSubscription extends BuildEventSubscription<ValD
   public void onResolveSymbols(BuildProfile profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
 
   }
-
+*/
   public Symbol resolvedType() { return typeResolver.resolvedType(); }
+
+  @Override
+  public void beforeSymbolsGenerated(Build build, LitFileRootExpression staticSpace) {
+
+  }
+
+  @Override
+  public void afterSymbolsGenerated(Build build, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
+
+  }
+
+  @Override
+  public void onResolveSymbols(Build build, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
+
+  }
 }

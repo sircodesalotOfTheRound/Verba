@@ -1,9 +1,9 @@
 package com.verba.language.parse.expressions.blockheader.varname;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.nodeevents.BuildEvent;
-import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
-import com.verba.language.build.nodeevents.subscriptions.NamedValueExpressionBuildEventHandler;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.events.NamedValueExpressionVerbaExpressionBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -19,9 +19,9 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 public class NamedValueExpression extends VerbaExpression
   implements RValueExpression, TupleItemExpression, MarkupRvalueExpression,
     NamedAndTypedExpression, MathOperandExpression,
-    BuildEvent.ContainsEventSubscriptionObject
+    VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
 {
-  private final NamedValueExpressionBuildEventHandler buildProfile = new NamedValueExpressionBuildEventHandler(this);
+  private final NamedValueExpressionVerbaExpressionBuildEventHandler buildProfile = new NamedValueExpressionVerbaExpressionBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
   private TypeConstraintExpression type;
 
@@ -85,5 +85,5 @@ public class NamedValueExpression extends VerbaExpression
   }
 
   @Override
-  public BuildEventSubscriptionBase buildEventObject() { return buildProfile; }
+  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 }

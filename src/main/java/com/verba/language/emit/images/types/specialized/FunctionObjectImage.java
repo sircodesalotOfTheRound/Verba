@@ -1,13 +1,12 @@
 package com.verba.language.emit.images.types.specialized;
 
-import com.verba.language.build.configuration.BuildProfile;
+import com.verba.language.build.configuration.Build;
 import com.verba.language.emit.header.StringTable;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
-import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
@@ -25,15 +24,19 @@ public class FunctionObjectImage implements ObjectImage {
   private boolean isFrozen = false;
 
   public FunctionObjectImage(FunctionDeclarationExpression declaration,
-                             BuildProfile buildProfile,
+                             Build build,
                              LitFileRootExpression staticSpace,
                              SymbolTable symbolTable,
                              StringTable stringTable) {
 
-    this.functionGraphVisitor = new FunctionGraphVisitor(buildProfile, declaration, symbolTable, staticSpace);
-    this.stringTable = buildProfile.stringTable();
+    this.functionGraphVisitor = new FunctionGraphVisitor(build, declaration, symbolTable, staticSpace);
+    this.stringTable = captureStringTable(build);
     this.imageName = stringTable.addString(declaration.name());
     this.objectImage = new InMemoryObjectImage(declaration.name(), ImageType.FUNCTION);
+  }
+
+  private StringTable captureStringTable(Build build) {
+    throw new NotImplementedException();
   }
 
   private void generateOpCodeList() {
