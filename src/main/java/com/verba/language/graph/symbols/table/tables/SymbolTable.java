@@ -25,7 +25,6 @@ public class SymbolTable {
   private final SystemTypeSymbols systemTypeSymbols;
   private final QList<Symbol> entries = new QList<>();
   private final Map<VerbaExpression, Symbol> entriesByInstance = new HashMap<>();
-  private final Map<String, QList<Symbol>> entriesByFriendlyName = new HashMap<>();
   private final Map<String, QList<Symbol>> entriesByFqn = new HashMap<>();
 
   public SymbolTable(SymbolTableExpression block) {
@@ -67,22 +66,7 @@ public class SymbolTable {
     // Add to all entry lists
     this.entries.add(entry);
     this.entriesByInstance.put(instance, entry);
-    this.getEntryListByFriendlyName(friendlyName).add(entry);
     this.getEntryListByFqn(fqn).add(entry);
-  }
-
-  private QList<Symbol> getEntryListByFriendlyName(String friendlyName) {
-    // If there is already a list associated with this name,
-    // then just return that.
-    if (this.entriesByFriendlyName.containsKey(friendlyName)) {
-      return this.entriesByFriendlyName.get(friendlyName);
-    }
-
-    // Else create a new list
-    QList<Symbol> entryList = new QList<>();
-    this.entriesByFriendlyName.put(friendlyName, entryList);
-
-    return entryList;
   }
 
   private QList<Symbol> getEntryListByFqn(String fqn) {
@@ -101,10 +85,6 @@ public class SymbolTable {
 
   public QIterable<Symbol> entries() {
     return this.entries;
-  }
-
-  public QIterable<Symbol> findAllMatchingFriendlyName(String friendlyName) {
-    return this.entriesByFriendlyName.get(friendlyName);
   }
 
   public QIterable<Symbol> findAllMatchingFqn(String fqn) {
