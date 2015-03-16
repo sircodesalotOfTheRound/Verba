@@ -66,6 +66,10 @@ public abstract class VerbatimOpCodeBase {
     return new LdStrOpCode(variable, value);
   }
 
+  public static VerbatimOpCodeBase loadUnit(VirtualVariable variable) {
+    return new LdUnitOpCode(variable);
+  }
+
   public static VerbatimOpCodeBase stageArg(VirtualVariable variable) {
     return new StageArgOpCode(variable);
   }
