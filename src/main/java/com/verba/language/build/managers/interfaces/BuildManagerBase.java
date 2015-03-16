@@ -1,4 +1,4 @@
-package com.verba.language.build.types.interfaces;
+package com.verba.language.build.managers.interfaces;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
@@ -16,13 +16,13 @@ public abstract class BuildManagerBase implements BuildArtifactContainer {
   }
 
   @Override
-  public <T extends BuildArtifact> boolean containsBuildInfoOfType(Class<T> type) {
-    return build.containsBuildInfoOfType(type);
+  public <T extends BuildArtifact> boolean containsArtifactOfType(Class<T> type) {
+    return build.containsArtifactOfType(type);
   }
 
   @Override
-  public QIterable<Class> buildInfoKeys() {
-    return build.buildInfoKeys();
+  public QIterable<Class> artifactTypes() {
+    return build.artifactTypes();
   }
 
   @Override
@@ -31,7 +31,7 @@ public abstract class BuildManagerBase implements BuildArtifactContainer {
   }
 
   @Override
-  public <T extends BuildArtifact> T getBuildInfo(Class<T> type) {
-    return build.getBuildInfo(type);
+  public <T extends BuildArtifact> T getArtifactOfType(Class<T> type) {
+    return build.getArtifactOfType(type);
   }
 }

@@ -2,9 +2,9 @@ package com.verba.build;
 
 import com.javalinq.implementations.QSet;
 import com.verba.language.build.artifacts.SourcesBuildArtifact;
+import com.verba.language.build.artifacts.StringTableBuildArtifact;
 import com.verba.language.build.configuration.BuildSpecification;
-import com.verba.language.build.types.LitFileBuildManager;
-import com.verba.language.build.types.interfaces.BuildManagerBase;
+import com.verba.language.build.managers.LitFileBuildManager;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,10 +19,10 @@ public class TestLitFileBuild {
 
   @Test
   public void testGlobbing() {
-    assert(build.containsBuildInfoOfType(SourcesBuildArtifact.class));
+    assert(build.containsArtifactOfType(SourcesBuildArtifact.class));
 
     QSet<String> filesAsSet = build
-      .getBuildInfo(SourcesBuildArtifact.class)
+      .getArtifactOfType(SourcesBuildArtifact.class)
       .files()
       .map(File::toString)
       .toSet();
@@ -34,6 +34,11 @@ public class TestLitFileBuild {
 
     assert(filesAsSet.contains("verba_sources/glob_test/subfolder/File4.v"));
     assert(filesAsSet.contains("verba_sources/glob_test/subfolder/File5.v"));
+  }
+
+  @Test
+  public void testContainsStringTable() {
+    assert(build.containsArtifactOfType(StringTableBuildArtifact.class));
   }
 
   @Test

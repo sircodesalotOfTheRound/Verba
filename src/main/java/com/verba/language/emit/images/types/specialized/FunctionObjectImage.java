@@ -1,7 +1,7 @@
 package com.verba.language.emit.images.types.specialized;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.emit.header.StringTable;
+import com.verba.language.build.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
@@ -20,14 +20,14 @@ public class FunctionObjectImage implements ObjectImage {
   private final FunctionGraphVisitor functionGraphVisitor;
   private final AppendableObjectImage objectImage;
   private final StringTableStringEntry imageName;
-  private final StringTable stringTable;
+  private final StringTableBuildArtifact stringTable;
   private boolean isFrozen = false;
 
   public FunctionObjectImage(FunctionDeclarationExpression declaration,
                              Build build,
                              LitFileRootExpression staticSpace,
                              SymbolTable symbolTable,
-                             StringTable stringTable) {
+                             StringTableBuildArtifact stringTable) {
 
     this.functionGraphVisitor = new FunctionGraphVisitor(build, declaration, symbolTable, staticSpace);
     this.stringTable = captureStringTable(build);
@@ -35,7 +35,7 @@ public class FunctionObjectImage implements ObjectImage {
     this.objectImage = new InMemoryObjectImage(declaration.name(), ImageType.FUNCTION);
   }
 
-  private StringTable captureStringTable(Build build) {
+  private StringTableBuildArtifact captureStringTable(Build build) {
     throw new NotImplementedException();
   }
 

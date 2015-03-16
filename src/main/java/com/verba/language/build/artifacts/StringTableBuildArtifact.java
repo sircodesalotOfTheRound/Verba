@@ -1,7 +1,10 @@
-package com.verba.language.emit.header;
+package com.verba.language.build.artifacts;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.build.artifacts.containers.BuildArtifact;
+import com.verba.language.emit.header.StringTableFqnEntry;
+import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 
 import java.util.HashMap;
@@ -10,7 +13,7 @@ import java.util.Map;
 /**
  * Created by sircodesalot on 14/11/22.
  */
-public class StringTable {
+public class StringTableBuildArtifact implements BuildArtifact {
   private int index;
   private final QList<StringTableStringEntry> entriesByIndex = new QList<>();
   private final Map<String, StringTableStringEntry> stringTable = new HashMap<>();

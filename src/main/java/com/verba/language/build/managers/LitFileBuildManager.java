@@ -1,8 +1,9 @@
-package com.verba.language.build.types;
+package com.verba.language.build.managers;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.build.types.interfaces.BuildManagerBase;
+import com.verba.language.build.managers.interfaces.BuildManagerBase;
 import com.verba.language.build.events.BuildEventPublisher;
+import com.verba.language.build.targets.AddStringTableBuildTarget;
 import com.verba.language.build.targets.CollectSourcesBuildTarget;
 
 /**
@@ -15,6 +16,7 @@ public class LitFileBuildManager extends BuildManagerBase {
     super(build);
 
     this.publisher = new BuildEventPublisher(build)
-      .addTarget(new CollectSourcesBuildTarget());
+      .addTarget(new CollectSourcesBuildTarget())
+      .addTarget(new AddStringTableBuildTarget());
   }
 }

@@ -1,14 +1,13 @@
 package com.verba.language.graph.expressions.functions;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.emit.header.StringTable;
+import com.verba.language.build.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.LitFileRootExpression;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.function.Consumer;
 
@@ -22,7 +21,7 @@ public class FunctionContext {
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
   private final SymbolTable symbolTable;
-  private final StringTable stringTable;
+  private final StringTableBuildArtifact stringTable;
 
   public FunctionContext(FunctionGraphVisitor functionGraphVisitor,
                          Build build,
@@ -32,7 +31,7 @@ public class FunctionContext {
                          VariableLifetimeGraph lifetimeGraph,
                          FunctionOpCodeSet opcodes) {
 
-    this.stringTable = captureStringTable(build);
+    this.stringTable = build.getArtifactOfType(StringTableBuildArtifact.class);
     this.functionGraphVisitor = functionGraphVisitor;
     this.symbolTable = symbolTable;
     this.litFileRoot = litFileRoot;
@@ -41,16 +40,12 @@ public class FunctionContext {
     this.opcodes = opcodes;
   }
 
-  private final StringTable captureStringTable(Build build) {
-    throw new NotImplementedException();
-  }
-
   public LitFileRootExpression staticSpaceExpression() { return this.litFileRoot; }
   public VirtualVariableScopeTree variableScopeTree() { return this.variableScopeTree; }
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }
   public SymbolTable symbolTable() { return this.symbolTable; }
-  public StringTable stringTable() { return this.stringTable; }
+  public StringTableBuildArtifact stringTable() { return this.stringTable; }
 
   public void visit(ExpressionTreeNode node) { node.accept(functionGraphVisitor); }
   public VirtualVariable visitWithNewVarScope(ExpressionTreeNode node) {

@@ -2,8 +2,7 @@ package com.verba.language.build.configuration;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.types.interfaces.BuildManagerBase;
-import com.verba.language.build.types.LitFileBuildManager;
+import com.verba.language.build.managers.LitFileBuildManager;
 import com.verba.language.build.source.CodeUnit;
 
 /**

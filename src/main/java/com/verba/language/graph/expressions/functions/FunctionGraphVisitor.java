@@ -2,7 +2,7 @@ package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.emit.header.StringTable;
+import com.verba.language.build.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
@@ -42,7 +42,7 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
   private final VariableLifetimeGraph lifetimeGraph;
   private final LitFileRootExpression litFileRoot;
   private final SymbolTable symbolTable;
-  private final StringTable stringTable;
+  private final StringTableBuildArtifact stringTable;
 
   private final FunctionContext context;
   private final FunctionOpCodeSet opcodes;
@@ -56,7 +56,7 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
     this.lifetimeGraph = new VariableLifetimeGraph(function);
     this.litFileRoot = litFileRoot;
     this.symbolTable = symbolTable;
-    this.stringTable = captureStringTable(build);
+    this.stringTable = build.getArtifactOfType(StringTableBuildArtifact.class);
     this.opcodes = new FunctionOpCodeSet();
     this.context = new FunctionContext(this, build, litFileRoot, symbolTable, variableSet, lifetimeGraph, opcodes);
     this.nodeProcessors = new NodeProcessorFactory(context);
@@ -68,10 +68,6 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
 
     DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
     renderer.display();
-  }
-
-  public StringTable captureStringTable(Build build) {
-    throw new NotImplementedException();
   }
 
   public QIterable<VerbatimOpCodeBase> opcodes() { return this.opcodes; }

@@ -12,15 +12,15 @@ import java.util.Map;
 public class BuildArtifactSet implements BuildArtifactContainer {
   private final Map<Class, Object> buildInfo = new HashMap<>();
 
-  public <T extends BuildArtifact> boolean containsBuildInfoOfType(Class<T> type) {
+  public <T extends BuildArtifact> boolean containsArtifactOfType(Class<T> type) {
     return buildInfo.containsKey(type);
   }
 
-  public QIterable<Class> buildInfoKeys() { return new QSet<>(this.buildInfo.keySet()); }
+  public QIterable<Class> artifactTypes() { return new QSet<>(this.buildInfo.keySet()); }
 
   public void addArtifact(BuildArtifact value) {
     buildInfo.put(value.getClass(), value);
   }
 
-  public <T extends BuildArtifact> T getBuildInfo(Class<T> type) { return (T)this.buildInfo.get(type); }
+  public <T extends BuildArtifact> T getArtifactOfType(Class<T> type) { return (T)this.buildInfo.get(type); }
 }

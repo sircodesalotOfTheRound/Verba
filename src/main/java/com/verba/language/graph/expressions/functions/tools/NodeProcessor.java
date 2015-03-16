@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions.tools;
 
-import com.verba.language.emit.header.StringTable;
+import com.verba.language.build.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.graph.expressions.functions.FunctionContext;
@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.categories.TypedExpression;
 public abstract class NodeProcessor<T> {
   protected final FunctionContext context;
   protected final VirtualVariableScopeTree variableScope;
-  protected final StringTable stringTable;
+  protected final StringTableBuildArtifact stringTable;
   protected final SymbolTable symbolTable;
   protected final FunctionOpCodeSet opcodes;
   protected final VariableLifetimeGraph lifetimeGraph;

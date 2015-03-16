@@ -22,13 +22,13 @@ public class Build implements BuildArtifactContainer {
   }
 
   @Override
-  public <T extends BuildArtifact> boolean containsBuildInfoOfType(Class<T> type) {
-    return artifacts.containsBuildInfoOfType(type);
+  public <T extends BuildArtifact> boolean containsArtifactOfType(Class<T> type) {
+    return artifacts.containsArtifactOfType(type);
   }
 
   @Override
-  public QIterable<Class> buildInfoKeys() {
-    return artifacts.buildInfoKeys();
+  public QIterable<Class> artifactTypes() {
+    return artifacts.artifactTypes();
   }
 
   @Override
@@ -40,8 +40,8 @@ public class Build implements BuildArtifactContainer {
   }
 
   @Override
-  public <T extends BuildArtifact> T getBuildInfo(Class<T> type) {
-    return artifacts.getBuildInfo(type);
+  public <T extends BuildArtifact> T getArtifactOfType(Class<T> type) {
+    return artifacts.getArtifactOfType(type);
   }
 
   public BuildSpecification specification() { return this.specification; }
