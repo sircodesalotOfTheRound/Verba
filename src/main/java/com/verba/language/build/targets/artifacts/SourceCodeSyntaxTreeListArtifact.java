@@ -7,10 +7,10 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 /**
  * Created by sircodesalot on 15/3/16.
  */
-public class SourceCodeSyntaxTreeListBuildArtifact implements BuildArtifact {
+public class SourceCodeSyntaxTreeListArtifact implements BuildArtifact {
   private final QIterable<VerbaCodePage> syntaxTrees;
 
-  public SourceCodeSyntaxTreeListBuildArtifact(QIterable<VerbaCodePage> syntaxTreeList) {
+  public SourceCodeSyntaxTreeListArtifact(QIterable<VerbaCodePage> syntaxTreeList) {
     this.syntaxTrees = syntaxTreeList;
   }
 

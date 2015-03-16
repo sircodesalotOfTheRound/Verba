@@ -1,7 +1,7 @@
 package com.verba.language.graph.expressions.functions;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
@@ -21,7 +21,7 @@ public class FunctionContext {
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
   private final SymbolTable symbolTable;
-  private final StringTableBuildArtifact stringTable;
+  private final StringTableArtifact stringTable;
 
   public FunctionContext(FunctionGraphVisitor functionGraphVisitor,
                          Build build,
@@ -31,7 +31,7 @@ public class FunctionContext {
                          VariableLifetimeGraph lifetimeGraph,
                          FunctionOpCodeSet opcodes) {
 
-    this.stringTable = build.getArtifactOfType(StringTableBuildArtifact.class);
+    this.stringTable = build.getArtifactOfType(StringTableArtifact.class);
     this.functionGraphVisitor = functionGraphVisitor;
     this.symbolTable = symbolTable;
     this.litFileRoot = litFileRoot;
@@ -45,7 +45,7 @@ public class FunctionContext {
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }
   public SymbolTable symbolTable() { return this.symbolTable; }
-  public StringTableBuildArtifact stringTable() { return this.stringTable; }
+  public StringTableArtifact stringTable() { return this.stringTable; }
 
   public void visit(ExpressionTreeNode node) { node.accept(functionGraphVisitor); }
   public VirtualVariable visitWithNewVarScope(ExpressionTreeNode node) {

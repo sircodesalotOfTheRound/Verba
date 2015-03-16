@@ -1,6 +1,6 @@
 package com.verba.language.build.targets;
 
-import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.interfaces.BuildTarget;
@@ -11,8 +11,8 @@ import com.verba.language.build.targets.interfaces.BuildTarget;
 public class AddStringTableBuildTarget extends BuildTarget {
   @Override
   public void onBuildUpdated(Build build, BuildArtifact artifact) {
-    if (!build.containsArtifactOfType(StringTableBuildArtifact.class)) {
-      build.addArtifact(new StringTableBuildArtifact());
+    if (!build.containsArtifactOfType(StringTableArtifact.class)) {
+      build.addArtifact(new StringTableArtifact());
     }
   }
 }

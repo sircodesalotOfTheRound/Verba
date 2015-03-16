@@ -2,7 +2,7 @@ package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
@@ -42,7 +42,7 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
   private final VariableLifetimeGraph lifetimeGraph;
   private final LitFileRootExpression litFileRoot;
   private final SymbolTable symbolTable;
-  private final StringTableBuildArtifact stringTable;
+  private final StringTableArtifact stringTable;
 
   private final FunctionContext context;
   private final FunctionOpCodeSet opcodes;
@@ -56,7 +56,7 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
     this.lifetimeGraph = new VariableLifetimeGraph(function);
     this.litFileRoot = litFileRoot;
     this.symbolTable = symbolTable;
-    this.stringTable = build.getArtifactOfType(StringTableBuildArtifact.class);
+    this.stringTable = build.getArtifactOfType(StringTableArtifact.class);
     this.opcodes = new FunctionOpCodeSet();
     this.context = new FunctionContext(this, build, litFileRoot, symbolTable, variableSet, lifetimeGraph, opcodes);
     this.nodeProcessors = new NodeProcessorFactory(context);

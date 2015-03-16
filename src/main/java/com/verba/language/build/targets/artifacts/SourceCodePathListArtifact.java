@@ -8,9 +8,9 @@ import java.io.File;
 /**
  * Created by sircodesalot on 15/3/4.
  */
-public class SourceCodePathListBuildArtifact implements BuildArtifact {
+public class SourceCodePathListArtifact implements BuildArtifact {
   private final QIterable<File> files;
-  public SourceCodePathListBuildArtifact(QIterable<File> files) {
+  public SourceCodePathListArtifact(QIterable<File> files) {
     this.files = files;
   }
 

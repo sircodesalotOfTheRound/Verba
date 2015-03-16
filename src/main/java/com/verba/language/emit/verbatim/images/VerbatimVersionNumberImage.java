@@ -1,6 +1,6 @@
 package com.verba.language.emit.verbatim.images;
 
-import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
@@ -12,11 +12,11 @@ import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
  */
 public class VerbatimVersionNumberImage extends ObjectImageBase {
 
-  public VerbatimVersionNumberImage(StringTableStringEntry version, StringTableBuildArtifact stringTable) {
+  public VerbatimVersionNumberImage(StringTableStringEntry version, StringTableArtifact stringTable) {
     super(produceImage(version, stringTable));
   }
 
-  private static ObjectImage produceImage(StringTableStringEntry version, StringTableBuildArtifact stringTable) {
+  private static ObjectImage produceImage(StringTableStringEntry version, StringTableArtifact stringTable) {
     return new InMemoryObjectImage("Verbatim Image Version", ImageType.VERSION)
       .writeString("Image Version", version)
       .asObjectImage();

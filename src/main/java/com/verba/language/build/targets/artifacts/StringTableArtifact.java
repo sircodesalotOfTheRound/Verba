@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by sircodesalot on 14/11/22.
  */
-public class StringTableBuildArtifact implements BuildArtifact {
+public class StringTableArtifact implements BuildArtifact {
   private int index;
   private final QList<StringTableStringEntry> entriesByIndex = new QList<>();
   private final Map<String, StringTableStringEntry> stringTable = new HashMap<>();

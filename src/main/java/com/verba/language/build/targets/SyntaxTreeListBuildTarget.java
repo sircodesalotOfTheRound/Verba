@@ -2,8 +2,8 @@ package com.verba.language.build.targets;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.build.targets.artifacts.SourceCodePathListBuildArtifact;
-import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListBuildArtifact;
+import com.verba.language.build.targets.artifacts.SourceCodePathListArtifact;
+import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListArtifact;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.targets.interfaces.BuildTarget;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
@@ -13,22 +13,22 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
  */
 public class SyntaxTreeListBuildTarget extends BuildTarget {
   public SyntaxTreeListBuildTarget() {
-    super(SourceCodePathListBuildArtifact.class);
+    super(SourceCodePathListArtifact.class);
   }
 
   @Override
   public void onBuildUpdated(Build build, BuildArtifact artifact) {
     if (this.allDependenciesAvailableOrUpdated(build, artifact)) {
-      SourceCodeSyntaxTreeListBuildArtifact syntaxTrees =
-        this.parseSources(build.getArtifactOfType(SourceCodePathListBuildArtifact.class));
+      SourceCodeSyntaxTreeListArtifact syntaxTrees =
+        this.parseSources(build.getArtifactOfType(SourceCodePathListArtifact.class));
       build.addArtifact(syntaxTrees);
     }
   }
 
-  private SourceCodeSyntaxTreeListBuildArtifact parseSources(SourceCodePathListBuildArtifact artifact) {
+  private SourceCodeSyntaxTreeListArtifact parseSources(SourceCodePathListArtifact artifact) {
     QIterable<VerbaCodePage> syntaxTrees = artifact.files()
       .map(file -> VerbaCodePage.fromFile(null, file.getAbsolutePath()));
 
-    return new SourceCodeSyntaxTreeListBuildArtifact(syntaxTrees);
+    return new SourceCodeSyntaxTreeListArtifact(syntaxTrees);
   }
 }

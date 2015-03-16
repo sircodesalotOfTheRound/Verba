@@ -1,9 +1,9 @@
 package com.verba.build;
 
 import com.javalinq.implementations.QSet;
-import com.verba.language.build.targets.artifacts.SourceCodePathListBuildArtifact;
-import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListBuildArtifact;
-import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.SourceCodePathListArtifact;
+import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListArtifact;
+import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.managers.LitFileBuildManager;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
@@ -21,10 +21,10 @@ public class TestLitFileBuild {
 
   @Test
   public void testGlobbing() {
-    assert(build.containsArtifactOfType(SourceCodePathListBuildArtifact.class));
+    assert(build.containsArtifactOfType(SourceCodePathListArtifact.class));
 
     QSet<String> filesAsSet = build
-      .getArtifactOfType(SourceCodePathListBuildArtifact.class)
+      .getArtifactOfType(SourceCodePathListArtifact.class)
       .files()
       .map(File::toString)
       .toSet();
@@ -40,15 +40,15 @@ public class TestLitFileBuild {
 
   @Test
   public void testContainsStringTable() {
-    assert(build.containsArtifactOfType(StringTableBuildArtifact.class));
+    assert(build.containsArtifactOfType(StringTableArtifact.class));
   }
 
   @Test
   public void testSyntaxTreeBuilding() {
     final QSet<String> allowedFunctionNames = new QSet<>("file_one", "file_two", "file_three", "file_four", "file_five");
 
-    assert (build.containsArtifactOfType(SourceCodeSyntaxTreeListBuildArtifact.class));
-    SourceCodeSyntaxTreeListBuildArtifact syntaxTrees = build.getArtifactOfType(SourceCodeSyntaxTreeListBuildArtifact.class);
+    assert (build.containsArtifactOfType(SourceCodeSyntaxTreeListArtifact.class));
+    SourceCodeSyntaxTreeListArtifact syntaxTrees = build.getArtifactOfType(SourceCodeSyntaxTreeListArtifact.class);
 
     // Make sure that all of the functions are represented.
     assert (syntaxTrees.syntaxTrees().count() == 5);
