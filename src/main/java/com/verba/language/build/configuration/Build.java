@@ -1,49 +1,52 @@
 package com.verba.language.build.configuration;
 
 
+import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.coordination.BuildProcess;
-import com.verba.language.build.info.BuildInfo;
-import com.verba.language.build.info.BuildInfoContainer;
-import com.verba.language.build.info.BuildInfoItem;
-import com.verba.language.build.processes.BuildExportableAssemblyProcess;
+import com.verba.language.build.artifacts.containers.BuildArtifactSet;
+import com.verba.language.build.artifacts.containers.BuildArtifactContainer;
+import com.verba.language.build.artifacts.containers.BuildArtifact;
+
+import java.util.function.Consumer;
 
 /**
- * Created by sircodesalot on 15/3/4.
+ * The Build class holds all of the build artifacts.
  */
-public class Build implements BuildInfoContainer {
-  private final BuildConfiguration configuration;
-  private final BuildInfo buildInfo = new BuildInfo();
+public class Build implements BuildArtifactContainer {
+  private final BuildSpecification specification;
+  private final BuildArtifactSet artifacts = new BuildArtifactSet();
+  private final QList<Consumer<BuildArtifact>> callbacks = new QList<>();
 
-  public Build(BuildSpecification profile) { this(profile.configuration()); }
-  public Build(BuildConfiguration configuration) {
-    this.configuration = configuration;
-    this.runBuildProcess(new BuildExportableAssemblyProcess(this));
+  public Build(BuildSpecification specification) {
+    this.specification = specification;
   }
-
-  private void runBuildProcess(BuildProcess process) {
-    process.process();
-  }
-
-  public BuildConfiguration configuration() { return this.configuration; }
 
   @Override
-  public <T extends BuildInfoItem> boolean containsBuildInfoOfType(Class<T> type) {
-    return buildInfo.containsBuildInfoOfType(type);
+  public <T extends BuildArtifact> boolean containsBuildInfoOfType(Class<T> type) {
+    return artifacts.containsBuildInfoOfType(type);
   }
 
   @Override
   public QIterable<Class> buildInfoKeys() {
-    return buildInfo.buildInfoKeys();
+    return artifacts.buildInfoKeys();
   }
 
   @Override
-  public void addBuildInfo(BuildInfoItem value) {
-    buildInfo.addBuildInfo(value);
+  public void addArtifact(BuildArtifact target) {
+    artifacts.addArtifact(target);
+    for (Consumer<BuildArtifact> callback : callbacks) {
+      callback.accept(target);
+    }
   }
 
   @Override
-  public <T extends BuildInfoItem> T getBuildInfo(Class<T> type) {
-    return buildInfo.getBuildInfo(type);
+  public <T extends BuildArtifact> T getBuildInfo(Class<T> type) {
+    return artifacts.getBuildInfo(type);
+  }
+
+  public BuildSpecification specification() { return this.specification; }
+
+  public void onTargetAdded(Consumer<BuildArtifact> callback) {
+    if (callback != null) callbacks.add(callback);
   }
 }

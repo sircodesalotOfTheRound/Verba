@@ -1,9 +1,9 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.BuildEventSubscriptionBase;
-import com.verba.language.build.event.subscriptions.FunctionEventSubscription;
+import com.verba.language.build.nodeevents.BuildEvent;
+import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
+import com.verba.language.build.nodeevents.subscriptions.FunctionEventSubscription;
 import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.expressions.modifiers.FunctionDeclarationExpressionModifierInfo;
 import com.verba.language.graph.symbols.table.entries.Symbol;

@@ -1,11 +1,9 @@
 package com.verba.build;
 
 import com.javalinq.implementations.QSet;
-import com.verba.language.build.configuration.Build;
+import com.verba.language.build.artifacts.SourcesBuildArtifact;
 import com.verba.language.build.configuration.BuildSpecification;
-import com.verba.language.build.coordination.BuildManager;
-import com.verba.language.build.infoitems.SourcesBuildItem;
-import com.verba.language.build.steps.CollectSourcesBuildStep;
+import com.verba.language.build.types.interfaces.BuildManagerBase;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,12 +17,12 @@ public class TestGlobbing {
     BuildSpecification specification = new BuildSpecification()
       .addSourceFolder("verba_sources/glob_test");
 
-    BuildManager build = specification.generateBuild();
+    BuildManagerBase build = specification.createLitFileBuild();
 
-    assert(build.containsBuildInfoOfType(SourcesBuildItem.class));
+    assert(build.containsBuildInfoOfType(SourcesBuildArtifact.class));
 
     QSet<String> filesAsSet = build
-      .getBuildInfo(SourcesBuildItem.class)
+      .getBuildInfo(SourcesBuildArtifact.class)
       .files()
       .map(File::toString)
       .toSet();

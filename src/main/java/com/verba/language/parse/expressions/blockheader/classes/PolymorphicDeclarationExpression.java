@@ -2,9 +2,9 @@ package com.verba.language.parse.expressions.blockheader.classes;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.BuildEventSubscriptionBase;
-import com.verba.language.build.event.subscriptions.PolymorphicBuildEventHandler;
+import com.verba.language.build.nodeevents.BuildEvent;
+import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
+import com.verba.language.build.nodeevents.subscriptions.PolymorphicBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;

@@ -1,10 +1,10 @@
-package com.verba.language.build.event.subscriptions;
+package com.verba.language.build.nodeevents.subscriptions;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.BuildProfile;
-import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.BuildEventSubscription;
+import com.verba.language.build.nodeevents.BuildEvent;
+import com.verba.language.build.nodeevents.BuildEventSubscription;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 import com.verba.language.parse.expressions.withns.WithNsExpression;

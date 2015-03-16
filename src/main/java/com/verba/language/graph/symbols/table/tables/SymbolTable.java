@@ -2,10 +2,8 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.event.subscriptions.ValDeclarationEventSubscription;
 import com.verba.language.graph.expressions.functions.SystemTypeSymbols;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
-import com.verba.language.graph.symbols.meta.interfaces.SymbolTableMetadata;
 import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.VerbaExpression;

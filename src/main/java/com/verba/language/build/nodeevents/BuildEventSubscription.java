@@ -1,4 +1,4 @@
-package com.verba.language.build.event;
+package com.verba.language.build.nodeevents;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.parse.violations.ValidationError;
@@ -10,6 +10,7 @@ import com.verba.language.parse.expressions.VerbaExpression;
 /**
  * Created by sircodesalot on 14/11/22.
  */
+@Deprecated
 public abstract class BuildEventSubscription<T> implements BuildEventSubscriptionBase {
   private final ValidationViolationList violations = new ValidationViolationList();
   private final T expression;

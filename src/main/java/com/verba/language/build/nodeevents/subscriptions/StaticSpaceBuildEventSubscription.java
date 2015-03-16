@@ -1,6 +1,6 @@
-package com.verba.language.build.event.subscriptions;
+package com.verba.language.build.nodeevents.subscriptions;
 
-import com.verba.language.build.event.BuildEventSubscription;
+import com.verba.language.build.nodeevents.BuildEventSubscription;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 
 /**

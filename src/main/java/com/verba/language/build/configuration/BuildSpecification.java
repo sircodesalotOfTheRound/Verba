@@ -2,7 +2,8 @@ package com.verba.language.build.configuration;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.coordination.BuildManager;
+import com.verba.language.build.types.interfaces.BuildManagerBase;
+import com.verba.language.build.types.LitFileBuildManager;
 import com.verba.language.build.source.CodeUnit;
 
 /**
@@ -18,7 +19,7 @@ public class BuildSpecification {
   private QList<CodeUnit> codeUnits = new QList<>();
 
 
-  public BuildSpecification() { this("defualt-build"); }
+  public BuildSpecification() { this("default-build"); }
   public BuildSpecification(String buildName) {
     this.buildName = buildName;
   }
@@ -37,7 +38,7 @@ public class BuildSpecification {
     return this;
   }
 
-  public boolean isDebugBuild() { return this.shouldEmitCode; }
+  public boolean isDebugBuild() { return this.isDebugBuild; }
   public BuildSpecification isDebugBuild(boolean emitCode) {
     this.shouldEmitCode = emitCode;
     return this;
@@ -59,12 +60,8 @@ public class BuildSpecification {
     return this.addCodeUnit(CodeUnit.fromFile(path));
   }
 
-  public BuildConfiguration configuration() {
-    return new BuildConfiguration(this);
-  }
-
-  public BuildManager generateBuild() {
+  public BuildManagerBase createLitFileBuild() {
     Build build = new Build(this);
-    return new BuildManager(build);
+    return new LitFileBuildManager(build);
   }
 }

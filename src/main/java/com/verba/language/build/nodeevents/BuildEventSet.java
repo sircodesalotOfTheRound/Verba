@@ -1,4 +1,4 @@
-package com.verba.language.build.event;
+package com.verba.language.build.nodeevents;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
@@ -12,6 +12,7 @@ import com.verba.language.parse.expressions.VerbaExpression;
 /**
  * Created by sircodesalot on 14/12/10.
  */
+@Deprecated
 public class BuildEventSet {
   private final QIterable<BuildEvent> eventSubscribers;
   private final BuildProfile buildProfile;

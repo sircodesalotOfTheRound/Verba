@@ -1,8 +1,8 @@
 package com.verba.language.parse.expressions.statements.returns;
 
-import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.BuildEventSubscriptionBase;
-import com.verba.language.build.event.subscriptions.ReturnStatementEventSubscription;
+import com.verba.language.build.nodeevents.BuildEvent;
+import com.verba.language.build.nodeevents.BuildEventSubscriptionBase;
+import com.verba.language.build.nodeevents.subscriptions.ReturnStatementEventSubscription;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;

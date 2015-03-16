@@ -1,8 +1,8 @@
-package com.verba.language.build.event.subscriptions;
+package com.verba.language.build.nodeevents.subscriptions;
 
 import com.verba.language.build.configuration.BuildProfile;
-import com.verba.language.build.event.BuildEvent;
-import com.verba.language.build.event.BuildEventSubscription;
+import com.verba.language.build.nodeevents.BuildEvent;
+import com.verba.language.build.nodeevents.BuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.ValDeclarationTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;

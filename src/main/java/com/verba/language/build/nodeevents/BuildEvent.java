@@ -1,4 +1,4 @@
-package com.verba.language.build.event;
+package com.verba.language.build.nodeevents;
 
 import com.verba.language.build.configuration.BuildProfile;
 import com.verba.language.emit.images.interfaces.ObjectImage;
@@ -8,6 +8,7 @@ import com.verba.language.parse.expressions.LitFileRootExpression;
 /**
  * Created by sircodesalot on 14/12/3.
  */
+@Deprecated
 public interface BuildEvent {
 
   // This interface means that the object delegates event subscriptions

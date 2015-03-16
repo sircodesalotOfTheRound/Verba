@@ -1,7 +1,6 @@
-package com.verba.language.build.event;
+package com.verba.language.build.nodeevents;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.parse.expressions.VerbaExpression;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -9,6 +8,7 @@ import java.util.function.Function;
 /**
  * Created by sircodesalot on 14/12/3.
  */
+@Deprecated
 public class BuildEventLauncher<T extends BuildEvent> {
   private final QIterable<T> expressions;
 

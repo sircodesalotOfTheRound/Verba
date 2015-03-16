@@ -1,6 +1,5 @@
 package com.verba.language.parse.lexing;
 
-import com.verba.language.build.event.BuildEvent;
 import com.verba.language.parse.codestream.CodeStream;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.info.LexList;
