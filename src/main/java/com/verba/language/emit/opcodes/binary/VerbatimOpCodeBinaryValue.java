@@ -8,7 +8,7 @@ import java.util.List;
  */
 public enum VerbatimOpCodeBinaryValue {
   CALL_NO_RETAIN("Call", "Call discarding result", 0x43),
-  CALL_WITH_RETAIN("CallRt", "Call retaining result", 0x43),
+  CALL_WITH_RETAIN("CallRt", "Call retaining result", 0x44),
 
   BOX("Box", "Box constant value", 0x31),
   COPY("Copy", "Copy variable", 0x33),
@@ -18,7 +18,6 @@ public enum VerbatimOpCodeBinaryValue {
   LD_TRUE("LdTrue", "Load 'True'", 0x90),
   LD_FALSE("LdFalse", "Load 'False'", 0x91),
   END_FUNCTION("EndF", "End of function", 0xFF),
-
 
   STAGE_ARG("StgArg", "Stage argument for call", 0x29),
   LD_UI64("LdUi64", "Load 64 bit unsigned int", 0xD3),
