@@ -1,8 +1,8 @@
-package com.verba.language.graph.events;
+package com.verba.language.graph.expressions.events;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscription;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.ReturnStatementTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;

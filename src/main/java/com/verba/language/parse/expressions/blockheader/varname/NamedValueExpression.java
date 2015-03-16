@@ -1,9 +1,9 @@
 package com.verba.language.parse.expressions.blockheader.varname;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
-import com.verba.language.graph.events.NamedValueExpressionVerbaExpressionBuildEventHandler;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.expressions.events.NamedValueExpressionVerbaExpressionBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;

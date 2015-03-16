@@ -1,8 +1,8 @@
 package com.verba.language.parse.expressions.statements.declaration;
 
-import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
-import com.verba.language.graph.events.ValDeclarationEventSubscriptionVerbaExpression;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.expressions.events.ValDeclarationEventSubscriptionVerbaExpression;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;

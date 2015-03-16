@@ -1,4 +1,4 @@
-package com.verba.language.graph.events.interfaces;
+package com.verba.language.graph.expressions.events.interfaces;
 
 import com.verba.language.build.configuration.Build;
 import com.verba.language.emit.images.interfaces.ObjectImage;

@@ -1,6 +1,6 @@
-package com.verba.language.graph.events;
+package com.verba.language.graph.expressions.events;
 
-import com.verba.language.graph.events.interfaces.VerbaExpressionBuildEventSubscription;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 
 /**
