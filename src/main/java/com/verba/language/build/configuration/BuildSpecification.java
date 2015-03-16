@@ -60,7 +60,7 @@ public class BuildSpecification {
     return this.addCodeUnit(CodeUnit.fromFile(path));
   }
 
-  public BuildManagerBase createLitFileBuild() {
+  public LitFileBuildManager createLitFileBuild() {
     Build build = new Build(this);
     return new LitFileBuildManager(build);
   }
