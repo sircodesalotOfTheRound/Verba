@@ -1,7 +1,7 @@
 package com.verba.language.build.events;
 
 import com.javalinq.implementations.QList;
-import com.verba.language.build.artifacts.containers.BuildArtifact;
+import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.interfaces.BuildTarget;
 import com.verba.tools.exceptions.CompilerException;
@@ -31,13 +31,16 @@ public class BuildEventPublisher {
     }
 
     this.targets.add(target);
-    target.onActivate(build);
+    target.onBuildUpdated(build, null);
+    for (BuildArtifact artifact : build.getArtifacts()) {
+      target.onBuildUpdated(build, artifact);
+    }
     return this;
   }
 
   public void publishBuildUpdated(BuildArtifact artifact) {
     for (BuildTarget target : targets) {
-      target.onBuildTargetsUpdated(build, artifact);
+      target.onBuildUpdated(build, artifact);
     }
   }
 }

@@ -3,9 +3,9 @@ package com.verba.language.build.configuration;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.build.artifacts.containers.BuildArtifactSet;
-import com.verba.language.build.artifacts.containers.BuildArtifactContainer;
-import com.verba.language.build.artifacts.containers.BuildArtifact;
+import com.verba.language.build.targets.artifacts.interfaces.BuildArtifactSet;
+import com.verba.language.build.targets.artifacts.interfaces.BuildArtifactContainer;
+import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 
 import java.util.function.Consumer;
 
@@ -42,6 +42,11 @@ public class Build implements BuildArtifactContainer {
   @Override
   public <T extends BuildArtifact> T getArtifactOfType(Class<T> type) {
     return artifacts.getArtifactOfType(type);
+  }
+
+  @Override
+  public QIterable<BuildArtifact> getArtifacts() {
+    return artifacts.getArtifacts();
   }
 
   public BuildSpecification specification() { return this.specification; }

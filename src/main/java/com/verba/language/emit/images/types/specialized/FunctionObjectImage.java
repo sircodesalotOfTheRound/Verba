@@ -1,7 +1,7 @@
 package com.verba.language.emit.images.types.specialized;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.build.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;

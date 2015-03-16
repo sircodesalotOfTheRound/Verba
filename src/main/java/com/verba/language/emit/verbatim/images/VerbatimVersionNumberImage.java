@@ -1,6 +1,6 @@
 package com.verba.language.emit.verbatim.images;
 
-import com.verba.language.build.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.header.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;

@@ -2,7 +2,7 @@ package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.build.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;

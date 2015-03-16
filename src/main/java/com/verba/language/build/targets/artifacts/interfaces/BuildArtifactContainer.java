@@ -1,4 +1,4 @@
-package com.verba.language.build.artifacts.containers;
+package com.verba.language.build.targets.artifacts.interfaces;
 
 import com.javalinq.interfaces.QIterable;
 
@@ -10,10 +10,13 @@ public interface BuildArtifactContainer {
   public QIterable<Class> artifactTypes();
   public void addArtifact(BuildArtifact value);
   public <T extends BuildArtifact> T getArtifactOfType(Class<T> type);
+  public QIterable<BuildArtifact> getArtifacts();
 
   default public void addArtifacts(QIterable<BuildArtifact> artifacts) {
     for (BuildArtifact item : artifacts) {
       this.addArtifact(item);
     }
   }
+
+
 }

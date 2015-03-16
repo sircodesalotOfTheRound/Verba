@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions.tools;
 
-import com.verba.language.build.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.graph.expressions.functions.FunctionContext;

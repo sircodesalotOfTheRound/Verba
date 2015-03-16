@@ -1,10 +1,12 @@
 package com.verba.build;
 
 import com.javalinq.implementations.QSet;
-import com.verba.language.build.artifacts.SourcesBuildArtifact;
-import com.verba.language.build.artifacts.StringTableBuildArtifact;
+import com.verba.language.build.targets.artifacts.SourceCodePathListBuildArtifact;
+import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListBuildArtifact;
+import com.verba.language.build.targets.artifacts.StringTableBuildArtifact;
 import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.managers.LitFileBuildManager;
+import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import org.junit.Test;
 
 import java.io.File;
@@ -13,16 +15,16 @@ import java.io.File;
  * Created by sircodesalot on 15/3/10.
  */
 public class TestLitFileBuild {
-  private final LitFileBuildManager build = new BuildSpecification()
+  private static final LitFileBuildManager build = new BuildSpecification()
     .addSourceFolder("verba_sources/glob_test")
     .createLitFileBuild();
 
   @Test
   public void testGlobbing() {
-    assert(build.containsArtifactOfType(SourcesBuildArtifact.class));
+    assert(build.containsArtifactOfType(SourceCodePathListBuildArtifact.class));
 
     QSet<String> filesAsSet = build
-      .getArtifactOfType(SourcesBuildArtifact.class)
+      .getArtifactOfType(SourceCodePathListBuildArtifact.class)
       .files()
       .map(File::toString)
       .toSet();
@@ -42,7 +44,23 @@ public class TestLitFileBuild {
   }
 
   @Test
-  public void testCompilation() {
+  public void testSyntaxTreeBuilding() {
+    final QSet<String> allowedFunctionNames = new QSet<>("file_one", "file_two", "file_three", "file_four", "file_five");
 
+    assert (build.containsArtifactOfType(SourceCodeSyntaxTreeListBuildArtifact.class));
+    SourceCodeSyntaxTreeListBuildArtifact syntaxTrees = build.getArtifactOfType(SourceCodeSyntaxTreeListBuildArtifact.class);
+
+    // Make sure that all of the functions are represented.
+    assert (syntaxTrees.syntaxTrees().count() == 5);
+    assert (syntaxTrees.syntaxTrees().all(tree -> {
+      FunctionDeclarationExpression function = tree.childExpressions()
+        .ofType(FunctionDeclarationExpression.class).single();
+
+      // Make sure each name is only represented once.
+      String name = function.name();
+      boolean containsFunction  = allowedFunctionNames.contains(function.name());
+      allowedFunctionNames.remove(name);
+      return containsFunction;
+    }));
   }
 }
