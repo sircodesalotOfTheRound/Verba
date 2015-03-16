@@ -1,10 +1,15 @@
 package com.verba.language.parse.expressions;
 
+import com.javalinq.interfaces.QIterable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.parse.violations.ValidationError;
+import com.verba.language.parse.violations.ValidationViolation;
+import com.verba.language.parse.violations.ValidationViolationList;
+import com.verba.language.parse.violations.ValidationWarning;
 
 /**
  * Created by sircodesalot on 14-2-19.
@@ -41,9 +46,10 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
 
   private VerbaExpression parent;
 
-  private transient final Lexer lexer;
+  private final Lexer lexer;
   private final LexInfo startingLexPoint;
   private LexInfo endingLexPoint;
+  private final ValidationViolationList violations = new ValidationViolationList();
 
   public VerbaExpression(VerbaExpression parent, Lexer lexer) {
     this.parent = parent;
@@ -119,6 +125,19 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     return rules.resolve(parent, lexer);
   }
 
+  public QIterable<ValidationViolation> violations() { return this.violations; }
+
+  public void addViolation(ValidationViolation violation) {
+    this.violations.add(violation);
+  }
+
+  protected void addWarning(String format, Object ... args)  {
+    this.addViolation(new ValidationWarning(this, format, args));
+  }
+
+  protected void addError(String format, Object ... args) {
+    this.addViolation(new ValidationError(this, format, args));
+  }
 
   @Override
   public boolean equals(Object obj) {
