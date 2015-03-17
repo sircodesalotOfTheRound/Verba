@@ -209,7 +209,7 @@ public class KeywordToken extends IdentifierToken {
     }
   }.get();
 
-  public static QIterable<String> vmTypeKeywords() { return KeywordToken.vmTypes; }
+  public static QIterable<String> platformTypeKeywords() { return KeywordToken.vmTypes; }
   public KeywordToken(String representation) {
     super(representation);
   }

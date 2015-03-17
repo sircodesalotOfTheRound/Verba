@@ -2,13 +2,14 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.expressions.functions.SystemTypeSymbols;
+import com.verba.language.graph.expressions.functions.PlatformTypeSymbols;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
 import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
+import com.verba.language.parse.expressions.primitives.PlatformTypeExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 
@@ -22,7 +23,7 @@ public class SymbolTable {
   private static final QIterable<Symbol> EMPTY_SET = new QList<>();
 
   private final Scope rootTable;
-  private final SystemTypeSymbols systemTypeSymbols;
+  private final PlatformTypeSymbols platformTypeSymbols;
   private final QList<Symbol> entries = new QList<>();
   private final Map<VerbaExpression, Symbol> entriesByInstance = new HashMap<>();
   private final Map<String, QList<Symbol>> entriesByFqn = new HashMap<>();
@@ -33,19 +34,25 @@ public class SymbolTable {
 
   public SymbolTable(Scope table) {
     this.rootTable = table;
-    this.systemTypeSymbols = this.addSystemTypes();
+    this.platformTypeSymbols = this.addPlatformTypes();
     this.scanTableHierarchy(table);
   }
 
-  private SystemTypeSymbols addSystemTypes() {
-    QIterable<Symbol> nativeTypeSymbolTableEntries = KeywordToken.vmTypeKeywords()
-      .map(primitive -> new Symbol(primitive, rootTable, null, SystemTypeMetadata.INSTANCE));
+  private PlatformTypeSymbols addPlatformTypes() {
+    QIterable<Symbol> nativeTypeSymbolTableEntries = KeywordToken.platformTypeKeywords()
+      .map(primitive -> {
+        return new Symbol(
+          primitive,
+          rootTable,
+          new PlatformTypeExpression(primitive),
+          SystemTypeMetadata.INSTANCE);
+      });
 
     for (Symbol entry : nativeTypeSymbolTableEntries) {
       this.putEntry(entry);
     }
 
-    return new SystemTypeSymbols(this);
+    return new PlatformTypeSymbols(this);
   }
 
   private void scanTableHierarchy(Scope table) {
@@ -97,8 +104,8 @@ public class SymbolTable {
   }
 
   public Symbol findSymbolForType(String fqn) {
-    if (this.systemTypeSymbols.isNativeTypeSymbol(fqn)) {
-      return this.systemTypeSymbols.findNativeTypeSymbolByName(fqn);
+    if (this.platformTypeSymbols.isNativeTypeSymbol(fqn)) {
+      return this.platformTypeSymbols.findNativeTypeSymbolByName(fqn);
     }
 
     return this.findAllMatchingFqn(fqn)

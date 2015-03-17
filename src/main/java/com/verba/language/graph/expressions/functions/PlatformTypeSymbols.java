@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by sircodesalot on 14/12/3.
  */
-public class SystemTypeSymbols {
+public class PlatformTypeSymbols {
   public final Symbol UNIT;
   public final Symbol ASCII;
   public final Symbol UTF;
@@ -21,7 +21,7 @@ public class SystemTypeSymbols {
   private final SymbolTable symbolTable;
   private final Map<String, Symbol> entriesByName = new HashMap<>();
 
-  public SystemTypeSymbols(SymbolTable symbolTable) {
+  public PlatformTypeSymbols(SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
     this.UNIT = captureEntryByKey(KeywordToken.UNIT);
 
