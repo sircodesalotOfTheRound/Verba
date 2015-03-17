@@ -20,8 +20,8 @@ public class SourceCodeSyntaxTreeListBuildTarget extends BuildTarget {
   @Override
   public void onBuildUpdated(Build build, BuildArtifact artifact) {
     if (this.allDependenciesAvailableOrUpdated(build, artifact)) {
-      SourceCodeSyntaxTreeListArtifact syntaxTrees =
-        this.parseSources(build.getArtifactOfType(SourceCodePathListArtifact.class));
+      SourceCodePathListArtifact sourcePaths = build.getArtifactOfType(SourceCodePathListArtifact.class);
+      SourceCodeSyntaxTreeListArtifact syntaxTrees = this.parseSources(sourcePaths);
       build.addArtifact(syntaxTrees);
     }
   }

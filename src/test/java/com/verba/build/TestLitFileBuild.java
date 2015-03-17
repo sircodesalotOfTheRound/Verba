@@ -19,10 +19,15 @@ import java.io.File;
  */
 public class TestLitFileBuild {
   final QSet<String> allowedFunctionNames = new QSet<>("file_one", "file_two", "file_three", "file_four", "file_five");
+  static final LitFileBuildManager build = new BuildSpecification()
+    .addSourceFolder("verba_sources/glob_test")
+    .createLitFileBuild();
+
   private LitFileBuildManager generateBuild() {
-    return new BuildSpecification()
+    return build;
+    /*return new BuildSpecification()
       .addSourceFolder("verba_sources/glob_test")
-      .createLitFileBuild();
+      .createLitFileBuild();*/
   }
 
 

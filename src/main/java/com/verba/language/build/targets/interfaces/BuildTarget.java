@@ -23,7 +23,11 @@ public abstract class BuildTarget {
   }
 
   public boolean allDependenciesAvailableOrUpdated(Build build, BuildArtifact artifact) {
-    return (isRequiredDependency(artifact) && allTargetDependenciesAvailable(build));
+    if (artifact == null) {
+      return allTargetDependenciesAvailable(build);
+    } else {
+      return (isRequiredDependency(artifact) && allTargetDependenciesAvailable(build));
+    }
   }
 
   public abstract void onBuildUpdated(Build build, BuildArtifact artifact);
