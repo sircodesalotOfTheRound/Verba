@@ -18,7 +18,8 @@ public class SymbolTableBuildTarget extends BuildTarget {
   public void onBuildUpdated(Build build, BuildArtifact artifact) {
     if (allDependenciesAvailableOrUpdated(build, artifact)) {
       LitFileSyntaxTreeArtifact syntaxTree = build.getArtifactOfType(LitFileSyntaxTreeArtifact.class);
-      build.addArtifact(new SymbolTableArtifact(syntaxTree));
+      SymbolTableArtifact symbolTable = new SymbolTableArtifact(syntaxTree);
+      build.addArtifact(symbolTable);
     }
   }
 }

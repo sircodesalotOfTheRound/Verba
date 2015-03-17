@@ -16,7 +16,7 @@ import java.io.Serializable;
 /**
  * Created by sircodesalot on 14-3-9.
  */
-public class Symbol implements Serializable {
+public class Symbol {
   private final String name;
   private final Scope table;
   private final VerbaExpression object;

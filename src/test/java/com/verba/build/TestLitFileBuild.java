@@ -9,6 +9,8 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
+import com.verba.language.parse.expressions.primitives.PlatformTypeExpression;
+import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import org.junit.Test;
 
 import java.io.File;
@@ -98,9 +100,14 @@ public class TestLitFileBuild {
     SymbolTableArtifact artifact = build.getArtifactOfType(SymbolTableArtifact.class);
     SymbolTable table = artifact.symbolTable();
 
+    assert (artifact.getSymbolsOfType(FunctionDeclarationExpression.class).count() == 5);
+    assert (artifact.getSymbolsOfType(PlatformTypeExpression.class).count()
+      == KeywordToken.platformTypeKeywords().count());
+
     assert (allowedFunctions.all(functionName -> {
       Symbol symbolMatchingFunction = table.findAllMatchingFqn(functionName).single();
       return symbolMatchingFunction != null;
     }));
   }
+
 }
