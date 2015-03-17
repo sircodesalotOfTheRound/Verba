@@ -6,13 +6,14 @@ import com.verba.language.build.targets.artifacts.SourceCodePathListArtifact;
 import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListArtifact;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.targets.interfaces.BuildTarget;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
 /**
  * Created by sircodesalot on 15/3/16.
  */
-public class SyntaxTreeListBuildTarget extends BuildTarget {
-  public SyntaxTreeListBuildTarget() {
+public class SourceCodeSyntaxTreeListBuildTarget extends BuildTarget {
+  public SourceCodeSyntaxTreeListBuildTarget() {
     super(SourceCodePathListArtifact.class);
   }
 
