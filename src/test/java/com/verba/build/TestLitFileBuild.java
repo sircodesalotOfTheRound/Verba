@@ -4,10 +4,9 @@ import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.managers.LitFileBuildManager;
-import com.verba.language.build.targets.artifacts.LitFileSyntaxTreeArtifact;
-import com.verba.language.build.targets.artifacts.SourceCodePathListArtifact;
-import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListArtifact;
-import com.verba.language.build.targets.artifacts.StringTableArtifact;
+import com.verba.language.build.targets.artifacts.*;
+import com.verba.language.graph.symbols.table.entries.Symbol;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import org.junit.Test;
@@ -18,16 +17,14 @@ import java.io.File;
  * Created by sircodesalot on 15/3/10.
  */
 public class TestLitFileBuild {
-  final QSet<String> allowedFunctionNames = new QSet<>("file_one", "file_two", "file_three", "file_four", "file_five");
-  static final LitFileBuildManager build = new BuildSpecification()
-    .addSourceFolder("verba_sources/glob_test")
-    .createLitFileBuild();
+  private QSet<String> getAllowedFunctionNames() {
+    return new QSet<>("file_one", "file_two", "file_three", "file_four", "file_five");
+  }
 
   private LitFileBuildManager generateBuild() {
-    return build;
-    /*return new BuildSpecification()
+    return new BuildSpecification()
       .addSourceFolder("verba_sources/glob_test")
-      .createLitFileBuild();*/
+      .createLitFileBuild();
   }
 
 
@@ -54,12 +51,13 @@ public class TestLitFileBuild {
   @Test
   public void testContainsStringTable() {
     LitFileBuildManager build = generateBuild();
-    assert(generateBuild().containsArtifactOfType(StringTableArtifact.class));
+    assert(build.containsArtifactOfType(StringTableArtifact.class));
   }
 
   @Test
   public void testSyntaxTreeBuilding() {
     LitFileBuildManager build = generateBuild();
+    QSet<String> allowedFunctions = getAllowedFunctionNames();
     assert (build.containsArtifactOfType(SourceCodeSyntaxTreeListArtifact.class));
     SourceCodeSyntaxTreeListArtifact syntaxTrees = build.getArtifactOfType(SourceCodeSyntaxTreeListArtifact.class);
 
@@ -71,14 +69,15 @@ public class TestLitFileBuild {
 
       // Make sure each name is only represented once.
       String name = function.name();
-      boolean containsFunction = allowedFunctionNames.contains(function.name());
-      allowedFunctionNames.remove(name);
+      boolean containsFunction = allowedFunctions.contains(function.name());
+      allowedFunctions.remove(name);
       return containsFunction;
     }));
   }
 
   @Test
   public void testSingleSyntaxTreeGeneration() {
+    QSet<String> allowedFunctions = getAllowedFunctionNames();
     LitFileBuildManager build = generateBuild();
     assert (build.containsArtifactOfType(LitFileSyntaxTreeArtifact.class));
     LitFileSyntaxTreeArtifact syntaxTree = build.getArtifactOfType(LitFileSyntaxTreeArtifact.class);
@@ -88,6 +87,20 @@ public class TestLitFileBuild {
       .ofType(FunctionDeclarationExpression.class)
       .map(FunctionDeclarationExpression::name);
 
-    assert (functionNames.all(allowedFunctionNames::contains));
+    assert (functionNames.all(allowedFunctions::contains));
+  }
+
+  @Test
+  public void testSymbolTableBuildTarget() {
+    LitFileBuildManager build = generateBuild();
+    QSet<String> allowedFunctions = getAllowedFunctionNames();
+    assert (build.containsArtifactOfType(SymbolTableArtifact.class));
+    SymbolTableArtifact artifact = build.getArtifactOfType(SymbolTableArtifact.class);
+    SymbolTable table = artifact.symbolTable();
+
+    assert (allowedFunctions.all(functionName -> {
+      Symbol symbolMatchingFunction = table.findAllMatchingFqn(functionName).single();
+      return symbolMatchingFunction != null;
+    }));
   }
 }

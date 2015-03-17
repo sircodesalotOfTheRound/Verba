@@ -15,10 +15,10 @@ public class BuildTargetDependencySet {
   }
 
   public boolean targetDependenciesAvailable(Build build) {
-    if (!targetDependencies.any()) {
-      return false;
+    if (targetDependencies.any()) {
+      return this.targetDependencies.all(build::containsArtifactOfType);
     } else {
-      return this.targetDependencies.all(targetDependencies::contains);
+      return true;
     }
   }
 
