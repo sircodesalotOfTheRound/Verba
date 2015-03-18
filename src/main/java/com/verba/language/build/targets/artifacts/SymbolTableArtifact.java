@@ -7,6 +7,7 @@ import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
+import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 
 /**
  * Created by sircodesalot on 15/3/17.
@@ -14,6 +15,11 @@ import com.verba.language.parse.expressions.VerbaExpression;
 public class SymbolTableArtifact implements BuildArtifact {
   private final SymbolTable symbolTable;
   private final ClassListMap symbolsByType;
+
+  public SymbolTableArtifact(VerbaCodePage page) {
+    this.symbolTable = new SymbolTable(page);
+    this.symbolsByType = partitionSymbolsByType(symbolTable);
+  }
 
   // Keeps a list of symbols associated with each class type.
   public static class ClassListMap {
@@ -80,8 +86,6 @@ public class SymbolTableArtifact implements BuildArtifact {
 
     return map;
   }
-
-
 
   public SymbolTable symbolTable() { return this.symbolTable; }
 

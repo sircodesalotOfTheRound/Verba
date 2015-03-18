@@ -3,6 +3,7 @@ package com.verba.language.build.targets;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.artifacts.SourceCodeSyntaxTreeListArtifact;
+import com.verba.language.build.targets.artifacts.SymbolTableArtifact;
 import com.verba.language.build.targets.artifacts.SymbolTableBySourceCodePageArtifact;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.targets.interfaces.BuildTarget;
@@ -15,16 +16,16 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 public class SymbolsBySourceFileBuildTarget extends BuildTarget {
   public static class SourceCodePageSymbolTable {
     private final VerbaCodePage page;
-    private final SymbolTable symbolTable;
+    private final SymbolTableArtifact symbolTable;
 
     public SourceCodePageSymbolTable(VerbaCodePage page) {
       this.page = page;
-      this.symbolTable = new SymbolTable(page);
+      this.symbolTable = new SymbolTableArtifact(page);
     }
 
     public String path() { return this.page.path(); }
     public VerbaCodePage page() { return this.page; }
-    public SymbolTable symbolTable() { return this.symbolTable; }
+    public SymbolTableArtifact symbolTable() { return this.symbolTable; }
   }
 
   public SymbolsBySourceFileBuildTarget() {
