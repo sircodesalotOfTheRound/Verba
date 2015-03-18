@@ -8,6 +8,7 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
+import com.verba.testtools.datastructures.OneToManyMap;
 import com.verba.testtools.polymorphism.ClassHierarchyFlattener;
 
 /**
@@ -23,29 +24,18 @@ public class SymbolTableArtifact implements BuildArtifact {
   }
 
   // Associates a class, and its entire hierarchy to an object.
-  public static class ClassHierarchyToObjectMap<TObject> {
-    private final QMap<Class, QList<Symbol>> map = new QMap<>();
+  public static class ClassHierarchyToObjectMap {
+    private final OneToManyMap<Class, Symbol> map = new OneToManyMap<>();
 
     public void addSymbol(Symbol symbol) {
       ClassHierarchyFlattener hierarchy = new ClassHierarchyFlattener(symbol.type());
       for (Class iface : hierarchy.flattenedHierarchy()) {
-        QList<Symbol> list = getListForInterface(iface);
-        list.add(symbol);
-      }
-    }
-
-    private QList<Symbol> getListForInterface(Class type) {
-      if (map.containsKey(type)) {
-        return map.get(type);
-      } else {
-        QList<Symbol> list = new QList<>();
-        map.add(type, list);
-        return list;
+        map.add(iface, symbol);
       }
     }
 
     public QIterable<Symbol> getDerivedClassesForInterface(Class type) {
-      return map.get(type);
+      return map.getItemsForKey(type);
     }
     public boolean containsInterface(Class type) {
       return map.containsKey(type);
