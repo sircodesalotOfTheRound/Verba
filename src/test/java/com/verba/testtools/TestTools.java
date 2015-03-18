@@ -1,4 +1,4 @@
-package com.verba.tools;
+package com.verba.testtools;
 
 import com.verba.language.parse.codestream.StringBasedCodeStream;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;

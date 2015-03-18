@@ -1,4 +1,4 @@
-package com.verba.tools.xml.parsing;
+package com.verba.testtools.xml.parsing;
 
 /**
  * Created by sircodesalot on 14/9/1.

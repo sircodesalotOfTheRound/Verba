@@ -1,11 +1,6 @@
 package com.verba.language.build.source;
 
-import com.verba.language.parse.codestream.CodeStream;
-import com.verba.language.parse.codestream.StringBasedCodeStream;
-import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.lexing.VerbaMemoizingLexer;
-import com.verba.tools.files.FileTools;
-import org.apache.commons.codec.digest.DigestUtils;
+import com.verba.testtools.files.FileTools;
 
 /**
  * Created by sircodesalot on 15/2/10.

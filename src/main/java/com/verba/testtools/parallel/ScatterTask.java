@@ -1,4 +1,4 @@
-package com.verba.tools.parallel;
+package com.verba.testtools.parallel;
 
 import java.util.ArrayList;
 import java.util.List;

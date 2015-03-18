@@ -8,9 +8,7 @@ import com.verba.language.parse.expressions.immediate.ImmediateFunctionExpressio
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
-import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
-import com.verba.tools.TestTools;
+import com.verba.testtools.TestTools;
 import org.junit.Test;
 
 /**

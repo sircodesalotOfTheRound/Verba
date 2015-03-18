@@ -9,7 +9,7 @@ import com.verba.language.parse.tokens.operators.mathop.AddOpToken;
 import com.verba.language.parse.tokens.operators.mathop.DivideOpToken;
 import com.verba.language.parse.tokens.operators.mathop.MultiplyOpToken;
 import com.verba.language.parse.tokens.operators.mathop.SubtractOpToken;
-import com.verba.tools.TestTools;
+import com.verba.testtools.TestTools;
 import org.junit.Test;
 
 /**

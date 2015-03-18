@@ -1,4 +1,4 @@
-package com.verba.tools.parallel;
+package com.verba.testtools.parallel;
 
 import java.util.function.Supplier;
 

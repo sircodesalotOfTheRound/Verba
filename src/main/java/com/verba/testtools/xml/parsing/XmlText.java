@@ -1,6 +1,6 @@
-package com.verba.tools.xml.parsing;
+package com.verba.testtools.xml.parsing;
 
-import com.verba.tools.xml.XmlLexer;
+import com.verba.testtools.xml.XmlLexer;
 
 /**
  * Created by sircodesalot on 14/9/1.

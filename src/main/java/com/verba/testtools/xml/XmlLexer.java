@@ -1,4 +1,4 @@
-package com.verba.tools.xml;
+package com.verba.testtools.xml;
 
 import java.util.Stack;
 

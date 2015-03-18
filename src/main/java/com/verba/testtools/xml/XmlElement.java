@@ -1,11 +1,11 @@
-package com.verba.tools.xml;
+package com.verba.testtools.xml;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.tools.display.StringTools;
-import com.verba.tools.xml.parsing.XmlTag;
-import com.verba.tools.xml.parsing.XmlTagType;
-import com.verba.tools.xml.parsing.XmlText;
+import com.verba.testtools.display.StringTools;
+import com.verba.testtools.xml.parsing.XmlTag;
+import com.verba.testtools.xml.parsing.XmlTagType;
+import com.verba.testtools.xml.parsing.XmlText;
 
 /**
  * Created by sircodesalot on 14/8/30.

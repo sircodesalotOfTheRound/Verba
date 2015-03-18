@@ -1,4 +1,4 @@
-package com.verba.tools.files;
+package com.verba.testtools.files;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;

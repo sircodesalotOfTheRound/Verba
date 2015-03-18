@@ -6,7 +6,7 @@ import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpres
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import com.verba.tools.TestTools;
+import com.verba.testtools.TestTools;
 import org.junit.Test;
 
 /**

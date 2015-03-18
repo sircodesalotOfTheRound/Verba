@@ -1,4 +1,4 @@
-package com.verba.tools.xml;
+package com.verba.testtools.xml;
 
 /**
  * Created by sircodesalot on 14/8/30.

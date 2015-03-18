@@ -6,7 +6,7 @@ import com.verba.language.parse.expressions.interop.AsmBlockExpression;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import com.verba.tools.TestTools;
+import com.verba.testtools.TestTools;
 import org.junit.Test;
 
 /**

@@ -8,36 +8,33 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.testtools.polymorphism.ClassHierarchyFlattener;
 
 /**
  * Created by sircodesalot on 15/3/17.
  */
 public class SymbolTableArtifact implements BuildArtifact {
   private final SymbolTable symbolTable;
-  private final ClassListMap symbolsByType;
+  private final ClassHierarchyToObjectMap symbolsByType;
 
   public SymbolTableArtifact(VerbaCodePage page) {
     this.symbolTable = new SymbolTable(page);
     this.symbolsByType = partitionSymbolsByType(symbolTable);
   }
 
-  // Keeps a list of symbols associated with each class type.
-  public static class ClassListMap {
+  // Associates a class, and its entire hierarchy to an object.
+  public static class ClassHierarchyToObjectMap<TObject> {
     private final QMap<Class, QList<Symbol>> map = new QMap<>();
 
     public void addSymbol(Symbol symbol) {
-      QIterable<Class> interfaces = collectInterfacesForType(symbol);
-      for (Class iface : interfaces) {
-        add(iface, symbol);
+      ClassHierarchyFlattener hierarchy = new ClassHierarchyFlattener(symbol.type());
+      for (Class iface : hierarchy.flattenedHierarchy()) {
+        QList<Symbol> list = getListForInterface(iface);
+        list.add(symbol);
       }
     }
 
-    private void add(Class type, Symbol symbol) {
-      QList<Symbol> list = getListForClass(type);
-      list.add(symbol);
-    }
-
-    private QList<Symbol> getListForClass(Class type) {
+    private QList<Symbol> getListForInterface(Class type) {
       if (map.containsKey(type)) {
         return map.get(type);
       } else {
@@ -47,28 +44,10 @@ public class SymbolTableArtifact implements BuildArtifact {
       }
     }
 
-    private QIterable<Class> collectInterfacesForType(Symbol symbol) {
-      return collectInterfacesForType(symbol.type(), new QList<>());
-    }
-
-    private QIterable<Class> collectInterfacesForType(Class type, QList<Class> interfaces) {
-      if (type == null) return interfaces;
-
-      collectInterfacesForType(type.getSuperclass(), interfaces);
-      for (Class iface : type.getInterfaces()) {
-        collectInterfacesForType(iface, interfaces);
-      }
-
-      interfaces.add(type);
-      return interfaces;
-    }
-
-
-    public QIterable<Symbol> getList(Class type) {
+    public QIterable<Symbol> getDerivedClassesForInterface(Class type) {
       return map.get(type);
     }
-
-    public boolean containsListForType(Class type) {
+    public boolean containsInterface(Class type) {
       return map.containsKey(type);
     }
   }
@@ -78,8 +57,8 @@ public class SymbolTableArtifact implements BuildArtifact {
     this.symbolsByType = partitionSymbolsByType(symbolTable);
   }
 
-  private ClassListMap partitionSymbolsByType(SymbolTable symbolTable) {
-    ClassListMap map = new ClassListMap();
+  private ClassHierarchyToObjectMap partitionSymbolsByType(SymbolTable symbolTable) {
+    ClassHierarchyToObjectMap map = new ClassHierarchyToObjectMap();
     for (Symbol symbol : symbolTable.entries()) {
       map.addSymbol(symbol);
     }
@@ -90,10 +69,10 @@ public class SymbolTableArtifact implements BuildArtifact {
   public SymbolTable symbolTable() { return this.symbolTable; }
 
   public <T> boolean containsSymbolsOfType(Class<T> type) {
-    return symbolsByType.containsListForType(type);
+    return symbolsByType.containsInterface(type);
   }
 
   public <T extends VerbaExpression> QIterable<T> getSymbolsOfType(Class<T> type) {
-    return symbolsByType.getList(type).cast(type);
+    return symbolsByType.getDerivedClassesForInterface(type).cast(type);
   }
 }
