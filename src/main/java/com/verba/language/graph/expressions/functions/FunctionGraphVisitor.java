@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
@@ -174,7 +174,7 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
   }
 
   @Override
-  public void visit(VerbaCodePage verbaCodePage) {
+  public void visit(VerbaSourceCodeFile sourceFile) {
     throw new NotImplementedException();
   }
 

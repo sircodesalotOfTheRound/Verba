@@ -7,28 +7,26 @@ import com.verba.language.build.targets.artifacts.SymbolTableArtifact;
 import com.verba.language.build.targets.artifacts.SymbolTableBySourceCodePageArtifact;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.targets.interfaces.BuildTarget;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import org.apache.commons.codec.digest.DigestUtils;
-
-import java.io.File;
 
 /**
  * Created by sircodesalot on 15/3/17.
  */
 public class SymbolsBySourceFileBuildTarget extends BuildTarget {
   public static class SourceCodeInfo {
-    private final VerbaCodePage page;
+    private final VerbaSourceCodeFile page;
     private final String hash;
     private final SymbolTableArtifact symbolTable;
 
-    public SourceCodeInfo(VerbaCodePage page) {
+    public SourceCodeInfo(VerbaSourceCodeFile page) {
       this.page = page;
       this.hash = DigestUtils.sha1Hex(page.text());
       this.symbolTable = new SymbolTableArtifact(page);
     }
 
     public String path() { return this.page.path(); }
-    public VerbaCodePage page() { return this.page; }
+    public VerbaSourceCodeFile page() { return this.page; }
     public String hash() { return this.hash; }
     public SymbolTableArtifact symbolTable() { return this.symbolTable; }
   }

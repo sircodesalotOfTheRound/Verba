@@ -7,7 +7,7 @@ import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDecla
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.TupleItemExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.json.JsonExpressionPair;
@@ -45,7 +45,7 @@ public abstract class ExpressionTreeVisitor {
   }
 
   public void visit(LitFileRootExpression litFileRoot) {
-    for (VerbaCodePage page : litFileRoot.pages()) {
+    for (VerbaSourceCodeFile page : litFileRoot.pages()) {
       page.accept(this);
     }
   }
@@ -93,7 +93,7 @@ public abstract class ExpressionTreeVisitor {
     }
   }
 
-  public void visit(VerbaCodePage page) {
+  public void visit(VerbaSourceCodeFile page) {
     for (VerbaExpression expression : page.childExpressions()) {
       expression.accept(this);
     }

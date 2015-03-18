@@ -9,7 +9,7 @@ import com.verba.language.graph.expressions.events.StaticSpaceVerbaExpressionBui
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 
 /**
  * Created by sircodesalot on 14-5-14.
@@ -18,13 +18,13 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
   private StaticSpaceVerbaExpressionBuildEventSubscription buildProfile = new StaticSpaceVerbaExpressionBuildEventSubscription(this);
   private QList<VerbaExpression> allExpressions = new QList<>();
   private Partition<Class, VerbaExpression> expressionsByType;
-  private QList<VerbaCodePage> pages;
+  private QList<VerbaSourceCodeFile> pages;
 
   public LitFileRootExpression() {
     super(null, null);
   }
 
-  public LitFileRootExpression(Iterable<VerbaCodePage> pages) {
+  public LitFileRootExpression(Iterable<VerbaSourceCodeFile> pages) {
     super(null, null);
 
     this.pages = new QList<>(pages);
@@ -32,7 +32,7 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
     this.expressionsByType = partitionExpressions(allExpressions);
   }
 
-  public LitFileRootExpression(VerbaCodePage... pages) {
+  public LitFileRootExpression(VerbaSourceCodeFile... pages) {
     super(null, null);
 
     this.pages = new QList<>(pages);
@@ -44,9 +44,9 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
     return this.allExpressions.parition(Object::getClass);
   }
 
-  private QList<VerbaExpression> extractExpressionsFromPages(QIterable<VerbaCodePage> pages) {
+  private QList<VerbaExpression> extractExpressionsFromPages(QIterable<VerbaSourceCodeFile> pages) {
     QList<VerbaExpression> allExpressionsFromPage = new QList<>(pages.cast(VerbaExpression.class));
-    allExpressionsFromPage.add(pages.flatten(VerbaCodePage::allExpressions));
+    allExpressionsFromPage.add(pages.flatten(VerbaSourceCodeFile::allExpressions));
 
     return allExpressionsFromPage;
   }
@@ -55,7 +55,7 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
     return this.expressionsByType.containsKey(type);
   }
 
-  public QIterable<VerbaCodePage> pages() { return this.pages; }
+  public QIterable<VerbaSourceCodeFile> pages() { return this.pages; }
 
   public QIterable<VerbaExpression> allExpressions() { return this.allExpressions; }
 

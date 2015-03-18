@@ -7,7 +7,7 @@ import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import com.verba.testtools.polymorphism.ClassHierarchyFlattener;
 
 /**
@@ -17,7 +17,7 @@ public class SymbolTableArtifact implements BuildArtifact {
   private final SymbolTable symbolTable;
   private final ClassHierarchyToObjectMap symbolsByType;
 
-  public SymbolTableArtifact(VerbaCodePage page) {
+  public SymbolTableArtifact(VerbaSourceCodeFile page) {
     this.symbolTable = new SymbolTable(page);
     this.symbolsByType = partitionSymbolsByType(symbolTable);
   }

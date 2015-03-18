@@ -8,9 +8,8 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.parse.expressions.blockheader.functions.SignatureDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import com.verba.language.parse.expressions.containers.array.ArrayDeclarationExpression;
 import com.verba.language.parse.expressions.containers.json.JsonExpression;
 import com.verba.language.parse.expressions.containers.markup.MarkupDeclarationExpression;
@@ -103,7 +102,7 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
     this.visitAll(block);
   }
 
-  public void visit(VerbaCodePage page) {
+  public void visit(VerbaSourceCodeFile page) {
     add(page);
     this.visitAll(page.allExpressions());
   }

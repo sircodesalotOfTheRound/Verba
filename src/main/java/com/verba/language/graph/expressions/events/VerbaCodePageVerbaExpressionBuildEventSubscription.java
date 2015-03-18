@@ -6,18 +6,18 @@ import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.parse.expressions.LitFileRootExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import com.verba.language.parse.expressions.withns.WithNsExpression;
 
 /**
  * Created by sircodesalot on 14/11/23.
  */
-public class VerbaCodePageVerbaExpressionBuildEventSubscription extends VerbaExpressionBuildEventSubscription<VerbaCodePage>
+public class VerbaCodePageVerbaExpressionBuildEventSubscription extends VerbaExpressionBuildEventSubscription<VerbaSourceCodeFile>
   implements VerbaExpressionBuildEvent.NotifyParsingVerbaExpressionBuildEvent
 {
   private QList<String> namespaces = new QList<>();
 
-  public VerbaCodePageVerbaExpressionBuildEventSubscription(VerbaCodePage expression) {
+  public VerbaCodePageVerbaExpressionBuildEventSubscription(VerbaSourceCodeFile expression) {
     super(expression);
   }
 

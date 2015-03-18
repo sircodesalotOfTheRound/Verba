@@ -24,7 +24,7 @@ import com.verba.language.parse.expressions.categories.GenericallyParameterizedE
 import com.verba.language.parse.expressions.categories.NamedExpression;
 import com.verba.language.parse.expressions.categories.ParameterizedExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
@@ -103,7 +103,7 @@ public class Scope {
     this.visitAll(staticSpace.pages().cast(VerbaExpression.class));
   }
 
-  public void visit(VerbaCodePage page) {
+  public void visit(VerbaSourceCodeFile page) {
     this.visitAll(page.childExpressions());
   }
 

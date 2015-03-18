@@ -6,7 +6,7 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.parse.expressions.VerbaExpression;
-import com.verba.language.parse.expressions.codepage.VerbaCodePage;
+import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 
 /**
  * Created by sircodesalot on 14/11/24.
@@ -14,7 +14,7 @@ import com.verba.language.parse.expressions.codepage.VerbaCodePage;
 public class SymbolNameResolver {
   private final SymbolTable symbolTable;
   private final Scope scope;
-  private final VerbaCodePage page;
+  private final VerbaSourceCodeFile page;
   private final QIterable<String> namespacesInScope;
 
   public SymbolNameResolver(SymbolTable symbolTable, Scope scope) {
@@ -45,23 +45,23 @@ public class SymbolNameResolver {
     return matchingEntries.distinct(SymbolResolutionMatch::symbol);
   }
 
-  private VerbaCodePage discoverSource(Scope scope) {
+  private VerbaSourceCodeFile discoverSource(Scope scope) {
     if (scope.entries().any()) {
-      return (VerbaCodePage) scope.entries().first().source();
+      return (VerbaSourceCodeFile) scope.entries().first().source();
     } else {
       return discoverPage((VerbaExpression)scope.header());
     }
   }
 
-  private VerbaCodePage discoverPage(VerbaExpression expression) {
-    if (expression instanceof VerbaCodePage) {
-      return (VerbaCodePage) expression;
+  private VerbaSourceCodeFile discoverPage(VerbaExpression expression) {
+    if (expression instanceof VerbaSourceCodeFile) {
+      return (VerbaSourceCodeFile) expression;
     } else {
       return discoverPage(expression.parent());
     }
   }
 
-  private QIterable<String> namespacesInScope(VerbaCodePage page, Scope scope) {
+  private QIterable<String> namespacesInScope(VerbaSourceCodeFile page, Scope scope) {
     QList<String> namespaces = new QList<>();
 
     namespaces.add(scope.fqnList());

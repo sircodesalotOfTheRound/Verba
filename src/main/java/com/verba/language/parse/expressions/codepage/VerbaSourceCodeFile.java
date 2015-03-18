@@ -23,7 +23,7 @@ import java.io.InputStream;
 /**
  * A Codepage is a page of Verba Code.
  */
-public class VerbaCodePage extends VerbaExpression
+public class VerbaSourceCodeFile extends VerbaExpression
   implements SymbolTableExpression, ExpressionSource,
   VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
 {
@@ -34,7 +34,7 @@ public class VerbaCodePage extends VerbaExpression
   private String path;
   private String text;
 
-  private VerbaCodePage(VerbaExpression parent, Lexer lexer) {
+  private VerbaSourceCodeFile(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
     this.path = lexer.filename();
@@ -70,8 +70,8 @@ public class VerbaCodePage extends VerbaExpression
     return expressionList;
   }
 
-  public static VerbaCodePage read(VerbaExpression parent, Lexer lexer) {
-    return new VerbaCodePage(parent, lexer);
+  public static VerbaSourceCodeFile read(VerbaExpression parent, Lexer lexer) {
+    return new VerbaSourceCodeFile(parent, lexer);
   }
 
   public QIterable<VerbaExpression> allExpressions() { return this.allExpressions; }
@@ -92,15 +92,15 @@ public class VerbaCodePage extends VerbaExpression
   }
 
   // Build from a file path.
-  public static VerbaCodePage fromFile(VerbaExpression parent, String path) {
+  public static VerbaSourceCodeFile fromFile(VerbaExpression parent, String path) {
     CodeStream codeStream = new FileBasedCodeStream(path);
     Lexer lexer = new VerbaMemoizingLexer(path, codeStream);
 
-    return new VerbaCodePage(parent, lexer);
+    return new VerbaSourceCodeFile(parent, lexer);
   }
 
   // Build from an item in a package.
-  public static VerbaCodePage fromResourceStream(String path) {
+  public static VerbaSourceCodeFile fromResourceStream(String path) {
     try {
       StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
       Class packageClass = Class.forName(stackTrace[stackTrace.length - 1].getClassName());
@@ -109,7 +109,7 @@ public class VerbaCodePage extends VerbaExpression
       CodeStream codeStream = new FileBasedCodeStream(path, stream);
       Lexer lexer = new VerbaMemoizingLexer(path, codeStream);
 
-      return new VerbaCodePage(null, lexer);
+      return new VerbaSourceCodeFile(null, lexer);
     } catch (Exception ex) {
       throw new NotImplementedException();
     }
