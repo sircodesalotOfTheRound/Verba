@@ -1,6 +1,7 @@
 package com.verba.language.build.targets.depdendencies;
 
 import com.javalinq.implementations.QSet;
+import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 
@@ -28,5 +29,9 @@ public class BuildTargetDependencySet {
     } else {
       return this.targetDependencies.contains(artifact.getClass());
     }
+  }
+
+  public QSet<Class> dependencies() {
+    return targetDependencies;
   }
 }

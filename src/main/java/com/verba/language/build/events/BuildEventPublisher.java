@@ -17,7 +17,7 @@ public class BuildEventPublisher {
 
   public BuildEventPublisher(Build build) {
     this.build = build;
-    this.build.onTargetAdded(new Consumer<BuildArtifact>() {
+    this.build.onArtifactAdded(new Consumer<BuildArtifact>() {
       @Override
       public void accept(BuildArtifact buildArtifact) {
         publishBuildUpdated(buildArtifact);
@@ -26,15 +26,14 @@ public class BuildEventPublisher {
   }
 
   public BuildEventPublisher addTarget(BuildTarget target) {
-    if (target == null) {
-      throw new CompilerException("Build Target cannot be null");
+    if (target != null) {
+      this.targets.add(target);
+      target.onBuildUpdated(build, null);
+      for (BuildArtifact artifact : build.getArtifacts()) {
+        target.onBuildUpdated(build, artifact);
+      }
     }
 
-    this.targets.add(target);
-    target.onBuildUpdated(build, null);
-    for (BuildArtifact artifact : build.getArtifacts()) {
-      target.onBuildUpdated(build, artifact);
-    }
     return this;
   }
 
