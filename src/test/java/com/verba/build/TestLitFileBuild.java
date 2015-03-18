@@ -101,9 +101,6 @@ public class TestLitFileBuild {
     SymbolTable table = artifact.symbolTable();
 
     assert (artifact.getSymbolsOfType(FunctionDeclarationExpression.class).count() == 5);
-    assert (artifact.getSymbolsOfType(PlatformTypeExpression.class).count()
-      == KeywordToken.platformTypeKeywords().count());
-
     assert (allowedFunctions.all(functionName -> {
       Symbol symbolMatchingFunction = table.findAllMatchingFqn(functionName).single();
       return symbolMatchingFunction != null;

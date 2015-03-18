@@ -2,7 +2,7 @@ package com.verba.language.graph.symbols.table.tables;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.expressions.functions.PlatformTypeSymbols;
+import com.verba.language.platform.PlatformTypeSymbols;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
 import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
@@ -23,7 +23,6 @@ public class SymbolTable {
   private static final QIterable<Symbol> EMPTY_SET = new QList<>();
 
   private final Scope rootTable;
-  private final PlatformTypeSymbols platformTypeSymbols;
   private final QList<Symbol> entries = new QList<>();
   private final Map<VerbaExpression, Symbol> entriesByInstance = new HashMap<>();
   private final Map<String, QList<Symbol>> entriesByFqn = new HashMap<>();
@@ -34,25 +33,7 @@ public class SymbolTable {
 
   public SymbolTable(Scope table) {
     this.rootTable = table;
-    this.platformTypeSymbols = this.addPlatformTypes();
     this.scanTableHierarchy(table);
-  }
-
-  private PlatformTypeSymbols addPlatformTypes() {
-    QIterable<Symbol> nativeTypeSymbolTableEntries = KeywordToken.platformTypeKeywords()
-      .map(primitive -> {
-        return new Symbol(
-          primitive,
-          rootTable,
-          new PlatformTypeExpression(primitive),
-          SystemTypeMetadata.INSTANCE);
-      });
-
-    for (Symbol entry : nativeTypeSymbolTableEntries) {
-      this.putEntry(entry);
-    }
-
-    return new PlatformTypeSymbols(this);
   }
 
   private void scanTableHierarchy(Scope table) {
@@ -104,8 +85,8 @@ public class SymbolTable {
   }
 
   public Symbol findSymbolForType(String fqn) {
-    if (this.platformTypeSymbols.isNativeTypeSymbol(fqn)) {
-      return this.platformTypeSymbols.findNativeTypeSymbolByName(fqn);
+    if (PlatformTypeSymbols.isNativeTypeSymbol(fqn)) {
+      return PlatformTypeSymbols.findNativeTypeSymbolByName(fqn);
     }
 
     return this.findAllMatchingFqn(fqn)
