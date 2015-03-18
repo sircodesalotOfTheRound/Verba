@@ -1,8 +1,8 @@
 
-#: Importing namespaces
+// Importing namespaces
 withns vm.some_namespace
 
-#: Some basic functionality
+// Some basic functionality
 namesapce a_namespace {
 
   #[HashTag]
@@ -20,7 +20,7 @@ namesapce a_namespace {
    print(string_parameter)
   }
 
-  #: Some polymorphics
+  // Some polymorphics
   trait MyTrait
   class SimpleClass
   class DerivedClass : SimpleClass, MyTrait
@@ -49,7 +49,7 @@ namesapce a_namespace {
 
     val array = [ 1, 2, 3 ]
 
-    #: Async call to empty nested function
+    // Async call to empty nested function
     fn nested_function
     val future_value = async nested_function()
     return future_value

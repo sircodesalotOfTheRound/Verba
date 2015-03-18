@@ -22,8 +22,8 @@ public class LineCommentToken implements Token {
     boolean isComment = false;
 
     stream.setUndoPosition();
-    if (stream.read() == '#') {
-      if (stream.hasNext() && (stream.read().equals(':'))) {
+    if (stream.read() == '/') {
+      if (stream.hasNext() && (stream.read().equals('/'))) {
         isComment = true;
       }
     }
