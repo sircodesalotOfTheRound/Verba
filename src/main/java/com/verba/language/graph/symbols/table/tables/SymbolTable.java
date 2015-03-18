@@ -4,15 +4,12 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.platform.PlatformTypeSymbols;
 import com.verba.language.graph.symbols.meta.NestedScopeMetadata;
-import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
 import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
-import com.verba.language.parse.expressions.primitives.PlatformTypeExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
-import com.verba.language.parse.tokens.identifiers.KeywordToken;
 
 import java.util.HashMap;
 import java.util.Map;

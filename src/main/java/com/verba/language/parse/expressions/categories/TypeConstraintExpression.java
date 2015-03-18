@@ -4,6 +4,7 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
 import com.verba.language.parse.lexing.Lexer;
+import com.verba.language.platform.expressions.PlatformTypeExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -12,7 +13,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public interface TypeConstraintExpression extends ExpressionCategory {
   public static TypeConstraintExpression read(VerbaExpression parent, Lexer lexer) {
     // TODO: Determine if this section is still in use.
-    if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
+    if (PlatformTypeExpression.isPlatformTypeName(lexer)) {
+      return PlatformTypeExpression.read(parent, lexer);
+    } else if (FullyQualifiedNameExpression.isFullyQualifiedName(lexer)) {
       return FullyQualifiedNameExpression.read(parent, lexer);
     } else if (TupleDeclarationExpression.isTupleTypeDeclaration(lexer)) {
       return TupleDeclarationExpression.read(parent, lexer);

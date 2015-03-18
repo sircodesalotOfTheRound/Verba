@@ -10,6 +10,7 @@ import com.verba.language.parse.violations.ValidationError;
 import com.verba.language.parse.violations.ValidationViolation;
 import com.verba.language.parse.violations.ValidationViolationList;
 import com.verba.language.parse.violations.ValidationWarning;
+import com.verba.language.platform.expressions.PlatformExpressionBacktrackRule;
 
 /**
  * Created by sircodesalot on 14-2-19.
@@ -30,6 +31,7 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     .addRule(new GrabExpressionBacktrackRule())
     .addRule(new ImmediateFunctionExpressionBacktrackRule())
     .addRule(new ForStatementBacktrackRule())
+    .addRule(new PlatformExpressionBacktrackRule())
     .addRule(new WhileStatementBacktrackRule())
     .addRule(new AssignmentStatementBacktrackRule())
     .addRule(new InjectedClassDeclarationBacktrackRule())

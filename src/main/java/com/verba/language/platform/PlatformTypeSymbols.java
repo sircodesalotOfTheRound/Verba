@@ -1,18 +1,11 @@
 package com.verba.language.platform;
 
-import com.javalinq.implementations.QMap;
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
-import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.primitives.PlatformTypeExpression;
+import com.verba.language.platform.expressions.PlatformTypeExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by sircodesalot on 14/12/3.

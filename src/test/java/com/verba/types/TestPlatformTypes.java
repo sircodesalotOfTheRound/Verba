@@ -1,6 +1,6 @@
 package com.verba.types;
 
-import com.verba.language.parse.expressions.primitives.PlatformTypeExpression;
+import com.verba.language.platform.expressions.PlatformTypeExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class TestPlatformTypes {
   public void test() {
     // Platform type expression will fail if the type is invalid.
     for (String keyword : KeywordToken.platformTypeKeywords()) {
-      PlatformTypeExpression expression = new PlatformTypeExpression(keyword);
+      //PlatformTypeExpression expression = PlatformTypeExpression.getExpressionForType(keyword);
     }
   }
 }

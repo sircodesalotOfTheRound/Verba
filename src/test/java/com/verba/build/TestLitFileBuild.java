@@ -9,8 +9,6 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.parse.expressions.primitives.PlatformTypeExpression;
-import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import org.junit.Test;
 
 import java.io.File;

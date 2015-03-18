@@ -1,4 +1,4 @@
-package com.verba.language.platform;
+package com.verba.language.platform.expressions;
 
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
