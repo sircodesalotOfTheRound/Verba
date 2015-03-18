@@ -13,6 +13,7 @@ import java.util.function.Consumer;
  */
 public class BuildEventPublisher {
   private final Build build;
+  private final BuildTargetDependencyGraph dependencyGraph = new BuildTargetDependencyGraph();
   private final QList<BuildTarget> targets = new QList<>();
 
   public BuildEventPublisher(Build build) {
@@ -26,20 +27,16 @@ public class BuildEventPublisher {
   }
 
   public BuildEventPublisher addTarget(BuildTarget target) {
-    if (target != null) {
-      this.targets.add(target);
-      target.onBuildUpdated(build, null);
-      for (BuildArtifact artifact : build.getArtifacts()) {
-        target.onBuildUpdated(build, artifact);
-      }
-    }
-
+    dependencyGraph.addTarget(target);
+    target.onBuildUpdated(build, null);
     return this;
   }
 
   public void publishBuildUpdated(BuildArtifact artifact) {
-    for (BuildTarget target : targets) {
-      target.onBuildUpdated(build, artifact);
+    if (dependencyGraph.containsTargetsForDependency(artifact)) {
+      for (BuildTarget target : dependencyGraph.getTargetsForDependency(artifact)) {
+        target.onBuildUpdated(build, artifact);
+      }
     }
   }
 }
