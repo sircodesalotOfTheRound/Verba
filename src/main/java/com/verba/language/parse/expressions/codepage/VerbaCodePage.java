@@ -32,11 +32,13 @@ public class VerbaCodePage extends VerbaExpression
   private QIterable<VerbaExpression> allExpressions;
   private Partition<Class, VerbaExpression> expressionsByType;
   private String path;
+  private String text;
 
   private VerbaCodePage(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
     this.path = lexer.filename();
+    this.text = lexer.text();
     this.childExpressions = this.readChildExpressions(lexer);
     this.allExpressions = captureAllExpressions(this.childExpressions);
     this.expressionsByType = this.allExpressions.parition(Object::getClass);
@@ -84,6 +86,7 @@ public class VerbaCodePage extends VerbaExpression
     }
   }
 
+  public String text() { return this.text; }
   public String path() {
     return this.path;
   }

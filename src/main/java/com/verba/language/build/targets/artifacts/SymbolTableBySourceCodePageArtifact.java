@@ -8,11 +8,11 @@ import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
  * Created by sircodesalot on 15/3/17.
  */
 public class SymbolTableBySourceCodePageArtifact implements BuildArtifact {
-  private final QIterable<SymbolsBySourceFileBuildTarget.SourceCodePageSymbolTable> symbolTables;
+  private final QIterable<SymbolsBySourceFileBuildTarget.SourceCodeInfo> symbolTables;
 
-  public SymbolTableBySourceCodePageArtifact(QIterable<SymbolsBySourceFileBuildTarget.SourceCodePageSymbolTable> symbolTables) {
+  public SymbolTableBySourceCodePageArtifact(QIterable<SymbolsBySourceFileBuildTarget.SourceCodeInfo> symbolTables) {
     this.symbolTables = symbolTables;
   }
 
-  public QIterable<SymbolsBySourceFileBuildTarget.SourceCodePageSymbolTable> symbolTables() { return this.symbolTables; }
+  public QIterable<SymbolsBySourceFileBuildTarget.SourceCodeInfo> symbolTables() { return this.symbolTables; }
 }
