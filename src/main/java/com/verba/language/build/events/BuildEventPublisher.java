@@ -14,16 +14,10 @@ import java.util.function.Consumer;
 public class BuildEventPublisher {
   private final Build build;
   private final BuildTargetDependencyGraph dependencyGraph = new BuildTargetDependencyGraph();
-  private final QList<BuildTarget> targets = new QList<>();
 
   public BuildEventPublisher(Build build) {
     this.build = build;
-    this.build.onArtifactAdded(new Consumer<BuildArtifact>() {
-      @Override
-      public void accept(BuildArtifact buildArtifact) {
-        publishBuildUpdated(buildArtifact);
-      }
-    });
+    this.build.onArtifactAdded(this::publishBuildUpdated);
   }
 
   public BuildEventPublisher addTarget(BuildTarget target) {
