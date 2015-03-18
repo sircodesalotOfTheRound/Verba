@@ -19,6 +19,7 @@ public class LitFileBuildManager extends BuildManagerBase {
       .addTarget(new AddStringTableBuildTarget())
       .addTarget(new SourceCodeSyntaxTreeListBuildTarget())
       .addTarget(new SymbolTableBuildTarget())
+      .addTarget(new SymbolsBySourceFileBuildTarget())
       .addTarget(new LitFileSyntaxTreeBuildTarget());
   }
 }

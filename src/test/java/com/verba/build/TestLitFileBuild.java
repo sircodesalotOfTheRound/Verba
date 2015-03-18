@@ -110,4 +110,12 @@ public class TestLitFileBuild {
     }));
   }
 
+  @Test
+  public void testSymbolTableByFiles() {
+    LitFileBuildManager build = generateBuild();
+    assert (build.containsArtifactOfType(SymbolTableBySourceCodePageArtifact.class));
+
+    SymbolTableBySourceCodePageArtifact artifact = build.getArtifactOfType(SymbolTableBySourceCodePageArtifact.class);
+    assert(artifact.symbolTables().count() == 5);
+  }
 }
