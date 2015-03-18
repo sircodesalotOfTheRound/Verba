@@ -3,7 +3,7 @@ package com.verba.language.emit.variables.frame;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.testtools.exceptions.CompilerException;
+import com.verba.tools.exceptions.CompilerException;
 
 /**
  * Created by sircodesalot on 14/12/4.

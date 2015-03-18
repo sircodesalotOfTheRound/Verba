@@ -1,15 +1,13 @@
 package com.verba.language.build.targets.artifacts;
 
-import com.javalinq.implementations.QList;
-import com.javalinq.implementations.QMap;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
-import com.verba.testtools.datastructures.OneToManyMap;
-import com.verba.testtools.polymorphism.ClassHierarchyFlattener;
+import com.verba.tools.datastructures.OneToManyMap;
+import com.verba.tools.polymorphism.ClassHierarchyFlattener;
 
 /**
  * Created by sircodesalot on 15/3/17.

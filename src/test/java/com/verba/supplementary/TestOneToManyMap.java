@@ -1,6 +1,6 @@
 package com.verba.supplementary;
 
-import com.verba.testtools.datastructures.OneToManyMap;
+import com.verba.tools.datastructures.OneToManyMap;
 import org.junit.Test;
 
 /**

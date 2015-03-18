@@ -4,7 +4,7 @@ import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.emit.variables.frame.VirtualVariableScope;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.testtools.exceptions.CompilerException;
+import com.verba.tools.exceptions.CompilerException;
 
 import java.util.HashMap;
 import java.util.Map;

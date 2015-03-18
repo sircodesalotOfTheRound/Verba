@@ -1,4 +1,4 @@
-package com.verba.testtools.datastructures;
+package com.verba.tools.datastructures;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.implementations.QMap;

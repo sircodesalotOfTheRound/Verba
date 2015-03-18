@@ -7,7 +7,7 @@ import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import com.verba.testtools.exceptions.CompilerException;
+import com.verba.tools.exceptions.CompilerException;
 
 /**
  * Created by sircodesalot on 14/12/7.

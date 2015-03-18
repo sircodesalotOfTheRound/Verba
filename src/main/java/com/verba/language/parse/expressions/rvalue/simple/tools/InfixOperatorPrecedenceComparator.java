@@ -7,7 +7,7 @@ import com.verba.language.parse.tokens.operators.mathop.AddOpToken;
 import com.verba.language.parse.tokens.operators.mathop.DivideOpToken;
 import com.verba.language.parse.tokens.operators.mathop.MultiplyOpToken;
 import com.verba.language.parse.tokens.operators.mathop.SubtractOpToken;
-import com.verba.testtools.exceptions.CompilerException;
+import com.verba.tools.exceptions.CompilerException;
 
 /**
  * Created by sircodesalot on 15/2/24.

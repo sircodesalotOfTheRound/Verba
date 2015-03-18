@@ -1,12 +1,8 @@
 package com.verba.language.build.events;
 
-import com.javalinq.implementations.QList;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.interfaces.BuildTarget;
-import com.verba.testtools.exceptions.CompilerException;
-
-import java.util.function.Consumer;
 
 /**
  * Created by sircodesalot on 15/3/16.

@@ -1,9 +1,9 @@
-package com.verba.testtools;
+package com.verba.tools;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.testtools.files.FileTools;
-import com.verba.testtools.xml.XmlElement;
+import com.verba.tools.files.FileTools;
+import com.verba.tools.xml.XmlElement;
 
 import java.io.*;
 import java.util.function.Supplier;

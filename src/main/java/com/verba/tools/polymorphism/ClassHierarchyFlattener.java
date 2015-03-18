@@ -1,4 +1,4 @@
-package com.verba.testtools.polymorphism;
+package com.verba.tools.polymorphism;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;

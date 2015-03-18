@@ -1,6 +1,6 @@
-package com.verba.testtools.xml;
+package com.verba.tools.xml;
 
-import com.verba.testtools.display.StringTools;
+import com.verba.tools.display.StringTools;
 
 /**
  * Created by sircodesalot on 14/8/30.

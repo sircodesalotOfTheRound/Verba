@@ -1,6 +1,6 @@
 package com.verba.supplementary;
 
-import com.verba.testtools.polymorphism.ClassHierarchyFlattener;
+import com.verba.tools.polymorphism.ClassHierarchyFlattener;
 import org.junit.Test;
 
 /**

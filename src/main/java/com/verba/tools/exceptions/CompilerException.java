@@ -1,4 +1,4 @@
-package com.verba.testtools.exceptions;
+package com.verba.tools.exceptions;
 
 /**
  * Created by sircodesalot on 14/12/4.

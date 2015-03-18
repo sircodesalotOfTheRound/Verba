@@ -5,7 +5,7 @@ import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.targets.artifacts.SourceCodePathListArtifact;
 import com.verba.language.build.targets.interfaces.BuildTarget;
-import com.verba.testtools.files.FileTools;
+import com.verba.tools.files.FileTools;
 
 import java.io.File;
 import java.util.function.Predicate;

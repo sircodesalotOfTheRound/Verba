@@ -1,12 +1,10 @@
 package com.verba.language.build.events;
 
-import com.javalinq.implementations.QList;
-import com.javalinq.implementations.QMap;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.targets.interfaces.BuildTarget;
-import com.verba.testtools.datastructures.OneToManyMap;
-import com.verba.testtools.polymorphism.ClassHierarchyFlattener;
+import com.verba.tools.datastructures.OneToManyMap;
+import com.verba.tools.polymorphism.ClassHierarchyFlattener;
 
 /**
  * Created by sircodesalot on 15/3/18.
