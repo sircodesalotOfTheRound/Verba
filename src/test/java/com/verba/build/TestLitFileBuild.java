@@ -106,17 +106,4 @@ public class TestLitFileBuild {
       return symbolMatchingFunction != null;
     }));
   }
-
-  @Test
-  public void testSymbolTableByFiles() {
-    LitFileBuildManager build = generateBuild();
-    assert (build.containsArtifactOfType(SymbolTableBySourceCodePageArtifact.class));
-
-    SymbolTableBySourceCodePageArtifact artifact = build.getArtifactOfType(SymbolTableBySourceCodePageArtifact.class);
-    assert(artifact.symbolTables().count() == 5);
-    assert(artifact.symbolTables().all(symbol -> symbol.symbolTable().containsSymbolsOfType(FunctionDeclarationExpression.class)));
-    assert(artifact.symbolTables().all(symbol -> {
-      return symbol.symbolTable().getSymbolsOfType(FunctionDeclarationExpression.class).count() == 1;
-    }));
-  }
 }

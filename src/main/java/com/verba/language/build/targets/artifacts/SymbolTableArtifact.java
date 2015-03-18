@@ -14,11 +14,26 @@ import com.verba.tools.polymorphism.ClassHierarchyFlattener;
  */
 public class SymbolTableArtifact implements BuildArtifact {
   private final SymbolTable symbolTable;
+  private final QIterable<SymbolTable> symbolTablesBySource;
   private final ClassHierarchyToObjectMap symbolsByType;
 
   public SymbolTableArtifact(VerbaSourceCodeFile page) {
     this.symbolTable = new SymbolTable(page);
     this.symbolsByType = partitionSymbolsByType(symbolTable);
+    this.symbolTablesBySource = separateSymbolTablesBySourceCodeFile(symbolTable);
+  }
+
+  public SymbolTableArtifact(LitFileSyntaxTreeArtifact syntaxTree) {
+    this.symbolTable = new SymbolTable(syntaxTree.expression());
+    this.symbolsByType = partitionSymbolsByType(symbolTable);
+    this.symbolTablesBySource = separateSymbolTablesBySourceCodeFile(symbolTable);
+  }
+
+  private QIterable<SymbolTable> separateSymbolTablesBySourceCodeFile(SymbolTable symbolTable) {
+    return symbolTable.sources()
+      .ofType(VerbaSourceCodeFile.class)
+      .map(SymbolTable::new)
+      .toList();
   }
 
   // Associates a class, and its entire hierarchy to an object.
@@ -40,10 +55,6 @@ public class SymbolTableArtifact implements BuildArtifact {
     }
   }
 
-  public SymbolTableArtifact(LitFileSyntaxTreeArtifact syntaxTree) {
-    this.symbolTable = new SymbolTable(syntaxTree.expression());
-    this.symbolsByType = partitionSymbolsByType(symbolTable);
-  }
 
   private ClassHierarchyToObjectMap partitionSymbolsByType(SymbolTable symbolTable) {
     ClassHierarchyToObjectMap map = new ClassHierarchyToObjectMap();
@@ -53,6 +64,8 @@ public class SymbolTableArtifact implements BuildArtifact {
 
     return map;
   }
+
+  public QIterable<SymbolTable> symbolTablesBySource() { return this.symbolTablesBySource; }
 
   public SymbolTable symbolTable() { return this.symbolTable; }
 

@@ -8,6 +8,7 @@ import com.verba.language.graph.symbols.meta.types.SystemTypeMetadata;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
+import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.expressions.primitives.PlatformTypeExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
@@ -114,6 +115,8 @@ public class SymbolTable {
   public Scope resolveScope(ValDeclarationStatement declaration) {
     return this.entriesByInstance.get(declaration).scope();
   }
+
+  public QIterable<ExpressionSource> sources() { return this.entries().map(Symbol::source).distinct(); }
 
   public Symbol findByIndex(int index) {
     return this.entries.get(index);
