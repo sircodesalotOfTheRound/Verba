@@ -117,5 +117,9 @@ public class TestLitFileBuild {
 
     SymbolTableBySourceCodePageArtifact artifact = build.getArtifactOfType(SymbolTableBySourceCodePageArtifact.class);
     assert(artifact.symbolTables().count() == 5);
+    assert(artifact.symbolTables().all(symbol -> symbol.symbolTable().containsSymbolsOfType(FunctionDeclarationExpression.class)));
+    assert(artifact.symbolTables().all(symbol -> {
+      return symbol.symbolTable().getSymbolsOfType(FunctionDeclarationExpression.class).count() == 1;
+    }));
   }
 }
