@@ -3,10 +3,12 @@ package com.verba.language.parse.expressions.codepage;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
+import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.expressions.events.VerbaCodePageVerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.tools.ExpressionTreeFlattener;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.codestream.CodeStream;
@@ -49,6 +51,21 @@ public class VerbaSourceCodeFile extends VerbaExpression
 
   @Override
   protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void afterContentsParsed(Build build) {
+
+  }
+
+  @Override
+  public void afterSymbolsGenerated(Build build, SymbolTable table) {
+
+  }
+
+  @Override
+  public void onResolveSymbols(Build build, SymbolTable table) {
 
   }
 

@@ -1,6 +1,7 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.expressions.events.FunctionEventSubscriptionVerbaExpression;
@@ -8,6 +9,7 @@ import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.expressions.modifiers.FunctionDeclarationExpressionModifierInfo;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.backtracking.rules.FunctionDeclarationBacktrackRule;
@@ -62,6 +64,21 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   @Override
   protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void afterContentsParsed(Build build) {
+    System.out.println("notified");
+  }
+
+  @Override
+  public void afterSymbolsGenerated(Build build, SymbolTable table) {
+
+  }
+
+  @Override
+  public void onResolveSymbols(Build build, SymbolTable table) {
 
   }
 

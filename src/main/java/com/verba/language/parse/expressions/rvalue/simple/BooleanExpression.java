@@ -1,5 +1,7 @@
 package com.verba.language.parse.expressions.rvalue.simple;
 
+import com.verba.language.build.configuration.Build;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.LiteralExpression;
@@ -25,6 +27,21 @@ public class BooleanExpression extends VerbaExpression implements LiteralExpress
 
   }
 
+  @Override
+  public void afterContentsParsed(Build build) {
+
+  }
+
+  @Override
+  public void afterSymbolsGenerated(Build build, SymbolTable table) {
+
+  }
+
+  @Override
+  public void onResolveSymbols(Build build, SymbolTable table) {
+
+  }
+
   private boolean determineValue(Lexer lexer) {
     if (lexer.currentIs(KeywordToken.class, KeywordToken.TRUE)) {
       lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.TRUE);
@@ -42,6 +59,7 @@ public class BooleanExpression extends VerbaExpression implements LiteralExpress
   public static BooleanExpression read(VerbaExpression parent, Lexer lexer) {
     return new BooleanExpression(parent, lexer);
   }
+
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);

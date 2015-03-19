@@ -1,6 +1,8 @@
 package com.verba.language.parse.expressions.modifiers;
 
+import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.symbols.table.tables.Scope;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
@@ -26,6 +28,21 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
 
   @Override
   protected void onChildRemoved(VerbaExpression child) {
+
+  }
+
+  @Override
+  public void afterContentsParsed(Build build) {
+
+  }
+
+  @Override
+  public void afterSymbolsGenerated(Build build, SymbolTable table) {
+
+  }
+
+  @Override
+  public void onResolveSymbols(Build build, SymbolTable table) {
 
   }
 

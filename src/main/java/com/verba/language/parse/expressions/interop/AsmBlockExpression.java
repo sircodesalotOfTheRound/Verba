@@ -1,5 +1,7 @@
 package com.verba.language.parse.expressions.interop;
 
+import com.verba.language.build.configuration.Build;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
@@ -42,6 +44,21 @@ public class AsmBlockExpression extends VerbaExpression {
   }
 
   @Override
+  public void afterContentsParsed(Build build) {
+
+  }
+
+  @Override
+  public void afterSymbolsGenerated(Build build, SymbolTable table) {
+
+  }
+
+  @Override
+  public void onResolveSymbols(Build build, SymbolTable table) {
+
+  }
+
+  @Override
   public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
@@ -49,4 +66,5 @@ public class AsmBlockExpression extends VerbaExpression {
   public static AsmBlockExpression read(VerbaExpression parent, Lexer lexer) {
     return new AsmBlockExpression(parent, lexer);
   }
+
 }

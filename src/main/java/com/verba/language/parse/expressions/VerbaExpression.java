@@ -1,7 +1,9 @@
 package com.verba.language.parse.expressions;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
@@ -51,38 +53,17 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
 
   private final Lexer lexer;
   private final LexInfo startingLexPoint;
-  private final VerbaExpressionBuildEventSubscriptionBase buildEventSubscription;
   private LexInfo endingLexPoint;
   private final ValidationViolationList violations = new ValidationViolationList();
 
   public VerbaExpression(VerbaExpression parent, Lexer lexer) {
-    this(parent, lexer, null);
-  }
-
-  public VerbaExpression(VerbaExpression parent, Lexer lexer,
-                         VerbaExpressionBuildEventSubscriptionBase eventSubscription) {
     this.parent = parent;
     this.lexer = lexer;
-    this.buildEventSubscription = eventSubscription;
     this.startingLexPoint = (lexer != null && lexer.notEOF()) ? lexer.current() : null;
   }
 
-  // Parent
-  public VerbaExpression parent() { return this.parent; }
-  protected abstract void onChildRemoved(VerbaExpression child);
-  public void setParent(VerbaExpression parent) {
-    VerbaExpression previousParent = this.parent;
-    this.parent = parent;
-
-    // Notify parent when child is removed.
-    if (previousParent != null) {
-      previousParent.onChildRemoved(this);
-    }
-  }
-
-  public boolean hasParent() {
-    return this.parent != null;
-  }
+  // Parsing
+  public static VerbaExpression read(VerbaExpression parent, Lexer lexer) { return rules.resolve(parent, lexer); }
 
   // Lex Info
   public LexInfo startingLexPoint() {
@@ -97,6 +78,7 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
     return this.endingLexPoint;
   }
 
+  // Text information
   public String text() {
     int startIndex = startingAbsolutePosition();
     int endIndex = endingAbsolutePosition();
@@ -118,23 +100,32 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
   public int endingColumn() { return this.endingLexPoint.column() + this.endingLexPoint.length(); }
   public int endingAbsolutePosition() { return this.endingLexPoint.absolutePosition() + this.endingLexPoint.length(); }
 
-  // Testing
-  public <T> boolean is(Class<T> type) {
-    return type.isAssignableFrom(this.getClass());
+  // Reflection
+  public <T> T as(Class<T> type) { return (T)this; }
+  public <T> boolean is(Class<T> type) { return type.isAssignableFrom(this.getClass()); }
+
+  public boolean hasParent() { return this.parent != null; }
+  public VerbaExpression parent() { return this.parent; }
+  public <T> boolean parentIs(Class<T> type) { return this.hasParent() && type.isAssignableFrom(this.parent.getClass()); }
+
+  protected abstract void onChildRemoved(VerbaExpression child);
+
+  public void setParent(VerbaExpression parent) {
+    VerbaExpression previousParent = this.parent;
+    this.parent = parent;
+
+    // Notify parent when child is removed.
+    if (previousParent != null) {
+      previousParent.onChildRemoved(this);
+    }
   }
 
-  public <T> T as(Class<T> type) {
-    return (T)this;
-  }
+  // Build Events
+  public abstract void afterContentsParsed(Build build);
+  public abstract void afterSymbolsGenerated(Build build, SymbolTable table);
+  public abstract void onResolveSymbols(Build build, SymbolTable table);
 
-  public <T> boolean parentIs(Class<T> type) {
-    return this.hasParent() && type.isAssignableFrom(this.parent.getClass());
-  }
-
-  public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {
-    return rules.resolve(parent, lexer);
-  }
-
+  // Violations
   public QIterable<ValidationViolation> violations() { return this.violations; }
 
   public void addViolation(ValidationViolation violation) {
@@ -147,23 +138,5 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
 
   protected void addError(String format, Object ... args) {
     this.addViolation(new ValidationError(this, format, args));
-  }
-
-  public boolean containsBuildEventSubscription() { return this.buildEventSubscription != null; }
-  public VerbaExpressionBuildEventSubscriptionBase eventSubscription() { return this.buildEventSubscription; }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (!(obj instanceof VerbaExpression)) {
-      return false;
-    }
-
-    if (this == obj) {
-      return true;
-    }
-
-    VerbaExpression rhs = (VerbaExpression)obj;
-    return startingAbsolutePosition() == rhs.startingAbsolutePosition()
-      && endingAbsolutePosition() == rhs.endingAbsolutePosition();
   }
 }

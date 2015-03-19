@@ -3,10 +3,12 @@ package com.verba.language.parse.expressions;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
+import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
 import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.expressions.events.StaticSpaceVerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
+import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
@@ -76,4 +78,20 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
   protected void onChildRemoved(VerbaExpression child) {
 
   }
+
+  @Override
+  public void afterContentsParsed(Build build) {
+
+  }
+
+  @Override
+  public void afterSymbolsGenerated(Build build, SymbolTable table) {
+
+  }
+
+  @Override
+  public void onResolveSymbols(Build build, SymbolTable table) {
+
+  }
+
 }

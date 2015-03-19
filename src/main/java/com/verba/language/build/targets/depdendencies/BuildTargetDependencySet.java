@@ -4,6 +4,8 @@ import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
+import com.verba.language.build.targets.interfaces.BuildTarget;
+import com.verba.tools.exceptions.CompilerException;
 
 /**
  * Created by sircodesalot on 15/3/16.
@@ -14,6 +16,7 @@ public class BuildTargetDependencySet {
   public BuildTargetDependencySet(Class ... targetDependencies) {
     this.targetDependencies = new QSet<>(targetDependencies);
   }
+
 
   public boolean targetDependenciesAvailable(Build build) {
     if (targetDependencies.any()) {
