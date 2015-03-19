@@ -16,6 +16,7 @@ import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
+import org.apache.commons.codec.digest.DigestUtils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.InputStream;
@@ -33,12 +34,14 @@ public class VerbaSourceCodeFile extends VerbaExpression
   private Partition<Class, VerbaExpression> expressionsByType;
   private String path;
   private String text;
+  private String hash;
 
   private VerbaSourceCodeFile(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
     this.path = lexer.filename();
     this.text = lexer.text();
+    this.hash = DigestUtils.sha1Hex(text);
     this.childExpressions = this.readChildExpressions(lexer);
     this.allExpressions = captureAllExpressions(this.childExpressions);
     this.expressionsByType = this.allExpressions.parition(Object::getClass);
@@ -87,9 +90,8 @@ public class VerbaSourceCodeFile extends VerbaExpression
   }
 
   public String text() { return this.text; }
-  public String path() {
-    return this.path;
-  }
+  public String path() { return this.path; }
+  public String hash() { return this.hash; }
 
   // Build from a file path.
   public static VerbaSourceCodeFile fromFile(VerbaExpression parent, String path) {
