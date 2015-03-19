@@ -25,8 +25,10 @@ public class FunctionEventSubscriptionVerbaExpression
   }
 
   private Symbol determineReturnType(SymbolTable symbolTable) {
-    FunctionReturnTypeResolver returnTypeResolver = new FunctionReturnTypeResolver(symbolTable, null);
-    return returnTypeResolver.resolve();
+    /*FunctionReturnTypeResolver returnTypeResolver = new FunctionReturnTypeResolver(symbolTable, null);
+    return returnTypeResolver.resolve();*/
+
+    return null;
   }
 
   public ObjectImage onGenerateObjectImage(Build buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {

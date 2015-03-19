@@ -13,18 +13,16 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
  * Created by sircodesalot on 14/12/3.
  */
 public class FunctionReturnTypeResolver {
-  private final SymbolTable symbolTable;
   private final FunctionDeclarationExpression declaration;
-  private final Scope scope;
   private boolean hasConsistentReturnType = false;
+  private Symbol resolvedType;
 
-  public FunctionReturnTypeResolver(SymbolTable symbolTable, FunctionDeclarationExpression declaration) {
-    this.symbolTable = symbolTable;
+  public FunctionReturnTypeResolver(FunctionDeclarationExpression declaration) {
     this.declaration = declaration;
-    this.scope = symbolTable.findByInstance(declaration).scope();
   }
 
-  public Symbol resolve() {
+  public Symbol resolve(SymbolTable symbolTable) {
+    Scope scope = symbolTable.findByInstance(declaration).scope();
     SymbolNameResolver resolver = new SymbolNameResolver(symbolTable, scope);
 
     // TODO: This is really not very thorough
@@ -33,8 +31,14 @@ public class FunctionReturnTypeResolver {
       QIterable<SymbolResolutionMatch> symbolsInScope =
         resolver.findSymbolsInScope(this.declaration.typeConstraint().representation());
 
-      this.hasConsistentReturnType = true;
-      return symbolsInScope.single().symbol();
+      if (symbolsInScope.any()) {
+        this.hasConsistentReturnType = true;
+        this.resolvedType = symbolsInScope.single().symbol();
+        return this.resolvedType;
+      } else {
+        this.hasConsistentReturnType = false;
+        this.resolvedType = null;
+      }
     }
 
     // If there isn't, check the return statements.
@@ -45,7 +49,8 @@ public class FunctionReturnTypeResolver {
     }
 
     // Otherwise return the first entry:
-    return returnStatements.single().returnType();
+    this.resolvedType = returnStatements.single().returnType();
+    return this.resolvedType;
   }
 
   // Not very thorough, but it will work for now.
@@ -60,4 +65,5 @@ public class FunctionReturnTypeResolver {
   }
 
   public boolean hasConsistentReturnType() { return this.hasConsistentReturnType; }
+  public Symbol resolvedType() { return this.resolvedType; }
 }

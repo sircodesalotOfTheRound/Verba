@@ -13,11 +13,6 @@ public class VerbaCodePageVerbaExpressionBuildEventSubscription
   private QList<String> namespaces = new QList<>();
 
   public void afterParse(Build analysis, LitFileRootExpression buildAnalysis) {
-    /*QIterable<String> namespaceRepresentations = this.expression()
-      .expressionsByType(WithNsExpression.class)
-      .map(ns -> ns.namespace().representation());
-
-    this.namespaces.add(namespaceRepresentations);*/
   }
 
   public QIterable<String> namespaces() { return namespaces; }

@@ -4,6 +4,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.expressions.modifiers.FunctionDeclarationExpressionModifierInfo;
+import com.verba.language.graph.symbols.resolution.FunctionReturnTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -37,12 +38,14 @@ public class FunctionDeclarationExpression extends VerbaExpression
   private final FullyQualifiedNameExpression identifier;
   private final BlockDeclarationExpression block;
   private final ExpressionModifierInfo modifierInfo;
+  private final FunctionReturnTypeResolver returnTypeResolver;
   private final boolean isConstructor;
   private TypeConstraintExpression explicitReturnType;
 
   public FunctionDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+    this.returnTypeResolver = new FunctionReturnTypeResolver(this);
     this.isConstructor = determineIsConstructorFunction(parent, lexer);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
 
@@ -73,7 +76,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   @Override
   public void onResolveSymbols(Build build, SymbolTable table) {
-
+    this.returnTypeResolver.resolve(table);
   }
 
   private boolean determineIsConstructorFunction(VerbaExpression parent, Lexer lexer) {
@@ -159,7 +162,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
     symbolTable.visit(this);
   }
 
-  public Symbol resolvedType() { return null; }
+  public Symbol resolvedType() { return this.returnTypeResolver.resolvedType(); }
 
   public ExpressionModifierInfo modifiers() { return this.modifierInfo; }
 }

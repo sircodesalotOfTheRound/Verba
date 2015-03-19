@@ -19,9 +19,8 @@ public class SyntaxTreeNotificationBuildTarget extends BuildTarget {
 
   @Override
   public void onBuildUpdated(Build build, BuildArtifact symbolTable) {
-    if (symbolTable instanceof LitFileSyntaxTreeArtifact) {
-      this.notifyExpressionsParseComplete(build, (LitFileSyntaxTreeArtifact) symbolTable);
-    } else if (symbolTable instanceof SymbolTableArtifact) {
+    if (symbolTable instanceof SymbolTableArtifact) {
+      this.notifyExpressionsParseComplete(build, build.getArtifactOfType(LitFileSyntaxTreeArtifact.class));
       this.notifyExpressionsSymbolTableComplete(build, (SymbolTableArtifact) symbolTable);
     }
   }

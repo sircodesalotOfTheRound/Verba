@@ -13,6 +13,7 @@ import com.verba.language.parse.codestream.FileBasedCodeStream;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
+import com.verba.language.parse.expressions.withns.WithNsExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -28,6 +29,7 @@ public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableE
   private QList<VerbaExpression> childExpressions;
   private QIterable<VerbaExpression> allExpressions;
   private Partition<Class, VerbaExpression> expressionsByType;
+  private QIterable<String> namespaces;
   private String path;
   private String text;
   private String hash;
@@ -50,6 +52,10 @@ public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableE
 
   @Override
   public void afterContentsParsed(Build build) {
+    this.namespaces = this
+      .expressionsByType(WithNsExpression.class)
+      .map(ns -> ns.namespace().representation())
+      .toList();
 
   }
 
@@ -128,7 +134,7 @@ public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableE
     }
   }
 
-  public QIterable<String> importedNamespaces() { return null; /*this.buildProfile.namespaces();*/ }
+  public QIterable<String> importedNamespaces() { return this.namespaces; }
 
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
