@@ -81,7 +81,7 @@ public class TestLitFileBuild {
     LitFileBuildManager build = generateBuild();
     assert (build.containsArtifactOfType(LitFileSyntaxTreeArtifact.class));
     LitFileSyntaxTreeArtifact syntaxTree = build.getArtifactOfType(LitFileSyntaxTreeArtifact.class);
-    LitFileRootExpression root = syntaxTree.expression();
+    LitFileRootExpression root = syntaxTree.rootExpression();
 
     QIterable<String> functionNames = root.allExpressions()
       .ofType(FunctionDeclarationExpression.class)

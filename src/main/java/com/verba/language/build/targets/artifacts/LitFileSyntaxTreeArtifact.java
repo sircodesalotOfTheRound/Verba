@@ -14,5 +14,5 @@ public class LitFileSyntaxTreeArtifact implements BuildArtifact {
     this.expression = new LitFileRootExpression(sourcePages);
   }
 
-  public LitFileRootExpression expression() { return this.expression; }
+  public LitFileRootExpression rootExpression() { return this.expression; }
 }

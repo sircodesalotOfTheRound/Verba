@@ -69,17 +69,17 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   @Override
   public void afterContentsParsed(Build build) {
-    System.out.println("notified");
+    System.out.println("after parse");
   }
 
   @Override
   public void afterSymbolsGenerated(Build build, SymbolTable table) {
-
+    System.out.println("after symbol table");
   }
 
   @Override
   public void onResolveSymbols(Build build, SymbolTable table) {
-
+    System.out.println("On resolve symbols");
   }
 
   private boolean determineIsConstructorFunction(VerbaExpression parent, Lexer lexer) {

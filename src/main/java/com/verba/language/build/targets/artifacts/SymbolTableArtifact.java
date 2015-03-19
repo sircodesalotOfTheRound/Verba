@@ -24,7 +24,7 @@ public class SymbolTableArtifact implements BuildArtifact {
   }
 
   public SymbolTableArtifact(LitFileSyntaxTreeArtifact syntaxTree) {
-    this.symbolTable = new SymbolTable(syntaxTree.expression());
+    this.symbolTable = new SymbolTable(syntaxTree.rootExpression());
     this.symbolsByType = partitionSymbolsByType(symbolTable);
     this.symbolTablesBySource = separateSymbolTablesBySourceCodeFile(symbolTable);
   }
