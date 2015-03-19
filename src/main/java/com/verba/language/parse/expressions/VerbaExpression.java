@@ -1,6 +1,7 @@
 package com.verba.language.parse.expressions;
 
 import com.javalinq.interfaces.QIterable;
+import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
@@ -50,12 +51,19 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
 
   private final Lexer lexer;
   private final LexInfo startingLexPoint;
+  private final VerbaExpressionBuildEventSubscriptionBase buildEventSubscription;
   private LexInfo endingLexPoint;
   private final ValidationViolationList violations = new ValidationViolationList();
 
   public VerbaExpression(VerbaExpression parent, Lexer lexer) {
+    this(parent, lexer, null);
+  }
+
+  public VerbaExpression(VerbaExpression parent, Lexer lexer,
+                         VerbaExpressionBuildEventSubscriptionBase eventSubscription) {
     this.parent = parent;
     this.lexer = lexer;
+    this.buildEventSubscription = eventSubscription;
     this.startingLexPoint = (lexer != null && lexer.notEOF()) ? lexer.current() : null;
   }
 
@@ -140,6 +148,9 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
   protected void addError(String format, Object ... args) {
     this.addViolation(new ValidationError(this, format, args));
   }
+
+  public boolean containsBuildEventSubscription() { return this.buildEventSubscription != null; }
+  public VerbaExpressionBuildEventSubscriptionBase eventSubscription() { return this.buildEventSubscription; }
 
   @Override
   public boolean equals(Object obj) {
