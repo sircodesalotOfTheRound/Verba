@@ -31,7 +31,14 @@ public class SymbolTable {
 
   public SymbolTable(Scope table) {
     this.rootTable = table;
+    this.addPlatformTypes();
     this.scanTableHierarchy(table);
+  }
+
+  private void addPlatformTypes() {
+    for (Symbol symbol : PlatformTypeSymbols.platformSymbols()) {
+      this.putEntry(symbol);
+    }
   }
 
   private void scanTableHierarchy(Scope table) {
