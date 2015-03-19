@@ -2,8 +2,6 @@ package com.verba.language.parse.expressions.blockheader.varname;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.expressions.events.NamedValueExpressionVerbaExpressionBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -20,10 +18,8 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  */
 public class NamedValueExpression extends VerbaExpression
   implements RValueExpression, TupleItemExpression, MarkupRvalueExpression,
-    NamedAndTypedExpression, MathOperandExpression,
-    VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
+    NamedAndTypedExpression, MathOperandExpression
 {
-  private final NamedValueExpressionVerbaExpressionBuildEventHandler buildProfile = new NamedValueExpressionVerbaExpressionBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
   private TypeConstraintExpression type;
 
@@ -85,7 +81,7 @@ public class NamedValueExpression extends VerbaExpression
   }
 
   @Override
-  public Symbol resolvedType() { return buildProfile.resolvedType(); }
+  public Symbol resolvedType() { return null; } //return buildProfile.resolvedType(); }
   public QIterable<TupleDeclarationExpression> parameters() { return this.identifier.first().parameterLists(); }
 
   public FullyQualifiedNameExpression identifier() {
@@ -100,7 +96,4 @@ public class NamedValueExpression extends VerbaExpression
   public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }
-
-  @Override
-  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 }

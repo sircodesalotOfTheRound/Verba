@@ -1,9 +1,6 @@
 package com.verba.language.parse.expressions.statements.declaration;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
-import com.verba.language.graph.expressions.events.ValDeclarationEventSubscriptionVerbaExpression;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -19,11 +16,9 @@ import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
  * Created by sircodesalot on 14-2-19.
  */
 public class ValDeclarationStatement extends VerbaExpression
-  implements NamedAndTypedExpression, AssignmentExpression, SymbolTableExpression,
-  VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
+  implements NamedAndTypedExpression, AssignmentExpression, SymbolTableExpression
 {
 
-  private ValDeclarationEventSubscriptionVerbaExpression buildProfile = new ValDeclarationEventSubscriptionVerbaExpression(this);
   private NamedValueExpression identifier;
   private RValueExpression rvalue;
   private boolean isMutable;
@@ -102,7 +97,8 @@ public class ValDeclarationStatement extends VerbaExpression
 
   @Override
   public Symbol resolvedType() {
-    return this.buildProfile.resolvedType();
+    return null;
+    //return this.buildProfile.resolvedType();
   }
 
 
@@ -130,6 +126,4 @@ public class ValDeclarationStatement extends VerbaExpression
     symbolTable.visit(this);
   }
 
-  @Override
-  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return this.buildProfile; }
 }

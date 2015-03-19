@@ -4,24 +4,16 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameResolver;
-import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
-import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
-import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
-import com.verba.language.parse.expressions.categories.TypeConstraintExpression;
 
 /**
  * Created by sircodesalot on 14/11/24.
  */
-public class PolymorphicVerbaExpressionBuildEventHandler extends VerbaExpressionBuildEventSubscription<PolymorphicDeclarationExpression>
-  implements VerbaExpressionBuildEvent.NotifySymbolTableVerbaExpressionBuildEvent,
-  VerbaExpressionBuildEvent.NotifyCodeGenerationEventVerbaExpression
+public class PolymorphicVerbaExpressionBuildEventHandler
 {
   private SymbolTable symbolTable;
   private Symbol thisEntry;
@@ -31,39 +23,31 @@ public class PolymorphicVerbaExpressionBuildEventHandler extends VerbaExpression
   private QIterable<Symbol> allMembers;
   private Partition<String, Symbol> symbolTableEntriesByName;
 
-  public PolymorphicVerbaExpressionBuildEventHandler(PolymorphicDeclarationExpression expression) {
-    super(expression);
-
-  }
-
-  @Override
   public void beforeSymbolsGenerated(Build build, LitFileRootExpression staticSpace) {
 
   }
 
-  @Override
   public void afterSymbolsGenerated(Build buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
   }
 
-  @Override
   public void onResolveSymbols(Build profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
-    this.thisEntry = symbolTable.findByInstance(this.expression());
+    /*this.thisEntry = symbolTable.findByInstance(this.expression());
     this.immediateMembers = determineImmediateMembers(this.expression());
     this.allMembers = determineAllMembers(this.expression(), new QList<>());
     this.symbolTableEntriesByName = this.allMembers.parition(Symbol::name);
-    this.traitEntriesByName = this.traitEntriesByName();
+    this.traitEntriesByName = this.traitEntriesByName();*/
   }
 
   private QIterable<Symbol> determineTraitEntries(SymbolTable symbolTable) {
-    Scope scope = symbolTable.resolveScope(this.expression());
+    //Scope scope = symbolTable.resolveScope(this.expression());
 
-    SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, scope);
+    //SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, scope);
     QList<Symbol> entriesForTraits = new QList<>() ;
-    for (TypeConstraintExpression expression : this.expression().traits()) {
+    /*for (TypeConstraintExpression expression : this.expression().traits()) {
       SymbolResolutionMatch match = nameResolver.findSymbolsInScope(expression.representation()).first();
       entriesForTraits.add(match.symbol());
-    }
+    }*/
 
     return entriesForTraits;
   }
@@ -76,7 +60,6 @@ public class PolymorphicVerbaExpressionBuildEventHandler extends VerbaExpression
     return this.traitEntries;
   }
 
-  @Override
   public void beforeCodeGeneration(Build buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
 
   }

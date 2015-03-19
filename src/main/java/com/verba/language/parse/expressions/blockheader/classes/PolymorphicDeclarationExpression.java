@@ -3,9 +3,6 @@ package com.verba.language.parse.expressions.blockheader.classes;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
-import com.verba.language.graph.expressions.events.PolymorphicVerbaExpressionBuildEventHandler;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -33,10 +30,8 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   implements NamedBlockExpression,
   ParameterizedExpression,
   GenericallyParameterizedExpression,
-  SymbolTableExpression,
-  VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
+  SymbolTableExpression
 {
-  private final PolymorphicVerbaExpressionBuildEventHandler eventSubscription = new PolymorphicVerbaExpressionBuildEventHandler(this);
   private final FullyQualifiedNameExpression identifier;
   private final boolean isClass;
   private BlockDeclarationExpression block;
@@ -132,32 +127,28 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     return this.primaryIdentifier().genericParameterList();
   }
 
-  public QIterable<Symbol> traitSymbolTableEntries() { return this.eventSubscription.traitEntries(); }
+  public QIterable<Symbol> traitSymbolTableEntries() { return null; } //this.eventSubscription.traitEntries(); }
 
   public QIterable<TypeConstraintExpression> traits() {
     return this.traits;
   }
 
-  public QIterable<Symbol> allMembers() { return this.eventSubscription.allMembers(); }
+  public QIterable<Symbol> allMembers() { return null; }// this.eventSubscription.allMembers(); }
 
   // Membership
-  public QIterable<Symbol> immediateMembers() { return this.eventSubscription.immediateMembers(); }
+  public QIterable<Symbol> immediateMembers() { return null; } //this.eventSubscription.immediateMembers(); }
 
   public boolean isClass() { return this.isClass; }
 
-  public boolean isDerivedFrom(String name) { return eventSubscription.isDerivedFrom(name); }
+  public boolean isDerivedFrom(String name) { return false; } //eventSubscription.isDerivedFrom(name); }
 
   public boolean isMember(String name) {
     return false;
   }
 
-  public boolean isImmediateMember(String name) {
-    return eventSubscription.isImmediateMember(name);
-  }
+  public boolean isImmediateMember(String name) { return false; } //eventSubscription.isImmediateMember(name); }
 
-  public QIterable<Symbol> findMembersByName(String name) {
-    return eventSubscription.findMembersByName(name);
-  }
+  public QIterable<Symbol> findMembersByName(String name) { return null; } // eventSubscription.findMembersByName(name); }
 
   @Override
   public BlockDeclarationExpression block() {
@@ -202,7 +193,4 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   @Override
   public QIterable<TupleDeclarationExpression> parameterSets() { return this.primaryIdentifier().parameterLists(); }
 
-
-  @Override
-  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return eventSubscription; }
 }

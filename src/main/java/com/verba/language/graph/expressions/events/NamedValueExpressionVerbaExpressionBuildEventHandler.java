@@ -1,39 +1,24 @@
 package com.verba.language.graph.expressions.events;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.resolution.NamedValueExpressionTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
-import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 
 /**
  * Created by sircodesalot on 14/12/7.
  */
-public class NamedValueExpressionVerbaExpressionBuildEventHandler extends VerbaExpressionBuildEventSubscription<NamedValueExpression>
-  implements VerbaExpressionBuildEvent.NotifySymbolTableVerbaExpressionBuildEvent
+public class NamedValueExpressionVerbaExpressionBuildEventHandler
 {
   private SymbolTable symbolTable;
   private NamedValueExpressionTypeResolver typeResolver;
 
-  public NamedValueExpressionVerbaExpressionBuildEventHandler(NamedValueExpression expression) {
-    super(expression);
-  }
-
-  @Override
-  public void beforeSymbolsGenerated(Build profile, LitFileRootExpression staticSpace) {
-
-  }
-
-  @Override
   public void afterSymbolsGenerated(Build profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
-    this.typeResolver = new NamedValueExpressionTypeResolver(this.expression(), symbolTable);
+    this.typeResolver = new NamedValueExpressionTypeResolver(null, symbolTable);
   }
 
-  @Override
   public void onResolveSymbols(Build profile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
 
   }

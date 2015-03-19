@@ -4,8 +4,6 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.expressions.events.StaticSpaceVerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -16,8 +14,7 @@ import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 /**
  * Created by sircodesalot on 14-5-14.
  */
-public class LitFileRootExpression extends VerbaExpression implements SymbolTableExpression, VerbaExpressionBuildEvent.ContainsEventSubscriptionObject {
-  private StaticSpaceVerbaExpressionBuildEventSubscription buildProfile = new StaticSpaceVerbaExpressionBuildEventSubscription(this);
+public class LitFileRootExpression extends VerbaExpression implements SymbolTableExpression {
   private QList<VerbaExpression> allExpressions = new QList<>();
   private Partition<Class, VerbaExpression> expressionsByType;
   private QList<VerbaSourceCodeFile> pages;
@@ -70,9 +67,6 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
 
   @Override
   public void accept(Scope symbolTable) { symbolTable.visit(this); }
-
-  @Override
-  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 
   @Override
   protected void onChildRemoved(VerbaExpression child) {

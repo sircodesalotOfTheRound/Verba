@@ -1,7 +1,6 @@
 package com.verba.language.parse.expressions.withns;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;

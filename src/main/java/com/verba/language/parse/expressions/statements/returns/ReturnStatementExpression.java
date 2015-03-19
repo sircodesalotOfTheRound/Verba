@@ -1,8 +1,6 @@
 package com.verba.language.parse.expressions.statements.returns;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
 import com.verba.language.graph.expressions.events.ReturnStatementEventSubscriptionVerbaExpression;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -17,11 +15,8 @@ import com.verba.language.parse.tokens.identifiers.KeywordToken;
  */
 
 public class ReturnStatementExpression extends VerbaExpression
-  implements VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
 {
   private RValueExpression value;
-
-  public ReturnStatementEventSubscriptionVerbaExpression eventSubscription = new ReturnStatementEventSubscriptionVerbaExpression(this);
 
   public ReturnStatementExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -74,8 +69,7 @@ public class ReturnStatementExpression extends VerbaExpression
   }
 
   public Symbol returnType() {
-    return eventSubscription.returnType();
+    return null;
+//    return eventSubscription.returnType();
   }
-  @Override
-  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return this.eventSubscription; }
 }

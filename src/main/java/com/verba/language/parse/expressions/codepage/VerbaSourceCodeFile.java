@@ -4,9 +4,6 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEvent;
-import com.verba.language.graph.expressions.events.interfaces.VerbaExpressionBuildEventSubscriptionBase;
-import com.verba.language.graph.expressions.events.VerbaCodePageVerbaExpressionBuildEventSubscription;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.tools.ExpressionTreeFlattener;
@@ -26,11 +23,8 @@ import java.io.InputStream;
 /**
  * A Codepage is a page of Verba Code.
  */
-public class VerbaSourceCodeFile extends VerbaExpression
-  implements SymbolTableExpression, ExpressionSource,
-  VerbaExpressionBuildEvent.ContainsEventSubscriptionObject
+public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableExpression, ExpressionSource
 {
-  private VerbaCodePageVerbaExpressionBuildEventSubscription buildProfile = new VerbaCodePageVerbaExpressionBuildEventSubscription(this);
   private QList<VerbaExpression> childExpressions;
   private QIterable<VerbaExpression> allExpressions;
   private Partition<Class, VerbaExpression> expressionsByType;
@@ -134,7 +128,7 @@ public class VerbaSourceCodeFile extends VerbaExpression
     }
   }
 
-  public QIterable<String> importedNamespaces() { return this.buildProfile.namespaces(); }
+  public QIterable<String> importedNamespaces() { return null; /*this.buildProfile.namespaces();*/ }
 
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
@@ -145,7 +139,4 @@ public class VerbaSourceCodeFile extends VerbaExpression
   public void accept(Scope symbolTable) {
     symbolTable.visit(this);
   }
-
-  @Override
-  public VerbaExpressionBuildEventSubscriptionBase buildEventObject() { return buildProfile; }
 }
