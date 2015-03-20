@@ -1,5 +1,6 @@
 package com.verba.language.build.targets.artifacts;
 
+import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 
@@ -13,5 +14,12 @@ public class BuildSpecificationArtifact implements BuildArtifact {
     this.specification = specification;
   }
 
-  public BuildSpecification specification() { return this.specification; }
+  public String name() { return specification.buildName(); }
+
+  public boolean isDebugBuild() { return specification.isDebugBuild(); }
+
+  public QIterable<String> sourceFolders() { return specification.sourceFolders(); }
+
+  public boolean shouldEmitCode() { return specification.shouldEmitCode(); }
+
 }

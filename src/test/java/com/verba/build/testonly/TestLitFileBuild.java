@@ -1,4 +1,4 @@
-package com.verba.build;
+package com.verba.build.testonly;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
@@ -24,9 +24,9 @@ public class TestLitFileBuild {
   private LitFileBuildManager generateBuild() {
     return new BuildSpecification()
       .addSourceFolder("verba_sources/glob_test")
+      .isDebugBuild(false)
       .createLitFileBuild();
   }
-
 
   @Test
   public void testGlobbing() {

@@ -31,15 +31,15 @@ public class BuildSpecification {
     return this;
   }
 
-  public boolean emitCode() { return this.shouldEmitCode; }
+  public boolean shouldEmitCode() { return this.shouldEmitCode; }
   public BuildSpecification shouldEmitCode(boolean emitCode) {
     this.shouldEmitCode = emitCode;
     return this;
   }
 
   public boolean isDebugBuild() { return this.isDebugBuild; }
-  public BuildSpecification isDebugBuild(boolean emitCode) {
-    this.shouldEmitCode = emitCode;
+  public BuildSpecification isDebugBuild(boolean isDebugBuild) {
+    this.isDebugBuild = isDebugBuild;
     return this;
   }
 

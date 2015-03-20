@@ -2,6 +2,8 @@ package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
+import com.verba.language.build.configuration.BuildSpecification;
+import com.verba.language.build.targets.artifacts.BuildSpecificationArtifact;
 import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
@@ -67,12 +69,15 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
   }
 
   private void performDebugOutput() {
-    if (false) {
-      System.out.println(function.text());
-      System.out.println();
+    if (this.build.containsArtifactOfType(BuildSpecificationArtifact.class)) {
+      BuildSpecificationArtifact specification = build.getArtifactOfType(BuildSpecificationArtifact.class);
+      if (specification.isDebugBuild()) {
+        System.out.println(function.text());
+        System.out.println();
 
-      DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
-      renderer.display();
+        DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
+        renderer.display();
+      }
     }
   }
 
