@@ -1,9 +1,11 @@
 package com.verba.language.build.managers;
 
 import com.verba.language.build.configuration.Build;
+import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.managers.interfaces.BuildManagerBase;
 import com.verba.language.build.events.BuildEventPublisher;
 import com.verba.language.build.targets.*;
+import com.verba.language.build.targets.artifacts.BuildSpecificationArtifact;
 
 /**
  * Created by sircodesalot on 15/3/16.
@@ -22,5 +24,13 @@ public class LitFileBuildManager extends BuildManagerBase {
       .addTarget(new SymbolTableBuildTarget())
       .addTarget(new SyntaxTreeNotificationBuildTarget())
       .addTarget(new LitFileSyntaxTreeBuildTarget());
+
+    this.addBuildSpecification(build);
+  }
+
+  private void addBuildSpecification(Build build) {
+    BuildSpecification specification = build.specification();
+    BuildSpecificationArtifact artifact = new BuildSpecificationArtifact(specification);
+    build.addArtifact(artifact);
   }
 }

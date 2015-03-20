@@ -2,6 +2,7 @@ package com.verba.language.build.targets;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
+import com.verba.language.build.targets.artifacts.BuildSpecificationArtifact;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.build.targets.artifacts.SourceCodePathListArtifact;
 import com.verba.language.build.targets.interfaces.BuildTarget;
@@ -22,9 +23,13 @@ public class CollectSourcePathsBuildTarget extends BuildTarget {
     }
   };
 
+  public CollectSourcePathsBuildTarget() {
+    super(BuildSpecificationArtifact.class);
+  }
+
   @Override
   public void onBuildUpdated(Build build, BuildArtifact target) {
-    if (!build.containsArtifactOfType(SourceCodePathListArtifact.class)) {
+    if (allDependenciesAvailableOrUpdated(build, target)) {
       QIterable<File> files = build.specification()
         .sourceFolders()
         .flatten(path -> FileTools.findInSubfolders(path, IS_V_FILE)).toSet();

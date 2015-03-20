@@ -18,13 +18,12 @@ public class SyntaxTreeNotificationBuildTarget extends BuildTarget {
   }
 
   @Override
-  public void onBuildUpdated(Build build, BuildArtifact symbolTable) {
-    if (symbolTable instanceof SymbolTableArtifact) {
+  public void onBuildUpdated(Build build, BuildArtifact artifact) {
+    if (allDependenciesAvailableOrUpdated(build, artifact) && artifact instanceof SymbolTableArtifact) {
       this.notifyExpressionsParseComplete(build, build.getArtifactOfType(LitFileSyntaxTreeArtifact.class));
-      this.notifyExpressionsSymbolTableComplete(build, (SymbolTableArtifact) symbolTable);
+      this.notifyExpressionsSymbolTableComplete(build, (SymbolTableArtifact)artifact);
     }
   }
-
 
   private void notifyExpressionsParseComplete(Build build, LitFileSyntaxTreeArtifact syntaxTree) {
     for (VerbaExpression expression : syntaxTree.rootExpression().allExpressions()) {
@@ -52,6 +51,4 @@ public class SyntaxTreeNotificationBuildTarget extends BuildTarget {
       expression.onValidate(build, symbolTable);
     }
   }
-
-
 }

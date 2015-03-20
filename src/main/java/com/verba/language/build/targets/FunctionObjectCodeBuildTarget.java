@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclar
  */
 public class FunctionObjectCodeBuildTarget extends BuildTarget {
   public FunctionObjectCodeBuildTarget() {
-    super(SymbolTableArtifact.class);
+    super(StringTableArtifact.class, SymbolTableArtifact.class);
   }
 
   @Override
