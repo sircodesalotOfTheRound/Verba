@@ -74,6 +74,6 @@ public class SymbolTableArtifact implements BuildArtifact {
   }
 
   public <T extends VerbaExpression> QIterable<T> getSymbolsOfType(Class<T> type) {
-    return symbolsByType.getDerivedClassesForInterface(type).cast(type);
+    return symbolsByType.getDerivedClassesForInterface(type).map(symbol -> symbol.expressionAs(type));
   }
 }

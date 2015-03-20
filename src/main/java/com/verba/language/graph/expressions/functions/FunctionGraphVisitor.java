@@ -37,10 +37,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by sircodesalot on 14/9/19.
  */
 public class FunctionGraphVisitor extends ExpressionTreeVisitor {
+  private final Build build;
   private final VirtualVariableScopeTree variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
-  private final LitFileRootExpression litFileRoot;
   private final SymbolTable symbolTable;
   private final StringTableArtifact stringTable;
 
@@ -50,25 +50,32 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
 
   // Node processors
 
-  public FunctionGraphVisitor(Build build, FunctionDeclarationExpression function, SymbolTable symbolTable, LitFileRootExpression litFileRoot) {
+  public FunctionGraphVisitor(Build build, FunctionDeclarationExpression function, SymbolTable symbolTable) {
+    this.build = build;
     this.variableSet = new VirtualVariableScopeTree(20);
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);
-    this.litFileRoot = litFileRoot;
     this.symbolTable = symbolTable;
     this.stringTable = build.getArtifactOfType(StringTableArtifact.class);
     this.opcodes = new FunctionOpCodeSet();
-    this.context = new FunctionContext(this, build, litFileRoot, symbolTable, variableSet, lifetimeGraph, opcodes);
+    this.context = new FunctionContext(this, build, symbolTable, variableSet, lifetimeGraph, opcodes);
     this.nodeProcessors = new NodeProcessorFactory(context);
 
-    System.out.println(function.text());
-    System.out.println();
 
     this.buildImage(function);
-
-    DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
-    renderer.display();
+    this.performDebugOutput();
   }
+
+  private void performDebugOutput() {
+    if (false) {
+      System.out.println(function.text());
+      System.out.println();
+
+      DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
+      renderer.display();
+    }
+  }
+
 
   public QIterable<VerbatimOpCodeBase> opcodes() { return this.opcodes; }
 

@@ -25,18 +25,13 @@ public class FunctionObjectImage implements ObjectImage {
 
   public FunctionObjectImage(FunctionDeclarationExpression declaration,
                              Build build,
-                             LitFileRootExpression staticSpace,
                              SymbolTable symbolTable,
                              StringTableArtifact stringTable) {
 
-    this.functionGraphVisitor = new FunctionGraphVisitor(build, declaration, symbolTable, staticSpace);
-    this.stringTable = captureStringTable(build);
+    this.functionGraphVisitor = new FunctionGraphVisitor(build, declaration, symbolTable);
+    this.stringTable = stringTable;
     this.imageName = stringTable.addString(declaration.name());
     this.objectImage = new InMemoryObjectImage(declaration.name(), ImageType.FUNCTION);
-  }
-
-  private StringTableArtifact captureStringTable(Build build) {
-    throw new NotImplementedException();
   }
 
   private void generateOpCodeList() {

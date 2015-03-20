@@ -18,6 +18,7 @@ public class LitFileBuildManager extends BuildManagerBase {
       .addTarget(new CollectSourcePathsBuildTarget())
       .addTarget(new AddStringTableBuildTarget())
       .addTarget(new SourceCodeSyntaxTreeListBuildTarget())
+      .addTarget(new FunctionObjectCodeBuildTarget())
       .addTarget(new SymbolTableBuildTarget())
       .addTarget(new SyntaxTreeNotificationBuildTarget())
       .addTarget(new LitFileSyntaxTreeBuildTarget());

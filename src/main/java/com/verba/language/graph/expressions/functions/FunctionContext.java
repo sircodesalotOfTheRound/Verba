@@ -16,7 +16,6 @@ import java.util.function.Consumer;
  */
 public class FunctionContext {
   private final FunctionGraphVisitor functionGraphVisitor;
-  private final LitFileRootExpression litFileRoot;
   private final VirtualVariableScopeTree variableScopeTree;
   private final VariableLifetimeGraph lifetimeGraph;
   private final FunctionOpCodeSet opcodes;
@@ -25,7 +24,6 @@ public class FunctionContext {
 
   public FunctionContext(FunctionGraphVisitor functionGraphVisitor,
                          Build build,
-                         LitFileRootExpression litFileRoot,
                          SymbolTable symbolTable,
                          VirtualVariableScopeTree variableScopeTree,
                          VariableLifetimeGraph lifetimeGraph,
@@ -34,13 +32,11 @@ public class FunctionContext {
     this.stringTable = build.getArtifactOfType(StringTableArtifact.class);
     this.functionGraphVisitor = functionGraphVisitor;
     this.symbolTable = symbolTable;
-    this.litFileRoot = litFileRoot;
     this.variableScopeTree = variableScopeTree;
     this.lifetimeGraph = lifetimeGraph;
     this.opcodes = opcodes;
   }
 
-  public LitFileRootExpression staticSpaceExpression() { return this.litFileRoot; }
   public VirtualVariableScopeTree variableScopeTree() { return this.variableScopeTree; }
   public VariableLifetimeGraph lifetimeGraph() { return this.lifetimeGraph; }
   public FunctionOpCodeSet opcodes() { return this.opcodes; }
