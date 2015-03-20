@@ -2,14 +2,14 @@ package com.verba.language.emit.images.types.specialized;
 
 import com.verba.language.build.configuration.Build;
 import com.verba.language.build.targets.artifacts.StringTableArtifact;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
-import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
+import com.verba.language.emit.images.types.common.InMemoryObjectImage;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -35,13 +35,13 @@ public class FunctionObjectImage implements ObjectImage {
   }
 
   private void generateOpCodeList() {
-    throw new NotImplementedException();
-    /*objectImage.writeString("name", this.imageName);
+    objectImage.writeString("name", this.imageName);
+    objectImage.writeInt32("image-length", (int) functionGraphVisitor.opcodes().count());
 
     for (VerbatimOpCodeBase opCode : functionGraphVisitor.opcodes()) {
-      objectImage.writeInt8(null, opCode.opcodeNumber());
+      objectImage.writeOpCode(opCode);
       opCode.render(objectImage);
-    }*/
+    }
   }
 
   public void displayCoreDump() {

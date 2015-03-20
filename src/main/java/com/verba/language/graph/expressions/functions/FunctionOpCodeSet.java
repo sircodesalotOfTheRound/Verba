@@ -2,8 +2,8 @@ package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.header.StringTableFqnEntry;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
 

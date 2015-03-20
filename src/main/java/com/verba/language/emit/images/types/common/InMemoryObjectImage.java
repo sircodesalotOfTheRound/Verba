@@ -1,10 +1,11 @@
-package com.verba.language.emit.images.types.basic;
+package com.verba.language.emit.images.types.common;
 
-import com.verba.language.emit.header.StringTableFqnEntry;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.AppendableObjectImage;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -50,12 +51,12 @@ public class InMemoryObjectImage implements AppendableObjectImage {
   }
 
   @Override
-  public ObjectImageOutputStream writeOpCode(VerbatimOpCodeBinaryValue value) {
-    for (int index = 0; index < value.opcodeValues().length; index++) {
+  public ObjectImageOutputStream writeOpCode(VerbatimOpCodeBase value) {
+    for (int index = 0; index < value.opcodeBinaryValues().length; index++) {
       if (index == 0) {
-        writeInt8(value.opcodeName(), value.opcodeValues()[index]);
+        writeInt8(value.opcodeName(), value.opcodeBinaryValues()[index]);
       } else {
-        writeInt8(null, value.opcodeValues()[index]);
+        writeInt8(null, value.opcodeBinaryValues()[index]);
       }
     }
     return this;

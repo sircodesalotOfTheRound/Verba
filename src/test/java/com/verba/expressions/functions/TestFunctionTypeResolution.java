@@ -6,7 +6,6 @@ import com.verba.language.build.targets.artifacts.SymbolTableArtifact;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
-import com.verba.language.platform.PlatformSourceSymbolTable;
 import com.verba.language.platform.PlatformTypeSymbols;
 import org.junit.Test;
 
@@ -17,6 +16,7 @@ public class TestFunctionTypeResolution {
   private static final LitFileBuildManager build = new BuildSpecification()
     .isDebugBuild(false)
     .addSourceFolder("verba_sources/function_tests")
+    .shouldPersist(false)
     .createLitFileBuild();
 
   @Test

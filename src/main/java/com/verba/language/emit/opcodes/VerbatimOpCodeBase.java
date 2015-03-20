@@ -1,8 +1,8 @@
 package com.verba.language.emit.opcodes;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.header.StringTableFqnEntry;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 import com.verba.language.emit.variables.VirtualVariable;

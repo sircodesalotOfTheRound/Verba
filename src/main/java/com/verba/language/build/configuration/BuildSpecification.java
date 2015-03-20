@@ -11,7 +11,7 @@ import com.verba.language.build.source.CodeUnit;
 public class BuildSpecification {
   private final String buildName;
   private boolean shouldCreateSymbolTable = true;
-  private boolean shouldEmitCode = true;
+  private boolean shouldPersist = true;
   private boolean isDebugBuild = true;
   private QList<String> sourceFolders = new QList<>();
 
@@ -31,9 +31,20 @@ public class BuildSpecification {
     return this;
   }
 
-  public boolean shouldEmitCode() { return this.shouldEmitCode; }
-  public BuildSpecification shouldEmitCode(boolean emitCode) {
-    this.shouldEmitCode = emitCode;
+  // If output folder speicifed, then just use that.
+  @Deprecated
+  public boolean shouldPersist() { return this.shouldPersist; }
+
+  @Deprecated
+  public BuildSpecification shouldPersist(boolean persist) {
+    this.shouldPersist = persist;
+    return this;
+  }
+
+  private String litfileOutputFolder;
+  public String litfileOutputFolder() { return this.litfileOutputFolder; }
+  public BuildSpecification litFileOutputFolder(String path) {
+    this.litfileOutputFolder = path;
     return this;
   }
 
@@ -61,6 +72,6 @@ public class BuildSpecification {
 
   public LitFileBuildManager createLitFileBuild() {
     Build build = new Build(this);
-    return new LitFileBuildManager(build);
+    return new LitFileBuildManager(build, this);
   }
 }

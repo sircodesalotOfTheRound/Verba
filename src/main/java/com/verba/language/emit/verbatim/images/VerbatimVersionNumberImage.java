@@ -1,11 +1,11 @@
 package com.verba.language.emit.verbatim.images;
 
 import com.verba.language.build.targets.artifacts.StringTableArtifact;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ImageType;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 import com.verba.language.emit.images.interfaces.ObjectImageBase;
-import com.verba.language.emit.images.types.basic.InMemoryObjectImage;
+import com.verba.language.emit.images.types.common.InMemoryObjectImage;
 
 /**
  * Created by sircodesalot on 14/12/5.

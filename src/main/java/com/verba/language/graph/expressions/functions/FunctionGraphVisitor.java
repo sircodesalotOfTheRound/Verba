@@ -2,10 +2,9 @@ package com.verba.language.graph.expressions.functions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.targets.artifacts.BuildSpecificationArtifact;
 import com.verba.language.build.targets.artifacts.StringTableArtifact;
-import com.verba.language.emit.images.types.basic.DebuggingObjectImage;
+import com.verba.language.emit.images.types.common.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;

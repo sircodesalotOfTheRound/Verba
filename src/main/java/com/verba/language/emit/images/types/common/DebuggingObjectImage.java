@@ -1,8 +1,8 @@
-package com.verba.language.emit.images.types.basic;
+package com.verba.language.emit.images.types.common;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.header.StringTableFqnEntry;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImageOutputStream;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
@@ -27,9 +27,9 @@ public class DebuggingObjectImage implements ObjectImageOutputStream {
   }
 
   @Override
-  public ObjectImageOutputStream writeOpCode(VerbatimOpCodeBinaryValue value) {
+  public ObjectImageOutputStream writeOpCode(VerbatimOpCodeBase value) {
     printFormatted("\t[%s] \t", value.opcodeName());
-    for (int binaryValue : value.opcodeValues()) {
+    for (int binaryValue : value.opcodeBinaryValues()) {
       printFormatted(String.format("%s ", binaryValue));
     }
 

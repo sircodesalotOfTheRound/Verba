@@ -3,8 +3,8 @@ package com.verba.language.build.targets.artifacts;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
-import com.verba.language.emit.header.StringTableFqnEntry;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImage;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.verba.language.emit.header;
+package com.verba.language.emit.header.stringtable;
 
 /**
  * Created by sircodesalot on 14/12/5.

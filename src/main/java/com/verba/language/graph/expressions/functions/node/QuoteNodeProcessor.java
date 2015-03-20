@@ -1,6 +1,6 @@
 package com.verba.language.graph.expressions.functions.node;
 
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;

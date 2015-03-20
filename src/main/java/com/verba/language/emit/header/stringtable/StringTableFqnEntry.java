@@ -1,4 +1,4 @@
-package com.verba.language.emit.header;
+package com.verba.language.emit.header.stringtable;
 
 import com.javalinq.interfaces.QIterable;
 

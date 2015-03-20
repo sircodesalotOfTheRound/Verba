@@ -1,14 +1,15 @@
 package com.verba.language.emit.images.interfaces;
 
-import com.verba.language.emit.header.StringTableFqnEntry;
-import com.verba.language.emit.header.StringTableStringEntry;
+import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
+import com.verba.language.emit.header.stringtable.StringTableStringEntry;
+import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.opcodes.binary.VerbatimOpCodeBinaryValue;
 
 /**
  * Created by sircodesalot on 14/9/19.
  */
 public interface ObjectImageOutputStream {
-  ObjectImageOutputStream writeOpCode(VerbatimOpCodeBinaryValue value);
+  ObjectImageOutputStream writeOpCode(VerbatimOpCodeBase opcode);
   ObjectImageOutputStream writeInt8(String label, int value);
   ObjectImageOutputStream writeInt16(String label, int value);
   ObjectImageOutputStream writeInt32(String label, int value);

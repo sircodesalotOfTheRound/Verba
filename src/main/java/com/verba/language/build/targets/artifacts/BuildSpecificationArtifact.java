@@ -16,10 +16,12 @@ public class BuildSpecificationArtifact implements BuildArtifact {
 
   public String name() { return specification.buildName(); }
 
+  public boolean containsLitfileOutputFolder() { return specification.litfileOutputFolder() != null; }
+  public String litfileOutputFolder() { return specification.litfileOutputFolder(); }
+
   public boolean isDebugBuild() { return specification.isDebugBuild(); }
 
   public QIterable<String> sourceFolders() { return specification.sourceFolders(); }
 
-  public boolean shouldEmitCode() { return specification.shouldEmitCode(); }
-
+  public boolean shouldPersist() { return specification.shouldPersist(); }
 }

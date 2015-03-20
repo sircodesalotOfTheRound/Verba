@@ -13,7 +13,7 @@ import com.verba.language.build.targets.artifacts.BuildSpecificationArtifact;
 public class LitFileBuildManager extends BuildManagerBase {
   private final BuildEventPublisher publisher;
 
-  public LitFileBuildManager(Build build) {
+  public LitFileBuildManager(Build build, BuildSpecification specification) {
     super(build);
 
     this.publisher = new BuildEventPublisher(build)
@@ -22,14 +22,14 @@ public class LitFileBuildManager extends BuildManagerBase {
       .addTarget(new SourceCodeSyntaxTreeListBuildTarget())
       .addTarget(new FunctionObjectCodeBuildTarget())
       .addTarget(new SymbolTableBuildTarget())
+      .addTarget(new LitFileBuildTarget())
       .addTarget(new SyntaxTreeNotificationBuildTarget())
       .addTarget(new LitFileSyntaxTreeBuildTarget());
 
-    this.addBuildSpecification(build);
+    this.addBuildSpecification(build, specification);
   }
 
-  private void addBuildSpecification(Build build) {
-    BuildSpecification specification = build.specification();
+  private void addBuildSpecification(Build build, BuildSpecification specification) {
     BuildSpecificationArtifact artifact = new BuildSpecificationArtifact(specification);
     build.addArtifact(artifact);
   }

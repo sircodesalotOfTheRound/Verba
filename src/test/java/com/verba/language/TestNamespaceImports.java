@@ -4,7 +4,6 @@ import com.javalinq.implementations.QSet;
 import com.verba.language.build.configuration.BuildSpecification;
 import com.verba.language.build.managers.LitFileBuildManager;
 import com.verba.language.build.targets.artifacts.LitFileSyntaxTreeArtifact;
-import com.verba.language.build.targets.artifacts.SymbolTableArtifact;
 import com.verba.language.parse.expressions.codepage.VerbaSourceCodeFile;
 import org.junit.Test;
 
@@ -15,6 +14,7 @@ public class TestNamespaceImports {
   private static final LitFileBuildManager build = new BuildSpecification()
     .isDebugBuild(false)
     .addSourceFolder("verba_sources/language_feature_tests")
+    .shouldPersist(false)
     .createLitFileBuild();
 
   @Test

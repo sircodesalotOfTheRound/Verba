@@ -49,8 +49,6 @@ public class Build implements BuildArtifactContainer {
     return artifacts.getArtifacts();
   }
 
-  public BuildSpecification specification() { return this.specification; }
-
   public void onArtifactAdded(Consumer<BuildArtifact> callback) {
     if (callback != null) callbacks.add(callback);
   }

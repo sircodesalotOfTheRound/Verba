@@ -1,7 +1,7 @@
 package com.verba.language.graph.expressions.functions.node;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.emit.header.StringTableFqnEntry;
+import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
