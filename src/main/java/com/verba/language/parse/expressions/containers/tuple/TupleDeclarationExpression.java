@@ -48,6 +48,11 @@ public class TupleDeclarationExpression extends VerbaExpression implements TypeC
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private QList<TupleItemExpression> readContents(Lexer lexer) {
     QList<TupleItemExpression> contents = new QList<>();
 

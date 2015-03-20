@@ -64,6 +64,11 @@ public class AccessModifierExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static AccessModifierExpression read(VerbaExpression expression, Lexer lexer) {
     return new AccessModifierExpression(expression, lexer);
   }

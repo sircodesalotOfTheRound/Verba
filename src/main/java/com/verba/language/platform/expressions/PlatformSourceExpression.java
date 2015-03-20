@@ -48,4 +48,9 @@ public class PlatformSourceExpression extends VerbaExpression implements Express
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
 }

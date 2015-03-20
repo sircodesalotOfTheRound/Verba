@@ -57,6 +57,11 @@ public class MarkupDeclarationExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private FullyQualifiedNameExpression determineName(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) {
       return FullyQualifiedNameExpression.read(this, lexer);

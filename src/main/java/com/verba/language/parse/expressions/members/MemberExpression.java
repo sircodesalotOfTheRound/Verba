@@ -65,6 +65,11 @@ public class MemberExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static MemberExpression read(VerbaExpression parent, Lexer lexer) {
     return new MemberExpression(parent, lexer);
   }

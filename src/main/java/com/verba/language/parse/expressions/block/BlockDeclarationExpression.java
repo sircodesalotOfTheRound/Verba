@@ -64,6 +64,11 @@ public class BlockDeclarationExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public boolean hasItems() {
     return this.expressions.any();
   }

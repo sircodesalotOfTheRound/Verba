@@ -88,4 +88,9 @@ public class LitFileRootExpression extends VerbaExpression implements SymbolTabl
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
 }

@@ -41,6 +41,11 @@ public class WithNsExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public FullyQualifiedNameExpression namespace() { return this.namespace; }
 
   @Override

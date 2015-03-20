@@ -46,6 +46,11 @@ public class JsonExpression extends VerbaExpression implements RValueExpression,
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private void readItems(Lexer lexer) {
     lexer.readCurrentAndAdvance(EnclosureToken.class, "{");
 

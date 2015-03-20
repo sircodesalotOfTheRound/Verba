@@ -56,6 +56,11 @@ public class NamedValueExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static NamedValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamedValueExpression(parent, lexer);
   }

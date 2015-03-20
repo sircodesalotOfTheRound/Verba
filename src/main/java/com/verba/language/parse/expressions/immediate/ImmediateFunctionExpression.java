@@ -80,6 +80,11 @@ public class ImmediateFunctionExpression extends VerbaExpression {
   }
 
   @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
+  @Override
   public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
   }

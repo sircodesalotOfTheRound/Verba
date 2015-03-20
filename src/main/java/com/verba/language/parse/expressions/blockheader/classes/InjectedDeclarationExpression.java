@@ -51,6 +51,11 @@ public class InjectedDeclarationExpression extends VerbaExpression implements Na
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static InjectedDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new InjectedDeclarationExpression(parent, lexer);
   }

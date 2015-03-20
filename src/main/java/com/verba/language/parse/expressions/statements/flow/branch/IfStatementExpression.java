@@ -52,6 +52,11 @@ public class IfStatementExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static IfStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new IfStatementExpression(parent, lexer);
   }

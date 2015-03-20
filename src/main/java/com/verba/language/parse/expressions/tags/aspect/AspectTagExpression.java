@@ -62,6 +62,11 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private VerbaExpression readType(Lexer lexer) {
     // @[ ... : new AspectFQN ]
     if (lexer.currentIs(KeywordToken.class, KeywordToken.NEW)) {

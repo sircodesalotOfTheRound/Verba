@@ -46,6 +46,11 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private LexInfo readModifier(Lexer lexer) {
     String currentToken = lexer.current().representation();
     if (!isModifier(currentToken)) {

@@ -47,6 +47,11 @@ public class CastedRValueExpression extends VerbaExpression implements RValueExp
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static CastedRValueExpression read(VerbaExpression parent, Lexer lexer) {
     return new CastedRValueExpression(parent, lexer);
   }

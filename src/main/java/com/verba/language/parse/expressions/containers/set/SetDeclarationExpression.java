@@ -59,6 +59,11 @@ public class SetDeclarationExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public QIterable<VerbaExpression> items() {
     return this.items;
   }

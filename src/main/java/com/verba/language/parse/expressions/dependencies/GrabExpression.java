@@ -45,6 +45,11 @@ public class GrabExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private VerbaExpression readResourceName(Lexer lexer) {
     if (lexer.currentIs(QuoteToken.class)) {
       return QuoteExpression.read(this, lexer);

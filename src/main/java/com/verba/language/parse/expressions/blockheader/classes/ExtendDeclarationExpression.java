@@ -51,6 +51,11 @@ public class ExtendDeclarationExpression extends VerbaExpression implements Name
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static ExtendDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new ExtendDeclarationExpression(parent, lexer);
   }

@@ -53,6 +53,11 @@ public class LambdaExpression extends VerbaExpression implements RValueExpressio
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static LambdaExpression read(VerbaExpression parent, Lexer lexer) {
     return new LambdaExpression(parent, lexer);
   }

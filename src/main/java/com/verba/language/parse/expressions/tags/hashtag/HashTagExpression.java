@@ -45,6 +45,11 @@ public class HashTagExpression extends VerbaExpression implements MetaTagExpress
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static HashTagExpression read(VerbaExpression parent, Lexer lexer) {
     return new HashTagExpression(parent, lexer);
   }

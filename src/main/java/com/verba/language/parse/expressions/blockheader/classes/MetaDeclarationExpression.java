@@ -55,6 +55,11 @@ public class MetaDeclarationExpression extends VerbaExpression implements NamedB
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static MetaDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaDeclarationExpression(parent, lexer);
   }

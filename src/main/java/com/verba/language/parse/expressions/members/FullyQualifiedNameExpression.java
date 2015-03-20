@@ -54,6 +54,11 @@ public class FullyQualifiedNameExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   // TODO: Move this into FullyQualifiedNameBacktrackRule if such a thing exists.
   public static boolean isFullyQualifiedName(Lexer lexer) {
     return lexer.currentIs(IdentifierToken.class);

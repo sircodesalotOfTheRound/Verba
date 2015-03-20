@@ -54,6 +54,11 @@ public class NewExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private boolean determineIsAnonymous(Lexer lexer) {
     if (lexer.currentIs(OperatorToken.class, ":")) {
       lexer.readCurrentAndAdvance();

@@ -50,6 +50,11 @@ public class ForStatementExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private void readContent(Lexer lexer) {
     lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.FOR);
     lexer.readCurrentAndAdvance(EnclosureToken.class, "(");

@@ -45,6 +45,11 @@ public class CodePageExpressionList extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static CodePageExpressionList read(VerbaExpression parent, Lexer lexer) {
     return new CodePageExpressionList(parent, lexer);
   }

@@ -43,6 +43,11 @@ public class RpnExpression extends VerbaExpression implements RValueExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private boolean isNextMathToken(Lexer lexer) {
     boolean isIt = false;
 

@@ -52,6 +52,11 @@ public class WhileStatementExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static WhileStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new WhileStatementExpression(parent, lexer);
   }

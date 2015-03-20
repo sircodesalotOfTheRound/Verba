@@ -47,6 +47,11 @@ public class TestChildRemoval {
     }
 
     @Override
+    public void onValidate(Build build, SymbolTable table) {
+
+    }
+
+    @Override
     public void accept(ExpressionTreeVisitor visitor) {
 
     }

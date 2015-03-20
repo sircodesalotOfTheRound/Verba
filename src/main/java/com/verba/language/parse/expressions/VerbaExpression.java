@@ -123,6 +123,7 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
   public abstract void afterContentsParsed(Build build);
   public abstract void afterSymbolsGenerated(Build build, SymbolTable table);
   public abstract void onResolveSymbols(Build build, SymbolTable table);
+  public abstract void onValidate(Build build, SymbolTable table);
 
   // Violations
   public QIterable<ValidationViolation> violations() { return this.violations; }

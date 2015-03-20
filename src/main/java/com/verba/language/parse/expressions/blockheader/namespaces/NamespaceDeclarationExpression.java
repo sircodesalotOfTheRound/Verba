@@ -48,6 +48,11 @@ public class NamespaceDeclarationExpression extends VerbaExpression implements N
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static NamespaceDeclarationExpression read(VerbaExpression parent, Lexer lexer) {
     return new NamespaceDeclarationExpression(parent, lexer);
   }

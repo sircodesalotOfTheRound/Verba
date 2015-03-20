@@ -73,6 +73,11 @@ public class PlatformTypeExpression extends VerbaExpression implements TypeConst
   }
 
   @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
+  @Override
   public void accept(ExpressionTreeVisitor visitor) {
 
   }

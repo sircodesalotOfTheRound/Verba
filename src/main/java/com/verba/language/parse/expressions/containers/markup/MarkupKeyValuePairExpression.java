@@ -44,6 +44,11 @@ public class MarkupKeyValuePairExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static MarkupKeyValuePairExpression read(VerbaExpression parent, Lexer lexer) {
     return new MarkupKeyValuePairExpression(parent, lexer);
   }

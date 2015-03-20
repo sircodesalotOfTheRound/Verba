@@ -51,6 +51,11 @@ public class ReturnStatementExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static ReturnStatementExpression read(VerbaExpression expression, Lexer lexer) {
     return new ReturnStatementExpression(expression, lexer);
   }

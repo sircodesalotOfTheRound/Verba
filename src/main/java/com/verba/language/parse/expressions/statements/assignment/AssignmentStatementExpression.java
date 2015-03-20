@@ -55,6 +55,11 @@ public class AssignmentStatementExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static AssignmentStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new AssignmentStatementExpression(parent, lexer);
   }

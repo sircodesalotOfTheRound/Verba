@@ -49,6 +49,11 @@ public class GenericTypeListExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private void readExpressions(Lexer lexer) {
     lexer.readCurrentAndAdvance(OperatorToken.class, "<");
 

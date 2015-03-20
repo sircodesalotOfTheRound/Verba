@@ -42,6 +42,11 @@ public class IdentifierExpression extends VerbaExpression implements RValueExpre
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static IdentifierExpression read(VerbaExpression parent, Lexer lexer) {
     return new IdentifierExpression(parent, lexer);
   }

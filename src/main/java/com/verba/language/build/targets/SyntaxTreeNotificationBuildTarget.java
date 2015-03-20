@@ -46,6 +46,11 @@ public class SyntaxTreeNotificationBuildTarget extends BuildTarget {
     for (VerbaExpression expression : allExpressions) {
       expression.onResolveSymbols(build, symbolTable);
     }
+
+    // Prompt all expressions to validate.
+    for (VerbaExpression expression : allExpressions) {
+      expression.onValidate(build, symbolTable);
+    }
   }
 
 

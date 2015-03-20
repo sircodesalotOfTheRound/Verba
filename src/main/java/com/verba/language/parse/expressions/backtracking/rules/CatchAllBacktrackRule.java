@@ -41,6 +41,11 @@ public class CatchAllBacktrackRule extends BacktrackRule {
 
     }
 
+    @Override
+    public void onValidate(Build build, SymbolTable table) {
+
+    }
+
     public LexInfo lexInfo() { return this.lexInfo; }
 
     @Override

@@ -69,6 +69,11 @@ public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableE
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private QIterable<VerbaExpression> captureAllExpressions(QList<VerbaExpression> childExpressions) {
     QList<VerbaExpression> allExpressions = new QList<>();
 

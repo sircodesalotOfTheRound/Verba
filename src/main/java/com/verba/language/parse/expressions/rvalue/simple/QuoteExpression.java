@@ -45,6 +45,11 @@ public class QuoteExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static QuoteExpression read(VerbaExpression parent, Lexer lexer) {
     return new QuoteExpression(parent, lexer);
   }

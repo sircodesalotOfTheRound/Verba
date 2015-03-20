@@ -42,6 +42,11 @@ public class BooleanExpression extends VerbaExpression implements LiteralExpress
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private boolean determineValue(Lexer lexer) {
     if (lexer.currentIs(KeywordToken.class, KeywordToken.TRUE)) {
       lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.TRUE);

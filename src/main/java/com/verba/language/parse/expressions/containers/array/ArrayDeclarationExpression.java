@@ -54,6 +54,11 @@ public class ArrayDeclarationExpression extends VerbaExpression implements RValu
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private LexInfo readContents(Lexer lexer) {
     return lexer.readCurrentAndAdvance(NumericToken.class);
   }

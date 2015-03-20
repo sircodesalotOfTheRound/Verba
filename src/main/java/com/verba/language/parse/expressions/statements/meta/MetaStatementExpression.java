@@ -43,6 +43,11 @@ public class MetaStatementExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static MetaStatementExpression read(VerbaExpression parent, Lexer lexer) {
     return new MetaStatementExpression(parent, lexer);
   }

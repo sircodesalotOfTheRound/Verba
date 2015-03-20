@@ -49,6 +49,11 @@ public class JsonExpressionPair extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private VerbaExpression readLhsItem(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) return IdentifierExpression.read(this, lexer);
     else if (lexer.currentIs(QuoteToken.class)) return QuoteExpression.read(this, lexer);

@@ -79,6 +79,11 @@ public class FunctionDeclarationExpression extends VerbaExpression
     this.returnTypeResolver.resolve(table);
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private boolean determineIsConstructorFunction(VerbaExpression parent, Lexer lexer) {
     if (lexer.currentIs(KeywordToken.class, KeywordToken.FN)) {
       lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.FN);

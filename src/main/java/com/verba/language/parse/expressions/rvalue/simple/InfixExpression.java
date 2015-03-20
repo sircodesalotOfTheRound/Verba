@@ -130,6 +130,11 @@ public class InfixExpression extends VerbaExpression implements RValueExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public boolean hasHigherPrecedenceThan(VerbaExpression rhs) {
     if (rhs != null && rhs instanceof InfixExpression) {
       return InfixOperatorPrecedenceComparator.comparePrecedence(this, (InfixExpression)rhs) < 0;

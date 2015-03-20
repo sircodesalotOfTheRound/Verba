@@ -69,6 +69,11 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   private boolean determineIsClass(Lexer lexer) {
     if (lexer.currentIs(KeywordToken.class, KeywordToken.CLASS)) {
       lexer.readCurrentAndAdvance(KeywordToken.class, KeywordToken.CLASS);

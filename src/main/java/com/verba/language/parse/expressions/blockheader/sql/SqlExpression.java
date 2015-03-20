@@ -43,6 +43,11 @@ public class SqlExpression extends VerbaExpression {
 
   }
 
+  @Override
+  public void onValidate(Build build, SymbolTable table) {
+
+  }
+
   public static VerbaExpression read(VerbaExpression parent, Lexer lexer) {
     return new SqlExpression(parent, lexer);
   }
