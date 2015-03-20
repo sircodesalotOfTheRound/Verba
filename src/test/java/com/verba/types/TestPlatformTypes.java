@@ -12,7 +12,7 @@ public class TestPlatformTypes {
   public void test() {
     // Platform type expression will fail if the type is invalid.
     for (String keyword : KeywordToken.platformTypeKeywords()) {
-      //PlatformTypeExpression expression = PlatformTypeExpression.getExpressionForType(keyword);
+      assert (PlatformTypeExpression.isPlatformTypeName(keyword));
     }
   }
 }

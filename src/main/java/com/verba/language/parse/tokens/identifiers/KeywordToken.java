@@ -2,7 +2,6 @@ package com.verba.language.parse.tokens.identifiers;
 
 import com.javalinq.implementations.QSet;
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.symbols.table.entries.Symbol;
 
 import java.util.function.Supplier;
 
@@ -14,7 +13,6 @@ public class KeywordToken extends IdentifierToken {
   public static final String POLY = "poly";
   public static final String MATRIX = "matrix";
   public static final String DYNAMIC = "dynamic";
-  public static final String DEFAULT = "default";
   public static final String INT = "int";
   public static final String INT8 = "int8";
   public static final String INT16= "int16";
@@ -42,8 +40,8 @@ public class KeywordToken extends IdentifierToken {
   public static final String OBJECT = "object";
   public static final String JSON = "json";
 
-  private static final QSet<String> vmTypes = new QSet<String>(
-    BOOLEAN, BYTE, NUMERIC, POLY, MATRIX, DEFAULT,
+  private static final QSet<String> platformTypes = new QSet<String>(
+    BOOLEAN, BYTE, NUMERIC, POLY, MATRIX,
     INT, INT8, INT16, INT32, INT64,
     UINT, UINT8, UINT16, UINT32, UINT64,
     DECIMAL, DECIMAL32, DECIMAL64,
@@ -132,10 +130,11 @@ public class KeywordToken extends IdentifierToken {
   public static final String HASA = "hasa";
   public static final String SOME = "some";
   public static final String NONE = "none";
-  public static final String DEF = "def";
+  public static final String DEFAULT = "default";
+  public static final String TYPE = "type";
 
   private static final QSet<String> reflection = new QSet<String>(
-    IS, ISA, HASA, SOME, NONE, DEF
+    IS, ISA, HASA, SOME, NONE, DEFAULT, TYPE
   );
 
   public static final String IF = "if";
@@ -191,7 +190,7 @@ public class KeywordToken extends IdentifierToken {
     @Override
     public QSet<String> get() {
       QSet<String> allKeywords = new QSet<String>();
-      allKeywords.add(vmTypes);
+      allKeywords.add(platformTypes);
       allKeywords.add(accessModifiers);
       allKeywords.add(otherKeywords);
       allKeywords.add(typeDeclaration);
@@ -209,7 +208,7 @@ public class KeywordToken extends IdentifierToken {
     }
   }.get();
 
-  public static QIterable<String> platformTypeKeywords() { return KeywordToken.vmTypes; }
+  public static QIterable<String> platformTypeKeywords() { return KeywordToken.platformTypes; }
   public KeywordToken(String representation) {
     super(representation);
   }
@@ -232,7 +231,7 @@ public class KeywordToken extends IdentifierToken {
   }
 
   public static boolean isNativeTypeKeyword(String representation) {
-    return KeywordToken.vmTypes.contains(representation);
+    return KeywordToken.platformTypes.contains(representation);
   }
 }
 

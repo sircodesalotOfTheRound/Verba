@@ -16,14 +16,60 @@ import com.verba.tools.exceptions.CompilerException;
  */
 public class PlatformTypeExpression extends VerbaExpression implements TypeConstraintExpression {
   public static final PlatformTypeExpression UNIT = new PlatformTypeExpression(KeywordToken.UNIT);
-  public static final PlatformTypeExpression UTF = new PlatformTypeExpression(KeywordToken.UTF);
-  public static final PlatformTypeExpression ASCII = new PlatformTypeExpression(KeywordToken.ASCII);
-  public static final PlatformTypeExpression INT = new PlatformTypeExpression(KeywordToken.INT);
   public static final PlatformTypeExpression DYNAMIC = new PlatformTypeExpression(KeywordToken.DYNAMIC);
+  public static final PlatformTypeExpression OBJECT = new PlatformTypeExpression(KeywordToken.OBJECT);
+  public static final PlatformTypeExpression JSON = new PlatformTypeExpression(KeywordToken.JSON);
+
   public static final PlatformTypeExpression BOOLEAN = new PlatformTypeExpression(KeywordToken.BOOLEAN);
+  public static final PlatformTypeExpression POLY = new PlatformTypeExpression(KeywordToken.POLY);
+  public static final PlatformTypeExpression MATRIX = new PlatformTypeExpression(KeywordToken.MATRIX);
+
+  public static final PlatformTypeExpression NUMERIC = new PlatformTypeExpression(KeywordToken.NUMERIC);
+  public static final PlatformTypeExpression BYTE = new PlatformTypeExpression(KeywordToken.BYTE);
+
+  public static final PlatformTypeExpression INT = new PlatformTypeExpression(KeywordToken.INT);
+  public static final PlatformTypeExpression INT8 = new PlatformTypeExpression(KeywordToken.INT8);
+  public static final PlatformTypeExpression INT16 = new PlatformTypeExpression(KeywordToken.INT16);
+  public static final PlatformTypeExpression INT32 = new PlatformTypeExpression(KeywordToken.INT32);
+  public static final PlatformTypeExpression INT64 = new PlatformTypeExpression(KeywordToken.INT64);
+
+  public static final PlatformTypeExpression UINT = new PlatformTypeExpression(KeywordToken.UINT);
+  public static final PlatformTypeExpression UINT8 = new PlatformTypeExpression(KeywordToken.UINT8);
+  public static final PlatformTypeExpression UINT16 = new PlatformTypeExpression(KeywordToken.UINT16);
+  public static final PlatformTypeExpression UINT32 = new PlatformTypeExpression(KeywordToken.UINT32);
+  public static final PlatformTypeExpression UINT64 = new PlatformTypeExpression(KeywordToken.UINT64);
+
+  public static final PlatformTypeExpression DECIMAL = new PlatformTypeExpression(KeywordToken.DECIMAL);
+  public static final PlatformTypeExpression DECIMAL32 = new PlatformTypeExpression(KeywordToken.DECIMAL32);
+  public static final PlatformTypeExpression DECIMAL64 = new PlatformTypeExpression(KeywordToken.DECIMAL64);
+
+  public static final PlatformTypeExpression CURRENCY = new PlatformTypeExpression(KeywordToken.CURRENCY);
+
+  public static final PlatformTypeExpression CHAR = new PlatformTypeExpression(KeywordToken.CHAR);
+
+  public static final PlatformTypeExpression ASCII = new PlatformTypeExpression(KeywordToken.ASCII);
+  public static final PlatformTypeExpression UTF = new PlatformTypeExpression(KeywordToken.UTF);
+  public static final PlatformTypeExpression UTF8 = new PlatformTypeExpression(KeywordToken.UTF8);
+  public static final PlatformTypeExpression UTF8BE = new PlatformTypeExpression(KeywordToken.UTF8BE);
+  public static final PlatformTypeExpression UTF16 = new PlatformTypeExpression(KeywordToken.UTF16);
+  public static final PlatformTypeExpression UTF16BE = new PlatformTypeExpression(KeywordToken.UTF16BE);
+  public static final PlatformTypeExpression UTF32 = new PlatformTypeExpression(KeywordToken.UTF32);
+  public static final PlatformTypeExpression UTF32BE = new PlatformTypeExpression(KeywordToken.UTF32BE);
 
   private static final QSet<PlatformTypeExpression> validPrimitiveTypes = new QSet<>(
-    UNIT, UTF, ASCII, INT, DYNAMIC, BOOLEAN
+    UNIT, DYNAMIC, OBJECT, JSON,
+    BOOLEAN, POLY, MATRIX,
+    NUMERIC, BYTE,
+
+    INT, INT8, INT16, INT32, INT64,
+    UINT, UINT8, UINT16, UINT32, UINT64,
+
+    DECIMAL, DECIMAL32, DECIMAL64,
+    CURRENCY,
+
+    CHAR,
+    ASCII, UTF,
+    UTF8, UTF8BE, UTF16, UTF16BE, UTF32, UTF32BE
   );
 
   private static final Partition<String, PlatformTypeExpression> expressionsByName
@@ -82,13 +128,17 @@ public class PlatformTypeExpression extends VerbaExpression implements TypeConst
 
   }
 
+  public static boolean isPlatformTypeName(String name) {
+    return expressionsByName.containsKey(name);
+  }
+
   public static boolean isPlatformTypeName(Lexer lexer) {
     if (lexer.isEOF()) {
       return false;
     }
 
     String representation = lexer.current().representation();
-    return expressionsByName.containsKey(representation);
+    return isPlatformTypeName(representation);
   }
 
   public static PlatformTypeExpression read(VerbaExpression parent, Lexer lexer) {
