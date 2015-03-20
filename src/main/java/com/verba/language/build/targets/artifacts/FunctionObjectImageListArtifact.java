@@ -1,5 +1,6 @@
 package com.verba.language.build.targets.artifacts;
 
+import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.emit.images.types.specialized.FunctionObjectImage;
@@ -12,6 +13,10 @@ public class FunctionObjectImageListArtifact implements BuildArtifact {
 
   public FunctionObjectImageListArtifact(QIterable<FunctionObjectImage> images) {
     this.images = images;
+  }
+
+  public FunctionObjectImageListArtifact() {
+    this.images = new QList<>();
   }
 
   public QIterable<FunctionObjectImage> images() { return this.images; }

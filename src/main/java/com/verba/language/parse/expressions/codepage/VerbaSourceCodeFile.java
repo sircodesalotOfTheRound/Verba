@@ -16,6 +16,7 @@ import com.verba.language.parse.expressions.categories.SymbolTableExpression;
 import com.verba.language.parse.expressions.withns.WithNsExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
+import com.verba.language.tools.ImportedNamespaceSet;
 import org.apache.commons.codec.digest.DigestUtils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -29,7 +30,7 @@ public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableE
   private QList<VerbaExpression> childExpressions;
   private QIterable<VerbaExpression> allExpressions;
   private Partition<Class, VerbaExpression> expressionsByType;
-  private QIterable<String> namespaces;
+  private ImportedNamespaceSet namespaces;
   private String path;
   private String text;
   private String hash;
@@ -52,11 +53,7 @@ public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableE
 
   @Override
   public void afterContentsParsed(Build build) {
-    this.namespaces = this
-      .expressionsByType(WithNsExpression.class)
-      .map(ns -> ns.namespace().representation())
-      .toList();
-
+    this.namespaces = new ImportedNamespaceSet(this);
   }
 
   @Override

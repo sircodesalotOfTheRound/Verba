@@ -34,12 +34,17 @@ public class FunctionObjectCodeBuildTarget extends BuildTarget {
     SymbolTableArtifact symbolTableArtifact = build.getArtifactOfType(SymbolTableArtifact.class);
     StringTableArtifact stringTable = build.getArtifactOfType(StringTableArtifact.class);
     SymbolTable symbolTable = symbolTableArtifact.symbolTable();
-    QIterable<FunctionDeclarationExpression> functions
-      = symbolTableArtifact.getSymbolsOfType(FunctionDeclarationExpression.class);
 
-    QList<FunctionObjectImage> functionObjectImages =
-      functions.map(function -> new FunctionObjectImage(function, build, symbolTable, stringTable)).toList();
+    if (symbolTableArtifact.containsSymbolsOfType(FunctionDeclarationExpression.class)) {
+      QIterable<FunctionDeclarationExpression> functions
+        = symbolTableArtifact.getSymbolsOfType(FunctionDeclarationExpression.class);
 
-    return new FunctionObjectImageListArtifact(functionObjectImages);
+      QList<FunctionObjectImage> functionObjectImages =
+        functions.map(function -> new FunctionObjectImage(function, build, symbolTable, stringTable)).toList();
+
+      return new FunctionObjectImageListArtifact(functionObjectImages);
+    } else {
+      return new FunctionObjectImageListArtifact();
+    }
   }
 }
