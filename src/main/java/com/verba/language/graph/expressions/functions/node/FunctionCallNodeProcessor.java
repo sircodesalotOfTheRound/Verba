@@ -18,18 +18,19 @@ public class FunctionCallNodeProcessor extends NodeProcessor<FunctionCallFacade>
   }
 
   @Override
-  public void process(FunctionCallFacade call) {
+  public VirtualVariable process(FunctionCallFacade call) {
     StringTableFqnEntry functionName = this.stringTable.addFqn(call.functionName());
     QIterable<VirtualVariable> arguments = this.loadArguments(call);
     VirtualVariable returnValue = this.createReturnValueStorage(call);
 
     this.performCall(call, functionName, arguments, returnValue);
+    return null;
   }
 
   private QIterable<VirtualVariable> loadArguments(FunctionCallFacade call) {
     return call.primaryParameters()
       .cast(ExpressionTreeNode.class)
-      .map(parameter -> this.visitAndCaptureResult(parameter));
+      .map(this::visitAndCaptureResult);
   }
 
   private VirtualVariable createReturnValueStorage(FunctionCallFacade call) {

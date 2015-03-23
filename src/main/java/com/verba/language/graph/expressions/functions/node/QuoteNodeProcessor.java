@@ -19,7 +19,7 @@ public class QuoteNodeProcessor extends NodeProcessor<QuoteExpression> {
     this.UTF = context.symbolTable().findSymbolForType(KeywordToken.UTF);
   }
 
-  public void process(QuoteExpression expression) {
+  public VirtualVariable process(QuoteExpression expression) {
     String variableName = expression.representation();
 
     VirtualVariable variable;
@@ -33,5 +33,7 @@ public class QuoteNodeProcessor extends NodeProcessor<QuoteExpression> {
 
     StringTableStringEntry innerText = stringTable.addString(expression.innerText());
     context.opcodes().loadString(variable, innerText);
+
+    return variable;
   }
 }

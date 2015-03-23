@@ -50,6 +50,10 @@ public class FunctionOpCodeSet implements QIterable<VerbatimOpCodeBase> {
     this.add(VerbatimOpCodeBase.ret());
   }
 
+  public void add(VirtualVariable destination, VirtualVariable source) {
+    this.add(VerbatimOpCodeBase.add(destination, source));
+  }
+
   public void ret(VirtualVariable variable) {
     this.add(VerbatimOpCodeBase.ret(variable));
   }

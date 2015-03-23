@@ -5,6 +5,7 @@ import com.verba.language.graph.expressions.functions.node.*;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
+import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
@@ -21,6 +22,7 @@ public class NodeProcessorFactory {
   private final NewExpressionNodeProcessor newExpressionNodeProcessor;
   private final ReturnStatementNodeProcessor returnStatementNodeProcessor;
   private final BooleanExpressionNodeProcessor booleanExpressionProcessor;
+  private final InfixExpressionNodeProcessor infixNodeProcessor;
 
   public NodeProcessorFactory(FunctionContext context) {
     this.valStatementProcessor = new ValNodeStatementProcessor(context);
@@ -30,6 +32,7 @@ public class NodeProcessorFactory {
     this.newExpressionNodeProcessor = new NewExpressionNodeProcessor(context);
     this.returnStatementNodeProcessor = new ReturnStatementNodeProcessor(context);
     this.booleanExpressionProcessor = new BooleanExpressionNodeProcessor(context);
+    this.infixNodeProcessor = new InfixExpressionNodeProcessor(context);
   }
 
   public void process(ValDeclarationStatement declaration) {
@@ -59,4 +62,6 @@ public class NodeProcessorFactory {
   public void process(BooleanExpression expression) {
     this.booleanExpressionProcessor.process(expression);
   }
+
+  public void process(InfixExpression expression) { this.infixNodeProcessor.process(expression); }
 }

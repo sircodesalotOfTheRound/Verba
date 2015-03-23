@@ -26,6 +26,7 @@ import com.verba.language.parse.expressions.containers.tuple.TupleDeclarationExp
 import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpression;
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
+import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
@@ -189,8 +190,13 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
     throw new NotImplementedException();
   }
 
+  @Override
   public void visit(QuoteExpression expression) {
     this.nodeProcessors.process(expression);
   }
 
+  @Override
+  public void visit(InfixExpression expression) {
+    this.nodeProcessors.process(expression);
+  }
 }

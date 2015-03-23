@@ -8,7 +8,7 @@ import com.verba.language.emit.variables.VirtualVariable;
  * Created by sircodesalot on 14/9/20.
  */
 public class LdUint64OpCode extends VerbatimOpCodeBase {
-  private static final VerbatimOpCodeBinaryValue LD_UI64 = VerbatimOpCodeBinaryValue.LD_STR;
+  private static final VerbatimOpCodeBinaryValue LD_UI64 = VerbatimOpCodeBinaryValue.LD_UI64;
 
   private final VirtualVariable variable;
   private final long value;

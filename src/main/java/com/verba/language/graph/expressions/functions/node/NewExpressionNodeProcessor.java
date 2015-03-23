@@ -16,9 +16,11 @@ public class NewExpressionNodeProcessor extends NodeProcessor<NewExpression> {
   }
 
   @Override
-  public void process(NewExpression expression) {
+  public VirtualVariable process(NewExpression expression) {
     Symbol unit = this.symbolTable.findSymbolForType(KeywordToken.UNIT);
     VirtualVariable variable = this.variableScope.addtoScope("new-value", unit);
     this.variableScope.setScopeValue(variable);
+
+    return variable;
   }
 }

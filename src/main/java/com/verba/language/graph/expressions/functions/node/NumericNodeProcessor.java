@@ -18,14 +18,20 @@ public class NumericNodeProcessor extends NodeProcessor<NumericExpression> {
   }
 
   @Override
-  public void process(NumericExpression expression) {
+  public VirtualVariable process(NumericExpression expression) {
     VirtualVariable loadedValue = this.loadValue(expression.asLong());
     this.opcodes.loaduint64(loadedValue, expression.asInt());
 
     this.variableScope.setScopeValue(loadedValue);
+    return loadedValue;
   }
 
   public VirtualVariable loadValue(Long value) {
-    return this.variableScope.addtoScope(value.toString(), INT);
+    String valueAsString = value.toString();
+    if (!this.variableScope.containsKey(valueAsString)) {
+      return this.variableScope.addtoScope(value.toString(), INT);
+    } else {
+      return this.variableScope.variableByName(valueAsString);
+    }
   }
 }

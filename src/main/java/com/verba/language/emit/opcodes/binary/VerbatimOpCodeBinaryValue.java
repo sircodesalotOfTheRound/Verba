@@ -22,7 +22,12 @@ public enum VerbatimOpCodeBinaryValue {
   STAGE_ARG("StgArg", "Stage argument for call", 0x29),
   LD_UNIT("LdUnit", "Load a Unit value", 0x20),
   LD_UI64("LdUi64", "Load 64 bit unsigned int", 0xD3),
-  LD_STR("LdStr", "Load String", 0xD1);
+  LD_STR("LdStr", "Load String", 0xD1),
+
+  ADD("Add", "Add two values", 0xE0),
+  SUB("Sub", "Subtract two values", 0xE1),
+  MULT("Mult", "Multiply two values", 0xE2),
+  DIV("Div", "Divide two values", 0xE3);
 
   private final String opcodeName;
   private final String description;

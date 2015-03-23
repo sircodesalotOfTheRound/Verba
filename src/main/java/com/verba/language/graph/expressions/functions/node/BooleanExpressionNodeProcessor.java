@@ -18,9 +18,11 @@ public class BooleanExpressionNodeProcessor extends NodeProcessor<BooleanExpress
   }
 
   @Override
-  public void process(BooleanExpression expression) {
+  public VirtualVariable process(BooleanExpression expression) {
     VirtualVariable variable = createVariable(expression);
     this.variableScope.setScopeValue(variable);
+
+    return null;
   }
 
   private VirtualVariable createVariable(BooleanExpression expression) {

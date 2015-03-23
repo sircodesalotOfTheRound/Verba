@@ -4,7 +4,6 @@ import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
-import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 
 /**
@@ -16,13 +15,15 @@ public class ReturnStatementNodeProcessor extends NodeProcessor<ReturnStatementE
   }
 
   @Override
-  public void process(ReturnStatementExpression expression) {
+  public VirtualVariable process(ReturnStatementExpression expression) {
     if (expression.hasValue()) {
       VirtualVariable variable = captureReturnValue(expression);
       this.opcodes.ret(variable);
     } else {
       this.opcodes.ret();
     }
+
+    return null;
   }
 
   private VirtualVariable captureReturnValue(ReturnStatementExpression expression) {

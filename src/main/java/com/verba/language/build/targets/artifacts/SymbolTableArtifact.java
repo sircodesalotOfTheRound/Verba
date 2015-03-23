@@ -36,6 +36,10 @@ public class SymbolTableArtifact implements BuildArtifact {
       .toList();
   }
 
+  public Symbol findSingleSymbolByFqn(String fqn) {
+    return this.symbolTable.findAllMatchingFqn(fqn).single();
+  }
+
   // Associates a class, and its entire hierarchy to an object.
   public static class ClassHierarchyToObjectMap {
     private final OneToManyMap<Class, Symbol> map = new OneToManyMap<>();

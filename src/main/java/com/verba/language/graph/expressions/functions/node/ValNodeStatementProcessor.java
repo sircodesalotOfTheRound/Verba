@@ -15,7 +15,7 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
     super(context);
   }
 
-  public void process(ValDeclarationStatement declaration) {
+  public VirtualVariable process(ValDeclarationStatement declaration) {
     // First generate the R-Value.
     VirtualVariable calculatedRValue = this.calculateRValue(declaration);
 
@@ -24,9 +24,12 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
     if (rvalueIsExistingNamedVariable(declaration, calculatedRValue)) {
       VirtualVariable destination = this.variableScope.addtoScope(declaration.name(), declaration.resolvedType());
       this.opcodes.copy(destination, calculatedRValue);
+      return destination;
     } else {
       calculatedRValue.renameVariable(declaration.name());
     }
+
+    return null;
   }
 
   private VirtualVariable calculateRValue(ValDeclarationStatement statement) {
