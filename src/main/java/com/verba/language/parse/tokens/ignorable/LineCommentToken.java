@@ -19,17 +19,7 @@ public class LineCommentToken implements Token {
   }
 
   public static boolean isLineCommentToken(CodeStream stream) {
-    boolean isComment = false;
-
-    stream.setUndoPosition();
-    if (stream.read() == '/') {
-      if (stream.hasNext() && (stream.read().equals('/'))) {
-        isComment = true;
-      }
-    }
-
-    stream.rollbackToUndoPosition();
-    return isComment;
+    return stream.peek().equals('#');
   }
 
   public static LineCommentToken read(CodeStream codeStream) {

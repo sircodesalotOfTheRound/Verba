@@ -2,7 +2,7 @@ package com.verba.language.parse.expressions.backtracking.rules;
 
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.backtracking.BacktrackRule;
-import com.verba.language.parse.expressions.tags.aspect.AspectTagExpression;
+import com.verba.language.parse.expressions.metatags.aspect.AspectTagExpression;
 import com.verba.language.parse.info.LexList;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.operators.tags.AspectTagToken;

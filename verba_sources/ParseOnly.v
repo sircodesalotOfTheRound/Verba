@@ -1,20 +1,20 @@
 
-// Importing namespaces
+# Importing namespaces
 withns vm.some_namespace
 
-// Some basic functionality
+# Some basic functionality
 namesapce a_namespace {
 
-  #[HashTag]
-  #[GenericHashtag<String>]
-  #[HashtagWithLambda(x -> x)]
-  @[SimpleAspect]
-  @[named_aspect : SomeAspect]
-  @[newed_aspect : new NewedAspect]
-  @[injected_aspect : inject NewedAspect]
+  [HashTag]
+  [GenericHashtag<String>]
+  [HashtagWithLambda(x -> x)]
+  @SimpleAspect
+  @named_aspect : SomeAspect
+  @newed_aspect : new NewedAspect
+  @injected_aspect : inject NewedAspect
   fn tagged_up_function { }
 
-  #: Some simple functions:
+  # Some simple functions:
   fn an_empty_function
   fn paramaterized_function(string_parameter : utf) {
    print(string_parameter)
@@ -38,7 +38,7 @@ namesapce a_namespace {
     }
   }
 
-  #: Object Types
+  # Object Types
   fn my_function() {
     val type_inferred_literal = 42
     val explicit_type : object = new Object()

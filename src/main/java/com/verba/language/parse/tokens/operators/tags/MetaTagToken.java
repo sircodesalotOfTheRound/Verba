@@ -3,9 +3,9 @@ package com.verba.language.parse.tokens.operators.tags;
 /**
  * Created by sircodesalot on 14-2-28.
  */
-public class HashTagToken extends TagToken {
+public class MetaTagToken extends TagToken {
 
-  protected HashTagToken() {
-    super("#[");
+  protected MetaTagToken() {
+    super("[");
   }
 }

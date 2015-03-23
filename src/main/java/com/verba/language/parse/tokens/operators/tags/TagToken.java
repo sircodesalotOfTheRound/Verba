@@ -29,7 +29,7 @@ public abstract class TagToken extends OperatorToken {
   public static OperatorToken read(Character firstToken, CodeStream stream) {
     if (firstToken == '#' && stream.peek() == '[') {
       stream.read();
-      return new HashTagToken();
+      return new MetaTagToken();
     } else if (firstToken == '@' && stream.peek() == '[') {
       stream.read();
       return new AspectTagToken();

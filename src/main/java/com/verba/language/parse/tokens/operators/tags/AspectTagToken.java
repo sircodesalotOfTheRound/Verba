@@ -6,6 +6,6 @@ package com.verba.language.parse.tokens.operators.tags;
 public class AspectTagToken extends TagToken {
 
   public AspectTagToken() {
-    super("@[");
+    super("@");
   }
 }

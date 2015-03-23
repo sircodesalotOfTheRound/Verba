@@ -1,4 +1,4 @@
-package com.verba.language.parse.expressions.tags.aspect;
+package com.verba.language.parse.expressions.metatags.aspect;
 
 import com.verba.language.build.configuration.Build;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -31,14 +31,11 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
     // @| name : Aspect
     if (lexer.peekToEndOfLine().contains(OperatorToken.class, ":")) {
       this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-
       lexer.readCurrentAndAdvance(OperatorToken.class, ":");
     }
 
     this.type = this.readType(lexer);
-
     // Read the closing ']'
-    lexer.readCurrentAndAdvance(EnclosureToken.class, "]");
     this.closeLexingRegion();
   }
 

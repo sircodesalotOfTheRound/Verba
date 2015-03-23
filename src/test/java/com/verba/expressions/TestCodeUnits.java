@@ -15,7 +15,7 @@ public class TestCodeUnits {
     assert(graphingTests.path().equals("verba_sources/code_unit_tests/GraphingTests.v"));
     assert(slightlyModifiedGraphingTests.path().equals("verba_sources/code_unit_tests/SlightlyModifiedGraphingTests.v"));
 
-    assert(graphingTests.hash().equals("de85049d2a898c3cbf978d0ece016fd26cb34b13"));
-    assert(slightlyModifiedGraphingTests.hash().equals("4e5fce4fdb54e992efa4d1ed338a441c4eb79a3a"));
+    assert(graphingTests.hash().equals("dbd13781bfc8146f1e1fe206272c720ad039c864"));
+    assert(slightlyModifiedGraphingTests.hash().equals("8c42903c98622da0c599d7c7df79ed10f3668bc5"));
   }
 }
