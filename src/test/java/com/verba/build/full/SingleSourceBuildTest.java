@@ -11,8 +11,7 @@ public class SingleSourceBuildTest {
   public static LitFileBuildManager build = new BuildSpecification()
     .addSourceFolder("verba_sources/single_source_build_test")
     .isDebugBuild(false)
-    .litFileOutputFolder("verba_builds")
-    .shouldPersist(true)
+    .outputPath("verba_builds/single-source-build.vlit")
     .createLitFileBuild();
 
   @Test

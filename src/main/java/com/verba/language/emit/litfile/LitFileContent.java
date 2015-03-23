@@ -33,12 +33,16 @@ public class LitFileContent {
 
   public void save() {
     try (FilePersistenceWriter writer = new FilePersistenceWriter(header.path())) {
-      header.emit(writer);
-      functions.emit(writer);
-
+      emitContents(writer);
     } catch (Exception e) {
       throw new CompilerException("Unable to persist file");
     }
+  }
+
+  private void emitContents(FilePersistenceWriter writer) {
+    header.emit(writer);
+    stringTable.emit(writer);
+    functions.emit(writer);
   }
 
 }

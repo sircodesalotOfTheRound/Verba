@@ -31,20 +31,11 @@ public class BuildSpecification {
     return this;
   }
 
-  // If output folder speicifed, then just use that.
-  @Deprecated
-  public boolean shouldPersist() { return this.shouldPersist; }
-
-  @Deprecated
-  public BuildSpecification shouldPersist(boolean persist) {
-    this.shouldPersist = persist;
-    return this;
-  }
-
-  private String litfileOutputFolder;
-  public String litfileOutputFolder() { return this.litfileOutputFolder; }
-  public BuildSpecification litFileOutputFolder(String path) {
-    this.litfileOutputFolder = path;
+  private String outputPath;
+  public boolean containsOutputPath() { return this.outputPath != null; }
+  public String outputPath() { return this.outputPath; }
+  public BuildSpecification outputPath(String path) {
+    this.outputPath = path;
     return this;
   }
 

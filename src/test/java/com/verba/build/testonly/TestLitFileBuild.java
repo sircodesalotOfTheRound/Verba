@@ -25,7 +25,6 @@ public class TestLitFileBuild {
     return new BuildSpecification()
       .addSourceFolder("verba_sources/glob_test")
       .isDebugBuild(false)
-      .shouldPersist(false)
       .createLitFileBuild();
   }
 

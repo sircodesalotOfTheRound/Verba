@@ -16,7 +16,6 @@ public class TestFunctionTypeResolution {
   private static final LitFileBuildManager build = new BuildSpecification()
     .isDebugBuild(false)
     .addSourceFolder("verba_sources/function_tests")
-    .shouldPersist(false)
     .createLitFileBuild();
 
   @Test

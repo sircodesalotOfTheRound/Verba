@@ -6,6 +6,8 @@ import com.verba.language.build.targets.artifacts.interfaces.BuildArtifact;
 import com.verba.language.emit.header.stringtable.StringTableFqnEntry;
 import com.verba.language.emit.header.stringtable.StringTableStringEntry;
 import com.verba.language.emit.images.interfaces.ObjectImage;
+import com.verba.language.emit.images.types.common.FilePersistenceWriter;
+import com.verba.language.emit.litfile.LitFileItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +15,7 @@ import java.util.Map;
 /**
  * Created by sircodesalot on 14/11/22.
  */
-public class StringTableArtifact implements BuildArtifact {
+public class StringTableArtifact implements BuildArtifact, LitFileItem {
   private int index;
   private final QList<StringTableStringEntry> entriesByIndex = new QList<>();
   private final Map<String, StringTableStringEntry> stringTable = new HashMap<>();
@@ -41,7 +43,12 @@ public class StringTableArtifact implements BuildArtifact {
     return entriesByIndex.get(index);
   }
 
-  public ObjectImage image() {
-    return null;
+  @Override
+  public void emit(FilePersistenceWriter image) {
+    image.writeInt8("string-table-size", (int) entriesByIndex.count());
+    for (StringTableStringEntry entry : entriesByIndex) {
+      image.writeInt8("index", entry.index());
+      image.writeRawString("text", entry.text());
+    }
   }
 }

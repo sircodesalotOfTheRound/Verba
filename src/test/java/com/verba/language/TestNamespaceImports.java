@@ -14,7 +14,6 @@ public class TestNamespaceImports {
   private static final LitFileBuildManager build = new BuildSpecification()
     .isDebugBuild(false)
     .addSourceFolder("verba_sources/language_feature_tests")
-    .shouldPersist(false)
     .createLitFileBuild();
 
   @Test
