@@ -1,4 +1,4 @@
-Verba Means To Do!
+Verba Means: 'To Do'!
 =====
 
 The verbatim byte literature compiler for the verba language. To see what you can use now, check out the **<a href="https://github.com/sircodesalotOfTheRound/Verba/wiki">samples of verba language currently implemented features</a>**!
