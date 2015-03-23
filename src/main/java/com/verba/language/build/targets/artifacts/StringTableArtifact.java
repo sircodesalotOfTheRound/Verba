@@ -45,9 +45,8 @@ public class StringTableArtifact implements BuildArtifact, LitFileItem {
 
   @Override
   public void emit(FilePersistenceWriter image) {
-    image.writeInt8("string-table-size", (int) entriesByIndex.count());
+    image.writeInt32("string-table-size", (int) entriesByIndex.count());
     for (StringTableStringEntry entry : entriesByIndex) {
-      image.writeInt8("index", entry.index());
       image.writeRawString("text", entry.text());
     }
   }
