@@ -17,6 +17,13 @@ public class VirtualVariableSet {
 
   public VirtualVariable create(String key, Symbol type) {
     VirtualVariable variable = new VirtualVariable(key, variableCount++, type);
+    variable.addVariableEventSubscription(new VirtualVariable.VirtualVariableEventSubscription() {
+      @Override
+      public void onRenameVariable(VirtualVariable variable, String newKey) {
+        variablesByName.remove(newKey);
+        variablesByName.add(newKey, variable);
+      }
+    });
     create(key, variable);
 
     return variable;
@@ -29,6 +36,11 @@ public class VirtualVariableSet {
       variablesByName.add(key, variable);
       variablesByIndex.add(variableCount++, variable);
     }
+  }
+
+  public void renameVariable(String oldName, String newName) {
+    VirtualVariable variable = this.variablesByName.get(oldName);
+    variable.rename(newName);
   }
 
   public VirtualVariable get(int index) {

@@ -26,7 +26,7 @@ public class VirtualVariable {
   public Symbol type() { return this.type; }
   public String key() { return key; }
 
-  public void renameVariable(String newKey) {
+  public void rename(String newKey) {
     for (VirtualVariableEventSubscription subscription : eventSubscriptions) {
       subscription.onRenameVariable(this, newKey);
     }
