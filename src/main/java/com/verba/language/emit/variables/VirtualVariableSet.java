@@ -1,6 +1,8 @@
 package com.verba.language.emit.variables;
 
 import com.javalinq.implementations.QMap;
+import com.javalinq.interfaces.QIterable;
+import com.javalinq.tools.KeyValuePair;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.tools.exceptions.CompilerException;
 
@@ -16,16 +18,17 @@ public class VirtualVariableSet {
   public boolean containsIndex(Integer index) { return variablesByIndex.containsKey(index); }
 
   public VirtualVariable create(String key, Symbol type) {
-    VirtualVariable variable = new VirtualVariable(key, variableCount++, type);
+    VirtualVariable variable = new VirtualVariable(key, variableCount, type);
     variable.addVariableEventSubscription(new VirtualVariable.VirtualVariableEventSubscription() {
       @Override
       public void onRenameVariable(VirtualVariable variable, String newKey) {
-        variablesByName.remove(newKey);
+        variablesByName.remove(variable.key());
         variablesByName.add(newKey, variable);
       }
     });
-    create(key, variable);
 
+    create(key, variable);
+    variableCount++;
     return variable;
   }
 
@@ -34,7 +37,7 @@ public class VirtualVariableSet {
       throw new CompilerException("Variable by this name already exists");
     } else {
       variablesByName.add(key, variable);
-      variablesByIndex.add(variableCount++, variable);
+      variablesByIndex.add(variableCount, variable);
     }
   }
 
@@ -52,4 +55,6 @@ public class VirtualVariableSet {
   }
 
   public int variableCount() { return variableCount; }
+
+  public QIterable<VirtualVariable> variables() { return this.variablesByIndex.map(KeyValuePair::value); }
 }
