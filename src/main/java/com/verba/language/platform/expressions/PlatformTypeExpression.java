@@ -51,12 +51,6 @@ public class PlatformTypeExpression extends VerbaExpression implements TypeConst
 
   public static final PlatformTypeExpression ASCII = new PlatformTypeExpression(KeywordToken.ASCII);
   public static final PlatformTypeExpression UTF = new PlatformTypeExpression(KeywordToken.UTF);
-  public static final PlatformTypeExpression UTF8 = new PlatformTypeExpression(KeywordToken.UTF8);
-  public static final PlatformTypeExpression UTF8BE = new PlatformTypeExpression(KeywordToken.UTF8BE);
-  public static final PlatformTypeExpression UTF16 = new PlatformTypeExpression(KeywordToken.UTF16);
-  public static final PlatformTypeExpression UTF16BE = new PlatformTypeExpression(KeywordToken.UTF16BE);
-  public static final PlatformTypeExpression UTF32 = new PlatformTypeExpression(KeywordToken.UTF32);
-  public static final PlatformTypeExpression UTF32BE = new PlatformTypeExpression(KeywordToken.UTF32BE);
 
   private static final QSet<PlatformTypeExpression> validPrimitiveTypes = new QSet<>(
     UNIT, DYNAMIC, OBJECT, JSON,
@@ -70,8 +64,7 @@ public class PlatformTypeExpression extends VerbaExpression implements TypeConst
     CURRENCY,
 
     CHAR,
-    ASCII, UTF,
-    UTF8, UTF8BE, UTF16, UTF16BE, UTF32, UTF32BE
+    ASCII, UTF
   );
 
   private static final Partition<String, PlatformTypeExpression> expressionsByName

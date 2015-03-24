@@ -30,12 +30,6 @@ public class KeywordToken extends IdentifierToken {
   public static final String CHAR = "char";
   public static final String ASCII = "ascii";
   public static final String UTF = "utf";
-  public static final String UTF8 = "utf8";
-  public static final String UTF16 = "utf16";
-  public static final String UTF32= "utf32";
-  public static final String UTF8BE = "utf8be";
-  public static final String UTF16BE = "utf16be";
-  public static final String UTF32BE= "utf32be";
   public static final String UNIT = "unit";
   public static final String OBJECT = "object";
   public static final String JSON = "json";
@@ -48,8 +42,7 @@ public class KeywordToken extends IdentifierToken {
     CURRENCY,
     CHAR,
     ASCII,
-    UTF, UTF8, UTF16, UTF32,
-    UTF8BE, UTF16BE, UTF32BE,
+    UTF,
     UNIT,
     OBJECT,
     DYNAMIC,
