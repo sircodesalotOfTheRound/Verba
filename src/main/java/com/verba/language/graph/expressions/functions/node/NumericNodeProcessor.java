@@ -24,13 +24,13 @@ public class NumericNodeProcessor extends NodeProcessor<NumericExpression> {
 
   public VirtualVariable loadValue(Long value) {
     String valueAsString = value.toString();
-    if (!this.variableScope.containsKey(valueAsString)) {
-      VirtualVariable variable = this.variableScope.addtoScope(value.toString(), INT);
+    if (!this.variableSet.containsKey(valueAsString)) {
+      VirtualVariable variable = this.variableSet.create(value.toString(), INT);
       this.opcodes.loaduint64(variable, value);
 
       return variable;
     } else {
-      return this.variableScope.variableByName(valueAsString);
+      return this.variableSet.get(valueAsString);
     }
   }
 }

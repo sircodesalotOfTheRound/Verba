@@ -8,7 +8,7 @@ import com.verba.language.emit.images.types.common.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.emit.variables.VirtualVariableScopeTree;
+import com.verba.language.emit.variables.VirtualVariableSet;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessorFactory;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -40,7 +40,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class FunctionGraphVisitor {
   private final Build build;
-  private final VirtualVariableScopeTree variableSet;
+  //private final VirtualVariableScopeTree variableSet;
+  private final VirtualVariableSet variableSet;
   private final FunctionDeclarationExpression function;
   private final VariableLifetimeGraph lifetimeGraph;
   private final SymbolTable symbolTable;
@@ -54,7 +55,7 @@ public class FunctionGraphVisitor {
 
   public FunctionGraphVisitor(Build build, FunctionDeclarationExpression function, SymbolTable symbolTable) {
     this.build = build;
-    this.variableSet = new VirtualVariableScopeTree(20);
+    this.variableSet = new VirtualVariableSet();
     this.function = function;
     this.lifetimeGraph = new VariableLifetimeGraph(function);
     this.symbolTable = symbolTable;

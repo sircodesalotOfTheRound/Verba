@@ -29,7 +29,7 @@ public class ReturnStatementNodeProcessor extends NodeProcessor<ReturnStatementE
 
   private VirtualVariable captureReturnValue(ReturnStatementExpression expression) {
     FunctionGraphNode value = (FunctionGraphNode)expression.value();
-    return this.visitAndCaptureResult(value);
+    return this.visit(value);
   }
 
 }

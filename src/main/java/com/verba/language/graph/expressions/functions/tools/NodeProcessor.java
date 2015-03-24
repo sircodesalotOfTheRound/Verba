@@ -2,13 +2,12 @@ package com.verba.language.graph.expressions.functions.tools;
 
 import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.emit.variables.VirtualVariable;
-import com.verba.language.emit.variables.VirtualVariableScopeTree;
+import com.verba.language.emit.variables.VirtualVariableSet;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.FunctionOpCodeSet;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.graph.visitors.ExpressionTreeNode;
 import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.categories.TypedExpression;
 
@@ -17,7 +16,7 @@ import com.verba.language.parse.expressions.categories.TypedExpression;
  */
 public abstract class NodeProcessor<T> {
   protected final FunctionContext context;
-  protected final VirtualVariableScopeTree variableScope;
+  protected final VirtualVariableSet variableSet;
   protected final StringTableArtifact stringTable;
   protected final SymbolTable symbolTable;
   protected final FunctionOpCodeSet opcodes;
@@ -26,7 +25,7 @@ public abstract class NodeProcessor<T> {
   public NodeProcessor(FunctionContext context) {
     this.context = context;
     this.symbolTable = context.symbolTable();
-    this.variableScope = context.variableScopeTree();
+    this.variableSet = context.variableSet();
     this.stringTable = context.stringTable();
     this.opcodes = context.opcodes();
     this.lifetimeGraph = context.lifetimeGraph();
@@ -35,9 +34,6 @@ public abstract class NodeProcessor<T> {
   protected VirtualVariable visit(FunctionGraphNode node) {
     return context.visit(node);
   }
-
-  @Deprecated
-  protected VirtualVariable visitAndCaptureResult(FunctionGraphNode node) { return context.visitWithNewVarScope(node); }
 
   protected Symbol getTypeForSymbol(TypedExpression expression) { return expression.resolvedType(); }
 

@@ -15,12 +15,14 @@ public class VirtualVariableSet {
   public boolean containsKey(String key) { return variablesByName.containsKey(key); }
   public boolean containsIndex(Integer index) { return variablesByIndex.containsKey(index); }
 
-  public void add(String key, Symbol type) {
+  public VirtualVariable create(String key, Symbol type) {
     VirtualVariable variable = new VirtualVariable(key, variableCount++, type);
-    add(key, variable);
+    create(key, variable);
+
+    return variable;
   }
 
-  private void add(String key, VirtualVariable variable) {
+  private void create(String key, VirtualVariable variable) {
     if (containsKey(key)) {
       throw new CompilerException("Variable by this name already exists");
     } else {
@@ -36,4 +38,6 @@ public class VirtualVariableSet {
   public VirtualVariable get(String key) {
     return variablesByName.get(key);
   }
+
+  public int variableCount() { return variableCount; }
 }

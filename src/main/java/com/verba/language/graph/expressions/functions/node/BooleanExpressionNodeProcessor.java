@@ -19,12 +19,12 @@ public class BooleanExpressionNodeProcessor extends NodeProcessor<BooleanExpress
 
   @Override
   public VirtualVariable process(BooleanExpression expression) {
-    VirtualVariable variable = createVariable(expression);
-    this.variableScope.setScopeValue(variable);
+    //VirtualVariable variable = createVariable(expression);
+    //this.variableScope.setScopeValue(variable);
 
     return null;
   }
-
+/*
   private VirtualVariable createVariable(BooleanExpression expression) {
     String keyword = captureKeywordForExpression(expression);
 
@@ -44,5 +44,5 @@ public class BooleanExpressionNodeProcessor extends NodeProcessor<BooleanExpress
     } else {
       return KeywordToken.FALSE;
     }
-  }
+  }*/
 }

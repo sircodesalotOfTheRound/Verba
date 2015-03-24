@@ -31,8 +31,8 @@ public class NamedValueNodeProcessor extends NodeProcessor<NamedValueExpression>
 
   private void captureValue(NamedValueExpression expression) {
     // Make this variable the scope value.
-    VirtualVariable variable = this.variableScope.variableByName(expression.name());
-    this.variableScope.setScopeValue(variable);
+    //VirtualVariable variable = this.variableScope.variableByName(expression.name());
+    //this.variableScope.setScopeValue(variable);
   }
 
 

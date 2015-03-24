@@ -7,32 +7,28 @@ import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import com.verba.language.platform.PlatformTypeSymbols;
 
 /**
  * Created by sircodesalot on 14/10/3.
  */
 public class QuoteNodeProcessor extends NodeProcessor<QuoteExpression> {
-  private final Symbol UTF;
-
   public QuoteNodeProcessor(FunctionContext context) {
     super(context);
-    this.UTF = context.symbolTable().findSymbolForType(KeywordToken.UTF);
   }
 
   public VirtualVariable process(QuoteExpression expression) {
     String variableName = expression.representation();
 
     VirtualVariable variable;
-    if (variableScope.containsVariableMatching(variableName, UTF)) {
-      variable = variableScope.variableByName(variableName);
+    if (variableSet.containsKey(variableName)) {
+      variable = variableSet.get(variableName);
     } else {
-      variable = variableScope.addtoScope(variableName, UTF);
+      variable = variableSet.create(variableName, PlatformTypeSymbols.UTF);
     }
 
-    variableScope.setScopeValue(variable);
-
     StringTableStringEntry innerText = stringTable.addString(expression.innerText());
-    context.opcodes().loadString(variable, innerText);
+    this.context.opcodes().loadString(variable, innerText);
 
     return variable;
   }

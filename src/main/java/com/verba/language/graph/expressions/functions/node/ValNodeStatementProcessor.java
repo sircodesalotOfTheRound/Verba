@@ -18,21 +18,22 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
 
   public VirtualVariable process(ValDeclarationStatement declaration) {
     // First generate the R-Value.
-    VirtualVariable calculatedRValue = this.calculateRValue(declaration);
+    //VirtualVariable calculatedRValue = this.calculateRValue(declaration);
 
     // If the rvalue is another named variable, then we need to make a copy.
     // Otherwise the rvalue is a temporary and we just need to rename it.
-    if (rvalueIsExistingNamedVariable(declaration, calculatedRValue)) {
+    /*if (rvalueIsExistingNamedVariable(declaration, calculatedRValue)) {
       VirtualVariable destination = this.variableScope.addtoScope(declaration.name(), declaration.resolvedType());
       this.opcodes.copy(destination, calculatedRValue);
       return destination;
     } else {
       calculatedRValue.renameVariable(declaration.name());
-    }
+    }*/
 
     return null;
   }
 
+  /*
   private VirtualVariable calculateRValue(ValDeclarationStatement statement) {
     return visitAndCaptureResult((FunctionGraphNode) statement.rvalue());
   }
@@ -40,6 +41,6 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
   public boolean rvalueIsExistingNamedVariable(ValDeclarationStatement declaration, VirtualVariable rvalue) {
     Scope scope = this.symbolTable.findByInstance(declaration).scope();
     return scope.isInScope(rvalue.key());
-  }
+  }*/
 
 }
