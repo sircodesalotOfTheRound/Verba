@@ -1,5 +1,6 @@
 package com.verba.language.graph.expressions.functions.tools;
 
+import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.node.*;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
@@ -35,33 +36,35 @@ public class NodeProcessorFactory {
     this.infixNodeProcessor = new InfixExpressionNodeProcessor(context);
   }
 
-  public void process(ValDeclarationStatement declaration) {
-    this.valStatementProcessor.process(declaration);
+  public VirtualVariable process(ValDeclarationStatement declaration) {
+    return this.valStatementProcessor.process(declaration);
   }
 
-  public void process(QuoteExpression quote) {
-    this.quoteNodeProcessor.process(quote);
+  public VirtualVariable process(QuoteExpression quote) {
+    return this.quoteNodeProcessor.process(quote);
   }
 
-  public void process(NumericExpression expression) {
-    this.numericNodeProcessor.process(expression);
+  public VirtualVariable process(NumericExpression expression) {
+    return this.numericNodeProcessor.process(expression);
   }
 
-  public void process(NamedValueExpression expression) {
-    this.namedValueNodeProcessor.process(expression);
+  public VirtualVariable process(NamedValueExpression expression) {
+    return this.namedValueNodeProcessor.process(expression);
   }
 
-  public void process(NewExpression expression) {
-    this.newExpressionNodeProcessor.process(expression);
+  public VirtualVariable process(NewExpression expression) {
+    return this.newExpressionNodeProcessor.process(expression);
   }
 
-  public void process(ReturnStatementExpression expression) {
-    this.returnStatementNodeProcessor.process(expression);
+  public VirtualVariable process(ReturnStatementExpression expression) {
+    return this.returnStatementNodeProcessor.process(expression);
   }
 
-  public void process(BooleanExpression expression) {
-    this.booleanExpressionProcessor.process(expression);
+  public VirtualVariable process(BooleanExpression expression) {
+    return this.booleanExpressionProcessor.process(expression);
   }
 
-  public void process(InfixExpression expression) { this.infixNodeProcessor.process(expression); }
+  public VirtualVariable process(InfixExpression expression) {
+    return this.infixNodeProcessor.process(expression);
+  }
 }

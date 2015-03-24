@@ -1,6 +1,8 @@
 package com.verba.language.parse.expressions.rvalue.newexpression;
 
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -96,5 +98,10 @@ public class NewExpression extends VerbaExpression
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
     visitor.visit(this);
+  }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
   }
 }

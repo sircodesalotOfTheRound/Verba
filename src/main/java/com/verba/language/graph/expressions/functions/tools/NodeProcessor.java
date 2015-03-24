@@ -9,6 +9,7 @@ import com.verba.language.graph.expressions.functions.variables.VariableLifetime
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.categories.TypedExpression;
 
 /**
@@ -31,10 +32,12 @@ public abstract class NodeProcessor<T> {
     this.lifetimeGraph = context.lifetimeGraph();
   }
 
-  protected void visit(ExpressionTreeNode node) { context.visit(node); }
+  protected VirtualVariable visit(FunctionGraphNode node) {
+    return context.visit(node);
+  }
 
   @Deprecated
-  protected VirtualVariable visitAndCaptureResult(ExpressionTreeNode node) { return context.visitWithNewVarScope(node); }
+  protected VirtualVariable visitAndCaptureResult(FunctionGraphNode node) { return context.visitWithNewVarScope(node); }
 
   protected Symbol getTypeForSymbol(TypedExpression expression) { return expression.resolvedType(); }
 

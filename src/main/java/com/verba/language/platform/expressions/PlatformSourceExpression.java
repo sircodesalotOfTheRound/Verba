@@ -1,6 +1,8 @@
 package com.verba.language.platform.expressions;
 
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
@@ -53,4 +55,8 @@ public class PlatformSourceExpression extends VerbaExpression implements Express
 
   }
 
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
+  }
 }

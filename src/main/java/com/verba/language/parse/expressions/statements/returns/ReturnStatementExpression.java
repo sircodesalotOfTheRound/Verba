@@ -1,7 +1,8 @@
 package com.verba.language.parse.expressions.statements.returns;
 
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.expressions.events.ReturnStatementEventSubscriptionVerbaExpression;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
@@ -76,5 +77,10 @@ public class ReturnStatementExpression extends VerbaExpression
   public Symbol returnType() {
     return null;
 //    return eventSubscription.returnType();
+  }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return visitor.visit(this);
   }
 }

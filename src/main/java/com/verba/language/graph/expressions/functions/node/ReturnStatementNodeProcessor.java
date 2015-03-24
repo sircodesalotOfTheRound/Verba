@@ -4,6 +4,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 
 /**
@@ -27,7 +28,7 @@ public class ReturnStatementNodeProcessor extends NodeProcessor<ReturnStatementE
   }
 
   private VirtualVariable captureReturnValue(ReturnStatementExpression expression) {
-    ExpressionTreeNode value = (ExpressionTreeNode)expression.value();
+    FunctionGraphNode value = (FunctionGraphNode)expression.value();
     return this.visitAndCaptureResult(value);
   }
 

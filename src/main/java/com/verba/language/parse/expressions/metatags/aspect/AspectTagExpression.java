@@ -1,6 +1,8 @@
 package com.verba.language.parse.expressions.metatags.aspect;
 
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -10,7 +12,6 @@ import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
-import com.verba.language.parse.tokens.operators.enclosure.EnclosureToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 import com.verba.language.parse.tokens.operators.tags.AspectTagToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -110,5 +111,10 @@ public class AspectTagExpression extends VerbaExpression implements MetaTagExpre
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
 
+  }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
   }
 }

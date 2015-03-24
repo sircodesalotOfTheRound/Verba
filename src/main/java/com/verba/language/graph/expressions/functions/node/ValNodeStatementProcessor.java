@@ -5,6 +5,7 @@ import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 
 /**
@@ -33,7 +34,7 @@ public class ValNodeStatementProcessor extends NodeProcessor<ValDeclarationState
   }
 
   private VirtualVariable calculateRValue(ValDeclarationStatement statement) {
-    return visitAndCaptureResult((ExpressionTreeNode) statement.rvalue());
+    return visitAndCaptureResult((FunctionGraphNode) statement.rvalue());
   }
 
   public boolean rvalueIsExistingNamedVariable(ValDeclarationStatement declaration, VirtualVariable rvalue) {

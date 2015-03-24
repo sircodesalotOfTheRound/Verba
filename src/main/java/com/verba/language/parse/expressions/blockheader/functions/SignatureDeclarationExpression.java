@@ -1,6 +1,8 @@
 package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -117,5 +119,10 @@ public class SignatureDeclarationExpression extends VerbaExpression implements N
   @Override
   public void accept(Scope symbolTable) {
     symbolTable.visit(this);
+  }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
   }
 }

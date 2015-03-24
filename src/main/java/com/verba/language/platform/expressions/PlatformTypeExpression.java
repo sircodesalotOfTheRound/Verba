@@ -3,6 +3,8 @@ package com.verba.language.platform.expressions;
 import com.javalinq.implementations.QSet;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -147,4 +149,9 @@ public class PlatformTypeExpression extends VerbaExpression implements TypeConst
 
   @Override
   public String representation() { return this.type; }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
+  }
 }

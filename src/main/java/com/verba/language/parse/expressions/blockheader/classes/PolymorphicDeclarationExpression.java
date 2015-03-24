@@ -3,6 +3,8 @@ package com.verba.language.parse.expressions.blockheader.classes;
 import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -198,4 +200,8 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   @Override
   public QIterable<TupleDeclarationExpression> parameterSets() { return this.primaryIdentifier().parameterLists(); }
 
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return visitor.visit(this);
+  }
 }

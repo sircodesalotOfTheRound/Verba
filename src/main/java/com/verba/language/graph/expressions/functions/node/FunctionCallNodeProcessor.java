@@ -7,6 +7,7 @@ import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.facades.FunctionCallFacade;
 
 /**
@@ -29,7 +30,7 @@ public class FunctionCallNodeProcessor extends NodeProcessor<FunctionCallFacade>
 
   private QIterable<VirtualVariable> loadArguments(FunctionCallFacade call) {
     return call.primaryParameters()
-      .cast(ExpressionTreeNode.class)
+      .cast(FunctionGraphNode.class)
       .map(this::visitAndCaptureResult);
   }
 

@@ -2,8 +2,11 @@ package com.verba.language.parse.expressions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.backtracking.BacktrackRuleSet;
 import com.verba.language.parse.expressions.backtracking.rules.*;
 import com.verba.language.parse.info.LexInfo;
@@ -17,7 +20,7 @@ import com.verba.language.platform.expressions.PlatformExpressionBacktrackRule;
 /**
  * Created by sircodesalot on 14-2-19.
  */
-public abstract class VerbaExpression implements ExpressionTreeNode {
+public abstract class VerbaExpression implements ExpressionTreeNode, FunctionGraphNode {
   private static BacktrackRuleSet<VerbaExpression> rules
     = new BacktrackRuleSet<VerbaExpression>()
     .addRule(new InfixExpressionBacktrackRule())
@@ -139,4 +142,5 @@ public abstract class VerbaExpression implements ExpressionTreeNode {
   protected void addError(String format, Object ... args) {
     this.addViolation(new ValidationError(this, format, args));
   }
+
 }

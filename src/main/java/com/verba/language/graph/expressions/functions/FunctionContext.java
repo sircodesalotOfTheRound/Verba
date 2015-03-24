@@ -7,6 +7,7 @@ import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeNode;
+import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 
 import java.util.function.Consumer;
@@ -43,8 +44,12 @@ public class FunctionContext {
   public SymbolTable symbolTable() { return this.symbolTable; }
   public StringTableArtifact stringTable() { return this.stringTable; }
 
-  public void visit(ExpressionTreeNode node) { node.accept(functionGraphVisitor); }
-  public VirtualVariable visitWithNewVarScope(ExpressionTreeNode node) {
+  public VirtualVariable visit(FunctionGraphNode node) {
+    return node.accept(functionGraphVisitor);
+  }
+
+  @Deprecated
+  public VirtualVariable visitWithNewVarScope(FunctionGraphNode node) {
     return variableScopeTree.withNewVariableScope(new Consumer<Object>() {
       @Override
       public void accept(Object o) {

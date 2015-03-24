@@ -7,12 +7,12 @@ import com.verba.language.build.targets.artifacts.StringTableArtifact;
 import com.verba.language.emit.images.types.common.DebuggingObjectImage;
 import com.verba.language.emit.opcodes.RetOpCode;
 import com.verba.language.emit.opcodes.VerbatimOpCodeBase;
+import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.emit.variables.VirtualVariableScopeTree;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessorFactory;
 import com.verba.language.graph.expressions.functions.variables.VariableLifetimeGraph;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
-import com.verba.language.graph.visitors.ExpressionTreeNode;
-import com.verba.language.graph.visitors.ExpressionTreeVisitor;
+import com.verba.language.graph.visitors.FunctionGraphNode;
 import com.verba.language.parse.expressions.LitFileRootExpression;
 import com.verba.language.parse.expressions.block.BlockDeclarationExpression;
 import com.verba.language.parse.expressions.blockheader.classes.PolymorphicDeclarationExpression;
@@ -38,7 +38,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by sircodesalot on 14/9/19.
  */
-public class FunctionGraphVisitor extends ExpressionTreeVisitor {
+public class FunctionGraphVisitor {
   private final Build build;
   private final VirtualVariableScopeTree variableSet;
   private final FunctionDeclarationExpression function;
@@ -86,7 +86,7 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
 
   private void buildImage(FunctionDeclarationExpression function) {
     BlockDeclarationExpression block = function.block();
-    for (ExpressionTreeNode expression : block.expressions().cast(ExpressionTreeNode.class)) {
+    for (FunctionGraphNode expression : block.expressions().cast(FunctionGraphNode.class)) {
       expression.accept(this);
     }
 
@@ -103,100 +103,88 @@ public class FunctionGraphVisitor extends ExpressionTreeVisitor {
     opcodes.endFunction();
   }
 
-  public void visit(ReturnStatementExpression expression) {
-    this.nodeProcessors.process(expression);
+  public VirtualVariable visit(ReturnStatementExpression expression) {
+    return this.nodeProcessors.process(expression);
   }
 
-  @Override
-  public void visit(BlockDeclarationExpression verbaExpressions) {
-    throw new NotImplementedException();
-  }
 
-  @Override
-  public void visit(LitFileRootExpression litFileRoot) {
-    throw new NotImplementedException();
-  }
-
-  public void visit(NamedValueExpression expression) {
-    this.nodeProcessors.process(expression);
-  }
-
-  @Override
-  public void visit(PolymorphicDeclarationExpression classDeclarationExpression) {
+  public VirtualVariable visit(BlockDeclarationExpression verbaExpressions) {
     throw new NotImplementedException();
   }
 
 
-  public void visit(AssignmentStatementExpression assignmentStatementExpression) {
-
-  }
-
-  public void visit(NumericExpression expression) {
-    this.nodeProcessors.process(expression);
-  }
-
-  @Override
-  public void visit(ValDeclarationStatement statement) {
-    this.nodeProcessors.process(statement);
-  }
-
-  @Override
-  public void visit(WithNsExpression withNsExpression) {
-  }
-
-  @Override
-  public void visit(MarkupDeclarationExpression markupDeclarationExpression) {
-
-  }
-
-  @Override
-  public void visit(DeclarationModifierExrpression declarationModifierExrpression) {
-
-  }
-
-  @Override
-  public void visit(NewExpression expression) {
-    this.nodeProcessors.process(expression);
-  }
-
-  @Override
-  public void visit(BooleanExpression expression) {
-    this.nodeProcessors.process(expression);
-  }
-
-  @Override
-  public void visit(FunctionDeclarationExpression functionDeclarationExpression) {
-
-  }
-
-  @Override
-  public void visit(ArrayDeclarationExpression arrayDeclarationExpression) {
-    throw new NotImplementedException();
-
-  }
-
-  @Override
-  public void visit(JsonExpression jsonExpression) {
+  public VirtualVariable visit(LitFileRootExpression litFileRoot) {
     throw new NotImplementedException();
   }
 
-  @Override
-  public void visit(TupleDeclarationExpression tupleDeclarationExpression) {
+  public VirtualVariable visit(NamedValueExpression expression) {
+    return this.nodeProcessors.process(expression);
+  }
+
+
+  public VirtualVariable visit(PolymorphicDeclarationExpression classDeclarationExpression) {
     throw new NotImplementedException();
   }
 
-  @Override
-  public void visit(VerbaSourceCodeFile sourceFile) {
+
+  public VirtualVariable visit(AssignmentStatementExpression assignmentStatementExpression) {
     throw new NotImplementedException();
   }
 
-  @Override
-  public void visit(QuoteExpression expression) {
-    this.nodeProcessors.process(expression);
+  public VirtualVariable visit(NumericExpression expression) {
+    return this.nodeProcessors.process(expression);
   }
 
-  @Override
-  public void visit(InfixExpression expression) {
-    this.nodeProcessors.process(expression);
+
+  public VirtualVariable visit(ValDeclarationStatement statement) {
+    return this.nodeProcessors.process(statement);
+  }
+
+  public VirtualVariable visit(WithNsExpression withNsExpression) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(MarkupDeclarationExpression markupDeclarationExpression) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(DeclarationModifierExrpression declarationModifierExrpression) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(NewExpression expression) {
+    return this.nodeProcessors.process(expression);
+  }
+
+  public VirtualVariable visit(BooleanExpression expression) {
+    return this.nodeProcessors.process(expression);
+  }
+
+  public VirtualVariable visit(FunctionDeclarationExpression functionDeclarationExpression) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(ArrayDeclarationExpression arrayDeclarationExpression) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(JsonExpression jsonExpression) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(TupleDeclarationExpression tupleDeclarationExpression) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(VerbaSourceCodeFile sourceFile) {
+    throw new NotImplementedException();
+  }
+
+  public VirtualVariable visit(QuoteExpression expression) {
+    return this.nodeProcessors.process(expression);
+  }
+
+  public VirtualVariable visit(InfixExpression expression) {
+    return this.nodeProcessors.process(expression);
   }
 }

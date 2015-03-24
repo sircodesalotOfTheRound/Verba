@@ -4,6 +4,8 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.tools.ExpressionTreeFlattener;
@@ -13,7 +15,6 @@ import com.verba.language.parse.codestream.FileBasedCodeStream;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.ExpressionSource;
 import com.verba.language.parse.expressions.categories.SymbolTableExpression;
-import com.verba.language.parse.expressions.withns.WithNsExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
 import com.verba.language.tools.ImportedNamespaceSet;
@@ -146,5 +147,10 @@ public class VerbaSourceCodeFile extends VerbaExpression implements SymbolTableE
   @Override
   public void accept(Scope symbolTable) {
     symbolTable.visit(this);
+  }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
   }
 }

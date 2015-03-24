@@ -2,6 +2,8 @@ package com.verba.language.parse.expressions.blockheader.functions;
 
 import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.expressions.modifiers.ExpressionModifierInfo;
 import com.verba.language.graph.expressions.modifiers.FunctionDeclarationExpressionModifierInfo;
 import com.verba.language.graph.symbols.resolution.FunctionReturnTypeResolver;
@@ -170,4 +172,9 @@ public class FunctionDeclarationExpression extends VerbaExpression
   public Symbol resolvedType() { return this.returnTypeResolver.resolvedType(); }
 
   public ExpressionModifierInfo modifiers() { return this.modifierInfo; }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
+  }
 }

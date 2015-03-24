@@ -5,6 +5,7 @@ import com.verba.language.graph.expressions.functions.FunctionContext;
 import com.verba.language.graph.expressions.functions.tools.NodeProcessor;
 import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.tokens.operators.mathop.AddOpToken;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by sircodesalot on 15/3/23.
@@ -17,13 +18,13 @@ public class InfixExpressionNodeProcessor extends NodeProcessor<InfixExpression>
   @Override
   public VirtualVariable process(InfixExpression expression) {
     if (expression.operator().is(AddOpToken.class)) {
-      VirtualVariable lhs = this.visitAndCaptureResult(expression.lhs());
-      VirtualVariable rhs = this.visitAndCaptureResult(expression.lhs());
+      VirtualVariable lhs = this.visit(expression.lhs());
+      VirtualVariable rhs = this.visit(expression.rhs());
       this.opcodes.add(lhs, rhs);
 
-      this.variableScope.setScopeValue(lhs);
+      return lhs;
     }
 
-    return null;
+    throw new NotImplementedException();
   }
 }

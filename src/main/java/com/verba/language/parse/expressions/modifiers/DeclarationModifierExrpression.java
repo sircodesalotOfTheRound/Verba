@@ -1,6 +1,8 @@
 package com.verba.language.parse.expressions.modifiers;
 
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
@@ -80,5 +82,10 @@ public class DeclarationModifierExrpression extends VerbaExpression implements S
   @Override
   public void accept(Scope symbolTable) {
     symbolTable.visit(this);
+  }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
   }
 }

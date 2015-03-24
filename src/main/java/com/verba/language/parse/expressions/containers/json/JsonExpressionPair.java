@@ -1,6 +1,8 @@
 package com.verba.language.parse.expressions.containers.json;
 
 import com.verba.language.build.configuration.Build;
+import com.verba.language.emit.variables.VirtualVariable;
+import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
@@ -81,5 +83,10 @@ public class JsonExpressionPair extends VerbaExpression {
   @Override
   public void accept(ExpressionTreeVisitor visitor) {
 
+  }
+
+  @Override
+  public VirtualVariable accept(FunctionGraphVisitor visitor) {
+    return null;
   }
 }
