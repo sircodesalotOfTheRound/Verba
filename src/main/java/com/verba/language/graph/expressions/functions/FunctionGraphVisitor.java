@@ -51,8 +51,6 @@ public class FunctionGraphVisitor {
   private final FunctionOpCodeSet opcodes;
   private final NodeProcessorFactory nodeProcessors;
 
-  // Node processors
-
   public FunctionGraphVisitor(Build build, FunctionDeclarationExpression function, SymbolTable symbolTable) {
     this.build = build;
     this.variableSet = new VirtualVariableSet();
@@ -63,7 +61,6 @@ public class FunctionGraphVisitor {
     this.opcodes = new FunctionOpCodeSet();
     this.context = new FunctionContext(this, build, symbolTable, variableSet, lifetimeGraph, opcodes);
     this.nodeProcessors = new NodeProcessorFactory(context);
-
 
     this.buildImage(function);
     this.performDebugOutput();
@@ -82,7 +79,7 @@ public class FunctionGraphVisitor {
     }
   }
 
-
+  public FunctionContext context() { return this.context; }
   public QIterable<VerbatimOpCodeBase> opcodes() { return this.opcodes; }
 
   private void buildImage(FunctionDeclarationExpression function) {
