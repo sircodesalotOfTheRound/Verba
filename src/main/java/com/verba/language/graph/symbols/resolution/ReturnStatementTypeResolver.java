@@ -7,6 +7,7 @@ import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
+import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.*;
 import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
@@ -40,12 +41,12 @@ public class ReturnStatementTypeResolver {
   private Symbol determineTypeForValue(RValueExpression value, SymbolTable symbolTable) {
     // TODO
     if (value instanceof InfixExpression) {
-      return PlatformTypeSymbols.INT;
+      return resolveInfixExpressionReturnType((InfixExpression)value, symbolTable);
     }
 
     if (value instanceof LiteralExpression) {
       if (value instanceof QuoteExpression) return PlatformTypeSymbols.UTF;
-      if (value instanceof NumericExpression) return PlatformTypeSymbols.INT;
+      if (value instanceof NumericExpression) return resolveIntegertype((NumericExpression)value, symbolTable);
     }
 
     if (value instanceof NamedExpression) {
@@ -56,6 +57,7 @@ public class ReturnStatementTypeResolver {
 
     throw new NotImplementedException();
   }
+
 
   private Symbol determineMatchingSymbolForName(String name, SymbolTable symbolTable) {
     Scope scope = symbolTable.resolveScope(statement);
@@ -78,6 +80,19 @@ public class ReturnStatementTypeResolver {
     }
 
     throw new NotImplementedException();
+  }
+
+  public Symbol resolveInfixExpressionReturnType(InfixExpression value, SymbolTable symbolTable) {
+    VerbaExpression lhs = value.lhs();
+    if (lhs instanceof QuoteExpression) return PlatformTypeSymbols.UTF;
+    if (lhs instanceof NumericExpression) return resolveIntegertype((NumericExpression) lhs, symbolTable);
+
+    throw new NotImplementedException();
+  }
+
+  private Symbol resolveIntegertype(NumericExpression value, SymbolTable symbolTable) {
+    // TODO: More processing:
+    return PlatformTypeSymbols.INT;
   }
 
   public Symbol returnType() { return this.returnType; }
