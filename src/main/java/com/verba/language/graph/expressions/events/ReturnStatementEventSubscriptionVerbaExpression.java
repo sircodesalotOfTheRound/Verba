@@ -23,7 +23,7 @@ public class ReturnStatementEventSubscriptionVerbaExpression
 
   public void afterSymbolsGenerated(Build buildProfile, LitFileRootExpression staticSpace, SymbolTable symbolTable) {
     this.symbolTable = symbolTable;
-    this.typeResolver = new ReturnStatementTypeResolver(null, symbolTable);
+    //this.typeResolver = new ReturnStatementTypeResolver(null, symbolTable);
   }
 
 

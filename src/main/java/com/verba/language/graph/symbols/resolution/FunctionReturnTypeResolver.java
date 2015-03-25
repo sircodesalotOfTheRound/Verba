@@ -8,6 +8,7 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.blockheader.functions.FunctionDeclarationExpression;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import com.verba.language.platform.PlatformTypeSymbols;
 
 /**
  * Created by sircodesalot on 14/12/3.
@@ -22,6 +23,10 @@ public class FunctionReturnTypeResolver {
   }
 
   public Symbol resolve(SymbolTable symbolTable) {
+    if (resolvedType != null) {
+      return this.resolvedType;
+    }
+
     Scope scope = symbolTable.findByInstance(declaration).scope();
     SymbolNameResolver resolver = new SymbolNameResolver(symbolTable, scope);
 
@@ -43,14 +48,16 @@ public class FunctionReturnTypeResolver {
 
     // If there isn't, check the return statements.
     // If there are none, then return unit.
-    QIterable<ReturnStatementExpression> returnStatements = scanForReturnStatements();
-    if (!returnStatements.any()) {
-      return symbolTable.findSymbolForType(KeywordToken.UNIT);
-    }
+    return this.resolvedType = resolveBasedOnReturnStatements(symbolTable);
+  }
 
-    // Otherwise return the first entry:
-    this.resolvedType = returnStatements.single().returnType();
-    return this.resolvedType;
+  private Symbol resolveBasedOnReturnStatements(SymbolTable symbolTable) {
+    QIterable<ReturnStatementExpression> returnStatements = scanForReturnStatements();
+    if (returnStatements.any()) {
+      return returnStatements.map(statement -> statement.returnType(symbolTable)).single();
+    } else {
+      return PlatformTypeSymbols.UNIT;
+    }
   }
 
   // Not very thorough, but it will work for now.

@@ -7,7 +7,6 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
  */
 
 public interface TypedExpression extends ExpressionCategory {
-
   boolean hasTypeConstraint();
   TypeConstraintExpression typeConstraint();
   Symbol resolvedType();

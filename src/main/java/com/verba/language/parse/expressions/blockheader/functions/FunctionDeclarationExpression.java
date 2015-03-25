@@ -73,7 +73,7 @@ public class FunctionDeclarationExpression extends VerbaExpression
 
   @Override
   public void afterSymbolsGenerated(Build build, SymbolTable table) {
-
+    this.returnTypeResolver.resolve(table);
   }
 
   @Override
@@ -169,12 +169,15 @@ public class FunctionDeclarationExpression extends VerbaExpression
     symbolTable.visit(this);
   }
 
+  @Override
   public Symbol resolvedType() { return this.returnTypeResolver.resolvedType(); }
+
+  public Symbol resolvedType(SymbolTable symbolTable) { return this.returnTypeResolver.resolve(symbolTable); }
 
   public ExpressionModifierInfo modifiers() { return this.modifierInfo; }
 
   @Override
   public VirtualVariable accept(FunctionGraphVisitor visitor) {
-    return null;
+    return visitor.visit(this);
   }
 }

@@ -9,11 +9,13 @@ import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.*;
+import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import com.verba.language.platform.PlatformTypeSymbols;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -21,40 +23,42 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class ReturnStatementTypeResolver {
   private final ReturnStatementExpression statement;
-  private final SymbolTable symbolTable;
   private Symbol returnType;
-  private Scope scope;
 
-  public ReturnStatementTypeResolver(ReturnStatementExpression statement, SymbolTable symbolTable) {
+  public ReturnStatementTypeResolver(ReturnStatementExpression statement) {
     this.statement = statement;
-    this.symbolTable = symbolTable;
-    this.scope = symbolTable.resolveScope(statement);
   }
 
-  private Symbol determineReturnValue() {
+  private Symbol determineReturnValue(SymbolTable symbolTable) {
     if (!statement.hasValue()) {
-      return symbolTable.findSymbolForType(KeywordToken.UNIT);
+      return PlatformTypeSymbols.UNIT;
+    } else {
+      return determineTypeForValue(statement.value(), symbolTable);
+    }
+  }
+
+  private Symbol determineTypeForValue(RValueExpression value, SymbolTable symbolTable) {
+    // TODO
+    if (value instanceof InfixExpression) {
+      return PlatformTypeSymbols.INT;
     }
 
-    return determineTypeForValue(statement.value());
-  }
-
-  private Symbol determineTypeForValue(RValueExpression value) {
     if (value instanceof LiteralExpression) {
-      if (value instanceof QuoteExpression) return symbolTable.findSymbolForType(KeywordToken.UTF);
-      if (value instanceof NumericExpression) return symbolTable.findSymbolForType(KeywordToken.INT);
+      if (value instanceof QuoteExpression) return PlatformTypeSymbols.UTF;
+      if (value instanceof NumericExpression) return PlatformTypeSymbols.INT;
     }
 
     if (value instanceof NamedExpression) {
       NamedExpression namedExpression = (NamedExpression)value;
-      Symbol matchingName = determineMatchingSymbolForName(namedExpression.name());
-      return determineTypeForMatchingName(matchingName);
+      Symbol matchingName = determineMatchingSymbolForName(namedExpression.name(), symbolTable);
+      return determineTypeForMatchingName(symbolTable, matchingName);
     }
 
     throw new NotImplementedException();
   }
 
-  private Symbol determineMatchingSymbolForName(String name) {
+  private Symbol determineMatchingSymbolForName(String name, SymbolTable symbolTable) {
+    Scope scope = symbolTable.resolveScope(statement);
     SymbolNameResolver nameResolver = new SymbolNameResolver(symbolTable, scope);
     QIterable<SymbolResolutionMatch> symbolsInScope = nameResolver.findSymbolsInScope(name);
 
@@ -62,7 +66,7 @@ public class ReturnStatementTypeResolver {
     return symbolsInScope.first().symbol();
   }
 
-  private Symbol determineTypeForMatchingName(Symbol symbol) {
+  private Symbol determineTypeForMatchingName(SymbolTable symbolTable, Symbol symbol) {
     if (symbol.is(TypedExpression.class)) {
       return symbol.expressionAs(TypedExpression.class).resolvedType();
 
@@ -76,9 +80,11 @@ public class ReturnStatementTypeResolver {
     throw new NotImplementedException();
   }
 
-  public Symbol returnType() {
-    if (this.returnType == null) {
-      this.returnType = determineReturnValue();
+  public Symbol returnType() { return this.returnType; }
+
+  public Symbol resolveReturnType(SymbolTable table) {
+    if (returnType == null) {
+      this.returnType = determineReturnValue(table);
     }
 
     return this.returnType;
