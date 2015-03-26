@@ -10,43 +10,42 @@ import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
 import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
+import com.verba.language.platform.PlatformTypeSymbols;
 
 /**
  * Created by sircodesalot on 14/12/7.
  */
 public class ValDeclarationTypeResolver {
   private final ValDeclarationStatement declaration;
-  private final SymbolTable symbolTable;
   private Symbol resolvedType;
 
-  public ValDeclarationTypeResolver(ValDeclarationStatement declaration, SymbolTable symbolTable) {
+  public ValDeclarationTypeResolver(ValDeclarationStatement declaration) {
     this.declaration = declaration;
-    this.symbolTable = symbolTable;
   }
 
-  public Symbol resolvedType() {
+  public Symbol resolvedType(SymbolTable symbolTable) {
     if (this.resolvedType == null) {
-      this.resolvedType = determineType();
+      this.resolvedType = determineType(symbolTable);
     }
 
     return this.resolvedType;
   }
 
-  private Symbol determineType() {
+  private Symbol determineType(SymbolTable symbolTable) {
     if (this.declaration.hasTypeConstraint()) {
       return symbolTable.findSymbolForType(this.declaration.typeConstraint().representation());
     }
 
-    return determineTypeFromRhs();
+    return determineTypeFromRhs(symbolTable);
   }
 
-  private Symbol determineTypeFromRhs() {
+  private Symbol determineTypeFromRhs(SymbolTable symbolTable) {
     if (this.declaration.hasRValue()) {
       RValueExpression rvalue = this.declaration.rvalue();
       if (rvalue instanceof LiteralExpression) {
-        return determineTypeFromLiteral(rvalue);
+        return determineTypeFromLiteral(rvalue, symbolTable);
       } else if (rvalue instanceof NamedValueExpression) {
-        return resolveByName(((NamedValueExpression) rvalue).name());
+        return resolveByName(((NamedValueExpression) rvalue).name(), symbolTable);
       }
     }
 
@@ -54,15 +53,15 @@ public class ValDeclarationTypeResolver {
     return null;
   }
 
-  private Symbol determineTypeFromLiteral(RValueExpression rvalue) {
-    if (rvalue instanceof UtfExpression) return symbolTable.findSymbolForType(KeywordToken.UTF);
-    if (rvalue instanceof NumericExpression) return symbolTable.findSymbolForType(KeywordToken.INT);
+  private Symbol determineTypeFromLiteral(RValueExpression rvalue, SymbolTable symbolTable) {
+    if (rvalue instanceof UtfExpression) return PlatformTypeSymbols.UTF;
+    if (rvalue instanceof NumericExpression) return PlatformTypeSymbols.INT;
 
     return null;
   }
 
-  private Symbol resolveByName(String name) {
-    Scope scope = this.symbolTable.resolveScope(this.declaration);
+  private Symbol resolveByName(String name, SymbolTable symbolTable) {
+    Scope scope = symbolTable.resolveScope(this.declaration);
     SymbolNameResolver resolver = new SymbolNameResolver(symbolTable, scope);
     SymbolResolutionMatch match = resolver.findSymbolsInScope(name).single();
 

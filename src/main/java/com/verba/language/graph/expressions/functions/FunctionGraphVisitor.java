@@ -72,12 +72,20 @@ public class FunctionGraphVisitor {
       if (specification.isDebugBuild()) {
         System.out.println(function.text());
         System.out.println();
+
+        this.showFunctionHeader();
         System.out.println();
 
         DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
         renderer.display();
       }
     }
+  }
+
+  private void showFunctionHeader() {
+    String message = String.format("%s : %s", function.name(), function.resolvedType().fqn());
+    System.out.println(message);
+    System.out.println();
   }
 
   public FunctionContext context() { return this.context; }

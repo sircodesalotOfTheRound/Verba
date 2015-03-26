@@ -3,6 +3,7 @@ package com.verba.language.parse.expressions.statements.declaration;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
+import com.verba.language.graph.symbols.resolution.ValDeclarationTypeResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -24,10 +25,12 @@ public class ValDeclarationStatement extends VerbaExpression
   private NamedValueExpression identifier;
   private RValueExpression rvalue;
   private boolean isMutable;
+  private final ValDeclarationTypeResolver typeResolver;
 
   private ValDeclarationStatement(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
+    this.typeResolver = new ValDeclarationTypeResolver(this);
     this.readExpression(lexer);
   }
 
@@ -48,7 +51,7 @@ public class ValDeclarationStatement extends VerbaExpression
 
   @Override
   public void onResolveSymbols(Build build, SymbolTable table) {
-
+    this.typeResolver.resolvedType(table);
   }
 
   @Override
@@ -104,10 +107,8 @@ public class ValDeclarationStatement extends VerbaExpression
 
   @Override
   public Symbol resolvedType() {
-    return null;
-    //return this.buildProfile.resolvedType();
+    return this.typeResolver.resolvedType(null);
   }
-
 
   public NamedValueExpression identifier() {
     return this.identifier;

@@ -9,5 +9,5 @@ import com.verba.language.graph.symbols.table.entries.Symbol;
 public class ValDeclarationEventSubscriptionVerbaExpression
 {
   private ValDeclarationTypeResolver typeResolver;
-  public Symbol resolvedType() { return typeResolver.resolvedType(); }
+  //public Symbol resolvedType() { return typeResolver.resolvedType(); }
 }
