@@ -62,8 +62,8 @@ public abstract class VerbatimOpCodeBase {
     return new RetOpCode(variable);
   }
 
-  public static VerbatimOpCodeBase loadString(VirtualVariable variable, StringTableStringEntry value) {
-    return new LdStrOpCode(variable, value);
+  public static VerbatimOpCodeBase ldutf(VirtualVariable variable, StringTableStringEntry value) {
+    return new LdUtfOpCode(variable, value);
   }
 
   public static VerbatimOpCodeBase add(VirtualVariable destination, VirtualVariable source) {

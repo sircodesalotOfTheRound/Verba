@@ -9,21 +9,21 @@ import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.*;
 import com.verba.language.parse.info.LexInfo;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.literals.QuoteToken;
+import com.verba.language.parse.tokens.literals.UtfToken;
 import com.verba.virtualmachine.VirtualMachineNativeTypes;
 
 /**
  * Created by sircodesalot on 14-2-19.
  */
-public class QuoteExpression extends VerbaExpression
+public class UtfExpression extends VerbaExpression
   implements LiteralExpression, NativeTypeExpression, MathOperandExpression
 {
 
   private final LexInfo token;
 
-  public QuoteExpression(VerbaExpression parent, Lexer lexer) {
+  public UtfExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
-    this.token = lexer.readCurrentAndAdvance(QuoteToken.class);
+    this.token = lexer.readCurrentAndAdvance(UtfToken.class);
     this.closeLexingRegion();
   }
 
@@ -52,8 +52,8 @@ public class QuoteExpression extends VerbaExpression
 
   }
 
-  public static QuoteExpression read(VerbaExpression parent, Lexer lexer) {
-    return new QuoteExpression(parent, lexer);
+  public static UtfExpression read(VerbaExpression parent, Lexer lexer) {
+    return new UtfExpression(parent, lexer);
   }
 
   public String representation() {
@@ -81,6 +81,6 @@ public class QuoteExpression extends VerbaExpression
 
   @Override
   public VirtualVariable accept(FunctionGraphVisitor visitor) {
-    return null;
+    return visitor.visit(this);
   }
 }

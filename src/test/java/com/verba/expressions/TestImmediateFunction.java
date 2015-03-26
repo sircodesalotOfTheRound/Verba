@@ -6,7 +6,7 @@ import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpres
 import com.verba.language.parse.expressions.categories.TupleItemExpression;
 import com.verba.language.parse.expressions.immediate.ImmediateFunctionExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.lexing.VerbaMemoizingLexer;
 import com.verba.testtools.TestTools;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class TestImmediateFunction {
     // Test the arguments (1, "two", three)
     QIterable<TupleItemExpression> arguments = expression.arguments().items();
     assert (arguments.first() instanceof NumericExpression);
-    assert (arguments.ofType(QuoteExpression.class).any());
+    assert (arguments.ofType(UtfExpression.class).any());
     assert (arguments.last() instanceof NamedValueExpression);
   }
 

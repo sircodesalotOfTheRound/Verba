@@ -7,7 +7,7 @@ import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpres
 import com.verba.language.parse.expressions.categories.LiteralExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.tokens.identifiers.KeywordToken;
 
@@ -55,7 +55,7 @@ public class ValDeclarationTypeResolver {
   }
 
   private Symbol determineTypeFromLiteral(RValueExpression rvalue) {
-    if (rvalue instanceof QuoteExpression) return symbolTable.findSymbolForType(KeywordToken.UTF);
+    if (rvalue instanceof UtfExpression) return symbolTable.findSymbolForType(KeywordToken.UTF);
     if (rvalue instanceof NumericExpression) return symbolTable.findSymbolForType(KeywordToken.INT);
 
     return null;

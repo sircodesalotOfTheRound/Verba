@@ -7,9 +7,9 @@ import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.members.FullyQualifiedNameExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.lexing.Lexer;
-import com.verba.language.parse.tokens.literals.QuoteToken;
+import com.verba.language.parse.tokens.literals.UtfToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -53,8 +53,8 @@ public class GrabExpression extends VerbaExpression {
   }
 
   private VerbaExpression readResourceName(Lexer lexer) {
-    if (lexer.currentIs(QuoteToken.class)) {
-      return QuoteExpression.read(this, lexer);
+    if (lexer.currentIs(UtfToken.class)) {
+      return UtfExpression.read(this, lexer);
     }
 
     return FullyQualifiedNameExpression.read(this, lexer);
@@ -64,7 +64,7 @@ public class GrabExpression extends VerbaExpression {
     if (resourceName instanceof FullyQualifiedNameExpression)
       return ((FullyQualifiedNameExpression) this.resourceName).representation();
 
-    else return ((QuoteExpression) this.resourceName).representation();
+    else return ((UtfExpression) this.resourceName).representation();
   }
 
 

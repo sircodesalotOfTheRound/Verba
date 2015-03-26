@@ -8,10 +8,10 @@ import com.verba.language.graph.visitors.ExpressionTreeVisitor;
 import com.verba.language.parse.expressions.VerbaExpression;
 import com.verba.language.parse.expressions.categories.RValueExpression;
 import com.verba.language.parse.expressions.rvalue.simple.IdentifierExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.lexing.Lexer;
 import com.verba.language.parse.tokens.identifiers.IdentifierToken;
-import com.verba.language.parse.tokens.literals.QuoteToken;
+import com.verba.language.parse.tokens.literals.UtfToken;
 import com.verba.language.parse.tokens.operators.mathop.OperatorToken;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -58,7 +58,7 @@ public class JsonExpressionPair extends VerbaExpression {
 
   private VerbaExpression readLhsItem(Lexer lexer) {
     if (lexer.currentIs(IdentifierToken.class)) return IdentifierExpression.read(this, lexer);
-    else if (lexer.currentIs(QuoteToken.class)) return QuoteExpression.read(this, lexer);
+    else if (lexer.currentIs(UtfToken.class)) return UtfExpression.read(this, lexer);
 
     throw new NotImplementedException();
   }

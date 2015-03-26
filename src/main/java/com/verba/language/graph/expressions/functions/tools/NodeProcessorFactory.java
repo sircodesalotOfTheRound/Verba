@@ -8,7 +8,7 @@ import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
 import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
 
@@ -17,7 +17,7 @@ import com.verba.language.parse.expressions.statements.returns.ReturnStatementEx
  */
 public class NodeProcessorFactory {
   private final ValNodeStatementProcessor valStatementProcessor;
-  private final QuoteNodeProcessor quoteNodeProcessor;
+  private final UtfNodeProcessor utfNodeProcessor;
   private final NumericNodeProcessor numericNodeProcessor;
   private final NamedValueNodeProcessor namedValueNodeProcessor;
   private final NewExpressionNodeProcessor newExpressionNodeProcessor;
@@ -27,7 +27,7 @@ public class NodeProcessorFactory {
 
   public NodeProcessorFactory(FunctionContext context) {
     this.valStatementProcessor = new ValNodeStatementProcessor(context);
-    this.quoteNodeProcessor = new QuoteNodeProcessor(context);
+    this.utfNodeProcessor = new UtfNodeProcessor(context);
     this.numericNodeProcessor = new NumericNodeProcessor(context);
     this.namedValueNodeProcessor = new NamedValueNodeProcessor(context);
     this.newExpressionNodeProcessor = new NewExpressionNodeProcessor(context);
@@ -40,8 +40,8 @@ public class NodeProcessorFactory {
     return this.valStatementProcessor.process(declaration);
   }
 
-  public VirtualVariable process(QuoteExpression quote) {
-    return this.quoteNodeProcessor.process(quote);
+  public VirtualVariable process(UtfExpression quote) {
+    return this.utfNodeProcessor.process(quote);
   }
 
   public VirtualVariable process(NumericExpression expression) {

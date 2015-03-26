@@ -58,8 +58,8 @@ public class FunctionOpCodeSet implements QIterable<VerbatimOpCodeBase> {
     this.add(VerbatimOpCodeBase.ret(variable));
   }
 
-  public void loadString(VirtualVariable variable, StringTableStringEntry text) {
-    this.add(VerbatimOpCodeBase.loadString(variable, text));
+  public void ldutf(VirtualVariable variable, StringTableStringEntry text) {
+    this.add(VerbatimOpCodeBase.ldutf(variable, text));
   }
 
   public void stageArg(VirtualVariable variable) {

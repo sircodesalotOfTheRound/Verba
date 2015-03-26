@@ -6,10 +6,10 @@ import com.verba.language.parse.tokenization.Token;
 /**
  * Created by sircodesalot on 14-2-19.
  */
-public class QuoteToken implements Token {
+public class UtfToken implements Token {
   String quotation;
 
-  public QuoteToken(CodeStream stream) {
+  public UtfToken(CodeStream stream) {
     this.quotation = readQuote(stream);
   }
 
@@ -28,8 +28,8 @@ public class QuoteToken implements Token {
     return builder.toString();
   }
 
-  public static QuoteToken read(CodeStream codeStream) {
-    return new QuoteToken(codeStream);
+  public static UtfToken read(CodeStream codeStream) {
+    return new UtfToken(codeStream);
   }
 
   @Override

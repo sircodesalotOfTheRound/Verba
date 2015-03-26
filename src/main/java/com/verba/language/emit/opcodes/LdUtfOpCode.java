@@ -8,14 +8,14 @@ import com.verba.language.emit.variables.VirtualVariable;
 /**
  * Created by sircodesalot on 14/9/20.
  */
-public class LdStrOpCode extends VerbatimOpCodeBase {
-  private static final VerbatimOpCodeBinaryValue LD_STR = VerbatimOpCodeBinaryValue.LD_STR;
+public class LdUtfOpCode extends VerbatimOpCodeBase {
+  private static final VerbatimOpCodeBinaryValue LD_UTF = VerbatimOpCodeBinaryValue.LD_UTF;
 
   private final VirtualVariable variable;
   private final StringTableStringEntry string;
 
-  public LdStrOpCode(VirtualVariable variable, StringTableStringEntry string) {
-    super(LD_STR);
+  public LdUtfOpCode(VirtualVariable variable, StringTableStringEntry string) {
+    super(LD_UTF);
 
     this.variable = variable;
     this.string = string;

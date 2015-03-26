@@ -1,21 +1,16 @@
 package com.verba.language.graph.symbols.resolution;
 
 import com.javalinq.interfaces.QIterable;
-import com.verba.language.graph.symbols.meta.ParameterSymbolMetadata;
-import com.verba.language.graph.symbols.resolution.SymbolNameResolver;
-import com.verba.language.graph.symbols.resolution.SymbolResolutionMatch;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.VerbaExpression;
-import com.verba.language.parse.expressions.blockheader.varname.NamedValueExpression;
 import com.verba.language.parse.expressions.categories.*;
 import com.verba.language.parse.expressions.rvalue.simple.InfixExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
-import com.verba.language.parse.tokens.identifiers.KeywordToken;
 import com.verba.language.platform.PlatformTypeSymbols;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -45,7 +40,7 @@ public class ReturnStatementTypeResolver {
     }
 
     if (value instanceof LiteralExpression) {
-      if (value instanceof QuoteExpression) return PlatformTypeSymbols.UTF;
+      if (value instanceof UtfExpression) return PlatformTypeSymbols.UTF;
       if (value instanceof NumericExpression) return resolveIntegertype((NumericExpression)value, symbolTable);
     }
 
@@ -84,7 +79,7 @@ public class ReturnStatementTypeResolver {
 
   public Symbol resolveInfixExpressionReturnType(InfixExpression value, SymbolTable symbolTable) {
     VerbaExpression lhs = value.lhs();
-    if (lhs instanceof QuoteExpression) return PlatformTypeSymbols.UTF;
+    if (lhs instanceof UtfExpression) return PlatformTypeSymbols.UTF;
     if (lhs instanceof NumericExpression) return resolveIntegertype((NumericExpression) lhs, symbolTable);
 
     throw new NotImplementedException();

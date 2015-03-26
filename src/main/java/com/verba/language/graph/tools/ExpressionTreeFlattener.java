@@ -18,7 +18,7 @@ import com.verba.language.parse.expressions.modifiers.DeclarationModifierExrpres
 import com.verba.language.parse.expressions.rvalue.newexpression.NewExpression;
 import com.verba.language.parse.expressions.rvalue.simple.BooleanExpression;
 import com.verba.language.parse.expressions.rvalue.simple.NumericExpression;
-import com.verba.language.parse.expressions.rvalue.simple.QuoteExpression;
+import com.verba.language.parse.expressions.rvalue.simple.UtfExpression;
 import com.verba.language.parse.expressions.statements.assignment.AssignmentStatementExpression;
 import com.verba.language.parse.expressions.statements.declaration.ValDeclarationStatement;
 import com.verba.language.parse.expressions.statements.returns.ReturnStatementExpression;
@@ -113,7 +113,7 @@ public class ExpressionTreeFlattener extends ExpressionTreeVisitor implements Se
   }
 
   @Override
-  public void visit(QuoteExpression quoteExpression) {
+  public void visit(UtfExpression utfExpression) {
    throw new NotImplementedException();
   }
 
