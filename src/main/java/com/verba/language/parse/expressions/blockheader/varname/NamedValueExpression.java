@@ -105,6 +105,6 @@ public class NamedValueExpression extends VerbaExpression
 
   @Override
   public VirtualVariable accept(FunctionGraphVisitor visitor) {
-    return null;
+    return visitor.visit(this);
   }
 }

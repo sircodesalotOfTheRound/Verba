@@ -21,19 +21,9 @@ public class NamedValueNodeProcessor extends NodeProcessor<NamedValueExpression>
   @Override
   public VirtualVariable process(NamedValueExpression expression) {
     if (FunctionCallFacade.isFunctionCall(expression)) {
-      this.functionCallNodeProcessor.process(new FunctionCallFacade(context, expression));
+      return this.functionCallNodeProcessor.process(new FunctionCallFacade(context, expression));
     } else {
-      this.captureValue(expression);
+      return this.variableSet.get(expression.name());
     }
-
-    return null;
   }
-
-  private void captureValue(NamedValueExpression expression) {
-    // Make this variable the scope value.
-    //VirtualVariable variable = this.variableScope.variableByName(expression.name());
-    //this.variableScope.setScopeValue(variable);
-  }
-
-
 }

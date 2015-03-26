@@ -135,6 +135,6 @@ public class ValDeclarationStatement extends VerbaExpression
 
   @Override
   public VirtualVariable accept(FunctionGraphVisitor visitor) {
-    return null;
+    return visitor.visit(this);
   }
 }

@@ -72,6 +72,7 @@ public class FunctionGraphVisitor {
       if (specification.isDebugBuild()) {
         System.out.println(function.text());
         System.out.println();
+        System.out.println();
 
         DebuggingObjectImage renderer = new DebuggingObjectImage(opcodes);
         renderer.display();
