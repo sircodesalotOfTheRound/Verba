@@ -5,6 +5,7 @@ import com.javalinq.interfaces.QIterable;
 import com.verba.language.build.configuration.Build;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
+import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationMemberResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -39,6 +40,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   private BlockDeclarationExpression block;
 
   private QIterable<TypeConstraintExpression> traits;
+  private final PolymorphicDeclarationMemberResolver memberResolver;
 
   private PolymorphicDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
@@ -47,6 +49,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
     this.traits = readBaseTypes(lexer);
     this.block = BlockDeclarationExpression.read(this, lexer);
+    this.memberResolver = new PolymorphicDeclarationMemberResolver(this);
 
     this.closeLexingRegion();
   }
@@ -68,7 +71,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
 
   @Override
   public void onResolveSymbols(Build build, SymbolTable table) {
-
+    this.memberResolver.resolve(table);
   }
 
   @Override
@@ -143,7 +146,9 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   public QIterable<Symbol> allMembers() { return null; }// this.eventSubscription.allMembers(); }
 
   // Membership
-  public QIterable<Symbol> immediateMembers() { return null; } //this.eventSubscription.immediateMembers(); }
+  public QIterable<Symbol> immediateMembers() {
+    return this.memberResolver.immediateMembers();
+  }
 
   public boolean isClass() { return this.isClass; }
 
@@ -153,9 +158,13 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     return false;
   }
 
-  public boolean isImmediateMember(String name) { return false; } //eventSubscription.isImmediateMember(name); }
+  public boolean isImmediateMember(String name) {
+    return this.memberResolver.containsImmediateMemberWithName(name);
+  }
 
-  public QIterable<Symbol> findMembersByName(String name) { return null; } // eventSubscription.findMembersByName(name); }
+  public QIterable<Symbol> findImmediateMembersByName(String name) {
+    return this.memberResolver.findImmediateMembersByName(name);
+  }
 
   @Override
   public BlockDeclarationExpression block() {

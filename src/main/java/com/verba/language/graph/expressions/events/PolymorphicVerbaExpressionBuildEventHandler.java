@@ -4,7 +4,7 @@ import com.javalinq.implementations.QList;
 import com.javalinq.interfaces.QIterable;
 import com.javalinq.tools.Partition;
 import com.verba.language.build.configuration.Build;
-import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationNameResolver;
+import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationMemberResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
 import com.verba.language.parse.expressions.LitFileRootExpression;
@@ -95,7 +95,7 @@ public class PolymorphicVerbaExpressionBuildEventHandler
   }
 
   private QIterable<Symbol> determineImmediateMembers(PolymorphicDeclarationExpression expression) {
-    PolymorphicDeclarationNameResolver members = new PolymorphicDeclarationNameResolver(this.symbolTable, expression);
+    PolymorphicDeclarationMemberResolver members = new PolymorphicDeclarationMemberResolver(expression);
     return members.immediateMembers();
   }
 
@@ -104,7 +104,7 @@ public class PolymorphicVerbaExpressionBuildEventHandler
       .map(Symbol::expression)
       .cast(PolymorphicDeclarationExpression.class);
 
-    PolymorphicDeclarationNameResolver members = new PolymorphicDeclarationNameResolver(this.symbolTable, expression);
+    PolymorphicDeclarationMemberResolver members = new PolymorphicDeclarationMemberResolver(expression);
     names.add(members.immediateMembers());
 
     for (PolymorphicDeclarationExpression trait : traits) {
