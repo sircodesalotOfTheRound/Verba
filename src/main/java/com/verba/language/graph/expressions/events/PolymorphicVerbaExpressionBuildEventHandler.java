@@ -100,7 +100,7 @@ public class PolymorphicVerbaExpressionBuildEventHandler
   }
 
   private QIterable<Symbol> determineAllMembers(PolymorphicDeclarationExpression expression, QList<Symbol> names) {
-    QIterable<PolymorphicDeclarationExpression> traits = expression.traitSymbolTableEntries()
+    QIterable<PolymorphicDeclarationExpression> traits = expression.traits()
       .map(Symbol::expression)
       .cast(PolymorphicDeclarationExpression.class);
 

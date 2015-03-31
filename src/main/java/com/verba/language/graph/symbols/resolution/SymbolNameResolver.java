@@ -24,6 +24,21 @@ public class SymbolNameResolver {
     this.namespacesInScope = namespacesInScope(page, scope);
   }
 
+  // TODO: Improve the query class.
+  public static class SymbolNameQueryBuilder {
+    private final String name;
+    public SymbolNameQueryBuilder(String name) {
+      this.name = name;
+    }
+
+    public String name() { return this.name; }
+  }
+
+  // TODO: Improve this function along with the query class.
+  public Symbol findBestMatchForName(SymbolNameQueryBuilder query) {
+    return findSymbolsInScope(query.name()).single().symbol();
+  }
+
   public QIterable<SymbolResolutionMatch> findSymbolsInScope(String name) {
     QList<SymbolResolutionMatch> matchingEntries = new QList<>();
 

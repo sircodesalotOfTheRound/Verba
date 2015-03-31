@@ -6,6 +6,7 @@ import com.verba.language.build.configuration.Build;
 import com.verba.language.emit.variables.VirtualVariable;
 import com.verba.language.graph.expressions.functions.FunctionGraphVisitor;
 import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationMemberResolver;
+import com.verba.language.graph.symbols.resolution.PolymorphicDeclarationTraitResolver;
 import com.verba.language.graph.symbols.table.entries.Symbol;
 import com.verba.language.graph.symbols.table.tables.Scope;
 import com.verba.language.graph.symbols.table.tables.SymbolTable;
@@ -39,17 +40,20 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   private final boolean isClass;
   private BlockDeclarationExpression block;
 
-  private QIterable<TypeConstraintExpression> traits;
+  private QIterable<TypeConstraintExpression> traitNames;
   private final PolymorphicDeclarationMemberResolver memberResolver;
+  private final PolymorphicDeclarationTraitResolver traitResolver;
 
   private PolymorphicDeclarationExpression(VerbaExpression parent, Lexer lexer) {
     super(parent, lexer);
 
     this.isClass = determineIsClass(lexer);
     this.identifier = FullyQualifiedNameExpression.read(this, lexer);
-    this.traits = readBaseTypes(lexer);
+    this.traitNames = readBaseTypes(lexer);
     this.block = BlockDeclarationExpression.read(this, lexer);
+
     this.memberResolver = new PolymorphicDeclarationMemberResolver(this);
+    this.traitResolver = new PolymorphicDeclarationTraitResolver(this);
 
     this.closeLexingRegion();
   }
@@ -72,6 +76,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   @Override
   public void onResolveSymbols(Build build, SymbolTable table) {
     this.memberResolver.resolve(table);
+    this.traitResolver.resolve(table);
   }
 
   @Override
@@ -137,10 +142,10 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
     return this.primaryIdentifier().genericParameterList();
   }
 
-  public QIterable<Symbol> traitSymbolTableEntries() { return null; } //this.eventSubscription.traitEntries(); }
+  public QIterable<Symbol> traits() { return this.traitResolver.traits(); }
 
-  public QIterable<TypeConstraintExpression> traits() {
-    return this.traits;
+  public QIterable<TypeConstraintExpression> traitNames() {
+    return this.traitNames;
   }
 
   public QIterable<Symbol> allMembers() { return null; }// this.eventSubscription.allMembers(); }
@@ -181,7 +186,7 @@ public class PolymorphicDeclarationExpression extends VerbaExpression
   }
 
   public boolean hasTraits() {
-    return (this.traits != null);
+    return (this.traitNames != null);
   }
 
   public boolean hasBlock() {

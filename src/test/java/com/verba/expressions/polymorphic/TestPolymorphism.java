@@ -15,7 +15,7 @@ import org.junit.Test;
 public class TestPolymorphism {
   private static final LitFileBuildManager build = new BuildSpecification()
     .addSourceFolder("verba_sources/polymorphic_tests")
-    .isDebugBuild(true)
+    .isDebugBuild(false)
     .shouldCreateSymbolTable(true)
     .createLitFileBuild();
 
@@ -44,5 +44,17 @@ public class TestPolymorphism {
 
     assert (widthStatement.resolvedType() == PlatformTypeSymbols.INT);
     assert (heightStatement.resolvedType() == PlatformTypeSymbols.INT);
+  }
+
+  @Test
+  public void testClassPolymorphism() {
+    SymbolTableArtifact symbolTableArtifact = build.getArtifactOfType(SymbolTableArtifact.class);
+
+    Symbol baseSymbol = symbolTableArtifact.findSingleSymbolByFqn("Base");
+    Symbol derivedSymbol = symbolTableArtifact.findSingleSymbolByFqn("Derived");
+    PolymorphicDeclarationExpression base = baseSymbol.expressionAs(PolymorphicDeclarationExpression.class);
+    PolymorphicDeclarationExpression derived = derivedSymbol.expressionAs(PolymorphicDeclarationExpression.class);
+
+    assert(derived.traits().single().expression() == base);
   }
 }
